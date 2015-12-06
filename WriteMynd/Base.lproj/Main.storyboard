@@ -55,6 +55,9 @@
                                         <animations/>
                                         <color key="backgroundColor" red="0.34901960784313724" green="0.73725490196078436" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Post to me"/>
+                                        <connections>
+                                            <action selector="postToMeTouched:" destination="Ots-nn-gMC" eventType="touchUpInside" id="gcL-51-sCc"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOL-n0-nd5">
                                         <rect key="frame" x="300" y="0.0" width="300" height="44"/>
@@ -65,11 +68,15 @@
                                         </constraints>
                                         <state key="normal" title="Post to network"/>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TOz-MO-kYm" customClass="SZTextView">
-                                        <rect key="frame" x="8" y="52" width="580" height="130"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TOz-MO-kYm" customClass="SZTextView">
+                                        <rect key="frame" x="8" y="52" width="580" height="200"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="jGP-ii-PSw"/>
+                                            <constraint firstAttribute="width" constant="580" id="zq0-Zy-yt9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="What's going on fam..?"/>
@@ -78,15 +85,31 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3a-pV-sYY">
+                                        <rect key="frame" x="280" y="267" width="40" height="20"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="kv1-De-XoL"/>
+                                            <constraint firstAttribute="width" constant="40" id="llf-gX-ffK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="GLo-sD-IFs" firstAttribute="width" secondItem="KOL-n0-nd5" secondAttribute="width" id="9rU-Ki-9Kt"/>
                                     <constraint firstAttribute="trailing" secondItem="KOL-n0-nd5" secondAttribute="trailing" id="Acx-te-Hpt"/>
+                                    <constraint firstItem="TOz-MO-kYm" firstAttribute="leading" secondItem="QSF-vZ-cT3" secondAttribute="leading" constant="8" id="DuH-LI-Y46"/>
+                                    <constraint firstItem="TOz-MO-kYm" firstAttribute="top" secondItem="KOL-n0-nd5" secondAttribute="bottom" constant="8" id="SDU-SV-3KN"/>
                                     <constraint firstItem="KOL-n0-nd5" firstAttribute="leading" secondItem="GLo-sD-IFs" secondAttribute="trailing" id="T8y-XJ-gm5"/>
+                                    <constraint firstAttribute="trailing" secondItem="TOz-MO-kYm" secondAttribute="trailing" constant="12" id="TQL-5S-qsK"/>
+                                    <constraint firstItem="I3a-pV-sYY" firstAttribute="centerX" secondItem="QSF-vZ-cT3" secondAttribute="centerX" id="UwX-QS-Sf9"/>
                                     <constraint firstItem="GLo-sD-IFs" firstAttribute="top" secondItem="QSF-vZ-cT3" secondAttribute="top" id="cyw-2Y-qyK"/>
                                     <constraint firstItem="KOL-n0-nd5" firstAttribute="baseline" secondItem="GLo-sD-IFs" secondAttribute="baseline" id="jqa-2r-aRg"/>
+                                    <constraint firstItem="I3a-pV-sYY" firstAttribute="top" secondItem="TOz-MO-kYm" secondAttribute="bottom" constant="15" id="ofI-7P-VGd"/>
                                     <constraint firstItem="GLo-sD-IFs" firstAttribute="leading" secondItem="QSF-vZ-cT3" secondAttribute="leading" id="otM-uX-qyP"/>
                                     <constraint firstItem="GLo-sD-IFs" firstAttribute="height" secondItem="KOL-n0-nd5" secondAttribute="height" id="tQe-zp-E10"/>
                                 </constraints>
@@ -108,9 +131,11 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="canvasView" destination="QSF-vZ-cT3" id="baW-a2-xbV"/>
+                        <outlet property="postTextView" destination="TOz-MO-kYm" id="q2q-Se-7MY"/>
                         <outlet property="postToMe" destination="GLo-sD-IFs" id="eqD-ea-fKQ"/>
                         <outlet property="postToNetwork" destination="KOL-n0-nd5" id="45x-5t-HjU"/>
                         <outlet property="segmentedControl" destination="ycR-7f-YBh" id="zl4-6G-Rhc"/>
+                        <outlet property="selectedEmojiLabel" destination="I3a-pV-sYY" id="iWU-t8-Voa"/>
                         <outlet property="timer" destination="3e4-Xq-nce" id="ARw-mP-kZX"/>
                     </connections>
                 </viewController>

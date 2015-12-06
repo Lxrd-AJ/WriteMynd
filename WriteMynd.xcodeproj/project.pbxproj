@@ -16,9 +16,10 @@
 		2172FC061C11D037003446AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC051C11D037003446AC /* LoginViewController.swift */; };
 		2172FC081C11E073003446AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC071C11E073003446AC /* Utilities.swift */; };
 		2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC091C123ED9003446AC /* PostViewController.swift */; };
-		2172FC0C1C1257F7003446AC /* PostToMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC0B1C1257F7003446AC /* PostToMeView.swift */; };
-		2172FC0E1C125815003446AC /* PostToMe.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2172FC0D1C125815003446AC /* PostToMe.xib */; };
 		2172FC111C1258B7003446AC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC101C1258B7003446AC /* Extensions.swift */; };
+		21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC171C14C63600F629FF /* EmojiView.swift */; };
+		21B8CC1A1C14C67600F629FF /* EmojiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21B8CC191C14C67600F629FF /* EmojiView.xib */; };
+		21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC1B1C14D9B600F629FF /* Post.swift */; };
 		BB141F1607F2FA1B8B9BFF20 /* Pods_WriteMynd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563CB6A045294B8739D31833 /* Pods_WriteMynd.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,9 +35,11 @@
 		2172FC051C11D037003446AC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2172FC071C11E073003446AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2172FC091C123ED9003446AC /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		2172FC0B1C1257F7003446AC /* PostToMeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostToMeView.swift; sourceTree = "<group>"; };
-		2172FC0D1C125815003446AC /* PostToMe.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostToMe.xib; sourceTree = "<group>"; };
 		2172FC101C1258B7003446AC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WriteMynd-Bridging-Header.h"; sourceTree = "<group>"; };
+		21B8CC171C14C63600F629FF /* EmojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
+		21B8CC191C14C67600F629FF /* EmojiView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiView.xib; sourceTree = "<group>"; };
+		21B8CC1B1C14D9B600F629FF /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		563CB6A045294B8739D31833 /* Pods_WriteMynd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteMynd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		606880F247D5F211339B5F25 /* Pods-WriteMynd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.release.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.release.xcconfig"; sourceTree = "<group>"; };
 		7C3B018CACE0828B4055A83D /* Pods-WriteMynd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +87,8 @@
 				2172FBF81C11B65E003446AC /* Info.plist */,
 				2172FC071C11E073003446AC /* Utilities.swift */,
 				2172FC101C1258B7003446AC /* Extensions.swift */,
+				21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */,
+				21B8CC1B1C14D9B600F629FF /* Post.swift */,
 			);
 			path = WriteMynd;
 			sourceTree = "<group>";
@@ -102,8 +107,8 @@
 		2172FC0F1C125823003446AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2172FC0D1C125815003446AC /* PostToMe.xib */,
-				2172FC0B1C1257F7003446AC /* PostToMeView.swift */,
+				21B8CC171C14C63600F629FF /* EmojiView.swift */,
+				21B8CC191C14C67600F629FF /* EmojiView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -186,8 +191,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2172FC0E1C125815003446AC /* PostToMe.xib in Resources */,
 				2172FBF71C11B65E003446AC /* LaunchScreen.storyboard in Resources */,
+				21B8CC1A1C14C67600F629FF /* EmojiView.xib in Resources */,
 				2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */,
 				2172FBF21C11B65E003446AC /* Main.storyboard in Resources */,
 			);
@@ -249,11 +254,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */,
-				2172FC0C1C1257F7003446AC /* PostToMeView.swift in Sources */,
+				21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */,
 				2172FC081C11E073003446AC /* Utilities.swift in Sources */,
 				2172FC111C1258B7003446AC /* Extensions.swift in Sources */,
 				2172FC021C11CD3A003446AC /* MeViewController.swift in Sources */,
 				2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */,
+				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
 			);
@@ -369,11 +375,14 @@
 			baseConfigurationReference = 7C3B018CACE0828B4055A83D /* Pods-WriteMynd.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -382,11 +391,13 @@
 			baseConfigurationReference = 606880F247D5F211339B5F25 /* Pods-WriteMynd.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
 			};
 			name = Release;
 		};
