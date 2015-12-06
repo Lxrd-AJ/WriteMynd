@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        UILabel.appearance().font = UIFont(name: "Avenir", size: 17.0)
+        
+        Parse.setApplicationId("aX2Yvurbzd7taCm4zJBxfFEeBzcci9I6wZtEQWJj",clientKey: "4IPqqsnEI8EjyyPnyOUtBOK76ETFnv8hpes36xwJ")
+        
         return true
     }
 

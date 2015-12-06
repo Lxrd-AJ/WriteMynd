@@ -8,20 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FBEC1C11B65E003446AC /* AppDelegate.swift */; };
-		2172FBEF1C11B65E003446AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FBEE1C11B65E003446AC /* ViewController.swift */; };
 		2172FBF21C11B65E003446AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF01C11B65E003446AC /* Main.storyboard */; };
 		2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF31C11B65E003446AC /* Assets.xcassets */; };
 		2172FBF71C11B65E003446AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF51C11B65E003446AC /* LaunchScreen.storyboard */; };
+		2172FC021C11CD3A003446AC /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC011C11CD3A003446AC /* MeViewController.swift */; };
+		2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC031C11CFF9003446AC /* SignUpViewController.swift */; };
+		2172FC061C11D037003446AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC051C11D037003446AC /* LoginViewController.swift */; };
+		2172FC081C11E073003446AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC071C11E073003446AC /* Utilities.swift */; };
+		2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC091C123ED9003446AC /* PostViewController.swift */; };
+		2172FC0C1C1257F7003446AC /* PostToMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC0B1C1257F7003446AC /* PostToMeView.swift */; };
+		2172FC0E1C125815003446AC /* PostToMe.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2172FC0D1C125815003446AC /* PostToMe.xib */; };
+		2172FC111C1258B7003446AC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC101C1258B7003446AC /* Extensions.swift */; };
+		BB141F1607F2FA1B8B9BFF20 /* Pods_WriteMynd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563CB6A045294B8739D31833 /* Pods_WriteMynd.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2172FBE91C11B65E003446AC /* WriteMynd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteMynd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2172FBEC1C11B65E003446AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2172FBEE1C11B65E003446AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2172FBF11C11B65E003446AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2172FBF31C11B65E003446AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2172FBF61C11B65E003446AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2172FBF81C11B65E003446AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2172FC011C11CD3A003446AC /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		2172FC031C11CFF9003446AC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		2172FC051C11D037003446AC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2172FC071C11E073003446AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		2172FC091C123ED9003446AC /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		2172FC0B1C1257F7003446AC /* PostToMeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostToMeView.swift; sourceTree = "<group>"; };
+		2172FC0D1C125815003446AC /* PostToMe.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostToMe.xib; sourceTree = "<group>"; };
+		2172FC101C1258B7003446AC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		563CB6A045294B8739D31833 /* Pods_WriteMynd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteMynd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		606880F247D5F211339B5F25 /* Pods-WriteMynd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.release.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.release.xcconfig"; sourceTree = "<group>"; };
+		7C3B018CACE0828B4055A83D /* Pods-WriteMynd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB141F1607F2FA1B8B9BFF20 /* Pods_WriteMynd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +59,8 @@
 			children = (
 				2172FBEB1C11B65E003446AC /* WriteMynd */,
 				2172FBEA1C11B65E003446AC /* Products */,
+				756C710973A55DA8911697D6 /* Pods */,
+				391ED2C4FF89AE84742B1F07 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +75,54 @@
 		2172FBEB1C11B65E003446AC /* WriteMynd */ = {
 			isa = PBXGroup;
 			children = (
+				2172FC0F1C125823003446AC /* Views */,
+				2172FBFE1C11BBBD003446AC /* Controllers */,
 				2172FBEC1C11B65E003446AC /* AppDelegate.swift */,
-				2172FBEE1C11B65E003446AC /* ViewController.swift */,
 				2172FBF01C11B65E003446AC /* Main.storyboard */,
 				2172FBF31C11B65E003446AC /* Assets.xcassets */,
 				2172FBF51C11B65E003446AC /* LaunchScreen.storyboard */,
 				2172FBF81C11B65E003446AC /* Info.plist */,
+				2172FC071C11E073003446AC /* Utilities.swift */,
+				2172FC101C1258B7003446AC /* Extensions.swift */,
 			);
 			path = WriteMynd;
+			sourceTree = "<group>";
+		};
+		2172FBFE1C11BBBD003446AC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2172FC011C11CD3A003446AC /* MeViewController.swift */,
+				2172FC031C11CFF9003446AC /* SignUpViewController.swift */,
+				2172FC051C11D037003446AC /* LoginViewController.swift */,
+				2172FC091C123ED9003446AC /* PostViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2172FC0F1C125823003446AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2172FC0D1C125815003446AC /* PostToMe.xib */,
+				2172FC0B1C1257F7003446AC /* PostToMeView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		391ED2C4FF89AE84742B1F07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				563CB6A045294B8739D31833 /* Pods_WriteMynd.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		756C710973A55DA8911697D6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C3B018CACE0828B4055A83D /* Pods-WriteMynd.debug.xcconfig */,
+				606880F247D5F211339B5F25 /* Pods-WriteMynd.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +132,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2172FBFB1C11B65E003446AC /* Build configuration list for PBXNativeTarget "WriteMynd" */;
 			buildPhases = (
+				F99239D2A1E4E1703EAA5B04 /* Check Pods Manifest.lock */,
 				2172FBE51C11B65E003446AC /* Sources */,
 				2172FBE61C11B65E003446AC /* Frameworks */,
 				2172FBE71C11B65E003446AC /* Resources */,
+				D3FD086A39E2B80958A62CB7 /* Embed Pods Frameworks */,
+				4ACE3A3DBC811EB3C02B06FB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -122,6 +186,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2172FC0E1C125815003446AC /* PostToMe.xib in Resources */,
 				2172FBF71C11B65E003446AC /* LaunchScreen.storyboard in Resources */,
 				2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */,
 				2172FBF21C11B65E003446AC /* Main.storyboard in Resources */,
@@ -130,12 +195,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4ACE3A3DBC811EB3C02B06FB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3FD086A39E2B80958A62CB7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F99239D2A1E4E1703EAA5B04 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2172FBE51C11B65E003446AC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2172FBEF1C11B65E003446AC /* ViewController.swift in Sources */,
+				2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */,
+				2172FC0C1C1257F7003446AC /* PostToMeView.swift in Sources */,
+				2172FC081C11E073003446AC /* Utilities.swift in Sources */,
+				2172FC111C1258B7003446AC /* Extensions.swift in Sources */,
+				2172FC021C11CD3A003446AC /* MeViewController.swift in Sources */,
+				2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */,
+				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,8 +366,10 @@
 		};
 		2172FBFC1C11B65E003446AC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C3B018CACE0828B4055A83D /* Pods-WriteMynd.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
@@ -258,8 +379,10 @@
 		};
 		2172FBFD1C11B65E003446AC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 606880F247D5F211339B5F25 /* Pods-WriteMynd.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
@@ -286,6 +409,7 @@
 				2172FBFD1C11B65E003446AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
