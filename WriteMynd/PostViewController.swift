@@ -79,9 +79,19 @@ class PostViewController: UIViewController {
     }
 
     @IBAction func postToMeTouched(sender: AnyObject) {
+        if let post = getPostData() {
+            post.isPrivate = true
+        }else{
+            print("No POst Data")
+        }
     }
     
-//    func getPostData() -> Post?{
-//        
-//    }
+    func getPostData() -> Post?{
+        guard postTextView.text != "" && selectedEmojiLabel.text != "" else { return nil }
+        //Parse the HashTags from the String
+        let postText: [String] = postTextView.text!.componentsSeparatedByString(" ")
+        let hashTags:[String] = postText.filter({ (text:String) -> Bool in return text[text.startIndex] == "#" })
+        return Post(emoji: selectedEmojiLabel.text!, text: postTextView.text!, hashTags: hashTags)
+    }
+    
 }

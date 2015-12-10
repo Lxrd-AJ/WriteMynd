@@ -38,6 +38,9 @@ class LoginViewController: PFLogInViewController {
     
     override func viewWillAppear(animated: Bool) {
         //UI Customizations
+        if let _ = PFUser.currentUser() {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     override func viewWillLayoutSubviews() {

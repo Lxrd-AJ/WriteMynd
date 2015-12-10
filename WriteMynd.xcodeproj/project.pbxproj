@@ -57,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2136F0741C19415500BE26FD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				21B8CC1B1C14D9B600F629FF /* Post.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		2172FBE01C11B65E003446AC = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +86,7 @@
 		2172FBEB1C11B65E003446AC /* WriteMynd */ = {
 			isa = PBXGroup;
 			children = (
+				2136F0741C19415500BE26FD /* Models */,
 				2172FC0F1C125823003446AC /* Views */,
 				2172FBFE1C11BBBD003446AC /* Controllers */,
 				2172FBEC1C11B65E003446AC /* AppDelegate.swift */,
@@ -88,7 +97,6 @@
 				2172FC071C11E073003446AC /* Utilities.swift */,
 				2172FC101C1258B7003446AC /* Extensions.swift */,
 				21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */,
-				21B8CC1B1C14D9B600F629FF /* Post.swift */,
 			);
 			path = WriteMynd;
 			sourceTree = "<group>";
@@ -383,6 +391,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -398,6 +407,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

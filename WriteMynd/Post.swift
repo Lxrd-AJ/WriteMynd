@@ -12,6 +12,7 @@ class Post {
     var emoji: String
     var text: String
     var hashTags: [String]
+    var isPrivate: Bool = true
     
     init( emoji:String, text:String, hashTags:[String] ){
         self.emoji = emoji; self.text = text; self.hashTags = hashTags

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UILabel.appearance().font = UIFont(name: "Avenir", size: 17.0)
         
-        Parse.setApplicationId("aX2Yvurbzd7taCm4zJBxfFEeBzcci9I6wZtEQWJj",clientKey: "4IPqqsnEI8EjyyPnyOUtBOK76ETFnv8hpes36xwJ")
+        Parse.setApplicationId("psbQTCZJnowKHs9FT534pLsRKOtgxQvkNTmYctOD",clientKey: "JZVNrhm8472sSy8tuXNibdzOI7Xx1k3OJnVoIAXt")
         
         return true
     }
