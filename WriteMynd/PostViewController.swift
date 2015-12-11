@@ -8,9 +8,9 @@
 
 import UIKit
 import SZTextView
+import Parse
 
 class PostViewController: UIViewController {
-
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var timer: UIBarButtonItem!
@@ -19,6 +19,8 @@ class PostViewController: UIViewController {
     @IBOutlet weak var postToNetwork: UIButton!
     @IBOutlet weak var postTextView: SZTextView!
     @IBOutlet weak var selectedEmojiLabel: UILabel!
+    
+    let user: PFUser = PFUser.currentUser()!
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -81,17 +83,39 @@ class PostViewController: UIViewController {
     @IBAction func postToMeTouched(sender: AnyObject) {
         if let post = getPostData() {
             post.isPrivate = true
-        }else{
-            print("No POst Data")
+            post.save()
+            //self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
+        else{ displayErrorMessage() }
+    }
+    
+    @IBAction func postToNetworkTouched(sender: UIButton) {
+        if let post = getPostData() {
+            post.isPrivate = false
+            post.save()
+            //self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        else{ displayErrorMessage() }
+    }
+    
+    func displayErrorMessage(){
+        let alertController = UIAlertController(title: "Lol", message: "You need to enter how you feel and select an emoji", preferredStyle: .Alert )
+        let okAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func getPostData() -> Post?{
         guard postTextView.text != "" && selectedEmojiLabel.text != "" else { return nil }
         //Parse the HashTags from the String
         let postText: [String] = postTextView.text!.componentsSeparatedByString(" ")
-        let hashTags:[String] = postText.filter({ (text:String) -> Bool in return text[text.startIndex] == "#" })
-        return Post(emoji: selectedEmojiLabel.text!, text: postTextView.text!, hashTags: hashTags)
+        let hashTags:[String] = postText.filter({ (text:String) -> Bool in
+            guard text != "" else { return false }
+            return text[text.startIndex] == "#"
+        })
+        return Post(emoji: selectedEmojiLabel.text!, text: postTextView.text!, hashTags: hashTags, author: user)
     }
     
 }

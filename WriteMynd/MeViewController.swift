@@ -9,14 +9,19 @@
 import UIKit
 import Parse
 import ParseUI
+import SwiftSpinner
 
 class MeViewController: UIViewController {
     
     var showPostController:Bool = true
+    var posts:[Post] = []
+    @IBOutlet weak var tableView:UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         showPostController = true
+        tableView.dataSource = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -25,6 +30,9 @@ class MeViewController: UIViewController {
             if showPostController {
                 self.performSegueWithIdentifier("showPostController", sender: self)
                 showPostController = false
+            }else{
+                SwiftSpinner.show("Patience is a Virtue \n Fetching your Posts")
+                fetchPosts()
             }
         }else{
             //Present Signup/Login Page
@@ -42,6 +50,43 @@ class MeViewController: UIViewController {
     
     @IBAction func unwindToSegue( segue:UIStoryboardSegue ) {}
     
+    func fetchPosts(){
+        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
+            self.posts = posts
+            self.tableView.reloadData()
+            SwiftSpinner.hide()
+        })
+    }
+    
+}
+
+extension MeViewController: UITableViewDataSource {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.posts.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell: PostTableViewCell = tableView.dequeueReusableCellWithIdentifier("PostTableViewCell", forIndexPath: indexPath) as! PostTableViewCell
+        let post: Post = self.posts[ indexPath.row ]
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .LongStyle
+        dateFormatter.timeStyle = .MediumStyle
+        
+        cell.emojiLabel.text = post.emoji
+        cell.dateLabel.text = dateFormatter.stringFromDate(post.createdAt!)
+        cell.postLabel.text = post.text
+        cell.hashTagsLabel.text = post.hashTags.reduce("", combine: { $0! + " " + $1 })
+        
+        cell.dateLabel.font = cell.dateLabel.font.fontWithSize(13)
+        cell.hashTagsLabel.font = cell.hashTagsLabel.font.fontWithSize(15)
+        
+        return cell
+    }
 }
 
 

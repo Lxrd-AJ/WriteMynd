@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0751C1A3B2A00BE26FD /* ParseService.swift */; };
+		2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */; };
 		2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FBEC1C11B65E003446AC /* AppDelegate.swift */; };
 		2172FBF21C11B65E003446AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF01C11B65E003446AC /* Main.storyboard */; };
 		2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF31C11B65E003446AC /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2136F0751C1A3B2A00BE26FD /* ParseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseService.swift; sourceTree = "<group>"; };
+		2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		2172FBE91C11B65E003446AC /* WriteMynd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteMynd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2172FBEC1C11B65E003446AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2172FBF11C11B65E003446AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 				2172FC071C11E073003446AC /* Utilities.swift */,
 				2172FC101C1258B7003446AC /* Extensions.swift */,
 				21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */,
+				2136F0751C1A3B2A00BE26FD /* ParseService.swift */,
 			);
 			path = WriteMynd;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 			children = (
 				21B8CC171C14C63600F629FF /* EmojiView.swift */,
 				21B8CC191C14C67600F629FF /* EmojiView.xib */,
+				2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -261,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */,
 				2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */,
 				21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */,
 				2172FC081C11E073003446AC /* Utilities.swift in Sources */,
@@ -270,6 +277,7 @@
 				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
+				2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
