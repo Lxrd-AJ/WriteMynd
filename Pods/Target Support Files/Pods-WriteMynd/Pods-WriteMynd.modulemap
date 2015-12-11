@@ -1,0 +1,6 @@
+framework module Pods_WriteMynd {
+  umbrella header "Pods-WriteMynd-umbrella.h"
+
+  export *
+  module * { export * }
+}

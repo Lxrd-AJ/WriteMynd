@@ -1,0 +1,24 @@
+PODS:
+  - Bolts/Tasks (1.5.0)
+  - Parse (1.10.0):
+    - Bolts/Tasks (~> 1.5)
+  - ParseUI (1.1.7):
+    - Bolts/Tasks (~> 1.3)
+    - Parse (~> 1.9)
+  - SwiftSpinner (0.8.0)
+  - SZTextView (1.2.1)
+
+DEPENDENCIES:
+  - Parse
+  - ParseUI
+  - SwiftSpinner
+  - SZTextView
+
+SPEC CHECKSUMS:
+  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
+  Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
+  ParseUI: c2bcdfbb00330e464b5b773266ae221697a3bb7b
+  SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
+  SZTextView: 906df45afd3c1b24fc5252088d5ef8061513c238
+
+COCOAPODS: 0.39.0
