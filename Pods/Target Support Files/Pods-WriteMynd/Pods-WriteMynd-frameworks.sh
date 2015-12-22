@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WriteMynd/Bolts.framework"
+  install_framework "Pods-WriteMynd/MMDrawerController.framework"
   install_framework "Pods-WriteMynd/Parse.framework"
   install_framework "Pods-WriteMynd/ParseUI.framework"
   install_framework "Pods-WriteMynd/SZTextView.framework"
@@ -92,6 +93,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WriteMynd/Bolts.framework"
+  install_framework "Pods-WriteMynd/MMDrawerController.framework"
   install_framework "Pods-WriteMynd/Parse.framework"
   install_framework "Pods-WriteMynd/ParseUI.framework"
   install_framework "Pods-WriteMynd/SZTextView.framework"

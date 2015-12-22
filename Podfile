@@ -9,6 +9,7 @@ target 'WriteMynd' do
     pod 'ParseUI'
     pod 'SZTextView'
     pod 'SwiftSpinner'
+    pod 'MMDrawerController'
     
 end
 

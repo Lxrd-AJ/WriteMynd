@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MMDrawerController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,17 +42,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0481CE338DC7C13C27F42B42C34BBA03</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>209CE9172A405F9ECE7B636AD7054CD1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>31490043CFE173258A2573B0A292B2BE</key>
+		<key>0D261B6EA3ECC94C66A4174DA4382B08</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -58,6 +53,21 @@
 			<true/>
 		</dict>
 		<key>708E01B006A9F88B3C13711562282B5E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96D3562E47E4792B0A6093A0323EB398</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C075D6223A5B59D8318F4EC634C17F90</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E0408806948F396AA3B159FEF214FE97</key>
 		<dict>
 			<key>primary</key>
 			<true/>
