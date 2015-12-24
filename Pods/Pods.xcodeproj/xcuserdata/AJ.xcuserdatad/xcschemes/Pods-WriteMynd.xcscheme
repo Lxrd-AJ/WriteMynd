@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '83D64B7A3B21916D6D19812B'
+               BlueprintIdentifier = 'EE3031D9EEBD3414C456D931'
                BlueprintName = 'Pods-WriteMynd'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_WriteMynd.framework'>

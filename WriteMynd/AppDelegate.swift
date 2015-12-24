@@ -8,18 +8,36 @@
 
 import UIKit
 import Parse
+import MMDrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        UILabel.appearance().font = UIFont(name: "Avenir", size: 17.0)
-        
+        //Parse configurations
         Parse.setApplicationId("psbQTCZJnowKHs9FT534pLsRKOtgxQvkNTmYctOD",clientKey: "JZVNrhm8472sSy8tuXNibdzOI7Xx1k3OJnVoIAXt")
+        
+        //UI Configurations
+        UILabel.appearance().font = UIFont(name: "Avenir", size: 17.0)
+        UINavigationBar.appearance().barTintColor = UIColor(red: 99/255, green: 60/255, blue: 134/255, alpha: 1)
+        UIWindow.appearance().tintColor = UIColor.whiteColor()
+        
+        //App Configurations
+        let meVC: MeViewController = storyboard.instantiateViewControllerWithIdentifier("MeViewController") as! MeViewController
+        let menuVC: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+        let navigationController: UINavigationController = UINavigationController(rootViewController: meVC)
+        let drawerController: MMDrawerController = MMDrawerController(centerViewController: navigationController, leftDrawerViewController: menuVC)
+        menuVC.navController = navigationController
+        menuVC.drawerController = drawerController
+        drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+        drawerController.closeDrawerGestureModeMask = [.BezelPanningCenterView,.PanningCenterView]
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window!.rootViewController = drawerController
+        window!.makeKeyAndVisible()
         
         return true
     }

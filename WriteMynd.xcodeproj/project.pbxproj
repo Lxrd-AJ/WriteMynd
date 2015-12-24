@@ -22,6 +22,9 @@
 		21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC171C14C63600F629FF /* EmojiView.swift */; };
 		21B8CC1A1C14C67600F629FF /* EmojiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21B8CC191C14C67600F629FF /* EmojiView.xib */; };
 		21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC1B1C14D9B600F629FF /* Post.swift */; };
+		21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1341C2949A90047306D /* MenuViewController.swift */; };
+		21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1361C2A129A0047306D /* MenuViewCell.swift */; };
+		21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1381C2AECCC0047306D /* DashboardController.swift */; };
 		BB141F1607F2FA1B8B9BFF20 /* Pods_WriteMynd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563CB6A045294B8739D31833 /* Pods_WriteMynd.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +47,9 @@
 		21B8CC171C14C63600F629FF /* EmojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		21B8CC191C14C67600F629FF /* EmojiView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiView.xib; sourceTree = "<group>"; };
 		21B8CC1B1C14D9B600F629FF /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		21C0A1341C2949A90047306D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		21C0A1361C2A129A0047306D /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
+		21C0A1381C2AECCC0047306D /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		563CB6A045294B8739D31833 /* Pods_WriteMynd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteMynd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		606880F247D5F211339B5F25 /* Pods-WriteMynd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.release.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.release.xcconfig"; sourceTree = "<group>"; };
 		7C3B018CACE0828B4055A83D /* Pods-WriteMynd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +119,8 @@
 				2172FC031C11CFF9003446AC /* SignUpViewController.swift */,
 				2172FC051C11D037003446AC /* LoginViewController.swift */,
 				2172FC091C123ED9003446AC /* PostViewController.swift */,
+				21C0A1341C2949A90047306D /* MenuViewController.swift */,
+				21C0A1381C2AECCC0047306D /* DashboardController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -123,6 +131,7 @@
 				21B8CC171C14C63600F629FF /* EmojiView.swift */,
 				21B8CC191C14C67600F629FF /* EmojiView.xib */,
 				2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */,
+				21C0A1361C2A129A0047306D /* MenuViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -272,12 +281,15 @@
 				2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */,
 				21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */,
 				2172FC081C11E073003446AC /* Utilities.swift in Sources */,
+				21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */,
 				2172FC111C1258B7003446AC /* Extensions.swift in Sources */,
 				2172FC021C11CD3A003446AC /* MeViewController.swift in Sources */,
 				2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */,
+				21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */,
 				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
+				21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */,
 				2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
