@@ -1,5 +1,6 @@
 PODS:
   - Bolts/Tasks (1.5.0)
+  - Charts (2.1.6)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -21,6 +22,7 @@ PODS:
   - SZTextView (1.2.1)
 
 DEPENDENCIES:
+  - Charts
   - MMDrawerController
   - Parse
   - ParseUI
@@ -29,6 +31,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
+  Charts: 5e1e5ac23898e5b09d226a2fc3e9d86bc281937e
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   Parse: 886af46a0a677402f6374bb97ac212e795f70afe
   ParseUI: c2bcdfbb00330e464b5b773266ae221697a3bb7b

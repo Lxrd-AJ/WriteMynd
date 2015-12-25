@@ -10,6 +10,7 @@ target 'WriteMynd' do
     pod 'SZTextView'
     pod 'SwiftSpinner'
     pod 'MMDrawerController'
+    pod 'Charts'
     
 end
 

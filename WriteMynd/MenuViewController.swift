@@ -11,7 +11,7 @@ import MMDrawerController
 
 class MenuViewController: UITableViewController {
     
-    let menuItems: [String] = ["Me","Feed","My Mynd","Science","Settings"]
+    let menuItems: [String] = ["Me","My Mynd"]//["Me","Feed","My Mynd","Science","Settings"]
     var navController: UINavigationController?
     var drawerController: MMDrawerController?
 
@@ -42,15 +42,21 @@ class MenuViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print( menuItems[indexPath.row] )
+        var controller: UIViewController
+        
         switch menuItems[indexPath.row] {
+        case "Me":
+            controller = storyboard!.instantiateViewControllerWithIdentifier("MeViewController") as! MeViewController
+            (controller as! MeViewController).showPostController = false
         case "My Mynd":
-            let dashboardController: DashboardController = storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
-            self.navController?.pushViewController(dashboardController, animated: true)
-            self.drawerController?.closeDrawerAnimated(true, completion: nil)
+            controller = storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
         default:
+            controller = UIViewController()
             break;
         }
+        
+        self.drawerController?.centerViewController = UINavigationController(rootViewController: controller)
+        self.drawerController?.closeDrawerAnimated(true, completion: nil)
     }
     
     /*

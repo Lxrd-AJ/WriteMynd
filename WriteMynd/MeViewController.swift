@@ -12,17 +12,19 @@ import UIKit
 import Parse
 import ParseUI
 import SwiftSpinner
+import MMDrawerController
 
 class MeViewController: UIViewController {
     
     var showPostController:Bool = true
     var posts:[Post] = []
     @IBOutlet weak var tableView:UITableView!
+    @IBOutlet weak var showMenuButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showPostController = true
+        showPostController = false //HIDE_FOR_NOW
         tableView.dataSource = self
     }
     
@@ -33,7 +35,7 @@ class MeViewController: UIViewController {
                 self.performSegueWithIdentifier("showPostController", sender: self)
                 showPostController = false
             }else{
-                SwiftSpinner.show("Patience is a Virtue \n Fetching your Posts")
+                //HIDE_FOR_NOW: SwiftSpinner.show("Patience is a Virtue \n Fetching your Posts")
                 fetchPosts()
             }
         }else{
@@ -51,6 +53,10 @@ class MeViewController: UIViewController {
     }
     
     @IBAction func unwindToSegue( segue:UIStoryboardSegue ) {}
+    
+    @IBAction func showMenu( sender: UIBarButtonItem ){
+        self.mm_drawerController.toggleDrawerSide(.Left, animated: true, completion: nil)
+    }
     
     func fetchPosts(){
         ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in

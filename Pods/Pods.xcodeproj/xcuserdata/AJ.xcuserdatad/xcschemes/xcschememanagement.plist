@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Charts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MMDrawerController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,7 +47,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D261B6EA3ECC94C66A4174DA4382B08</key>
+		<key>24090FBCEF7A50AE384678B5C071804B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,17 +62,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>831C181DB875CBA3538DC30658E30CD9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>96D3562E47E4792B0A6093A0323EB398</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C075D6223A5B59D8318F4EC634C17F90</key>
+		<key>98B04E850CAE2BFDA4DA4BFC83F739AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E0408806948F396AA3B159FEF214FE97</key>
+		<key>CF7F70EE61DF28BD162C276261B96D2D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
