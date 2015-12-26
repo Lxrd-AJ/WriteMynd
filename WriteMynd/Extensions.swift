@@ -14,3 +14,20 @@ extension UIView{
         return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil , options: nil)[0] as? UIView
     }
 }
+
+extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralConvertible {
+    func max() -> String {
+        var maxValue: Int = -1; var maxKey: String = "";
+        for key in self.keys {
+            if (self[key] as? Int) > maxValue { maxValue = (self[key] as? Int)!; maxKey = String(key); }
+        }
+        return maxKey
+    }
+    
+    func min() -> String {
+        return String(self.keys.reduce(self.keys.first, combine: {
+            if (self[$0!] as? Int) < (self[$1] as? Int) { return $0 }
+            else{ return $1 }
+        }))
+    }
+}

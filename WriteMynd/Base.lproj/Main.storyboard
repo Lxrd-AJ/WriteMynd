@@ -489,11 +489,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="leastUsedHashTag" destination="OtF-K7-7t8" id="o5z-D1-i96"/>
                         <outlet property="lineGraphCanvas" destination="E02-45-dbG" id="8Wz-a0-trF"/>
                         <outlet property="maxHashTag" destination="uxP-3v-ses" id="6sV-Kh-OSI"/>
                         <outlet property="maxPieChartCanvas" destination="7yd-hV-9Vj" id="wSa-8y-RzG"/>
                         <outlet property="minHashTag" destination="OtF-K7-7t8" id="rq2-Ps-Uzg"/>
                         <outlet property="minPieChartCanvas" destination="G17-95-uxs" id="7ze-NB-RKH"/>
+                        <outlet property="mostUsedHashTag" destination="uxP-3v-ses" id="y5w-3R-VKY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WC6-Y6-aHb" userLabel="First Responder" sceneMemberID="firstResponder"/>

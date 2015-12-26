@@ -9,6 +9,7 @@
 import UIKit
 import MMDrawerController
 import Charts
+import Parse
 
 class DashboardController: UIViewController {
     
@@ -17,6 +18,8 @@ class DashboardController: UIViewController {
     @IBOutlet weak var minPieChartCanvas: UIView!
     @IBOutlet weak var minHashTag: UILabel!
     @IBOutlet weak var lineGraphCanvas: UIView!
+    @IBOutlet weak var mostUsedHashTag: UILabel!
+    @IBOutlet weak var leastUsedHashTag: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,8 @@ class DashboardController: UIViewController {
         //Hide the layering colors from storyboard
         maxPieChartCanvas.backgroundColor = UIColor.whiteColor()
         minPieChartCanvas.backgroundColor = UIColor.whiteColor()
+        mostUsedHashTag.text = "-"
+        leastUsedHashTag.text = "-"
         
         //Charts Customization
         let maxPieChart: PieChartView = PieChartView(frame: CGRect(x:maxPieChartCanvas.frame.origin.x, y: maxPieChartCanvas.frame.origin.y, width: 200, height: 200 ))
@@ -37,6 +42,19 @@ class DashboardController: UIViewController {
         let maxTag = ["Others","Family"]
         let maxTagsData = [4.0,6.0]
         setPieChart(dataPoints: maxTag, values: maxTagsData, pieChart: maxPieChart)
+        
+        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
+            let hashTags = posts.reduce([], combine: { return $0 + $1.hashTags })
+            print(hashTags)
+            var hashTagMap: [String:Int] = [:]
+            for hashtag in hashTags {
+                if let freq = hashTagMap[hashtag] { hashTagMap[hashtag] = freq + 1 }
+                else{ hashTagMap[hashtag] = 1 }
+            }
+            print(hashTagMap)
+            print(hashTagMap.max())
+            print(hashTagMap.min())
+        })
     }
 
     override func didReceiveMemoryWarning() {

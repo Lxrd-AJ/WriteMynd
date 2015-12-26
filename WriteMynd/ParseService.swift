@@ -20,4 +20,5 @@ class ParseService {
             else{ callback(posts: []) }
         })
     }
+    
 }
