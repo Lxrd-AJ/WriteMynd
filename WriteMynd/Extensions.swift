@@ -25,9 +25,44 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
     }
     
     func min() -> String {
-        return String(self.keys.reduce(self.keys.first, combine: {
-            if (self[$0!] as? Int) < (self[$1] as? Int) { return $0 }
+        guard self.keys.first != nil else{ return "" }
+        return String(self.keys.reduce(self.keys.first! , combine: {
+            if (self[$0] as? Int) < (self[$1] as? Int) { return $0 }
             else{ return $1 }
         }))
+    }
+    
+    func maxTuple () -> (Int,Int) {
+        //maxTuple ( current_highest, total_value )
+        guard self.keys.first != nil else{ return (0,0) }
+        return self.keys.reduce((self[self.keys.first!] as! Int, 0), combine: { (var tuple:(Int,Int), curKey) in
+            let _curKey = self[curKey] as! Int
+            if _curKey > tuple.0 { tuple.0 = _curKey }
+            tuple.1 += _curKey
+            return tuple
+        })
+    }
+    
+    func maxPercent () -> Int {
+        let maxTuple: (highest:Int,total:Int) = self.maxTuple()
+        print(maxTuple)
+        return Int((Float(maxTuple.highest) / Float(maxTuple.total)) * Float(100))
+    }
+    
+    func minTuple () -> (Int,Int) {
+        //minTuple ( current_lowest, total_value )
+        guard self.keys.first != nil else{ return (0,0) }
+        return self.keys.reduce((self[self.keys.first!] as! Int, 0), combine: { (var tuple:(Int,Int), curKey) in
+            let _curKey = self[curKey] as! Int
+            if _curKey < tuple.0 { tuple.0 = _curKey }
+            tuple.1 += _curKey
+            return tuple
+        })
+    }
+    
+    func minPercent () -> Int {
+        let minTuple: (lowest:Int,total:Int) = self.minTuple()
+        print(minTuple)
+        return Int((Float(minTuple.lowest) / Float(minTuple.total)) * Float(100))
     }
 }

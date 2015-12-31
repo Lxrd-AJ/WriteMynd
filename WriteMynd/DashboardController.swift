@@ -35,13 +35,8 @@ class DashboardController: UIViewController {
         let minPieChart: PieChartView = PieChartView(frame: CGRect(x:minPieChartCanvas.bounds.origin.x, y: minPieChartCanvas.frame.origin.y, width: 200, height: 200 ))
         maxPieChartCanvas.addSubview(maxPieChart)
         minPieChartCanvas.addSubview(minPieChart)
-        maxPieChart.noDataText = "Make lots of similar tags"
+        maxPieChart.noDataText = "Thinking...."
         minPieChart.noDataText = "Be together, not the same"
-        
-        //Test
-        let maxTag = ["Others","Family"]
-        let maxTagsData = [4.0,6.0]
-        setPieChart(dataPoints: maxTag, values: maxTagsData, pieChart: maxPieChart)
         
         ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
             let hashTags = posts.reduce([], combine: { return $0 + $1.hashTags })
@@ -51,9 +46,21 @@ class DashboardController: UIViewController {
                 if let freq = hashTagMap[hashtag] { hashTagMap[hashtag] = freq + 1 }
                 else{ hashTagMap[hashtag] = 1 }
             }
-            print(hashTagMap)
-            print(hashTagMap.max())
-            print(hashTagMap.min())
+            
+            //Draw the Pie Charts for most used hashTags and LeastUsedHashTags
+            //Most Used HashTag
+            let mostTags = ["Others", hashTagMap.max()]
+            let maxTuple: (highest:Int, total:Int) = hashTagMap.maxTuple()
+            let mostTagsData = [ Double((maxTuple.total - maxTuple.highest)), Double(maxTuple.highest)]
+            self.setPieChart(dataPoints: mostTags, values: mostTagsData, pieChart: maxPieChart, centerValue: hashTagMap.maxPercent())
+            self.maxHashTag.text = hashTagMap.max()
+            
+            //Least Used HashTag
+            let leastTags = ["Others", hashTagMap.min()]
+            let minTuple: (lowest:Int, total:Int) = hashTagMap.minTuple()
+            let leastTagsData = [ Double(minTuple.total - minTuple.lowest), Double(minTuple.lowest)]
+            self.setPieChart(dataPoints: leastTags, values: leastTagsData, pieChart: minPieChart, centerValue: hashTagMap.minPercent())
+            self.minHashTag.text = hashTagMap.min()
         })
     }
 
@@ -62,7 +69,7 @@ class DashboardController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setPieChart( dataPoints dataPoints: [String], values: [Double], pieChart: PieChartView ) {
+    func setPieChart( dataPoints dataPoints: [String], values: [Double], pieChart: PieChartView, centerValue: Int ) {
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
             let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
@@ -78,12 +85,13 @@ class DashboardController: UIViewController {
         pieChart.data = chartData
         pieChart.drawSliceTextEnabled = false
         pieChart.usePercentValuesEnabled = true
-        pieChart.centerText = "69%" //345-346
+        pieChart.centerText = "\(centerValue)%" //345-346
         pieChart.holeRadiusPercent = 0.8
         pieChart.centerTextRadiusPercent = 1
         pieChart.descriptionTextPosition = CGPointZero
         pieChart.legend.enabled = false
         pieChart.userInteractionEnabled = false
+        pieChart.animate(xAxisDuration: 1, yAxisDuration: 1, easingOption: .EaseInOutCirc)
     }
     
     @IBAction func showMenu( sender: UIBarButtonItem ){
