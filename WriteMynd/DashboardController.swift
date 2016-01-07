@@ -10,6 +10,7 @@ import UIKit
 import MMDrawerController
 import Charts
 import Parse
+import SwiftDate
 
 class DashboardController: UIViewController {
     
@@ -40,7 +41,6 @@ class DashboardController: UIViewController {
         
         ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
             let hashTags = posts.reduce([], combine: { return $0 + $1.hashTags })
-            print(hashTags)
             var hashTagMap: [String:Int] = [:]
             for hashtag in hashTags {
                 if let freq = hashTagMap[hashtag] { hashTagMap[hashtag] = freq + 1 }
@@ -61,6 +61,10 @@ class DashboardController: UIViewController {
             let leastTagsData = [ Double(minTuple.total - minTuple.lowest), Double(minTuple.lowest)]
             self.setPieChart(dataPoints: leastTags, values: leastTagsData, pieChart: minPieChart, centerValue: hashTagMap.minPercent())
             self.minHashTag.text = hashTagMap.min()
+            
+            
+            //Draw the Line Chart for the emoji used over time
+            let _ = self.makeEmojiToDateCountDictionary(posts)
         })
     }
 
@@ -68,6 +72,24 @@ class DashboardController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func makeEmojiToDateCountDictionary( posts:[Post] ) -> [Character: [NSDate:Int]] {
+        var emojiToDirtyDatesCount: [Character: [NSDate]] = [:]
+        for post in posts {
+            let key = post.emoji.characters.first!
+            if var arr = emojiToDirtyDatesCount[key] { arr.append(post.createdAt!); emojiToDirtyDatesCount[key] = arr; }
+            else { emojiToDirtyDatesCount[key] = [post.createdAt!] }
+        }
+        print(emojiToDirtyDatesCount)
+        return [:] //DELETE
+    }
+    
+//    func makeDatesToCountDict( dates:[NSDate] ) -> [NSDate:Int] {
+//        let dateFormat = DateFormat.Custom("dd/MM/yyyy")
+//        var result: [NSDate:Int] = dates.reduce([:], combine: { ( dict:[NSDate:Int], date ) in
+//            //let key = Date
+//        })
+//    }
     
     func setPieChart( dataPoints dataPoints: [String], values: [Double], pieChart: PieChartView, centerValue: Int ) {
         var dataEntries: [ChartDataEntry] = []

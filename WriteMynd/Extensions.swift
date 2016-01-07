@@ -45,7 +45,6 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
     
     func maxPercent () -> Int {
         let maxTuple: (highest:Int,total:Int) = self.maxTuple()
-        print(maxTuple)
         return Int((Float(maxTuple.highest) / Float(maxTuple.total)) * Float(100))
     }
     
@@ -62,7 +61,6 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
     
     func minPercent () -> Int {
         let minTuple: (lowest:Int,total:Int) = self.minTuple()
-        print(minTuple)
         return Int((Float(minTuple.lowest) / Float(minTuple.total)) * Float(100))
     }
 }

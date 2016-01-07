@@ -90,6 +90,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WriteMynd/Parse.framework"
   install_framework "Pods-WriteMynd/ParseUI.framework"
   install_framework "Pods-WriteMynd/SZTextView.framework"
+  install_framework "Pods-WriteMynd/SwiftDate.framework"
   install_framework "Pods-WriteMynd/SwiftSpinner.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -99,5 +100,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WriteMynd/Parse.framework"
   install_framework "Pods-WriteMynd/ParseUI.framework"
   install_framework "Pods-WriteMynd/SZTextView.framework"
+  install_framework "Pods-WriteMynd/SwiftDate.framework"
   install_framework "Pods-WriteMynd/SwiftSpinner.framework"
 fi

@@ -21,6 +21,11 @@ class PostViewController: UIViewController {
     @IBOutlet weak var selectedEmojiLabel: UILabel!
     
     let user: PFUser = PFUser.currentUser()!
+    let dailyQuestion: [String] = [
+        "What's going on?",
+        "What mood are you in?",
+        "How is your health?"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad();

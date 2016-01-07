@@ -11,6 +11,7 @@ target 'WriteMynd' do
     pod 'SwiftSpinner'
     pod 'MMDrawerController'
     pod 'Charts'
+    pod 'SwiftDate', '~> 2.0'
     
 end
 

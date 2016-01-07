@@ -10,7 +10,7 @@ import Foundation
 import Parse
 
 class Post {
-    var emoji: String
+    var emoji: String //TODO: Change to Character, //TODO_FOR_TODO: Change from Character to a Custom Struct Emoji
     var text: String
     var hashTags: [String]
     var isPrivate: Bool = true
