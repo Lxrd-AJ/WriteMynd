@@ -21,6 +21,8 @@ class DashboardController: UIViewController {
     @IBOutlet weak var lineGraphCanvas: UIView!
     @IBOutlet weak var mostUsedHashTag: UILabel!
     @IBOutlet weak var leastUsedHashTag: UILabel!
+    @IBOutlet weak var emojiSegmentedControl: UISegmentedControl!
+    //@IBOutlet weak var lineGraphCanvas: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,7 @@ class DashboardController: UIViewController {
         minPieChartCanvas.backgroundColor = UIColor.whiteColor()
         mostUsedHashTag.text = "-"
         leastUsedHashTag.text = "-"
+        self.emojiSegmentedControl.hidden = true
         
         //Charts Customization
         let maxPieChart: PieChartView = PieChartView(frame: CGRect(x:maxPieChartCanvas.frame.origin.x, y: maxPieChartCanvas.frame.origin.y, width: 200, height: 200 ))
@@ -39,6 +42,7 @@ class DashboardController: UIViewController {
         maxPieChart.noDataText = "Thinking...."
         minPieChart.noDataText = "Be together, not the same"
         
+        //TODO: If there are no hashtags then display empty graphs
         ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
             let hashTags = posts.reduce([], combine: { return $0 + $1.hashTags })
             var hashTagMap: [String:Int] = [:]
@@ -62,9 +66,19 @@ class DashboardController: UIViewController {
             self.setPieChart(dataPoints: leastTags, values: leastTagsData, pieChart: minPieChart, centerValue: hashTagMap.minPercent())
             self.minHashTag.text = hashTagMap.min()
             
-            
+            //Customise the Line Graph Section
+            self.emojiSegmentedControl.removeAllSegments()
             //Draw the Line Chart for the emoji used over time
-            let _ = self.makeEmojiToDateCountDictionary(posts)
+            let emojiMap = self.makeEmojiToDateCountDictionary(posts)
+            var i = 0;
+            for (emoji,_) in emojiMap {
+                self.emojiSegmentedControl.insertSegmentWithTitle(String(emoji), atIndex: i, animated: false);
+                self.emojiSegmentedControl.setWidth(50.0, forSegmentAtIndex: i)
+                i++
+            }
+            self.emojiSegmentedControl.hidden = false
+            print( emojiMap )
+            
         })
     }
 
@@ -76,20 +90,28 @@ class DashboardController: UIViewController {
     func makeEmojiToDateCountDictionary( posts:[Post] ) -> [Character: [NSDate:Int]] {
         var emojiToDirtyDatesCount: [Character: [NSDate]] = [:]
         for post in posts {
-            let key = post.emoji.characters.first!
-            if var arr = emojiToDirtyDatesCount[key] { arr.append(post.createdAt!); emojiToDirtyDatesCount[key] = arr; }
-            else { emojiToDirtyDatesCount[key] = [post.createdAt!] }
+            if let key = post.emoji.characters.first {
+                if emojiToDirtyDatesCount[key] != nil{ emojiToDirtyDatesCount[key]!.append(post.createdAt!) }
+                else { emojiToDirtyDatesCount[key] = [post.createdAt!] }
+            }
+            
         }
-        print(emojiToDirtyDatesCount)
-        return [:] //DELETE
+        //print(emojiToDirtyDatesCount)
+        var emojiMap: [Character:[NSDate:Int]] = [:]
+        for (emoji,dates) in emojiToDirtyDatesCount { emojiMap[emoji] = makeDatesToCountDict(dates) }
+        return emojiMap
     }
     
-//    func makeDatesToCountDict( dates:[NSDate] ) -> [NSDate:Int] {
-//        let dateFormat = DateFormat.Custom("dd/MM/yyyy")
-//        var result: [NSDate:Int] = dates.reduce([:], combine: { ( dict:[NSDate:Int], date ) in
-//            //let key = Date
-//        })
-//    }
+    func makeDatesToCountDict( dates:[NSDate] ) -> [NSDate:Int] {
+        let dateFormat = DateFormat.Custom("dd/MM/yyyy")
+        let result: [NSDate:Int] = dates.reduce([:], combine: { ( var dict:[NSDate:Int], date ) in
+            let key = date.toString(dateFormat)!.toDate(dateFormat)!
+            if dict[key] != nil { dict[key]! += 1 }
+            else{ dict[key] = 1 }
+            return dict
+        })
+        return result
+    }
     
     func setPieChart( dataPoints dataPoints: [String], values: [Double], pieChart: PieChartView, centerValue: Int ) {
         var dataEntries: [ChartDataEntry] = []
