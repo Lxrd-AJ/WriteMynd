@@ -24,7 +24,8 @@ class PostViewController: UIViewController {
     let dailyQuestion: [String] = [
         "What's going on?",
         "What mood are you in?",
-        "How is your health?"
+        "How is your health?",
+        "How are you?"
     ]
     
     override func viewDidLoad() {
