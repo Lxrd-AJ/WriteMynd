@@ -64,3 +64,12 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
         return Int((Float(minTuple.lowest) / Float(minTuple.total)) * Float(100))
     }
 }
+
+extension Dictionary {
+    func keys() -> [Key]{
+//        for (key,value) in self {
+//
+//        }
+        return [Key](self.keys)
+    }
+}

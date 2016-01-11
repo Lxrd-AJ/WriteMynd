@@ -22,7 +22,8 @@ class DashboardController: UIViewController {
     @IBOutlet weak var mostUsedHashTag: UILabel!
     @IBOutlet weak var leastUsedHashTag: UILabel!
     @IBOutlet weak var emojiSegmentedControl: UISegmentedControl!
-    //@IBOutlet weak var lineGraphCanvas: UIView!
+    var emojiMap:[Character: [NSDate:Int]]?
+    let lineChartView: LineChartView = LineChartView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +38,10 @@ class DashboardController: UIViewController {
         //Charts Customization
         let maxPieChart: PieChartView = PieChartView(frame: CGRect(x:maxPieChartCanvas.frame.origin.x, y: maxPieChartCanvas.frame.origin.y, width: 200, height: 200 ))
         let minPieChart: PieChartView = PieChartView(frame: CGRect(x:minPieChartCanvas.bounds.origin.x, y: minPieChartCanvas.frame.origin.y, width: 200, height: 200 ))
+        lineChartView.frame = CGRect(x: lineGraphCanvas.bounds.origin.x, y: lineGraphCanvas.bounds.origin.y, width: lineGraphCanvas.frame.width * 0.55, height: lineGraphCanvas.frame.height - 10)
         maxPieChartCanvas.addSubview(maxPieChart)
         minPieChartCanvas.addSubview(minPieChart)
+        lineGraphCanvas.addSubview(lineChartView)
         maxPieChart.noDataText = "Thinking...."
         minPieChart.noDataText = "Be together, not the same"
         
@@ -69,22 +72,54 @@ class DashboardController: UIViewController {
             //Customise the Line Graph Section
             self.emojiSegmentedControl.removeAllSegments()
             //Draw the Line Chart for the emoji used over time
-            let emojiMap = self.makeEmojiToDateCountDictionary(posts)
+            self.emojiMap = self.makeEmojiToDateCountDictionary(posts)
             var i = 0;
-            for (emoji,_) in emojiMap {
+            for (emoji,_) in self.emojiMap! {
                 self.emojiSegmentedControl.insertSegmentWithTitle(String(emoji), atIndex: i, animated: false);
                 self.emojiSegmentedControl.setWidth(50.0, forSegmentAtIndex: i)
                 i++
             }
             self.emojiSegmentedControl.hidden = false
-            print( emojiMap )
-            
+            self.emojiSegmentedControl.selectedSegmentIndex = 0
+            self.emojiSegmentedControl.addTarget(self, action: "emojiSegmentControlTapped:", forControlEvents: .ValueChanged)
+            //print( self.emojiMap )
+            self.drawLineGraph((self.emojiMap?.keys.first!)!, map: self.emojiMap!)
+            print(self.lineGraphCanvas.frame.width)
         })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func drawLineGraph( emoji:Character, map:[Character: [NSDate:Int]] ){
+        var dataPoints:[String] = []; var values:[Double] = []
+        let data = map[emoji]
+        let dateFormat = DateFormat.Custom("dd/MM/yyyy")
+        for (date,count) in data! {
+            dataPoints.append(date.toString(dateFormat)!)
+            values.append( Double(count) )
+        }
+        setLineChart(dataPoints, values: values)
+    }
+    
+    func setLineChart( dataPoints:[String], values:[Double] ){
+        var dataEntries: [ChartDataEntry] = []
+        for i in 0..<dataPoints.count {
+            dataEntries.append( ChartDataEntry(value: values[i], xIndex: i) )
+        }
+        let lineChartDataSet = LineChartDataSet(yVals: dataEntries)
+        let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
+        lineChartView.data = lineChartData
+    }
+    
+    func emojiSegmentControlTapped( segmentControl:UISegmentedControl ) {
+        let index = segmentControl.selectedSegmentIndex
+        let emojis = emojiMap?.keys()
+        let selectedEmoji:Character = emojis![index]
+        //print(emojiMap![selectedEmoji])
+        drawLineGraph(selectedEmoji, map: emojiMap!)
     }
     
     func makeEmojiToDateCountDictionary( posts:[Post] ) -> [Character: [NSDate:Int]] {
