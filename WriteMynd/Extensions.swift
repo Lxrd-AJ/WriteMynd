@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Charts
 
 extension UIView{
     class func loadFromNibName( nibNamed:String, bundle:NSBundle? = nil ) -> UIView? {
@@ -73,3 +74,15 @@ extension Dictionary {
         return [Key](self.keys)
     }
 }
+
+
+
+
+class LineXAxis: ChartXAxisValueFormatter {
+    @objc func stringForXValue(index: Int, original: String, viewPortHandler: ChartViewPortHandler) -> String {
+        let double = Double(original)
+        guard double != nil else { return original }
+        return String(Int(double!))
+    }
+}
+

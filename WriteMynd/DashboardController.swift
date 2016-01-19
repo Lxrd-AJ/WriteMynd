@@ -38,7 +38,7 @@ class DashboardController: UIViewController {
         //Charts Customization
         let maxPieChart: PieChartView = PieChartView(frame: CGRect(x:maxPieChartCanvas.frame.origin.x, y: maxPieChartCanvas.frame.origin.y, width: 200, height: 200 ))
         let minPieChart: PieChartView = PieChartView(frame: CGRect(x:minPieChartCanvas.bounds.origin.x, y: minPieChartCanvas.frame.origin.y, width: 200, height: 200 ))
-        lineChartView.frame = CGRect(x: lineGraphCanvas.bounds.origin.x, y: lineGraphCanvas.bounds.origin.y, width: lineGraphCanvas.frame.width * 0.55, height: lineGraphCanvas.frame.height - 10)
+        lineChartView.frame = CGRect(x: lineGraphCanvas.bounds.origin.x, y: lineGraphCanvas.bounds.origin.y, width: lineGraphCanvas.frame.width * 0.62, height: lineGraphCanvas.frame.height )
         maxPieChartCanvas.addSubview(maxPieChart)
         minPieChartCanvas.addSubview(minPieChart)
         lineGraphCanvas.addSubview(lineChartView)
@@ -71,6 +71,14 @@ class DashboardController: UIViewController {
             
             //Customise the Line Graph Section
             self.emojiSegmentedControl.removeAllSegments()
+            //customise the line graph
+            self.lineChartView.backgroundColor = UIColor(red: 133/255, green: 97/255, blue: 166/255, alpha: 1.0)
+            self.lineChartView.drawGridBackgroundEnabled = false
+            self.lineChartView.scaleXEnabled = false; self.lineChartView.scaleYEnabled = false
+            self.lineChartView.pinchZoomEnabled = false
+            self.lineChartView.xAxis.valueFormatter = LineXAxis()
+            self.lineChartView.xAxis.drawGridLinesEnabled = false
+
             //Draw the Line Chart for the emoji used over time
             self.emojiMap = self.makeEmojiToDateCountDictionary(posts)
             var i = 0;
@@ -111,6 +119,7 @@ class DashboardController: UIViewController {
         }
         let lineChartDataSet = LineChartDataSet(yVals: dataEntries)
         let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
+        lineChartData.setValueFont(UIFont(name: "Avenir", size: 9))
         lineChartView.data = lineChartData
     }
     
@@ -129,7 +138,6 @@ class DashboardController: UIViewController {
                 if emojiToDirtyDatesCount[key] != nil{ emojiToDirtyDatesCount[key]!.append(post.createdAt!) }
                 else { emojiToDirtyDatesCount[key] = [post.createdAt!] }
             }
-            
         }
         //print(emojiToDirtyDatesCount)
         var emojiMap: [Character:[NSDate:Int]] = [:]
@@ -139,7 +147,7 @@ class DashboardController: UIViewController {
     
     func makeDatesToCountDict( dates:[NSDate] ) -> [NSDate:Int] {
         let dateFormat = DateFormat.Custom("dd/MM/yyyy")
-        let result: [NSDate:Int] = dates.reduce([:], combine: { ( var dict:[NSDate:Int], date ) in
+        let result: [NSDate:Int] = dates.sort({ return $0 < $1 }).reduce([:], combine: { ( var dict:[NSDate:Int], date ) in
             let key = date.toString(dateFormat)!.toDate(dateFormat)!
             if dict[key] != nil { dict[key]! += 1 }
             else{ dict[key] = 1 }
