@@ -26,6 +26,9 @@
 		21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1341C2949A90047306D /* MenuViewController.swift */; };
 		21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1361C2A129A0047306D /* MenuViewCell.swift */; };
 		21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1381C2AECCC0047306D /* DashboardController.swift */; };
+		21FA7FA01C5F04C300D0836F /* SwipeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FA7F9F1C5F04C300D0836F /* SwipeView.xib */; };
+		21FA7FA21C5F04F000D0836F /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA11C5F04F000D0836F /* SwipeView.swift */; };
+		21FA7FA41C5F162C00D0836F /* SwipeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA31C5F162C00D0836F /* SwipeEnums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		21C0A1341C2949A90047306D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		21C0A1361C2A129A0047306D /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
 		21C0A1381C2AECCC0047306D /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
+		21FA7F9F1C5F04C300D0836F /* SwipeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwipeView.xib; sourceTree = "<group>"; };
+		21FA7FA11C5F04F000D0836F /* SwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
+		21FA7FA31C5F162C00D0836F /* SwipeEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeEnums.swift; sourceTree = "<group>"; };
 		A6860EA5839031560CC75E7E /* Pods_WriteMynd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteMynd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDF3529DD65B7F3A92F32E8 /* Pods-WriteMynd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.release.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.release.xcconfig"; sourceTree = "<group>"; };
 		E47566DA142DA8C02B9AC07D /* Pods-WriteMynd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.debug.xcconfig"; sourceTree = "<group>"; };
@@ -108,6 +114,7 @@
 				2172FC101C1258B7003446AC /* Extensions.swift */,
 				21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */,
 				2136F0751C1A3B2A00BE26FD /* ParseService.swift */,
+				21FA7FA31C5F162C00D0836F /* SwipeEnums.swift */,
 			);
 			path = WriteMynd;
 			sourceTree = "<group>";
@@ -132,6 +139,8 @@
 				21B8CC191C14C67600F629FF /* EmojiView.xib */,
 				2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */,
 				21C0A1361C2A129A0047306D /* MenuViewCell.swift */,
+				21FA7F9F1C5F04C300D0836F /* SwipeView.xib */,
+				21FA7FA11C5F04F000D0836F /* SwipeView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -215,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21FA7FA01C5F04C300D0836F /* SwipeView.xib in Resources */,
 				2172FBF71C11B65E003446AC /* LaunchScreen.storyboard in Resources */,
 				21B8CC1A1C14C67600F629FF /* EmojiView.xib in Resources */,
 				2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */,
@@ -280,6 +290,7 @@
 				2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */,
 				2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */,
 				21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */,
+				21FA7FA21C5F04F000D0836F /* SwipeView.swift in Sources */,
 				2172FC081C11E073003446AC /* Utilities.swift in Sources */,
 				21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */,
 				2172FC111C1258B7003446AC /* Extensions.swift in Sources */,
@@ -287,6 +298,7 @@
 				2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */,
 				21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */,
 				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,
+				21FA7FA41C5F162C00D0836F /* SwipeEnums.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
 				21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */,

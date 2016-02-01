@@ -21,10 +21,13 @@ class PostViewController: UIViewController {
     @IBOutlet weak var selectedEmojiLabel: UILabel!
     
     var questionIndex: Int?
+    var swipeView: SwipeView?
     let user: PFUser = PFUser.currentUser()!
         
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        segmentedControl.addTarget(self, action: "postSegmentedControlTapped:", forControlEvents: .ValueChanged)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -35,7 +38,6 @@ class PostViewController: UIViewController {
         
         //Register for the keyboard will show notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidChangeFrameNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -51,6 +53,41 @@ class PostViewController: UIViewController {
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    /*
+        Selected Segment 0 is the text posting screen
+        Selected Segment 1 is the Swiping screen
+    */
+    func postSegmentedControlTapped( segmentedControl: UISegmentedControl ) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            //do nothing for now
+            break;
+        case 1:
+            //show the swiping card on the screen
+            
+            //Customise the SwipeView
+            self.swipeView = SwipeView.loadFromNibName("SwipeView") as? SwipeView
+            swipeView!.frame = CGRect(x: 20, y: 20, width: view.frame.width - 40, height: view.frame.height - 40)
+            swipeView!.setupView()
+            swipeView!.cancelButton.addTarget(self, action: "cancelSwiping:", forControlEvents: .TouchUpInside)
+            swipeView?.becomeFirstResponder()
+
+            //Customise the backgroundView
+            self.postTextView.editable = false
+            segmentedControl.selectedSegmentIndex = 0
+            self.view.addSubview(swipeView!)
+            break;
+        default:
+            break;
+        }
+    }
+    
+    func cancelSwiping( button:UIButton ){
+        swipeView?.removeFromSuperview()
+        self.postTextView.editable = true
+        self.postTextView.becomeFirstResponder()
     }
     
     func customiseUI(){
