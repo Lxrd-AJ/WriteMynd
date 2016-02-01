@@ -188,7 +188,7 @@
 				TargetAttributes = {
 					2172FBE81C11B65E003446AC = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 349P7P3B63;
+						DevelopmentTeam = VCLKRPEWT4;
 					};
 				};
 			};
@@ -411,7 +411,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Lizzie.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
@@ -430,7 +430,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Lizzie.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";

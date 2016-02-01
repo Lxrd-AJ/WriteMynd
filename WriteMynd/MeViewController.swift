@@ -18,9 +18,12 @@ class MeViewController: UIViewController {
     
     var showPostController:Bool = true
     var posts:[Post] = []
+    let questionIndex = Int( arc4random_uniform(UInt32(dailyQuestion.count)) )
     @IBOutlet weak var tableView:UITableView!
     @IBOutlet weak var showMenuButton: UIBarButtonItem!
-
+    @IBOutlet weak var dailyQuestionButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +32,7 @@ class MeViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         //Check if User exists
         if let _ = PFUser.currentUser() {
             if showPostController {
@@ -46,10 +50,23 @@ class MeViewController: UIViewController {
         }
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //Change the daily question
+        dailyQuestionButton.titleLabel!.text = dailyQuestion[questionIndex]
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated. 
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showPostController" {
+            let postVC = segue.destinationViewController as! PostViewController
+            postVC.questionIndex = questionIndex
+        }
     }
     
     @IBAction func unwindToSegue( segue:UIStoryboardSegue ) {}

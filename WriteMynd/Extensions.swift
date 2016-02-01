@@ -68,9 +68,6 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
 
 extension Dictionary {
     func keys() -> [Key]{
-//        for (key,value) in self {
-//
-//        }
         return [Key](self.keys)
     }
 }
