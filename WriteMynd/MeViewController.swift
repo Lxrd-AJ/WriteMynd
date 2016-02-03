@@ -54,7 +54,7 @@ class MeViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Change the daily question
-        dailyQuestionButton.titleLabel!.text = dailyQuestion[questionIndex]
+        dailyQuestionButton.setTitle(dailyQuestion[questionIndex], forState: .Normal)
     }
 
     override func didReceiveMemoryWarning() {

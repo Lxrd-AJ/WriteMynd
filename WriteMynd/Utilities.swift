@@ -9,6 +9,8 @@
 import Foundation
 
 let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+let screenWidth = UIScreen.mainScreen().bounds.width
+let screenHeight = UIScreen.mainScreen().bounds.height
 
 let dailyQuestion: [String] = [
     "What's going on?",
@@ -74,3 +76,55 @@ let dailyQuestion: [String] = [
     "How much did you eat today?",
     "What’s worth fighting for?"
 ]
+
+let positiveSwipeQuestions: [String] = [
+    "Calm",
+    "Confident",
+    "Content",
+    "Eager",
+    "Ecstatic",
+    "Engaged",
+    "Excited",
+    "Grateful",
+    "Happy",
+    "Humourous",
+    "Inspired",
+    "Loving",
+    "Motivated",
+    "Optimistic",
+    "Passionate",
+    "Proud",
+    "Reassured",
+    "Relaxed",
+    "Relieved",
+    "Secure",
+    "Surprised",
+    "Thrilled"
+]
+
+let negativeSwipeQuestions: [String] = [
+    "Angry",
+    "Afraid",
+    "Annoyed",
+    "Anxious",
+    "Ashamed",
+    "Bored",
+    "Confused",
+    "Demoralised",
+    "Depressed",
+    "Disappointed",
+    "Disgusted",
+    "Embarassed",
+    "Frustrated",
+    "Guilty",
+    "Insecure",
+    "Jealous",
+    "Lonely",
+    "Resentful",
+    "Sad",
+    "Self-conscious",
+    "Stressed",
+    "Worried"
+]
+
+let swipeQuestions = positiveSwipeQuestions + negativeSwipeQuestions

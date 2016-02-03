@@ -73,6 +73,10 @@ class PostViewController: UIViewController {
             swipeView!.setupView()
             swipeView!.cancelButton.addTarget(self, action: "cancelSwiping:", forControlEvents: .TouchUpInside)
             swipeView?.becomeFirstResponder()
+            
+            //Callback functions called by the swipe view
+            swipeView?.dismissalCallback = { self.dismissViewControllerAnimated(true, completion: nil) }
+            swipeView?.swipeSave = { (swipe:Swipe) -> Void in swipe.save(); }
 
             //Customise the backgroundView
             self.postTextView.editable = false
