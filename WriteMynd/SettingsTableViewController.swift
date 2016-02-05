@@ -8,6 +8,7 @@
 
 import UIKit
 import MMDrawerController
+import Parse
 
 class SettingsTableViewController: UITableViewController {
     
@@ -42,12 +43,25 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SettingsCell")!
-        
-        cell.textLabel?.text = rows[indexPath.row]
+        let cellText = rows[indexPath.row]
+
+        cell.textLabel?.text = cellText
         cell.textLabel?.textColor = UIColor(red: 99/255, green: 60/255, blue: 134/255, alpha: 1)
         cell.textLabel?.font = UIFont(name: "Avenir", size: 17.0)
         
         return cell
     }
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let rowText = rows[ indexPath.row ]
+        switch rowText {
+        case "Log out":
+            PFUser.logOut()
+            let meVC: MeViewController = storyboard!.instantiateViewControllerWithIdentifier("MeViewController") as! MeViewController
+            self.mm_drawerController.centerViewController = UINavigationController(rootViewController: meVC)
+        default:
+            print("Unhandled cell select")
+        }
+    }
 }
