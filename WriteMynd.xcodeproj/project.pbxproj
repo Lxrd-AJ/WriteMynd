@@ -30,6 +30,7 @@
 		21FA7FA21C5F04F000D0836F /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA11C5F04F000D0836F /* SwipeView.swift */; };
 		21FA7FA41C5F162C00D0836F /* SwipeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA31C5F162C00D0836F /* SwipeEnums.swift */; };
 		21FA7FA61C61C49400D0836F /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA51C61C49400D0836F /* Swipe.swift */; };
+		21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		21FA7FA11C5F04F000D0836F /* SwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 		21FA7FA31C5F162C00D0836F /* SwipeEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeEnums.swift; sourceTree = "<group>"; };
 		21FA7FA51C61C49400D0836F /* Swipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
+		21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		A6860EA5839031560CC75E7E /* Pods_WriteMynd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteMynd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDF3529DD65B7F3A92F32E8 /* Pods-WriteMynd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.release.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.release.xcconfig"; sourceTree = "<group>"; };
 		E47566DA142DA8C02B9AC07D /* Pods-WriteMynd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				2172FC091C123ED9003446AC /* PostViewController.swift */,
 				21C0A1341C2949A90047306D /* MenuViewController.swift */,
 				21C0A1381C2AECCC0047306D /* DashboardController.swift */,
+				21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */,
 				2172FC111C1258B7003446AC /* Extensions.swift in Sources */,
 				2172FC021C11CD3A003446AC /* MeViewController.swift in Sources */,
+				21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */,
 				2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */,
 				21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */,
 				21FA7FA61C61C49400D0836F /* Swipe.swift in Sources */,
@@ -349,7 +353,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: gai10@uni.brighton.ac.uk (LU7DNDCG99)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ganiyu Ibraheem (Q5L56H9SBX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -395,7 +399,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: gai10@uni.brighton.ac.uk (LU7DNDCG99)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ganiyu Ibraheem (349P7P3B63)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -429,7 +433,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lizzie.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "54c6fbca-c4dc-42da-bfea-97eb97241da4";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -448,7 +452,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lizzie.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "54c6fbca-c4dc-42da-bfea-97eb97241da4";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

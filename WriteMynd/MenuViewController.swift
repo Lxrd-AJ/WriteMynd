@@ -11,7 +11,7 @@ import MMDrawerController
 
 class MenuViewController: UITableViewController {
     
-    let menuItems: [String] = ["Me","My Mynd"]//["Me","Feed","My Mynd","Science","Settings"]
+    let menuItems: [String] = ["Me","My Mynd","Settings"]//["Me","Feed","My Mynd","Science","Settings"]
     var navController: UINavigationController?
     var drawerController: MMDrawerController?
 
@@ -50,6 +50,8 @@ class MenuViewController: UITableViewController {
             (controller as! MeViewController).showPostController = false
         case "My Mynd":
             controller = storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
+        case "Settings":
+            controller = storyboard!.instantiateViewControllerWithIdentifier("SettingsTableViewController") as! SettingsTableViewController
         default:
             controller = UIViewController()
             break;
@@ -59,14 +61,4 @@ class MenuViewController: UITableViewController {
         self.drawerController?.closeDrawerAnimated(true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
