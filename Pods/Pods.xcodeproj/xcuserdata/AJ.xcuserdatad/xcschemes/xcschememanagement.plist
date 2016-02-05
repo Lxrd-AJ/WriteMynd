@@ -34,6 +34,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RMActionController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RMDateSelectionViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SZTextView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +62,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1A72C8B9842E586FAFD5995755BAEBEA</key>
+		<key>24090FBCEF7A50AE384678B5C071804B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>24090FBCEF7A50AE384678B5C071804B</key>
+		<key>277AF6E9A30B18FACCD29EDC898F1785</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +82,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>439AD2610969D2C1591F999AF7B173BE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6FD46D150D7621E803113C97129398DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>708E01B006A9F88B3C13711562282B5E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8E58F97C1C975E33285A6AF323785827</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,17 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7E02A030DB180F18DE2B0EAF9423B1E</key>
+		<key>99D0EE97ACA515682A3FB55E8136C308</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ED7B8FB5AC3DD6A5D157821F95CAD0D5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F9631E05EF6A3D495BC032FE71E51890</key>
+		<key>D8532B9A63D426405D68B43AFA64601D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

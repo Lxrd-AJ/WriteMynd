@@ -12,6 +12,7 @@ target 'WriteMynd' do
     pod 'MMDrawerController'
     pod 'Charts'
     pod 'SwiftDate', '~> 2.0'
+    pod 'RMDateSelectionViewController', '~> 2.0.3'
     
 end
 
