@@ -11,7 +11,7 @@ import MMDrawerController
 
 class MenuViewController: UITableViewController {
     
-    let menuItems: [String] = ["Me","My Mynd","Settings"]//["Me","Feed","My Mynd","Science","Settings"]
+    let menuItems: [String] = ["Me","My Mynd","Science","Settings"]//["Me","Feed","My Mynd","Science","Settings"]
     var navController: UINavigationController?
     var drawerController: MMDrawerController?
 
@@ -50,6 +50,8 @@ class MenuViewController: UITableViewController {
             (controller as! MeViewController).showPostController = false
         case "My Mynd":
             controller = storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
+        case "Science":
+            controller = storyboard!.instantiateViewControllerWithIdentifier("ScienceViewController") as! ScienceViewController
         case "Settings":
             controller = storyboard!.instantiateViewControllerWithIdentifier("SettingsTableViewController") as! SettingsTableViewController
         default:

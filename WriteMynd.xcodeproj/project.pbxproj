@@ -10,6 +10,7 @@
 		10694AE2EFBF193FE6559F7E /* Pods_WriteMynd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6860EA5839031560CC75E7E /* Pods_WriteMynd.framework */; };
 		2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0751C1A3B2A00BE26FD /* ParseService.swift */; };
 		2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */; };
+		21544BF61C77B81C0034BA80 /* ScienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21544BF51C77B81C0034BA80 /* ScienceViewController.swift */; };
 		2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FBEC1C11B65E003446AC /* AppDelegate.swift */; };
 		2172FBF21C11B65E003446AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF01C11B65E003446AC /* Main.storyboard */; };
 		2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF31C11B65E003446AC /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 		2172FC081C11E073003446AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC071C11E073003446AC /* Utilities.swift */; };
 		2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC091C123ED9003446AC /* PostViewController.swift */; };
 		2172FC111C1258B7003446AC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC101C1258B7003446AC /* Extensions.swift */; };
+		21B89FC41C77BF5B00E6D4E7 /* ScienceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */; };
 		21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC171C14C63600F629FF /* EmojiView.swift */; };
 		21B8CC1A1C14C67600F629FF /* EmojiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21B8CC191C14C67600F629FF /* EmojiView.xib */; };
 		21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC1B1C14D9B600F629FF /* Post.swift */; };
@@ -36,6 +38,7 @@
 /* Begin PBXFileReference section */
 		2136F0751C1A3B2A00BE26FD /* ParseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseService.swift; sourceTree = "<group>"; };
 		2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		21544BF51C77B81C0034BA80 /* ScienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScienceViewController.swift; path = ../ScienceViewController.swift; sourceTree = "<group>"; };
 		2172FBE91C11B65E003446AC /* WriteMynd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteMynd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2172FBEC1C11B65E003446AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2172FBF11C11B65E003446AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		2172FC071C11E073003446AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2172FC091C123ED9003446AC /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		2172FC101C1258B7003446AC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScienceMessage.swift; sourceTree = "<group>"; };
 		21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WriteMynd-Bridging-Header.h"; sourceTree = "<group>"; };
 		21B8CC171C14C63600F629FF /* EmojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		21B8CC191C14C67600F629FF /* EmojiView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiView.xib; sourceTree = "<group>"; };
@@ -127,13 +131,15 @@
 		2172FBFE1C11BBBD003446AC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2172FC011C11CD3A003446AC /* MeViewController.swift */,
-				2172FC031C11CFF9003446AC /* SignUpViewController.swift */,
-				2172FC051C11D037003446AC /* LoginViewController.swift */,
-				2172FC091C123ED9003446AC /* PostViewController.swift */,
-				21C0A1341C2949A90047306D /* MenuViewController.swift */,
 				21C0A1381C2AECCC0047306D /* DashboardController.swift */,
+				2172FC051C11D037003446AC /* LoginViewController.swift */,
+				21C0A1341C2949A90047306D /* MenuViewController.swift */,
+				2172FC011C11CD3A003446AC /* MeViewController.swift */,
+				2172FC091C123ED9003446AC /* PostViewController.swift */,
+				21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */,
+				21544BF51C77B81C0034BA80 /* ScienceViewController.swift */,
 				21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */,
+				2172FC031C11CFF9003446AC /* SignUpViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -303,9 +309,11 @@
 				2172FC021C11CD3A003446AC /* MeViewController.swift in Sources */,
 				21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */,
 				2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */,
+				21544BF61C77B81C0034BA80 /* ScienceViewController.swift in Sources */,
 				21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */,
 				21FA7FA61C61C49400D0836F /* Swipe.swift in Sources */,
 				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,
+				21B89FC41C77BF5B00E6D4E7 /* ScienceMessage.swift in Sources */,
 				21FA7FA41C5F162C00D0836F /* SwipeEnums.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
@@ -431,9 +439,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Lizzie.WriteMynd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "54c6fbca-c4dc-42da-bfea-97eb97241da4";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -450,9 +458,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Lizzie.WriteMynd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "54c6fbca-c4dc-42da-bfea-97eb97241da4";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
