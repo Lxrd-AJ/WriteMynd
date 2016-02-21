@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WriteMynd</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="shortcut icon" href="//favicon.ico">
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+<script src="js/ui/jquery.ui.touch-punch.js"></script>
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script src="js/draggabilly.pkgd.min.js"></script>
+<script src="js/dynamics.min.js"></script>
+<script src="js/main.js"></script>
+</head>
+
+<body onload="init();">
+<div class="container">
+<div class="grid__item color-11">
+  <div class="headerText">
+    <div id="cloudLogo2"><img src="img/logo.png" alt="" width="141" height="147"/> </div>
+    <div id="headerTxt"> WriteMynd</div>
+    <div id="headernotiTag"> get notified when the app is ready for download</div>
+    <div id="headerTitle">Record, reflect on and share honest feelings for a happier mind</div>
+    <div id="appLogo"><img src="img/android8.png" width="58" height="58" alt=""/> <img src="img/apple62.png" width="58" height="58" alt=""/></div>
+    <div class="content">
+      <button id="trigger-dialog" class="button button--dialog">click her to sign up</button>
+    </div>
+    <div class="dialog" id="dialog-1">
+      <div class="mover-wrap dialog__content">
+        <div class="handle"></div>
+        <div class="mover">
+          <div class="dialog__content-inner">
+            <div class="dialog__header">
+              <h2>Newsletter</h2>
+              <button class="action action--close"> <i class="icon icon--cross"></i> <span class="text-hidden">Close dialog</span> </button>
+            </div>
+            <div class="dialog__body">
+              <div class="actions">
+                <div class="mover__element"> <a href="#" class="action action--fav"> <i class="icon icon--heart icon--action"></i> <span class="action__title"></span> <span class="action__subline">please enter your name</span>
+                  <form>
+                    <strong>Name</strong><br>
+                    <input type="text" name="name">
+                    <br>
+                  </form
+										>
+                  </a> </div>
+                <div class="mover__element"> <a href="#" class="action action--download"> <i class="icon icon--download icon--action"></i> <span class="action__title"></span> <span class="action__subline">please enter your email address</span>
+                  <form>
+                    <strong>Email</strong><br>
+                    <input type="text" name="email">
+                    <br>
+                  </form
+										>
+                  </a> </div>
+              </div>
+            </div>
+            <div class="dialog__footer"> <a href="#">View all related resources</a> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img src="img/01.png" width="820" height="676" alt=""/>
+    <div id="pHone">
+      <div class="marvel-device iphone5c green">
+        <div class="top-bar"></div>
+        <div class="camera"></div>
+        <div class="sensor"></div>
+        <div class="speaker"></div>
+        <div class="screen">
+          <canvas id="demoCanvas" width="500" height="200"></canvas>
+        </div>
+        <div class="home"></div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+    <script>
+			(function() {
+				var dialog = new DialogEl(document.getElementById('dialog-1'), {
+					mainElement : {
+						minscale : 0.6,
+						minopacity : 0.5,
+						//rX : 30,
+						rY : 40
+					},
+					innerElements : {tx : 100, ty : 100},
+					// the element is considered out of bounds if its center (x,y) is either 
+					// x < outofbounds.x or x > win.width-outofbounds.x or
+					// y < outofbounds.y or y > win.height - outofbounds.y
+					outofbounds: {x : 0, y: 0}
+				});
+
+				document.getElementById('trigger-dialog').addEventListener('click', function(ev) {
+					dialog.open();
+				});
+			})();
+		</script> 
+    <script>      
+      function init() {
+        var stage = new createjs.Stage("demoCanvas");
+        var circle = new createjs.Shape();
+        circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
+        circle.x = 100;
+        circle.y = 100;
+        stage.addChild(circle);
+        stage.update();
+      }
+    </script> 
+  </div>
+</div>
+</body>
+<footer>
+<div id="footerText1" >
+  <h1>Record:</h1>
+  Focus yourself in the present and calm the mind.Lorem ipsum dolor sit amet, vocent audire numquam usu ei, et sit postea feugait consectetuer. Vim id viris dolor antiopam. Sea consulatu reprehendunt definitionem id. At platonem interesset instructior eum, hinc dicta eum cu. Pro eu antiopam repudiandae, ad putant suavitate definiebas nec</div>
+<hr class="vertical"/>
+<div id="footerText2">
+  <h1>Reflect:</h1>
+  Spot patterns in your feelings and better address them as a result.Lorem ipsum dolor sit amet, vocent audire numquam usu ei, et sit postea feugait consectetuer. Vim id viris dolor antiopam. Sea consulatu reprehendunt definitionem id. At platonem interesset instructior eum, hinc dicta eum cu. Pro eu antiopam repudiandae, ad putant suavitate definiebas nec</div>
+<div id="footerText3">
+  <h1>Share:</h1>
+  Empathise with others in a controlled social environment.Lorem ipsum dolor sit amet, vocent audire numquam usu ei, et sit postea feugait consectetuer. Vim id viris dolor antiopam. Sea consulatu reprehendunt definitionem id. At platonem interesset instructior eum, hinc dicta eum cu. Pro eu antiopam repudiandae, ad putant suavitate definiebas nec</div>
+</html>
