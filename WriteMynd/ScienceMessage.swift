@@ -12,6 +12,7 @@ class ScienceMessage: UIViewController {
     
     @IBOutlet weak var messageLabel: UILabel!
     var message:String!
+    var index:Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
