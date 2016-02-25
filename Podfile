@@ -13,6 +13,7 @@ target 'WriteMynd' do
     pod 'Charts'
     pod 'SwiftDate', '~> 2.0'
     pod 'RMDateSelectionViewController', '~> 2.0.3'
+    pod 'ZendeskSDK', '~> 1.5'
     
 end
 

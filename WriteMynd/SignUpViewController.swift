@@ -51,7 +51,7 @@ extension SignUpViewController: PFSignUpViewControllerDelegate {
         print(error)
     }
     
-    func signUpViewController(signUpController: PFSignUpViewController, shouldBeginSignUp info: [NSObject : AnyObject]) -> Bool {
+    func signUpViewController(signUpController: PFSignUpViewController, shouldBeginSignUp info: [String : String]) -> Bool {
         return true
     }
     

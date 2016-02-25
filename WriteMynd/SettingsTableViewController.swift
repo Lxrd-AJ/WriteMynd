@@ -11,18 +11,34 @@ import MMDrawerController
 import Parse
 import RMDateSelectionViewController
 import SwiftDate
+import ZendeskSDK
 
+/**
+ Settings page for the entire app, Here the user can 
+    * Set Reminders
+    * Get Help
+    * Log Out
+ - todo:
+    - [ ] Use Constant strings to represent the row text to avoid errors
+ */
 class SettingsTableViewController: UITableViewController {
     
     let REMINDER_SWITCH: String = "REMINDER_SWITCH"
     let REMINDER_HOUR: String = "REMINDER_HOUR"
     let REMINDER_MINUTE: String = "REMINDER_MINUTE"
     
-    var rows: [String] = [
-        "Set a daily reminder",
-        "Log out"
-    ]
+    //Settings Table
+    let TROUBLE_APP = "Having trouble with the app?"
+    
+    lazy var rows: [String] = {
+        return [
+            "Set a daily reminder",
+            self.TROUBLE_APP,
+            "Log out"
+        ]
 
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +49,18 @@ class SettingsTableViewController: UITableViewController {
         if NSUserDefaults.standardUserDefaults().boolForKey(REMINDER_SWITCH) {
             self.rows.insert("Timer", atIndex: 1)
         }
-        
+        //Zendesk Configurations
+        ZDKConfig.instance().initializeWithAppId("5da13e96950d04535c6ae060f94b79cd713ef65de89b0ef2", zendeskUrl: "https://writemynd.zendesk.com", andClientId: "mobile_sdk_client_8deeb7714b32b75f45de")
+        ZDKConfig.instance().userIdentity = ZDKAnonymousIdentity()
+        ZDKRMA.configure({ (account:ZDKAccount!,config:ZDKRMAConfigObject!) -> Void in
+            //config.dialogActions = []
+            config.additionalRequestInfo = "Testing WriteMynd"
+        })
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        //Ask the user for feedback, **Only shows if criteria in Zendesk admin have been met**
+        ZDKRMA.showAlwaysInView(self.view)
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,11 +104,16 @@ class SettingsTableViewController: UITableViewController {
             label.text = "\(hour):\(minute)"
             cell.accessoryView = label
             cell.backgroundColor = UIColor(red: 3/255, green: 201/255, blue: 169/255, alpha: 1)
-        default:
-            print("Unhandled cell customisation")
+        default: break
         }
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        let rowText = rows[ indexPath.row ]
+        guard rowText != "Set a daily reminder" else{ return false }
+        return true
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -93,6 +125,8 @@ class SettingsTableViewController: UITableViewController {
             PFUser.logOut()
             let meVC: MeViewController = storyboard!.instantiateViewControllerWithIdentifier("MeViewController") as! MeViewController
             self.mm_drawerController.centerViewController = UINavigationController(rootViewController: meVC)
+        case TROUBLE_APP:
+            ZDKRequests.showRequestCreationWithNavController(self.navigationController)
         default:
             print("Unhandled cell select")
         }
@@ -162,3 +196,10 @@ class SettingsTableViewController: UITableViewController {
         return scheduleDate
     }
 }
+
+//5da13e96950d04535c6ae060f94b79cd713ef65de89b0ef2
+//[[ZDKConfig instance] initializeWithAppId:@"5da13e96950d04535c6ae060f94b79cd713ef65de89b0ef2" zendeskUrl:@"https://writemynd.zendesk.com" ClientId:@"mobile_sdk_client_8deeb7714b32b75f45de" onSuccess:^() {
+//    
+//} onError:^(NSError *error) {
+//    
+//}];

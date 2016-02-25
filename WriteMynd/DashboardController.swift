@@ -117,7 +117,7 @@ class DashboardController: UIViewController {
         for i in 0..<dataPoints.count {
             dataEntries.append( ChartDataEntry(value: values[i], xIndex: i) )
         }
-        let lineChartDataSet = LineChartDataSet(yVals: dataEntries)
+        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "")
         let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
         lineChartData.setValueFont(UIFont(name: "Avenir", size: 9))
         lineChartView.data = lineChartData
@@ -162,7 +162,7 @@ class DashboardController: UIViewController {
             let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
             dataEntries.append(dataEntry)
         }
-        let pieChartDataSet = PieChartDataSet(yVals: dataEntries)
+        let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "");
         let chartData = PieChartData(xVals: dataPoints, dataSets: [pieChartDataSet])
         pieChartDataSet.colors = [UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1),UIColor(red: 99/255, green: 60/255, blue: 134/255, alpha: 1)]
         //pieChartDataSet.highlightEnabled = false
