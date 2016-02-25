@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+@font-face {
+  font-family: avenir;
+  src: url(fonts/AvenirLTStd-Light.otf);
+}
+
+#circle {
+  position: absolute;
+  top: 200px;
+  left: 90px;
+  background-color: rgb(89, 188, 170);
+  margin: 20px auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 200px;
+}
+#text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family:Avenir;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+
+
+
+</style>
+</head>
+<body>
+
+	<img id="bg" style="width:340px; height:600px; solid #000;background-color: rgb(133,97,166);" usemap="#responsemap">
+		<div id="circle">
+		    <div id="text">  </div>
+		  </div>
+
+  <map name="responsemap">
+ 		<area class="zero"  shape="rect" coords="0,0,150,600" href ="" >
+ 		<area class="five"   shape="rect" coords="180,0,340,120" href ="">
+ 		<area class="four"   shape="rect" coords="180,120,340,240"  href ="">
+ 		<area class="three" shape="rect" coords="180,240,340,360"href ="">
+ 		<area class="two"  shape="rect" coords="180,360,340,480" href ="">
+ 		<area class="one"  shape="rect" coords="180,480,340,600" href ="">
+
+ 	</map>
+
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+  <script>
+
+  var score = 0;
+  var counter = 0;
+  var emotions = [
+    "CALM",
+    "ANGRY",
+    "CONFIDENT",
+    "AFRAID",
+    "CONTENT",
+    "ANNOYED",
+    "EAGER",
+    "ANXIOUS",
+    "ECSTATIC",
+    "ASHAMED",
+    "ENGAGED",
+    "BORED",
+    "EXCITED",
+    "CONFUSED",
+    "GRATEFUL",
+    "DEMORALISED",
+    "HAPPY",
+    "DEPRESSED",
+    "HUMOUROUS",
+    "DISAPPOINTED",
+    "INSPIRED",
+    "DISGUSTED",
+    "LOVING",
+    "EMBARASSED",
+    "MOTIVATED",
+    "FRUSTRATED",
+    "OPTIMISTIC",
+    "GUILTY",
+    "PASSIONATE",
+    "INSECURE",
+    "PROUD",
+    "JEALOUS",
+    "REASSURED",
+    "LONELY",
+    "RELAXED",
+    "RESENTFUL",
+    "RELIEVED",
+    "SAD",
+    "SECURE",
+    "SELF-CONSCIOUS",
+    "SURPRISED",
+    "STRESSED",
+    "THRILLED",
+    "WORRIED"
+    ];
+
+  function updateEmotion(counter) {
+    if(counter == 44){
+      var standardised_score = score + 220;
+      var percentage_score = Math.floor((standardised_score/440)*100);
+      $("#text").text("Today you are feeling " + percentage_score + "% positive.");
+    } else {
+      var emotion_value = emotions[counter];
+      $("#text").text(emotion_value);
+    }
+  }
+
+  function updateScore(x) {
+    if(counter % 2 == 0){
+      score = score + x;
+    }
+    else{
+      score = score - x;
+    };
+
+   }
+
+  function page_load() {
+    $(".zero").click(function(event) {
+      event.preventDefault();
+      updateScore(0);
+      counter = counter + 1;
+      console.log(score);
+      console.log(counter);
+      updateEmotion(counter);
+    });
+    $(".one").click(function(event) {
+      event.preventDefault();
+      updateScore(1);
+      counter = counter + 1;
+      console.log(score);
+      console.log(counter);
+      updateEmotion(counter);
+    });
+    $(".two").click(function(event) {
+      event.preventDefault();
+      updateScore(2);
+      counter = counter + 1;
+      console.log(score);
+      console.log(counter);
+      updateEmotion(counter);
+    });
+    $(".three").click(function(event) {
+      event.preventDefault();
+      updateScore(3);
+      counter = counter + 1;
+      console.log(score);
+      console.log(counter);
+      updateEmotion(counter);
+    });
+    $(".four").click(function(event) {
+      event.preventDefault();
+      updateScore(4);
+      counter = counter + 1;
+      console.log(score);
+      console.log(counter);
+      updateEmotion(counter);
+    });
+    $(".five").click(function(event) {
+      event.preventDefault();
+      updateScore(5);
+      counter = counter + 1;
+      console.log(score);
+      console.log(counter);
+      updateEmotion(counter);
+    });
+
+    updateEmotion(counter);
+  }
+
+  $(page_load);
+  </script>
+
+</body>
+</html>
