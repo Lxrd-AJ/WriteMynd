@@ -92,6 +92,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WriteMynd/RMActionController.framework"
   install_framework "Pods-WriteMynd/RMDateSelectionViewController.framework"
   install_framework "Pods-WriteMynd/SZTextView.framework"
+  install_framework "Pods-WriteMynd/SnapKit.framework"
   install_framework "Pods-WriteMynd/SwiftDate.framework"
   install_framework "Pods-WriteMynd/SwiftSpinner.framework"
 fi
@@ -104,6 +105,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WriteMynd/RMActionController.framework"
   install_framework "Pods-WriteMynd/RMDateSelectionViewController.framework"
   install_framework "Pods-WriteMynd/SZTextView.framework"
+  install_framework "Pods-WriteMynd/SnapKit.framework"
   install_framework "Pods-WriteMynd/SwiftDate.framework"
   install_framework "Pods-WriteMynd/SwiftSpinner.framework"
 fi

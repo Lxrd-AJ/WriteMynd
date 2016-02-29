@@ -16,7 +16,7 @@ import ZendeskSDK
 /**
  Settings page for the entire app, Here the user can 
     * Set Reminders
-    * Get Help
+    * Get Help , Zendesk URL https://writemynd.zendesk.com/
     * Log Out
  - todo:
     - [ ] Use Constant strings to represent the row text to avoid errors
@@ -196,10 +196,3 @@ class SettingsTableViewController: UITableViewController {
         return scheduleDate
     }
 }
-
-//5da13e96950d04535c6ae060f94b79cd713ef65de89b0ef2
-//[[ZDKConfig instance] initializeWithAppId:@"5da13e96950d04535c6ae060f94b79cd713ef65de89b0ef2" zendeskUrl:@"https://writemynd.zendesk.com" ClientId:@"mobile_sdk_client_8deeb7714b32b75f45de" onSuccess:^() {
-//    
-//} onError:^(NSError *error) {
-//    
-//}];

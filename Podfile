@@ -14,6 +14,7 @@ target 'WriteMynd' do
     pod 'SwiftDate', '~> 2.0'
     pod 'RMDateSelectionViewController', '~> 2.0.3'
     pod 'ZendeskSDK', '~> 1.5'
+    pod 'SnapKit', '~> 0.15.0'
     
 end
 

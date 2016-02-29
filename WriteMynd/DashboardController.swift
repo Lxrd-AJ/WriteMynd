@@ -11,6 +11,7 @@ import MMDrawerController
 import Charts
 import Parse
 import SwiftDate
+import SnapKit
 
 class DashboardController: UIViewController {
     
@@ -47,6 +48,11 @@ class DashboardController: UIViewController {
         
         //TODO: If there are no hashtags then display empty graphs
         ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
+            guard posts.count != 0 else{
+                self.showNoPostsMessage()
+                return;
+            }
+
             let hashTags = posts.reduce([], combine: { return $0 + $1.hashTags })
             var hashTagMap: [String:Int] = [:]
             for hashtag in hashTags {
@@ -94,6 +100,20 @@ class DashboardController: UIViewController {
             self.drawLineGraph((self.emojiMap?.keys.first!)!, map: self.emojiMap!)
             print(self.lineGraphCanvas.frame.width)
         })
+    }
+    
+    func showNoPostsMessage(){
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        view.backgroundColor = UIColor.whiteColor()
+        let textLabel = UILabel()
+        textLabel.text = "Please make a Post!"
+        view.addSubview(textLabel)
+        textLabel.snp_makeConstraints(closure: {(make:ConstraintMaker) -> Void in
+            make.centerX.equalTo(view.snp_centerX)
+            make.centerY.equalTo(view.snp_centerY)
+        })
+        
+        self.view.addSubview(view)
     }
 
     override func didReceiveMemoryWarning() {
