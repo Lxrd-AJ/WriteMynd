@@ -11,6 +11,10 @@ import Parse
 
 class ParseService {
     
+    /**
+     - todo:
+        [ ] Change to use Promises
+     */
     class func fetchPostsForUser( user:PFUser, callback:(posts:[Post]) -> Void ) {
         let fetchQuery: PFQuery = PFQuery( className: "Post" )
         fetchQuery.whereKey("parent", equalTo: user )

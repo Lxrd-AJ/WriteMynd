@@ -31,7 +31,7 @@ class PostViewController: UIViewController {
     
     var questionIndex: Int?
     //var swipeView: SwipeView?
-    var swipeVC: TestSwipeViewController = TestSwipeViewController()
+    var swipeVC: SwipeViewController = SwipeViewController()
     let user: PFUser = PFUser.currentUser()!
         
     override func viewDidLoad() {
@@ -75,49 +75,17 @@ class PostViewController: UIViewController {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             //do nothing for now
-            //Remove the Test Swipe View Controller
-            self.swipeVC.willMoveToParentViewController(nil)
-            self.swipeVC.view.removeFromSuperview()
-            self.swipeVC.removeFromParentViewController()
-            print(self.swipeVC.view)
             break;
         case 1:
             //show the swiping card on the screen
-            //MARK - DEPRECATED
-            //Customise the SwipeView
-            //self.swipeView = SwipeView.loadFromNibName("SwipeView") as? SwipeView
-//            swipeView!.frame = CGRect(x: 20, y: 20, width: view.frame.width - 40, height: view.frame.height - 40)
-//            swipeView!.setupView()
-//            swipeView!.cancelButton.addTarget(self, action: "cancelSwiping:", forControlEvents: .TouchUpInside)
-//            swipeView?.becomeFirstResponder()
-//            
-//            //Callback functions called by the swipe view
-//            swipeView?.dismissalCallback = { self.dismissViewControllerAnimated(true, completion: nil) }
-//            swipeView?.swipeSave = { (swipe:Swipe) -> Void in swipe.save(); }
-//
-//            //Customise the backgroundView
-//            self.postTextView.editable = false
-//            segmentedControl.selectedSegmentIndex = 0
-//            self.view.addSubview(swipeView!)
-            
-            //Customise Options for MDCSwipeToChoose
-//            let options = MDCSwipeToChooseViewOptions()
-//            options.delegate = self
-//            segmentedControl.selectedSegmentIndex = 0
-//            options.onPan = { (state:MDCPanState!) -> Void in
-//                print(state.thresholdRatio)
-//            }
-//            let view = TestSwipeView(frame: UIEdgeInsetsInsetRect(self.view.bounds, UIEdgeInsets(top: 100, left: 25, bottom: 100, right: 25)), options: options)
-//            view.backgroundColor = UIColor.brownColor()
-//            //view.setupView()
-//            
-//            self.view.addSubview(view)
-            
             self.addChildViewController(swipeVC)
-            swipeVC.view.frame = UIEdgeInsetsInsetRect(self.view.bounds, UIEdgeInsets(top: 80, left: 20, bottom: 80, right: 20))
+            swipeVC.view.frame = self.view.bounds
             swipeVC.view.backgroundColor = UIColor.brownColor()
-            self.view.addSubview(swipeVC.view as! KolodaView)
+            swipeVC.delegate = self
+            self.view.addSubview(swipeVC.view)
             swipeVC.didMoveToParentViewController(self)
+            
+            segmentedControl.selectedSegmentIndex = 0
             break;
         default:
             break;
@@ -201,18 +169,11 @@ class PostViewController: UIViewController {
     
 }
 
-extension PostViewController: MDCSwipeToChooseDelegate {
-    func viewDidCancelSwipe(view: UIView!) {
-        print("Swipe Cancelled")
-    }
-    
-    func view(view: UIView!, shouldBeChosenWithDirection direction: MDCSwipeDirection) -> Bool {
-        print(direction)
-        print(view.gestureRecognizers)
-        return true
-    }
-    
-    func view(view: UIView!, wasChosenWithDirection direction: MDCSwipeDirection) {
-        print(direction)
+extension PostViewController: SwipeViewControllerDelegate {
+    func removeMe(){
+        //Remove the Test Swipe View Controller
+        self.swipeVC.willMoveToParentViewController(nil)
+        self.swipeVC.view.removeFromSuperview()
+        self.swipeVC.removeFromParentViewController()
     }
 }

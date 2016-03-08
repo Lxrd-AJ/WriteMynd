@@ -15,7 +15,6 @@ target 'WriteMynd' do
     pod 'RMDateSelectionViewController', '~> 2.0.3'
     pod 'ZendeskSDK', '~> 1.5'
     pod 'SnapKit', '~> 0.15.0'
-    pod 'MDCSwipeToChoose'
     pod 'Koloda', '~> 2.0.10'
     
 end
