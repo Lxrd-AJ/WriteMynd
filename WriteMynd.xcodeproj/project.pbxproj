@@ -10,7 +10,6 @@
 		10694AE2EFBF193FE6559F7E /* Pods_WriteMynd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6860EA5839031560CC75E7E /* Pods_WriteMynd.framework */; };
 		2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0751C1A3B2A00BE26FD /* ParseService.swift */; };
 		2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */; };
-		21544BF61C77B81C0034BA80 /* ScienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21544BF51C77B81C0034BA80 /* ScienceViewController.swift */; };
 		2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FBEC1C11B65E003446AC /* AppDelegate.swift */; };
 		2172FBF21C11B65E003446AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF01C11B65E003446AC /* Main.storyboard */; };
 		2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF31C11B65E003446AC /* Assets.xcassets */; };
@@ -21,6 +20,8 @@
 		2172FC081C11E073003446AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC071C11E073003446AC /* Utilities.swift */; };
 		2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC091C123ED9003446AC /* PostViewController.swift */; };
 		2172FC111C1258B7003446AC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC101C1258B7003446AC /* Extensions.swift */; };
+		217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */; };
+		217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BDB1C8A25290085D71B /* SwipeViewController.swift */; };
 		21B89FC41C77BF5B00E6D4E7 /* ScienceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */; };
 		21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC171C14C63600F629FF /* EmojiView.swift */; };
 		21B8CC1A1C14C67600F629FF /* EmojiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21B8CC191C14C67600F629FF /* EmojiView.xib */; };
@@ -28,6 +29,7 @@
 		21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1341C2949A90047306D /* MenuViewController.swift */; };
 		21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1361C2A129A0047306D /* MenuViewCell.swift */; };
 		21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1381C2AECCC0047306D /* DashboardController.swift */; };
+		21F548CB1C8F1DA6004E85F3 /* ScienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */; };
 		21FA7FA01C5F04C300D0836F /* SwipeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FA7F9F1C5F04C300D0836F /* SwipeView.xib */; };
 		21FA7FA21C5F04F000D0836F /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA11C5F04F000D0836F /* SwipeView.swift */; };
 		21FA7FA41C5F162C00D0836F /* SwipeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA31C5F162C00D0836F /* SwipeEnums.swift */; };
@@ -38,7 +40,6 @@
 /* Begin PBXFileReference section */
 		2136F0751C1A3B2A00BE26FD /* ParseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseService.swift; sourceTree = "<group>"; };
 		2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
-		21544BF51C77B81C0034BA80 /* ScienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScienceViewController.swift; path = ../ScienceViewController.swift; sourceTree = "<group>"; };
 		2172FBE91C11B65E003446AC /* WriteMynd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteMynd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2172FBEC1C11B65E003446AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2172FBF11C11B65E003446AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +52,8 @@
 		2172FC071C11E073003446AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2172FC091C123ED9003446AC /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		2172FC101C1258B7003446AC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSwipeView.swift; sourceTree = "<group>"; };
+		217F3BDB1C8A25290085D71B /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScienceMessage.swift; sourceTree = "<group>"; };
 		21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WriteMynd-Bridging-Header.h"; sourceTree = "<group>"; };
 		21B8CC171C14C63600F629FF /* EmojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 		21C0A1341C2949A90047306D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		21C0A1361C2A129A0047306D /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
 		21C0A1381C2AECCC0047306D /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
+		21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScienceViewController.swift; sourceTree = "<group>"; };
 		21FA7F9F1C5F04C300D0836F /* SwipeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwipeView.xib; sourceTree = "<group>"; };
 		21FA7FA11C5F04F000D0836F /* SwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 		21FA7FA31C5F162C00D0836F /* SwipeEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeEnums.swift; sourceTree = "<group>"; };
@@ -137,9 +141,10 @@
 				2172FC011C11CD3A003446AC /* MeViewController.swift */,
 				2172FC091C123ED9003446AC /* PostViewController.swift */,
 				21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */,
-				21544BF51C77B81C0034BA80 /* ScienceViewController.swift */,
+				21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */,
 				21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */,
 				2172FC031C11CFF9003446AC /* SignUpViewController.swift */,
+				217F3BDB1C8A25290085D71B /* SwipeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 				21C0A1361C2A129A0047306D /* MenuViewCell.swift */,
 				21FA7F9F1C5F04C300D0836F /* SwipeView.xib */,
 				21FA7FA11C5F04F000D0836F /* SwipeView.swift */,
+				217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -299,17 +305,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */,
 				2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */,
 				2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */,
 				21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */,
 				21FA7FA21C5F04F000D0836F /* SwipeView.swift in Sources */,
 				2172FC081C11E073003446AC /* Utilities.swift in Sources */,
+				21F548CB1C8F1DA6004E85F3 /* ScienceViewController.swift in Sources */,
 				21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */,
 				2172FC111C1258B7003446AC /* Extensions.swift in Sources */,
 				2172FC021C11CD3A003446AC /* MeViewController.swift in Sources */,
 				21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */,
 				2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */,
-				21544BF61C77B81C0034BA80 /* ScienceViewController.swift in Sources */,
 				21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */,
 				21FA7FA61C61C49400D0836F /* Swipe.swift in Sources */,
 				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,
@@ -317,6 +324,7 @@
 				21FA7FA41C5F162C00D0836F /* SwipeEnums.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
+				217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */,
 				21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */,
 				2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */,
 			);
@@ -361,7 +369,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ganiyu Ibraheem (Q5L56H9SBX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lizzie Barclay (7NV433R55L)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -407,7 +415,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ganiyu Ibraheem (349P7P3B63)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lizzie Barclay (7NV433R55L)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -435,11 +443,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lizzie Barclay (7NV433R55L)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Lizzie.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";
@@ -454,11 +462,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lizzie Barclay (7NV433R55L)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WriteMynd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.TheLeaf.WriteMynd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Lizzie.WriteMynd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WriteMynd/WriteMynd-Bridging-Header.h";

@@ -13,6 +13,11 @@ import Parse
 import SwiftDate
 import SnapKit
 
+/**
+ My Mynd Section. 
+ - todo
+    [ ] Add constraints to the graphs (maxPieChartCanvas,minPieChartCanvas,lineGraphCanvas)
+ */
 class DashboardController: UIViewController {
     
     @IBOutlet weak var maxPieChartCanvas: UIView!

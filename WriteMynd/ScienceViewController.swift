@@ -61,22 +61,12 @@ class ScienceViewController: UIPageViewController {
 extension ScienceViewController: UIPageViewControllerDataSource {
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-//        guard index != 0 else{ return nil }
-//        index -= 1
-//        print(index)
-//        return controllers[index]
-
         let currentIndex = (viewController as! ScienceMessage).index
         if currentIndex <= 0 { return nil }
         else{ return self.controllers[ currentIndex - 1 ] }
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-//        index += 1
-//        guard index != controllers.count else { return nil }
-//        print(index)
-//        return controllers[index]
-        
         let currentIndex = (viewController as! ScienceMessage).index
         if currentIndex >= self.controllers.count - 1 { return nil }
         else{ return self.controllers[ currentIndex + 1 ] }

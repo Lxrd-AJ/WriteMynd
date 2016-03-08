@@ -86,6 +86,8 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WriteMynd/Bolts.framework"
   install_framework "Pods-WriteMynd/Charts.framework"
+  install_framework "Pods-WriteMynd/Koloda.framework"
+  install_framework "Pods-WriteMynd/MDCSwipeToChoose.framework"
   install_framework "Pods-WriteMynd/MMDrawerController.framework"
   install_framework "Pods-WriteMynd/Parse.framework"
   install_framework "Pods-WriteMynd/ParseUI.framework"
@@ -95,10 +97,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WriteMynd/SnapKit.framework"
   install_framework "Pods-WriteMynd/SwiftDate.framework"
   install_framework "Pods-WriteMynd/SwiftSpinner.framework"
+  install_framework "Pods-WriteMynd/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WriteMynd/Bolts.framework"
   install_framework "Pods-WriteMynd/Charts.framework"
+  install_framework "Pods-WriteMynd/Koloda.framework"
+  install_framework "Pods-WriteMynd/MDCSwipeToChoose.framework"
   install_framework "Pods-WriteMynd/MMDrawerController.framework"
   install_framework "Pods-WriteMynd/Parse.framework"
   install_framework "Pods-WriteMynd/ParseUI.framework"
@@ -108,4 +113,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WriteMynd/SnapKit.framework"
   install_framework "Pods-WriteMynd/SwiftDate.framework"
   install_framework "Pods-WriteMynd/SwiftSpinner.framework"
+  install_framework "Pods-WriteMynd/pop.framework"
 fi

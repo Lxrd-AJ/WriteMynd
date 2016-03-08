@@ -7,3 +7,4 @@
 #import <MMDrawerController/UIViewController+MMDrawerController.h>
 #import <RMActionController/RMActionController.h>
 #import <RMDateSelectionViewController/RMDateSelectionViewController.h>
+#import <MDCSwipeToChoose/MDCSwipeToChoose.h>
