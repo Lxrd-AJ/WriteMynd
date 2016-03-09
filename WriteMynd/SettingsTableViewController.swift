@@ -24,11 +24,13 @@ import ZendeskSDK
 class SettingsTableViewController: UITableViewController {
     
     let REMINDER_SWITCH: String = "REMINDER_SWITCH"
-    let REMINDER_HOUR: String = "REMINDER_HOUR"
-    let REMINDER_MINUTE: String = "REMINDER_MINUTE"
+    //let REMINDER_HOUR: String = "REMINDER_HOUR"
+    //let REMINDER_MINUTE: String = "REMINDER_MINUTE"
+    let REMINDER_DATE: String = "REMINDER_DATE"
     
     //Settings Table
     let TROUBLE_APP = "Having trouble with the app?"
+    let TIMER = "Time"
     
     lazy var rows: [String] = {
         return [
@@ -46,8 +48,8 @@ class SettingsTableViewController: UITableViewController {
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SettingsCell")
         
         //Check if the user's time string is in the user defaults, if true add the "Timer" string to after "Set a daily reminder"
-        if NSUserDefaults.standardUserDefaults().boolForKey(REMINDER_SWITCH) {
-            self.rows.insert("Timer", atIndex: 1)
+        if let _ = NSUserDefaults.standardUserDefaults().objectForKey(REMINDER_DATE) where NSUserDefaults.standardUserDefaults().boolForKey(REMINDER_SWITCH) {
+            self.rows.insert(TIMER, atIndex: 1)
         }
         //Zendesk Configurations
         ZDKConfig.instance().initializeWithAppId("5da13e96950d04535c6ae060f94b79cd713ef65de89b0ef2", zendeskUrl: "https://writemynd.zendesk.com", andClientId: "mobile_sdk_client_8deeb7714b32b75f45de")
@@ -60,7 +62,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         //Ask the user for feedback, **Only shows if criteria in Zendesk admin have been met**
-        ZDKRMA.showAlwaysInView(self.view)
+        //ZDKRMA.showAlwaysInView(self.view)
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,11 +99,12 @@ class SettingsTableViewController: UITableViewController {
             reminderSwitch.setOn(switchValue, animated: false)
             reminderSwitch.addTarget(self, action: "dailyReminderSwitchTapped:", forControlEvents: .ValueChanged)
             cell.accessoryView = reminderSwitch
-        case "Timer":
+        case TIMER:
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-            let hour = NSUserDefaults.standardUserDefaults().integerForKey(REMINDER_HOUR)
-            let minute = NSUserDefaults.standardUserDefaults().integerForKey(REMINDER_MINUTE)
-            label.text = "\(hour):\(minute)"
+            //let hour = NSUserDefaults.standardUserDefaults().integerForKey(REMINDER_HOUR)
+            //let minute = NSUserDefaults.standardUserDefaults().integerForKey(REMINDER_MINUTE)
+            let scheduleDate = NSUserDefaults.standardUserDefaults().objectForKey(self.REMINDER_DATE) as! NSDate
+            label.text = "\(scheduleDate.toString(DateFormat.Custom("HH:mm"))!)"
             cell.accessoryView = label
             cell.backgroundColor = UIColor(red: 3/255, green: 201/255, blue: 169/255, alpha: 1)
         default: break
@@ -143,20 +146,30 @@ class SettingsTableViewController: UITableViewController {
                 let date:NSDate = (controller.contentView as! UIDatePicker).date
                 let reminderDate = self.createRepeatingNotification(date.hour, minute: date.minute)
                 //Add the new time cell string to the table rows array 
-                self.rows.insert("Timer", atIndex: 1)
+                self.rows.insert(self.TIMER, atIndex: 1)
                 //Create a local notification for the selected time
                 let localNotification:UILocalNotification = UILocalNotification()
+                let userNotificationTypes:UIUserNotificationType = [ .Alert, .Badge, .Sound ]
+                let settings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+                let application = UIApplication.sharedApplication()
+                
                 localNotification.fireDate = reminderDate
                 localNotification.alertBody = "Hello from WriteMynd, it's time to write a post"
                 localNotification.alertAction = "Make a Post"
                 localNotification.timeZone = NSTimeZone.defaultTimeZone()
                 localNotification.alertTitle = "Yo! Yo!"
                 localNotification.repeatInterval = .Day
-                UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+                localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
+                
+                application.registerUserNotificationSettings(settings)
+                application.scheduleLocalNotification(localNotification)
                 print(localNotification)
+                print("\n")
+                print(UIApplication.sharedApplication().scheduledLocalNotifications)
                 //Save the time to the user's defaults
-                NSUserDefaults.standardUserDefaults().setInteger(date.hour, forKey: self.REMINDER_HOUR)
-                NSUserDefaults.standardUserDefaults().setInteger(date.minute, forKey: self.REMINDER_MINUTE)
+                //NSUserDefaults.standardUserDefaults().setInteger(date.hour, forKey: self.REMINDER_HOUR)
+                //NSUserDefaults.standardUserDefaults().setInteger(date.minute, forKey: self.REMINDER_MINUTE)
+                NSUserDefaults.standardUserDefaults().setObject(reminderDate, forKey: self.REMINDER_DATE)
                 //and reload the table
                 self.tableView.reloadData()
             })!
@@ -171,11 +184,14 @@ class SettingsTableViewController: UITableViewController {
         }else{
             //Remove any existing local notification
             UIApplication.sharedApplication().cancelAllLocalNotifications()
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
             //Remove the Timer string
-            self.rows = rows.filter({ $0 != "Timer" })
+            self.rows = rows.filter({ $0 != TIMER })
             //Remove it from the User Defaults
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(REMINDER_HOUR)
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(REMINDER_MINUTE)
+            //NSUserDefaults.standardUserDefaults().removeObjectForKey(REMINDER_HOUR)
+            //NSUserDefaults.standardUserDefaults().removeObjectForKey(REMINDER_MINUTE)
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(REMINDER_DATE)
+            
             self.tableView.reloadData()
         }
         
@@ -193,6 +209,7 @@ class SettingsTableViewController: UITableViewController {
 //        }
         dateComponent.hour = hour; dateComponent.minute = minute;
         scheduleDate = calendar.dateFromComponents(dateComponent)!
+        print( scheduleDate.toString(DateFormat.Custom("HH:mm")) )
         return scheduleDate
     }
 }

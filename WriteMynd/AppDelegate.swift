@@ -35,11 +35,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
         drawerController.closeDrawerGestureModeMask = [.BezelPanningCenterView,.PanningCenterView]
         
+        //Local Notifications
+        if let localNotification:UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+            application.applicationIconBadgeNumber = 0 //localNotification.applicationIconBadgeNumber--
+            print("Application launched by local Notification \n \(localNotification.applicationIconBadgeNumber)")
+        }
+        application.applicationIconBadgeNumber = 0 //HACK: Remove later
+        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = drawerController
         window!.makeKeyAndVisible()
         
         return true
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        application.applicationIconBadgeNumber = 0
+        if application.applicationState == .Active {
+            print("Local Notification recieved whilst active")
+            //TODO: Display an unintrusive notification
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

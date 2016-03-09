@@ -109,10 +109,10 @@
 		2172FBEB1C11B65E003446AC /* WriteMynd */ = {
 			isa = PBXGroup;
 			children = (
+				2172FBEC1C11B65E003446AC /* AppDelegate.swift */,
 				2136F0741C19415500BE26FD /* Models */,
 				2172FC0F1C125823003446AC /* Views */,
 				2172FBFE1C11BBBD003446AC /* Controllers */,
-				2172FBEC1C11B65E003446AC /* AppDelegate.swift */,
 				2172FBF01C11B65E003446AC /* Main.storyboard */,
 				2172FBF31C11B65E003446AC /* Assets.xcassets */,
 				2172FBF51C11B65E003446AC /* LaunchScreen.storyboard */,

@@ -28,9 +28,7 @@ class PostViewController: UIViewController {
     @IBOutlet weak var postToNetwork: UIButton!
     @IBOutlet weak var postTextView: SZTextView!
     @IBOutlet weak var selectedEmojiLabel: UILabel!
-    
     var questionIndex: Int?
-    //var swipeView: SwipeView?
     var swipeVC: SwipeViewController = SwipeViewController()
     let user: PFUser = PFUser.currentUser()!
         
@@ -74,9 +72,10 @@ class PostViewController: UIViewController {
     func postSegmentedControlTapped( segmentedControl: UISegmentedControl ) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            //do nothing for now
+            self.postTextView.becomeFirstResponder()
             break;
         case 1:
+            self.postTextView.resignFirstResponder()
             //show the swiping card on the screen
             self.addChildViewController(swipeVC)
             swipeVC.view.frame = self.view.bounds
@@ -90,12 +89,6 @@ class PostViewController: UIViewController {
         default:
             break;
         }
-    }
-    
-    func cancelSwiping( button:UIButton ){
-        //swipeView?.removeFromSuperview()
-        self.postTextView.editable = true
-        self.postTextView.becomeFirstResponder()
     }
     
     func customiseUI(){
@@ -129,8 +122,12 @@ class PostViewController: UIViewController {
         selectedEmojiLabel.text = emoji
     }
 
+    /**
+     - todo: 
+        [ ] Refactor postToMe and postToNetwork
+     */
     @IBAction func postToMeTouched(sender: AnyObject) {
-        if let post = getPostData() {
+        if let post = getPostData() where post.hashTags.count > 0{
             post.isPrivate = true
             post.save()
             //self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
@@ -140,17 +137,17 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func postToNetworkTouched(sender: UIButton) {
-        if let post = getPostData() {
+        if let post = getPostData() where post.hashTags.count > 0 {
             post.isPrivate = false
             post.save()
+            print(post.hashTags)
             //self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
-        }
-        else{ displayErrorMessage() }
+        }else{ displayErrorMessage() }
     }
     
     func displayErrorMessage(){
-        let alertController = UIAlertController(title: "Lol", message: "You need to enter how you feel and select an emoji", preferredStyle: .Alert )
+        let alertController = UIAlertController(title: "Lol", message: "You need to enter how you feel, select an emoji and type an hashtag", preferredStyle: .Alert )
         let okAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
