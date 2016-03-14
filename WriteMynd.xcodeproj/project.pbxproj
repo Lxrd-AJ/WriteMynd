@@ -128,16 +128,15 @@
 		2172FBFE1C11BBBD003446AC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				21FE51C91C90ADD0002F8874 /* Posting */,
 				21C0A1381C2AECCC0047306D /* DashboardController.swift */,
 				2172FC051C11D037003446AC /* LoginViewController.swift */,
 				21C0A1341C2949A90047306D /* MenuViewController.swift */,
 				2172FC011C11CD3A003446AC /* MeViewController.swift */,
-				2172FC091C123ED9003446AC /* PostViewController.swift */,
 				21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */,
 				21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */,
 				21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */,
 				2172FC031C11CFF9003446AC /* SignUpViewController.swift */,
-				217F3BDB1C8A25290085D71B /* SwipeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -152,6 +151,15 @@
 				217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		21FE51C91C90ADD0002F8874 /* Posting */ = {
+			isa = PBXGroup;
+			children = (
+				2172FC091C123ED9003446AC /* PostViewController.swift */,
+				217F3BDB1C8A25290085D71B /* SwipeViewController.swift */,
+			);
+			name = Posting;
 			sourceTree = "<group>";
 		};
 		379B847CC8E1370B8EFFED7B /* Frameworks */ = {

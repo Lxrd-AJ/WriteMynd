@@ -14,6 +14,9 @@ protocol SwipeViewControllerDelegate {
     func removeMe()
 }
 
+/**
+ Sublcass KolodaView to implement custom swiping feature or copy and paste and match
+ */
 class SwipeViewController: UIViewController {
 
     let questions: [String] = swipeQuestions.shuffle() //`swipeQuestions` declared in utilities.swift

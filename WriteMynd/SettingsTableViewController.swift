@@ -30,7 +30,7 @@ class SettingsTableViewController: UITableViewController {
     
     //Settings Table
     let TROUBLE_APP = "Having trouble with the app?"
-    let TIMER = "Time"
+    let TIMER = "Set a Reminder"
     
     lazy var rows: [String] = {
         return [

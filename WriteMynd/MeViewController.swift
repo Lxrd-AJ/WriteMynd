@@ -39,7 +39,7 @@ class MeViewController: UIViewController {
                 self.performSegueWithIdentifier("showPostController", sender: self)
                 showPostController = false
             }else{
-                //HIDE_FOR_NOW: SwiftSpinner.show("Patience is a Virtue \n Fetching your Posts")
+                SwiftSpinner.show("Patience is a Virtue \n Fetching your Posts")
                 fetchPosts()
             }
         }else{
