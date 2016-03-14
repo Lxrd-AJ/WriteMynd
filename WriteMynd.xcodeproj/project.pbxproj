@@ -30,6 +30,7 @@
 		21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1361C2A129A0047306D /* MenuViewCell.swift */; };
 		21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1381C2AECCC0047306D /* DashboardController.swift */; };
 		21F548CB1C8F1DA6004E85F3 /* ScienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */; };
+		21F619361C9756750089542F /* PostMethodDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F619351C9756750089542F /* PostMethodDropdown.swift */; };
 		21FA7FA61C61C49400D0836F /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA51C61C49400D0836F /* Swipe.swift */; };
 		21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		21C0A1361C2A129A0047306D /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
 		21C0A1381C2AECCC0047306D /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScienceViewController.swift; sourceTree = "<group>"; };
+		21F619351C9756750089542F /* PostMethodDropdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMethodDropdown.swift; sourceTree = "<group>"; };
 		21FA7FA51C61C49400D0836F /* Swipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
 		21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		A6860EA5839031560CC75E7E /* Pods_WriteMynd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteMynd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,17 +112,17 @@
 			isa = PBXGroup;
 			children = (
 				2172FBEC1C11B65E003446AC /* AppDelegate.swift */,
-				2136F0741C19415500BE26FD /* Models */,
-				2172FC0F1C125823003446AC /* Views */,
-				2172FBFE1C11BBBD003446AC /* Controllers */,
 				2172FBF01C11B65E003446AC /* Main.storyboard */,
-				2172FBF31C11B65E003446AC /* Assets.xcassets */,
 				2172FBF51C11B65E003446AC /* LaunchScreen.storyboard */,
 				2172FBF81C11B65E003446AC /* Info.plist */,
 				2172FC071C11E073003446AC /* Utilities.swift */,
 				2172FC101C1258B7003446AC /* Extensions.swift */,
 				21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */,
 				2136F0751C1A3B2A00BE26FD /* ParseService.swift */,
+				2172FBF31C11B65E003446AC /* Assets.xcassets */,
+				2172FC0F1C125823003446AC /* Views */,
+				2136F0741C19415500BE26FD /* Models */,
+				2172FBFE1C11BBBD003446AC /* Controllers */,
 			);
 			path = WriteMynd;
 			sourceTree = "<group>";
@@ -149,6 +151,7 @@
 				2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */,
 				21C0A1361C2A129A0047306D /* MenuViewCell.swift */,
 				217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */,
+				21F619351C9756750089542F /* PostMethodDropdown.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */,
+				21F619361C9756750089542F /* PostMethodDropdown.swift in Sources */,
 				2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */,
 				2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */,
 				21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */,

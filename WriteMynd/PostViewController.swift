@@ -28,22 +28,22 @@ class PostViewController: UIViewController {
     @IBOutlet weak var postToNetwork: UIButton!
     @IBOutlet weak var postTextView: SZTextView!
     @IBOutlet weak var selectedEmojiLabel: UILabel!
-    var questionIndex: Int?
-    var swipeVC: SwipeViewController = SwipeViewController()
+    let questionIndex: Int = Int( arc4random_uniform(UInt32(dailyQuestion.count)) )
     let user: PFUser = PFUser.currentUser()!
+    var swipeVC: SwipeViewController = SwipeViewController()
+    var selectedSegmentIndex:Int = 0
         
     override func viewDidLoad() {
         super.viewDidLoad();
         
         segmentedControl.addTarget(self, action: "postSegmentedControlTapped:", forControlEvents: .ValueChanged)
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         postTextView.becomeFirstResponder()
-        postTextView.placeholder = dailyQuestion[questionIndex!]
+        postTextView.placeholder = dailyQuestion[questionIndex]
         
         //Register for the keyboard will show notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
@@ -53,6 +53,12 @@ class PostViewController: UIViewController {
         super.viewDidAppear(animated)
         //postTextView.becomeFirstResponder()
         customiseUI()
+        switch self.selectedSegmentIndex {
+        case 1: //Swiping Index selected
+            self.showSwipingScene()
+        default:
+            break
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,20 +81,23 @@ class PostViewController: UIViewController {
             self.postTextView.becomeFirstResponder()
             break;
         case 1:
-            self.postTextView.resignFirstResponder()
-            //show the swiping card on the screen
-            self.addChildViewController(swipeVC)
-            swipeVC.view.frame = self.view.bounds
-            swipeVC.view.backgroundColor = UIColor.brownColor()
-            swipeVC.delegate = self
-            self.view.addSubview(swipeVC.view)
-            swipeVC.didMoveToParentViewController(self)
-            
-            segmentedControl.selectedSegmentIndex = 0
+            showSwipingScene()
             break;
         default:
             break;
         }
+    }
+    
+    func showSwipingScene(){
+        self.postTextView.resignFirstResponder()
+        self.addChildViewController(swipeVC)
+        swipeVC.view.frame = self.view.bounds
+        swipeVC.view.backgroundColor = UIColor.brownColor()
+        swipeVC.delegate = self
+        self.view.addSubview(swipeVC.view)
+        swipeVC.didMoveToParentViewController(self)
+        
+        segmentedControl.selectedSegmentIndex = 0
     }
     
     func customiseUI(){
@@ -168,9 +177,10 @@ class PostViewController: UIViewController {
 
 extension PostViewController: SwipeViewControllerDelegate {
     func removeMe(){
-        //Remove the Test Swipe View Controller
+        //Remove the Swipe View Controller
         self.swipeVC.willMoveToParentViewController(nil)
         self.swipeVC.view.removeFromSuperview()
         self.swipeVC.removeFromParentViewController()
+        self.postTextView.becomeFirstResponder()
     }
 }

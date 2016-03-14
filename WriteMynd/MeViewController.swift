@@ -14,15 +14,18 @@ import ParseUI
 import SwiftSpinner
 import MMDrawerController
 
+/**
+ - todo:
+    [ ] Use a ContainerView to represent the `MeViewController` and the `tableView`
+ */
 class MeViewController: UIViewController {
     
     var showPostController:Bool = true
     var posts:[Post] = []
-    let questionIndex = Int( arc4random_uniform(UInt32(dailyQuestion.count)) )
+    var dropDown:PostMethodDropdown = PostMethodDropdown()
     @IBOutlet weak var tableView:UITableView!
     @IBOutlet weak var showMenuButton: UIBarButtonItem!
-    @IBOutlet weak var dailyQuestionButton: UIButton!
-    
+    @IBOutlet weak var postButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +42,7 @@ class MeViewController: UIViewController {
                 self.performSegueWithIdentifier("showPostController", sender: self)
                 showPostController = false
             }else{
-                SwiftSpinner.show("Patience is a Virtue \n Fetching your Posts")
+                //HIDE_FOR_NOW: SwiftSpinner.show("Patience is a Virtue \n Fetching your Posts")
                 fetchPosts()
             }
         }else{
@@ -53,8 +56,9 @@ class MeViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //Change the daily question
-        dailyQuestionButton.setTitle(dailyQuestion[questionIndex], forState: .Normal)
+        
+        //Setup the PostButton
+        //Present the `PostViewController` modally
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,16 +67,58 @@ class MeViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showPostController" {
+        if let button = sender as? UIButton where segue.identifier == "showPostViewController" {
             let postVC = segue.destinationViewController as! PostViewController
-            postVC.questionIndex = questionIndex
+            postVC.selectedSegmentIndex = button.tag //Each Button's tag corresponds to the `segmentedControl` in `PostViewController`
         }
     }
     
     @IBAction func unwindToSegue( segue:UIStoryboardSegue ) {}
     
+    /**
+     Present the `PostMethodDropdown` view
+     - todo:
+        [ ] self.dropDown's reference is always changed if the user taps the postButton repeatedly,it creates a weird memory leak bug
+     */
+    @IBAction func postButtonTapped( sender:UIButton ){
+        let yDropdown = self.tableView.frame.origin.y
+        let transparencyButton = UIButton(frame: self.view.bounds)
+        transparencyButton.backgroundColor = UIColor.clearColor()
+        transparencyButton.addTarget(self, action: "dismissHelperButton:", forControlEvents: .TouchUpInside)
+        self.dropDown = PostMethodDropdown(frame: CGRect(x: 0, y: yDropdown-10, width: screenWidth, height: 80))
+        self.dropDown.writeItButton.addTarget(self, action: "initiatePostViewControllerSegue:", forControlEvents: .TouchUpInside)
+        self.dropDown.swipeItButton.addTarget(self, action: "initiatePostViewControllerSegue:", forControlEvents: .TouchUpInside)
+        
+        self.view.addSubview(self.dropDown)
+        
+        UIView.animateWithDuration(0.1, delay: 0.0001, options: .CurveEaseIn, animations: {
+            self.dropDown.frame.origin.y = yDropdown
+            self.tableView.alpha = 0.2
+            }, completion: { bool in
+                self.view.insertSubview(transparencyButton, belowSubview: self.dropDown)
+        })
+    }
+    
     @IBAction func showMenu( sender: UIBarButtonItem ){
         self.mm_drawerController.toggleDrawerSide(.Left, animated: true, completion: nil)
+    }
+    
+    func initiatePostViewControllerSegue( sender:UIButton ){
+        self.dismissHelperButton(sender)
+        self.performSegueWithIdentifier("showPostViewController", sender: sender)
+    }
+    
+    /**
+     Helper function to dismiss the Post Method dropdown once the user taps outside the dropdown
+     */
+    func dismissHelperButton( sender:UIButton ){
+        UIView.animateWithDuration(0.001, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.dropDown.frame.origin.y -= 10
+            self.tableView.alpha = 1.0
+            }, completion: { bool in
+                self.dropDown.removeFromSuperview()
+                sender.removeFromSuperview()
+        })
     }
     
     func fetchPosts(){
