@@ -78,7 +78,8 @@ class MeViewController: UIViewController {
     /**
      Present the `PostMethodDropdown` view
      - todo:
-        [ ] self.dropDown's reference is always changed if the user taps the postButton repeatedly,it creates a weird memory leak bug
+        [ ] self.dropDown's reference is always changed if the user taps the postButton repeatedly,it creates a weird memory leak bug, create lazy vars for 
+            `dropDown` and `transparency` buttons to prevent memory leak
      */
     @IBAction func postButtonTapped( sender:UIButton ){
         let yDropdown = self.tableView.frame.origin.y
