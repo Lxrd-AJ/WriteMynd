@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Koloda
 import SnapKit
 
 protocol SwipeViewControllerDelegate {
@@ -25,7 +24,7 @@ class SwipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let kolodaView = KolodaView(frame: UIEdgeInsetsInsetRect(self.view.bounds, UIEdgeInsetsMake(100, 50, 100, 50)))
+        let kolodaView = SwipeView(frame: UIEdgeInsetsInsetRect(self.view.bounds, UIEdgeInsetsMake(100, 50, 100, 50)))
         kolodaView.dataSource = self
         kolodaView.delegate = self
         self.view.addSubview( kolodaView )
@@ -54,13 +53,13 @@ class SwipeViewController: UIViewController {
     }
 }
 
-extension SwipeViewController: KolodaViewDataSource {
+extension SwipeViewController: SwipeViewDataSource {
  
-    func koloda(kolodaNumberOfCards koloda: KolodaView) -> UInt {
+    func koloda(kolodaNumberOfCards koloda: SwipeView) -> UInt {
         return UInt(questions.count)
     }
     
-    func koloda(koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
+    func koloda(koloda: SwipeView, viewForCardAtIndex index: UInt) -> UIView {
         let label = UILabel()
         label.text = questions[Int(index)]
         label.textAlignment = .Center
@@ -69,31 +68,23 @@ extension SwipeViewController: KolodaViewDataSource {
     }
 }
 
-extension SwipeViewController: KolodaViewDelegate {
-    func koloda(koloda: KolodaView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
+extension SwipeViewController: SwipeViewDelegate {
+    func koloda(koloda: SwipeView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeDirection) {
         var swipe = Swipe(value: -1, feeling: questions[Int(index)])
-        switch direction {
-        case .Left:
-            swipe.value = 0
-            break;
-        case .Right:
-            swipe.value = 10
-            break;
-        default:
-            break;
-        }
+        swipe.value = direction.rawValue
+        print(direction)
         swipe.save()
     }
     
-    func koloda(kolodaDidRunOutOfCards koloda: KolodaView) {
+    func koloda(kolodaDidRunOutOfCards koloda: SwipeView) {
         print("Cards Finished")
     }
     
-    func koloda(kolodaShouldTransparentizeNextCard koloda: KolodaView) -> Bool {
+    func koloda(kolodaShouldTransparentizeNextCard koloda: SwipeView) -> Bool {
         return false
     }
     
-    func koloda(kolodaSwipeThresholdMargin koloda: KolodaView) -> CGFloat? {
+    func koloda(kolodaSwipeThresholdMargin koloda: SwipeView) -> CGFloat? {
         return nil
     }
 }
