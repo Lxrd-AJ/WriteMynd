@@ -14,7 +14,7 @@
 		2172FBF21C11B65E003446AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF01C11B65E003446AC /* Main.storyboard */; };
 		2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF31C11B65E003446AC /* Assets.xcassets */; };
 		2172FBF71C11B65E003446AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF51C11B65E003446AC /* LaunchScreen.storyboard */; };
-		2172FC021C11CD3A003446AC /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC011C11CD3A003446AC /* MeViewController.swift */; };
+		2172FC021C11CD3A003446AC /* EveryMyndController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC011C11CD3A003446AC /* EveryMyndController.swift */; };
 		2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC031C11CFF9003446AC /* SignUpViewController.swift */; };
 		2172FC061C11D037003446AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC051C11D037003446AC /* LoginViewController.swift */; };
 		2172FC081C11E073003446AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC071C11E073003446AC /* Utilities.swift */; };
@@ -22,6 +22,7 @@
 		2172FC111C1258B7003446AC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC101C1258B7003446AC /* Extensions.swift */; };
 		217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */; };
 		217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BDB1C8A25290085D71B /* SwipeViewController.swift */; };
+		219F4F581C9AFBFD00B9AB34 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */; };
 		21B89FC41C77BF5B00E6D4E7 /* ScienceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */; };
 		21B8CC181C14C63600F629FF /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC171C14C63600F629FF /* EmojiView.swift */; };
 		21B8CC1A1C14C67600F629FF /* EmojiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21B8CC191C14C67600F629FF /* EmojiView.xib */; };
@@ -29,6 +30,7 @@
 		21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1341C2949A90047306D /* MenuViewController.swift */; };
 		21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1361C2A129A0047306D /* MenuViewCell.swift */; };
 		21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1381C2AECCC0047306D /* DashboardController.swift */; };
+		21E120CA1C9BB43B00DB1C8D /* PostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */; };
 		21F548CB1C8F1DA6004E85F3 /* ScienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */; };
 		21F619361C9756750089542F /* PostMethodDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F619351C9756750089542F /* PostMethodDropdown.swift */; };
 		21F6193A1C9952CB0089542F /* KolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F619391C9952CB0089542F /* KolodaView.swift */; };
@@ -47,7 +49,7 @@
 		2172FBF31C11B65E003446AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2172FBF61C11B65E003446AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2172FBF81C11B65E003446AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2172FC011C11CD3A003446AC /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		2172FC011C11CD3A003446AC /* EveryMyndController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveryMyndController.swift; sourceTree = "<group>"; };
 		2172FC031C11CFF9003446AC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		2172FC051C11D037003446AC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2172FC071C11E073003446AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 		2172FC101C1258B7003446AC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSwipeView.swift; sourceTree = "<group>"; };
 		217F3BDB1C8A25290085D71B /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
+		219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeDirection.swift; sourceTree = "<group>"; };
 		21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScienceMessage.swift; sourceTree = "<group>"; };
 		21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WriteMynd-Bridging-Header.h"; sourceTree = "<group>"; };
 		21B8CC171C14C63600F629FF /* EmojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
@@ -63,6 +66,7 @@
 		21C0A1341C2949A90047306D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		21C0A1361C2A129A0047306D /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
 		21C0A1381C2AECCC0047306D /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
+		21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTableViewController.swift; sourceTree = "<group>"; };
 		21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScienceViewController.swift; sourceTree = "<group>"; };
 		21F619351C9756750089542F /* PostMethodDropdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMethodDropdown.swift; sourceTree = "<group>"; };
 		21F619391C9952CB0089542F /* KolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KolodaView.swift; sourceTree = "<group>"; };
@@ -136,15 +140,14 @@
 		2172FBFE1C11BBBD003446AC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				21E120C61C9BB30F00DB1C8D /* OnBoarding */,
+				21E120C51C9BB30400DB1C8D /* Settings */,
+				21E120C41C9BB2E700DB1C8D /* MyMynd */,
+				21E120C31C9BB2C100DB1C8D /* Science */,
+				219F4F591C9BA27700B9AB34 /* EveryMynd */,
 				21FE51C91C90ADD0002F8874 /* Posting */,
-				21C0A1381C2AECCC0047306D /* DashboardController.swift */,
-				2172FC051C11D037003446AC /* LoginViewController.swift */,
 				21C0A1341C2949A90047306D /* MenuViewController.swift */,
-				2172FC011C11CD3A003446AC /* MeViewController.swift */,
-				21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */,
-				21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */,
-				21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */,
-				2172FC031C11CFF9003446AC /* SignUpViewController.swift */,
+				21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -162,6 +165,48 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		219F4F591C9BA27700B9AB34 /* EveryMynd */ = {
+			isa = PBXGroup;
+			children = (
+				2172FC011C11CD3A003446AC /* EveryMyndController.swift */,
+			);
+			name = EveryMynd;
+			sourceTree = "<group>";
+		};
+		21E120C31C9BB2C100DB1C8D /* Science */ = {
+			isa = PBXGroup;
+			children = (
+				21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */,
+				21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */,
+			);
+			name = Science;
+			sourceTree = "<group>";
+		};
+		21E120C41C9BB2E700DB1C8D /* MyMynd */ = {
+			isa = PBXGroup;
+			children = (
+				21C0A1381C2AECCC0047306D /* DashboardController.swift */,
+			);
+			name = MyMynd;
+			sourceTree = "<group>";
+		};
+		21E120C51C9BB30400DB1C8D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		21E120C61C9BB30F00DB1C8D /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				2172FC051C11D037003446AC /* LoginViewController.swift */,
+				2172FC031C11CFF9003446AC /* SignUpViewController.swift */,
+			);
+			name = OnBoarding;
+			sourceTree = "<group>";
+		};
 		21F619371C9951880089542F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +222,7 @@
 				21F619391C9952CB0089542F /* KolodaView.swift */,
 				21F6193B1C9A0B5F0089542F /* DraggableCardView.swift */,
 				21F6193D1C9A11190089542F /* OverlayView.swift */,
+				219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */,
 			);
 			name = Koloda;
 			sourceTree = "<group>";
@@ -342,9 +388,11 @@
 				21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */,
 				21F6193E1C9A11190089542F /* OverlayView.swift in Sources */,
 				2172FC111C1258B7003446AC /* Extensions.swift in Sources */,
-				2172FC021C11CD3A003446AC /* MeViewController.swift in Sources */,
+				2172FC021C11CD3A003446AC /* EveryMyndController.swift in Sources */,
 				21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */,
 				2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */,
+				219F4F581C9AFBFD00B9AB34 /* SwipeDirection.swift in Sources */,
+				21E120CA1C9BB43B00DB1C8D /* PostsTableViewController.swift in Sources */,
 				21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */,
 				21FA7FA61C61C49400D0836F /* Swipe.swift in Sources */,
 				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,

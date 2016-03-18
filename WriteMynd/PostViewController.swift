@@ -9,8 +9,6 @@
 import UIKit
 import SZTextView
 import Parse
-import MDCSwipeToChoose
-import Koloda
 
 /**
  Lets the user post with tho different methods

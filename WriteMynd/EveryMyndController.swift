@@ -13,38 +13,71 @@ import Parse
 import ParseUI
 import SwiftSpinner
 import MMDrawerController
+import SnapKit
 
 /**
  - todo:
-    [ ] Use a ContainerView to represent the `MeViewController` and the `tableView`
+    [x] Use a ContainerView to represent the `MeViewController` and the `tableView`
  */
-class MeViewController: UIViewController {
+class EveryMyndController: UIViewController {
     
-    var showPostController:Bool = true
-    var posts:[Post] = []
     var dropDown:PostMethodDropdown = PostMethodDropdown()
-    @IBOutlet weak var tableView:UITableView!
+    let postsController: PostsTableViewController = PostsTableViewController()
     @IBOutlet weak var showMenuButton: UIBarButtonItem!
-    @IBOutlet weak var postButton: UIButton!
+    
+    lazy var everyMyndLabel: UILabel = {
+        let label:UILabel = UILabel()
+        label.text = "Everymynd"; label.sizeToFit()
+        label.font = label.font.fontWithSize(25.0)
+        label.textColor = UIColor.lightGrayColor()
+        return label
+    }()
+    
+    lazy var createPostButton: UIButton = {
+        let button: UIButton = UIButton(frame: CGRect(x: 15, y: 15, width: screenWidth - 30, height: 50))
+        button.backgroundColor = UIColor.greenColor()
+        button.setTitle("Create a post", forState: .Normal)
+        button.alpha = 0.8
+        return button;
+    }()
+    
+    lazy var bottomView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: screenHeight - 80, width: screenWidth, height: 80))
+        view.backgroundColor = UIColor.whiteColor()
+        view.alpha = 0.5
+        view.addSubview(self.createPostButton)
+        return view;
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        //Adding the table view controller to display posts
+        self.addChildViewController(postsController)
+        self.view.addSubview(postsController.tableView)
+        //Height is calculated as 120 offset from top + bottom view's height
+        postsController.tableView.frame = CGRectMake(10, 120, screenWidth - 20, screenHeight - (120+bottomView.bounds.height))
+        postsController.didMoveToParentViewController(self)
         
-        showPostController = false //HIDE_FOR_NOW
-        tableView.dataSource = self
+        //MARK: View Customisations and Constraints
+        self.view.addSubview( everyMyndLabel )
+        everyMyndLabel.snp_makeConstraints(closure: { make in
+            var topOffset:Float = 40;
+            if let navHeight = self.navigationController?.navigationBar.bounds.height{ topOffset += Float(navHeight);}
+            make.top.equalTo(self.view).offset(topOffset)
+            make.left.equalTo(self.view).offset(10)
+        })
+        
+        self.view.addSubview(bottomView);
+        //END MARK
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         //Check if User exists
         if let _ = PFUser.currentUser() {
-            if showPostController {
-                self.performSegueWithIdentifier("showPostController", sender: self)
-                showPostController = false
-            }else{
-                //HIDE_FOR_NOW: SwiftSpinner.show("Patience is a Virtue \n Fetching your Posts")
-                fetchPosts()
-            }
+            fetchPosts()
         }else{
             //Present Signup/Login Page
             let loginVC:LoginViewController = LoginViewController()
@@ -82,19 +115,19 @@ class MeViewController: UIViewController {
             `dropDown` and `transparency` buttons to prevent memory leak
      */
     @IBAction func postButtonTapped( sender:UIButton ){
-        let yDropdown = self.tableView.frame.origin.y
+        //let yDropdown = self.tableView.frame.origin.y
         let transparencyButton = UIButton(frame: self.view.bounds)
         transparencyButton.backgroundColor = UIColor.clearColor()
         transparencyButton.addTarget(self, action: "dismissHelperButton:", forControlEvents: .TouchUpInside)
-        self.dropDown = PostMethodDropdown(frame: CGRect(x: 0, y: yDropdown-10, width: screenWidth, height: 80))
+        //self.dropDown = PostMethodDropdown(frame: CGRect(x: 0, y: yDropdown-10, width: screenWidth, height: 80))
         self.dropDown.writeItButton.addTarget(self, action: "initiatePostViewControllerSegue:", forControlEvents: .TouchUpInside)
         self.dropDown.swipeItButton.addTarget(self, action: "initiatePostViewControllerSegue:", forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.dropDown)
         
         UIView.animateWithDuration(0.1, delay: 0.0001, options: .CurveEaseIn, animations: {
-            self.dropDown.frame.origin.y = yDropdown
-            self.tableView.alpha = 0.2
+            //self.dropDown.frame.origin.y = yDropdown
+            //self.tableView.alpha = 0.2
             }, completion: { bool in
                 self.view.insertSubview(transparencyButton, belowSubview: self.dropDown)
         })
@@ -115,7 +148,7 @@ class MeViewController: UIViewController {
     func dismissHelperButton( sender:UIButton ){
         UIView.animateWithDuration(0.001, delay: 0.0, options: .CurveEaseOut, animations: {
             self.dropDown.frame.origin.y -= 10
-            self.tableView.alpha = 1.0
+            //self.tableView.alpha = 1.0
             }, completion: { bool in
                 self.dropDown.removeFromSuperview()
                 sender.removeFromSuperview()
@@ -124,42 +157,10 @@ class MeViewController: UIViewController {
     
     func fetchPosts(){
         ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
-            self.posts = posts
-            self.tableView.reloadData()
+            self.postsController.posts = posts
+            self.postsController.tableView.reloadData()
             SwiftSpinner.hide()
         })
     }
     
 }
-
-extension MeViewController: UITableViewDataSource {
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.posts.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: PostTableViewCell = tableView.dequeueReusableCellWithIdentifier("PostTableViewCell", forIndexPath: indexPath) as! PostTableViewCell
-        let post: Post = self.posts[ indexPath.row ]
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .LongStyle
-        dateFormatter.timeStyle = .MediumStyle
-        
-        cell.emojiLabel.text = post.emoji
-        cell.dateLabel.text = dateFormatter.stringFromDate(post.createdAt!)
-        cell.postLabel.text = post.text
-        cell.hashTagsLabel.text = post.hashTags.reduce("", combine: { $0! + " " + $1 })
-        
-        cell.dateLabel.font = cell.dateLabel.font.fontWithSize(13)
-        cell.hashTagsLabel.font = cell.hashTagsLabel.font.fontWithSize(15)
-        
-        return cell
-    }
-}
-
-
-

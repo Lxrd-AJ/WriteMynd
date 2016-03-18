@@ -9,9 +9,13 @@
 import UIKit
 import MMDrawerController
 
+/**
+ - todo:
+    [ ] Replace each menuItem name with a const string **type saftey**
+ */
 class MenuViewController: UITableViewController {
     
-    let menuItems: [String] = ["Me","My Mynd","Science","Settings"]//["Me","Feed","My Mynd","Science","Settings"]
+    let menuItems: [String] = ["Every Mynd","My Mynd","Science","Settings"]
     var navController: UINavigationController?
     var drawerController: MMDrawerController?
 
@@ -45,9 +49,8 @@ class MenuViewController: UITableViewController {
         var controller: UIViewController
         
         switch menuItems[indexPath.row] {
-        case "Me":
-            controller = storyboard!.instantiateViewControllerWithIdentifier("MeViewController") as! MeViewController
-            (controller as! MeViewController).showPostController = false
+        case "Every Mynd":
+            controller = storyboard!.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
         case "My Mynd":
             controller = storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
         case "Science":

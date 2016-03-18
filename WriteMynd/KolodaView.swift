@@ -9,25 +9,6 @@
 import Foundation
 import pop
 
-/**
- Extending the `SwipeDirection` enumeration in the Koloda module to add custom swiping directions
- */
-enum SwipeDirection:Int {
-    case _15Degrees = 11
-    case _30Degrees = 10
-    case _45Degrees = 9
-    case _60Degrees = 8
-    case _75Degrees = 7
-    case _90Degrees = 6
-    case _105Degrees = 5
-    case _120Degrees = 4
-    case _135Degrees = 3
-    case _150Degrees = 2
-    case _165Degrees = 1
-    case Left = 0
-    case Ragnarok = -1
-}
-
 //Default values
 private let defaultCountOfVisibleCards = 3
 private let backgroundCardsTopMargin: CGFloat = 4.0
@@ -59,10 +40,10 @@ private let kolodaAppearAlphaAnimationDuration: NSTimeInterval = 0.8
 protocol SwipeViewDataSource:class {
     func koloda(kolodaNumberOfCards koloda:SwipeView) -> UInt
     func koloda(koloda: SwipeView, viewForCardAtIndex index: UInt) -> UIView
-    func koloda(koloda: SwipeView, viewForCardOverlayAtIndex index: UInt) -> OverlayView?
+    func koloda(koloda: SwipeView, viewForCardOverlayAtIndex index: UInt, onContentView view:UIView) -> OverlayView?
 }
 extension SwipeViewDataSource {
-    func koloda(koloda: SwipeView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
+    func koloda(koloda: SwipeView, viewForCardOverlayAtIndex index: UInt, onContentView view:UIView) -> OverlayView? {
         return nil
     }
 }
@@ -78,7 +59,7 @@ protocol SwipeViewDelegate:class {
     func koloda(kolodaBackgroundCardAnimation koloda: SwipeView) -> POPPropertyAnimation?
     func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection)
     func koloda(kolodaDidResetCard koloda: SwipeView)
-    func koloda(kolodaSwipeThresholdMargin koloda: SwipeView) -> CGFloat?
+    func koloda(kolodaSwipeThresholdRatioMargin koloda: SwipeView) -> CGFloat?
     func koloda(koloda: SwipeView, didShowCardAtIndex index: UInt)
 }
 extension SwipeViewDelegate {
@@ -91,7 +72,7 @@ extension SwipeViewDelegate {
     func koloda(kolodaBackgroundCardAnimation koloda: SwipeView) -> POPPropertyAnimation? {return nil}
     func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {}
     func koloda(kolodaDidResetCard koloda: SwipeView) {}
-    func koloda(kolodaSwipeThresholdMargin koloda: SwipeView) -> CGFloat? {return nil}
+    func koloda(kolodaSwipeThresholdRatioMargin koloda: SwipeView) -> CGFloat? {return nil}
     func koloda(koloda: SwipeView, didShowCardAtIndex index: UInt) {}
 }
 
@@ -103,7 +84,8 @@ class SwipeView: UIView, SwipeableCardDelegate {
         }
     }
     weak var delegate: SwipeViewDelegate?
-    
+    var allowedDirections:[SwipeDirection] = [.Left, ._15Degrees, ._30Degrees, ._45Degrees, ._60Degrees, ._75Degrees, ._90Degrees, ._105Degrees, ._120Degrees, ._135Degrees, ._150Degrees,
+        ._165Degrees ]
     private(set) var currentCardNumber = 0
     private(set) var countOfCards = 0
     
@@ -182,7 +164,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
                     }
                     nextCardView.userInteractionEnabled = index == 0
                     
-                    let overlayView = overlayViewForCardAtIndex(UInt(index+currentCardNumber))
+                    let overlayView = dataSource.koloda(self, viewForCardOverlayAtIndex: UInt(index+currentCardNumber), onContentView: nextCardContentView)
                     
                     nextCardView.configure(nextCardContentView, overlayView: overlayView)
                     visibleCards.append(nextCardView)
@@ -373,13 +355,13 @@ class SwipeView: UIView, SwipeableCardDelegate {
     }
     
     func card(cardWasTapped card: SwipeableCardView) {
-        let index = currentCardNumber + visibleCards.indexOf(card)!
+        let index = currentCardNumber + (visibleCards.indexOf(card) ?? 0)
         
         delegate?.koloda(self, didSelectCardAtIndex: UInt(index))
     }
     
-    func card(cardSwipeThresholdMargin card: SwipeableCardView) -> CGFloat? {
-        return delegate?.koloda(kolodaSwipeThresholdMargin: self)
+    func card(cardSwipeThresholdRatioMargin card: SwipeableCardView) -> CGFloat? {
+        return delegate?.koloda(kolodaSwipeThresholdRatioMargin: self)
     }
     
     //MARK: Private
@@ -394,10 +376,6 @@ class SwipeView: UIView, SwipeableCardDelegate {
         
     }
     
-    private func overlayViewForCardAtIndex(index: UInt) -> OverlayView? {
-        return dataSource?.koloda(self, viewForCardOverlayAtIndex: index)
-    }
-    
     //MARK: Actions
     private func swipedAction(direction: SwipeDirection) {
         animating = true
@@ -410,7 +388,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
             if let dataSource = dataSource {
                 
                 let lastCardContentView = dataSource.koloda(self, viewForCardAtIndex: UInt(shownCardsCount - 1))
-                let lastCardOverlayView = dataSource.koloda(self, viewForCardOverlayAtIndex: UInt(shownCardsCount - 1))
+                let lastCardOverlayView = dataSource.koloda(self, viewForCardOverlayAtIndex: UInt(shownCardsCount - 1), onContentView: lastCardContentView)
                 
                 let lastCardFrame = frameForCardAtIndex(UInt(visibleCards.count))
                 let cardParameters = backgroundCardParametersForFrame(lastCardFrame)
@@ -516,7 +494,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
             
             if let dataSource = self.dataSource {
                 let firstCardContentView = dataSource.koloda(self, viewForCardAtIndex: UInt(currentCardNumber))
-                let firstCardOverlayView = dataSource.koloda(self, viewForCardOverlayAtIndex: UInt(currentCardNumber))
+                let firstCardOverlayView = dataSource.koloda(self, viewForCardOverlayAtIndex: UInt(currentCardNumber), onContentView: firstCardContentView)
                 let firstCardView = SwipeableCardView()
                 
                 if shouldTransparentize {
@@ -588,7 +566,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
             if let dataSource = self.dataSource {
                 
                 let currentCardContentView = dataSource.koloda(self, viewForCardAtIndex: UInt(currentCardNumber + index))
-                let overlayView = dataSource.koloda(self, viewForCardOverlayAtIndex: UInt(currentCardNumber + index))
+                let overlayView = dataSource.koloda(self, viewForCardOverlayAtIndex: UInt(currentCardNumber + index), onContentView:currentCardContentView)
                 let currentCard = visibleCards[index]
                 
                 currentCard.configure(currentCardContentView, overlayView: overlayView)
@@ -630,6 +608,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
     }
     
     func swipe(direction: SwipeDirection) {
+        guard allowedDirections.contains(direction) else { return }
         if (animating == false) {
             
             if let frontCard = visibleCards.first {
@@ -653,6 +632,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
     }
     
     func viewForCardAtIndex(index: Int) -> UIView? {
+        let index = Int(index)
         if visibleCards.count + currentCardNumber > index && index >= currentCardNumber {
             return visibleCards[index - currentCardNumber].contentView
         } else {

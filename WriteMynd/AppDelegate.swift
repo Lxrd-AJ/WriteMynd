@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().tintColor = UIColor(red: 99/255, green: 60/255, blue: 134/255, alpha: 1) //UIColor.whiteColor()
         
         //App Configurations
-        let meVC: MeViewController = storyboard.instantiateViewControllerWithIdentifier("MeViewController") as! MeViewController
+        let meVC: EveryMyndController = storyboard.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
         let menuVC: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
         let navigationController: UINavigationController = UINavigationController(rootViewController: meVC)
         let drawerController: MMDrawerController = MMDrawerController(centerViewController: navigationController, leftDrawerViewController: menuVC)

@@ -3,9 +3,6 @@ PODS:
   - Charts (2.2.3):
     - Charts/Core (= 2.2.3)
   - Charts/Core (2.2.3)
-  - Koloda (2.0.10):
-    - pop (~> 1.0)
-  - MDCSwipeToChoose (0.2.3)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -30,7 +27,7 @@ PODS:
   - SnapKit (0.15.0)
   - SwiftDate (2.0.2)
   - SwiftSpinner (0.8.0)
-  - SZTextView (1.2.1)
+  - SZTextView (1.2.2)
   - ZendeskSDK (1.5.4.1):
     - ZendeskSDK/Core (= 1.5.4.1)
     - ZendeskSDK/Localization (= 1.5.4.1)
@@ -42,11 +39,10 @@ PODS:
 
 DEPENDENCIES:
   - Charts
-  - Koloda (~> 2.0.10)
-  - MDCSwipeToChoose
   - MMDrawerController
   - Parse
   - ParseUI
+  - pop (~> 1.0)
   - RMDateSelectionViewController (~> 2.0.3)
   - SnapKit (~> 0.15.0)
   - SwiftDate (~> 2.0)
@@ -57,8 +53,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   Charts: f54267bb3f0f0e74520c6f248517cf5074dfd6fc
-  Koloda: 10f747feeff5e425061f78e5ce17208783e34a99
-  MDCSwipeToChoose: 56239d98b4558c66e7c3c9069482befd26092270
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   Parse: de2c52a9a1421b91ae7594ab8ce191afd184f19b
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
@@ -68,9 +62,9 @@ SPEC CHECKSUMS:
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftDate: b4f4d0962afe48365ad2800c9850a6626deb9359
   SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
-  SZTextView: 906df45afd3c1b24fc5252088d5ef8061513c238
+  SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
   ZendeskSDK: 45b7a2812a04c3c5c2510aeeeded5818e6e705a5
 
-PODFILE CHECKSUM: 1d3eb9352da2ca5a1fa9799d57193a624cb0e394
+PODFILE CHECKSUM: 4d6e228ef9a5d02d437d359d28eeb044751f2291
 
 COCOAPODS: 1.0.0.beta.1

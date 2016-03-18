@@ -126,7 +126,7 @@ class SettingsTableViewController: UITableViewController {
         switch rowText {
         case "Log out":
             PFUser.logOut()
-            let meVC: MeViewController = storyboard!.instantiateViewControllerWithIdentifier("MeViewController") as! MeViewController
+            let meVC: EveryMyndController = storyboard!.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
             self.mm_drawerController.centerViewController = UINavigationController(rootViewController: meVC)
         case TROUBLE_APP:
             ZDKRequests.showRequestCreationWithNavController(self.navigationController)

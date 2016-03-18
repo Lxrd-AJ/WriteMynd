@@ -8,13 +8,7 @@
 
 import Foundation
 
-enum OverlayMode{
-    case None
-    case Left
-    case Right
-}
-
 
 class OverlayView: UIView {
-    var overlayState:OverlayMode = OverlayMode.None
+    var overlayState = SwipeDirection.Ragnarok
 }
