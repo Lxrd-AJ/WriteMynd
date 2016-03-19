@@ -27,7 +27,9 @@ class SwipeViewController: UIViewController {
         let kolodaView = SwipeView(frame: UIEdgeInsetsInsetRect(self.view.bounds, UIEdgeInsetsMake(100, 50, 100, 50)))
         kolodaView.dataSource = self
         kolodaView.delegate = self
+        
         self.view.addSubview( kolodaView )
+        self.view.backgroundColor = UIColor.brownColor()
         
         //MARK - Customisations
         let cancelButton = UIButton()
@@ -49,7 +51,7 @@ class SwipeViewController: UIViewController {
     func removeMe(){
         if let delegate = delegate{
             delegate.removeMe()
-        }else{ print("Delegate Not assigned") }
+        }else{ self.dismissViewControllerAnimated(true, completion: nil) }
     }
 }
 

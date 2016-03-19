@@ -16,6 +16,7 @@ target 'WriteMynd' do
     pod 'ZendeskSDK', '~> 1.5'
     pod 'SnapKit', '~> 0.15.0'
     pod 'pop', '~> 1.0'
+    pod 'JTSActionSheet', '~> 1.0.1'
     
 end
 

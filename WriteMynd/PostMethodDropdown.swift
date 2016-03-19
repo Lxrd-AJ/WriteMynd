@@ -9,6 +9,7 @@
 import UIKit
 
 /**
+ - note DEPRECATED
 Custom Override to add the dropdown options to the view on initialization.
 The Dropdowns are
 * Write It

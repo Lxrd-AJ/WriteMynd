@@ -16,6 +16,8 @@ class PostTableViewCell: UITableViewCell {
     var postLabel: UILabel = UILabel()
     var hashTagsLabel: UILabel = UILabel()
     var isPrivateLabel: UILabel = UILabel()
+    var ellipsesButton: UIButton = UIButton()
+    var empathiseButton: UIButton = UIButton()
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,16 +34,40 @@ class PostTableViewCell: UITableViewCell {
         setupBottomSection(self.contentView)
     }
     
-    func setupBottomSection( superview:UIView ) {
-        let view = UIView(frame: CGRect(x: 0, y: superview.bounds.height * 0.8, width: superview.bounds.width, height: superview.bounds.height * 0.2))
-        view.backgroundColor = UIColor.blueColor()
-        superview.addSubview(view)
+    override func prepareForReuse() {
+        self.empathiseButton = UIButton()
+    }
+    
+    func setupBottomSection( superView:UIView ) {
+        let _view = UIView(frame: CGRect(x: 0, y: superView.bounds.height * 0.8, width: superView.bounds.width, height: superView.bounds.height * 0.2))
+        superView.addSubview(_view)
+        //_view.backgroundColor = UIColor.greenColor()
+        
+        //Ellipsis Button
+//        _view.addSubview(ellipsesButton)
+//        ellipsesButton.frame = CGRect(x: (_view.frame.origin.x), y: _view.frame.origin.y, width: 50, height: 50)
+//        //ellipsesButton.frame.origin.x = _view.bounds.width - 100
+//        //ellipsesButton.frame.origin.y = (superView.bounds.height * 0.8) + 5
+//        
+//        //Empathise Button
+//        _view.addSubview(empathiseButton)
+//        empathiseButton.snp_makeConstraints(closure: { make in
+//            make.size.equalTo(CGSize(width: 45, height: 45))
+//            make.right.equalTo(ellipsesButton.snp_right)
+//        })
     }
     
     func setupMiddleSection( superview:UIView ){
         let view = UIView(frame: CGRect(x: 0, y: superview.bounds.height * 0.2, width: superview.bounds.width, height: superview.bounds.height * 0.6))
-        view.backgroundColor = UIColor.greenColor()
         superview.addSubview(view)
+        
+        //Posts Label
+        superview.addSubview(postLabel)
+        postLabel.numberOfLines = 0
+        postLabel.snp_makeConstraints(closure: { make in
+            make.width.equalTo(superview.snp_width)
+            make.center.equalTo(superview.snp_center)
+        })
     }
     
     func setupTopSection( superView:UIView )  {

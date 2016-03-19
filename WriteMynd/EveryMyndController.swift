@@ -14,6 +14,7 @@ import ParseUI
 import SwiftSpinner
 import MMDrawerController
 import SnapKit
+import JTSActionSheet
 
 /**
  - todo:
@@ -37,6 +38,7 @@ class EveryMyndController: UIViewController {
         let button: UIButton = UIButton(frame: CGRect(x: 15, y: 15, width: screenWidth - 30, height: 50))
         button.backgroundColor = UIColor.greenColor()
         button.setTitle("Create a post", forState: .Normal)
+        button.addTarget(self, action: "showPostingSheet:", forControlEvents: .TouchUpInside)
         button.alpha = 0.8
         return button;
     }()
@@ -44,13 +46,15 @@ class EveryMyndController: UIViewController {
     lazy var bottomView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: screenHeight - 80, width: screenWidth, height: 80))
         view.backgroundColor = UIColor.whiteColor()
-        view.alpha = 0.5
+        view.alpha = 1.0
         view.addSubview(self.createPostButton)
         return view;
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
      
         //Adding the table view controller to display posts
         self.addChildViewController(postsController)
@@ -77,6 +81,7 @@ class EveryMyndController: UIViewController {
         super.viewDidAppear(animated)
         //Check if User exists
         if let _ = PFUser.currentUser() {
+            postsController.tableView.hidden = true
             fetchPosts()
         }else{
             //Present Signup/Login Page
@@ -108,57 +113,35 @@ class EveryMyndController: UIViewController {
     
     @IBAction func unwindToSegue( segue:UIStoryboardSegue ) {}
     
-    /**
-     Present the `PostMethodDropdown` view
-     - todo:
-        [ ] self.dropDown's reference is always changed if the user taps the postButton repeatedly,it creates a weird memory leak bug, create lazy vars for 
-            `dropDown` and `transparency` buttons to prevent memory leak
-     */
-    @IBAction func postButtonTapped( sender:UIButton ){
-        //let yDropdown = self.tableView.frame.origin.y
-        let transparencyButton = UIButton(frame: self.view.bounds)
-        transparencyButton.backgroundColor = UIColor.clearColor()
-        transparencyButton.addTarget(self, action: "dismissHelperButton:", forControlEvents: .TouchUpInside)
-        //self.dropDown = PostMethodDropdown(frame: CGRect(x: 0, y: yDropdown-10, width: screenWidth, height: 80))
-        self.dropDown.writeItButton.addTarget(self, action: "initiatePostViewControllerSegue:", forControlEvents: .TouchUpInside)
-        self.dropDown.swipeItButton.addTarget(self, action: "initiatePostViewControllerSegue:", forControlEvents: .TouchUpInside)
-        
-        self.view.addSubview(self.dropDown)
-        
-        UIView.animateWithDuration(0.1, delay: 0.0001, options: .CurveEaseIn, animations: {
-            //self.dropDown.frame.origin.y = yDropdown
-            //self.tableView.alpha = 0.2
-            }, completion: { bool in
-                self.view.insertSubview(transparencyButton, belowSubview: self.dropDown)
-        })
-    }
-    
     @IBAction func showMenu( sender: UIBarButtonItem ){
         self.mm_drawerController.toggleDrawerSide(.Left, animated: true, completion: nil)
     }
     
-    func initiatePostViewControllerSegue( sender:UIButton ){
-        self.dismissHelperButton(sender)
-        self.performSegueWithIdentifier("showPostViewController", sender: sender)
-    }
-    
-    /**
-     Helper function to dismiss the Post Method dropdown once the user taps outside the dropdown
-     */
-    func dismissHelperButton( sender:UIButton ){
-        UIView.animateWithDuration(0.001, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.dropDown.frame.origin.y -= 10
-            //self.tableView.alpha = 1.0
-            }, completion: { bool in
-                self.dropDown.removeFromSuperview()
-                sender.removeFromSuperview()
-        })
+    func showPostingSheet( sender:UIButton ){
+        self.bottomView.alpha = 0.0
+        let theme: JTSActionSheetTheme = JTSActionSheetTheme.defaultTheme()
+        let swipeItItem = JTSActionSheetItem(title: "Swipe It", action: {
+            self.bottomView.alpha = 1.0
+            let swipeVC = self.storyboard?.instantiateViewControllerWithIdentifier("SwipeViewController") as! SwipeViewController
+            self.presentViewController(swipeVC, animated: true, completion: nil)
+            //self.navigationController?.pushViewController(swipeVC, animated: true)
+            }, isDestructive: false)
+        let writeItItem = JTSActionSheetItem(title: "Write It", action: {
+            print("Write It")
+            self.bottomView.alpha = 1.0
+            }, isDestructive: false)
+        let cancelItem = JTSActionSheetItem(title: "Cancel", action: {
+            self.bottomView.alpha = 1.0
+            }, isDestructive: true)
+        let actionSheet = JTSActionSheet(theme: theme, title: "", actionItems: [swipeItItem, writeItItem], cancelItem: cancelItem)
+        actionSheet.showInView(self.view)
     }
     
     func fetchPosts(){
         ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
             self.postsController.posts = posts
             self.postsController.tableView.reloadData()
+            self.postsController.tableView.hidden = false
             SwiftSpinner.hide()
         })
     }

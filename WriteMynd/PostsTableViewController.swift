@@ -17,6 +17,7 @@ class PostsTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.registerClass(PostTableViewCell.self , forCellReuseIdentifier: CELL_IDENTIFIER)
         self.tableView.backgroundColor = UIColor.clearColor()
+        self.tableView.separatorColor = UIColor.clearColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,11 +52,14 @@ class PostsTableViewController: UITableViewController {
         dateFormatter.timeStyle = .MediumStyle
         
         if post.isPrivate {
-            cell.backgroundColor = UIColor(red: 235/250, green: 240/250, blue: 241/255, alpha: 1.0)
+            cell.backgroundColor = UIColor(red: 236/250, green: 236/250, blue: 236/255, alpha: 1.0)
             cell.isPrivateLabel.text = "me"
             cell.isPrivateLabel.textColor = UIColor.blueColor()
+            cell.empathiseButton.hidden = true
         }else{
             cell.backgroundColor = UIColor.whiteColor()
+            cell.isPrivateLabel.text = ""
+            cell.empathiseButton.setImage(UIImage(named: "Hearts")!, forState: .Normal)
         }
         cell.layer.cornerRadius = 5
         cell.layer.borderColor = UIColor.whiteColor().CGColor
@@ -65,6 +69,8 @@ class PostsTableViewController: UITableViewController {
         cell.dateLabel.text = dateFormatter.stringFromDate(post.createdAt!)
         cell.postLabel.text = post.text
         cell.hashTagsLabel.text = post.hashTags.reduce("", combine: { $0! + " " + $1 })
+        cell.ellipsesButton.setTitle("...", forState: .Normal)
+        cell.ellipsesButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         
         cell.dateLabel.font = cell.dateLabel.font.fontWithSize(13)
         cell.hashTagsLabel.font = cell.hashTagsLabel.font.fontWithSize(15)
@@ -76,6 +82,9 @@ class PostsTableViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        let count = posts[indexPath.section].text.characters.count * 20
+//        guard count < 200 else{ return 200.0 }//Maximum height
+//        guard count >= 0 else{ return 100.0 }//Minimum height
         return 200.0
     }
     
