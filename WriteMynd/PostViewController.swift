@@ -168,7 +168,7 @@ class PostViewController: UIViewController {
             guard text != "" else { return false }
             return text[text.startIndex] == "#"
         })
-        return Post(emoji: selectedEmojiLabel.text!, text: postTextView.text!, hashTags: hashTags, author: user)
+        return Post(emoji: Emoji.Happy, text: postTextView.text!, hashTags: hashTags, author: user)//selectedEmojiLabel.text!
     }
     
 }

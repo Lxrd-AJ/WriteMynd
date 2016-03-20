@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "WM": {
+      "applicationId": "psbQTCZJnowKHs9FT534pLsRKOtgxQvkNTmYctOD"
+    },
+    "_default": {
+      "link": "WM"
+    }
+  }
+}

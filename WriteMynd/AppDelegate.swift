@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("psbQTCZJnowKHs9FT534pLsRKOtgxQvkNTmYctOD",clientKey: "JZVNrhm8472sSy8tuXNibdzOI7Xx1k3OJnVoIAXt")
         
         //UI Configurations
-        UILabel.appearance().font = UIFont(name: "Avenir", size: 17.0)
+        UILabel.appearance().font = UIFont(name: "Montserrat-Regular.ttf", size: 17.0)
         UINavigationBar.appearance().barTintColor = UIColor.whiteColor()//
         UIBarButtonItem.appearance().tintColor = UIColor(red: 99/255, green: 60/255, blue: 134/255, alpha: 1) //UIColor.whiteColor()
         

@@ -10,6 +10,23 @@ import Foundation
 import UIKit
 import Charts
 
+// Color palette
+
+extension UIColor {
+    class func wmCoolBlueColor() -> UIColor {
+        return UIColor(red: 87.0 / 255.0, green: 132.0 / 255.0, blue: 199.0 / 255.0, alpha: 1.0)
+    }
+    class func wmDarkSkyBlue10Color() -> UIColor {
+        return UIColor(red: 68.0 / 255.0, green: 179.0 / 255.0, blue: 232.0 / 255.0, alpha: 0.1)
+    }
+    class func wmSlateGreyColor() -> UIColor {
+        return UIColor(red: 84.0 / 255.0, green: 93.0 / 255.0, blue: 103.0 / 255.0, alpha: 1.0)
+    }
+    class func wmSilverColor() -> UIColor {
+        return UIColor(red: 184.0 / 255.0, green: 192.0 / 255.0, blue: 201.0 / 255.0, alpha: 1.0)
+    }
+}
+
 extension UIView{
     class func loadFromNibName( nibNamed:String, bundle:NSBundle? = nil ) -> UIView? {
         return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil , options: nil)[0] as? UIView
@@ -177,7 +194,19 @@ extension MutableCollectionType where Index == Int {
     }
 }
 
-
+extension Array where Element: EmpathisedPost {
+    
+    func containsPost( post:Post ) -> Bool {
+        var result = false
+        for emPost in self {
+            if emPost.postID == post.ID{
+                result = true
+                break
+            }
+        }
+        return result
+    }
+}
 
 
 class LineXAxis: ChartXAxisValueFormatter {

@@ -17,6 +17,7 @@ target 'WriteMynd' do
     pod 'SnapKit', '~> 0.15.0'
     pod 'pop', '~> 1.0'
     pod 'JTSActionSheet', '~> 1.0.1'
+    pod 'DOFavoriteButton', '~> 0.0.4'
     
 end
 

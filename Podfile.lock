@@ -3,6 +3,7 @@ PODS:
   - Charts (2.2.3):
     - Charts/Core (= 2.2.3)
   - Charts/Core (2.2.3)
+  - DOFavoriteButton (0.0.4)
   - JTSActionSheet (1.0.1)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
@@ -40,6 +41,7 @@ PODS:
 
 DEPENDENCIES:
   - Charts
+  - DOFavoriteButton
   - JTSActionSheet (~> 1.0.1)
   - MMDrawerController
   - Parse
@@ -55,6 +57,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   Charts: f54267bb3f0f0e74520c6f248517cf5074dfd6fc
+  DOFavoriteButton: 866e15af173d2dd5233971a1f657a5f31d2491d5
   JTSActionSheet: d7e5350ce63b5ff23ced9db653ed1c768358124e
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   Parse: de2c52a9a1421b91ae7594ab8ce191afd184f19b
@@ -68,6 +71,6 @@ SPEC CHECKSUMS:
   SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
   ZendeskSDK: 45b7a2812a04c3c5c2510aeeeded5818e6e705a5
 
-PODFILE CHECKSUM: 3d8c22731cb2da15860bdc8448e3eeef13fc1255
+PODFILE CHECKSUM: 9dac88e368c24554fafa73026a82f8a58bd26c8c
 
 COCOAPODS: 1.0.0.beta.1

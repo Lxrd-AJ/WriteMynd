@@ -11,6 +11,8 @@ import UIKit
 
 /**
  Extending the `SwipeDirection` enumeration in the Koloda module to add custom swiping directions
+ - todo:
+    [ ]
  */
 enum SwipeDirection:Int {
     case _15Degrees = 11

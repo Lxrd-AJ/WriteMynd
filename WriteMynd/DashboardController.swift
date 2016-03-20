@@ -159,7 +159,7 @@ class DashboardController: UIViewController {
     func makeEmojiToDateCountDictionary( posts:[Post] ) -> [Character: [NSDate:Int]] {
         var emojiToDirtyDatesCount: [Character: [NSDate]] = [:]
         for post in posts {
-            if let key = post.emoji.characters.first {
+            if let key = post.emoji.value().name.characters.first {
                 if emojiToDirtyDatesCount[key] != nil{ emojiToDirtyDatesCount[key]!.append(post.createdAt!) }
                 else { emojiToDirtyDatesCount[key] = [post.createdAt!] }
             }
