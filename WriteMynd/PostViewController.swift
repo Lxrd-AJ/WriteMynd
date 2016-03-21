@@ -9,7 +9,7 @@
 import UIKit
 import SZTextView
 import Parse
-
+//DEPRECATED
 /**
  Lets the user post with tho different methods
     * By typing how they feel and selecting an emoji

@@ -7,6 +7,24 @@
 //
 
 import Foundation
+import JTSActionSheet
+
+class ViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: <#T##UIImage?#>, style: <#T##UIBarButtonItemStyle#>, target: <#T##AnyObject?#>, action: <#T##Selector#>)
+    }
+}
+
+func global_getActionSheetTheme() -> JTSActionSheetTheme {
+    let theme = JTSActionSheetTheme.defaultTheme()
+    theme.normalButtonFont = UIFont(name: "Montserrat-Regular", size: 15.0)!
+    theme.normalButtonColor = UIColor.whiteColor()
+    theme.destructiveButtonColor = UIColor.wmSilverColor()
+    theme.backgroundColor = UIColor.wmGreenishTealColor()
+    return theme
+}
 
 class Label: UILabel {
     

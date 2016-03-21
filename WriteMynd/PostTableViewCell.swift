@@ -55,7 +55,7 @@ class PostTableViewCell: UITableViewCell {
 
         //Empathise Button
         bottomView.addSubview(empathiseButton)
-        empathiseButton.setImage(UIImage(named: "fill1"), forState: .Normal)
+        empathiseButton.setImage(UIImage(named: "empathise_heart"), forState: .Normal)
 //        empathiseButton.imageColorOff = UIColor.brownColor()
 //        empathiseButton.imageColorOn = UIColor.redColor()
 //        empathiseButton.circleColor = UIColor.greenColor()

@@ -10,12 +10,17 @@ import UIKit
 import Parse
 import DOFavoriteButton
 
+/**
+ - note: https://github.com/dzenbot/DZNEmptyDataSet for Empty Posts UI
+ - note: Pull to refresh UI https://github.com/uzysjung/UzysAnimatedGifPullToRefresh
+ */
 class PostsTableViewController: UITableViewController {
     
     let CELL_IDENTIFIER = "WriteMynd And Chill Cell"
     var posts:[Post] = []
     var empathisedPosts: [EmpathisedPost] = []
     var currentCellSelection = -1
+    var delegate: PostsTableVCDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +67,7 @@ class PostsTableViewController: UITableViewController {
         }else{
             cell.backgroundColor = UIColor.whiteColor()
             cell.isPrivateLabel.text = ""
-            cell.empathiseButton.setImage(UIImage(named: "Hearts")!, forState: .Normal)
+            cell.empathiseButton.setImage(UIImage(named: "empathise_heart")!, forState: .Normal)
             cell.empathiseButton.hidden = false
         }
         
@@ -131,7 +136,7 @@ class PostsTableViewController: UITableViewController {
 extension PostsTableViewController {
     
     func extendPostInCell( sender:Button ) {
-        print(sender.selected)
+        print("Before anim: \(sender.selected)")
         
         if sender.selected {
             sender.selected = false
@@ -144,6 +149,12 @@ extension PostsTableViewController {
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
         self.tableView.reloadData()
+        
+        if self.currentCellSelection > 0 {
+            self.tableView.reloadSections(NSIndexSet(index: sender.tag), withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+        
+        print("After \(sender.selected)")
     }
     
     func empathisePost( sender:DOFavoriteButton ){
@@ -178,4 +189,22 @@ extension PostsTableViewController {
             }
         })
     }
+}
+
+/***
+ScrollViewDelegate Extensions and Protocol definition
+ The protocol propagates the scroll messages to the `PostsTableViewController` delegate
+*/
+protocol PostsTableVCDelegate {
+    func scrollBegan( scrollView:UIScrollView )
+}
+extension PostsTableViewController {
+    override func scrollViewWillBeginDragging( scrollView: UIScrollView){
+        delegate?.scrollBegan( scrollView )
+    }
+    
+//    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+//        print("Dragging ended")
+//        delegate?.scrollEnded()
+//    }
 }

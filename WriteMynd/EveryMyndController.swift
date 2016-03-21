@@ -19,16 +19,16 @@ import JTSActionSheet
 /**
  - todo:
     [x] Use a ContainerView to represent the `MeViewController` and the `tableView`
-    [ ] Once the user starts swiping, hide the bottomView
+    [x] Once the user starts scrolling, hide the bottomView
  */
-class EveryMyndController: UIViewController {
+class EveryMyndController: ViewController {
     
     var dropDown:PostMethodDropdown = PostMethodDropdown()
     var posts:[Post] = []
+    var empathisedPosts:[EmpathisedPost] = []
+    var lastContentOffSet: CGFloat = 0.0 //tracker to determine if user scrolling up/down
     let postsController: PostsTableViewController = PostsTableViewController()
     @IBOutlet weak var showMenuButton: UIBarButtonItem!
-    
-    var empathisedPosts:[EmpathisedPost] = []
     var postsEmphasised:[Post]{
         return posts.filter({ post in
             if self.empathisedPosts.containsPost(post){
@@ -53,41 +53,50 @@ class EveryMyndController: UIViewController {
         button.setTitle("Empathised with", forState: .Normal)
         button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
         button.layer.cornerRadius = 14.0
-        button.setImage(UIImage(named: "page1"), forState: .Normal)
+        button.setImage(UIImage(named: "empathiseHeart"), forState: .Normal)
         button.addTarget(self, action: "showOnlyEmphasisedPosts:", forControlEvents: .TouchUpInside)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         button.setFontSize(14.0)
         return button
     }()
     
-    lazy var createPostButton: UIButton = {
-        let button: UIButton = UIButton() //frame: CGRect(x: 15, y: 15, width: screenWidth - 30, height: 50)
-        button.backgroundColor = UIColor.greenColor()
+    lazy var createPostButton: Button = {
+        let button: Button = Button()
+        button.backgroundColor = UIColor.wmGreenishTealColor()
         button.setTitle("Create a post", forState: .Normal)
+        button.setImage(UIImage(named: "group")!, forState: .Normal)
+        button.setFontSize(16)
+        
+        button.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        button.titleLabel!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        button.imageView!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 1, bottom: 1, right: -100)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
+        
+
         button.addTarget(self, action: "showPostingSheet:", forControlEvents: .TouchUpInside)
         button.alpha = 0.8
         return button;
     }()
     
     lazy var bottomView: UIView = {
-        let view = UIView()//frame: CGRect(x: 0, y: screenHeight - 80, width: screenWidth, height: 80)
+        let view = UIView()
         view.backgroundColor = UIColor.whiteColor()
         view.alpha = 1.0
-        //view.addSubview(self.createPostButton)
         return view;
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
         self.view.backgroundColor = UIColor(red: 246/255, green: 247/255, blue: 251/255, alpha: 1)     
         //Adding the table view controller to display posts
         self.addChildViewController(postsController)
         self.view.addSubview(postsController.tableView)
         //Height is calculated as 120 offset from top + bottom view's height
-        postsController.tableView.frame = CGRectMake(10, 120, screenWidth - 20, screenHeight - (218+bottomView.bounds.height))
         postsController.didMoveToParentViewController(self)
+        postsController.delegate = self
         
         //MARK: View Customisations and Constraints
         self.view.addSubview( everyMyndLabel )
@@ -121,7 +130,14 @@ class EveryMyndController: UIViewController {
             make.edges.equalTo(bottomView).inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         })
         
-        
+        //Posts TableViewController constraints
+        postsController.tableView.snp_makeConstraints(closure: { make in
+            make.top.equalTo(everyMyndLabel.snp_bottom).offset(5)
+            make.centerX.equalTo(self.view.snp_centerX)
+            make.bottom.equalTo(bottomView.snp_top).offset(-5)
+            make.width.equalTo(screenWidth - 20)
+        })
+    
         //END MARK
         
         if (PFUser.currentUser() != nil) {
@@ -185,9 +201,15 @@ extension EveryMyndController {
         self.postsController.tableView.reloadData()
     }
     
+    /**
+    Selector method to show the different methods available to make a post
+     - note: Another option https://github.com/okmr-d/DOAlertController
+        UIActionSheet does not allow images so an option might be to mimic UIActionSheet with a View
+        Controller and View and present them
+     */
     func showPostingSheet( sender:UIButton ){
         self.bottomView.alpha = 0.0
-        let theme: JTSActionSheetTheme = JTSActionSheetTheme.defaultTheme()
+        let theme: JTSActionSheetTheme = global_getActionSheetTheme()
         let swipeItItem = JTSActionSheetItem(title: "Swipe It", action: {
             self.bottomView.alpha = 1.0
             let swipeVC = self.storyboard?.instantiateViewControllerWithIdentifier("SwipeViewController") as! SwipeViewController
@@ -226,4 +248,27 @@ extension EveryMyndController {
         })
     }
 
+}
+
+extension EveryMyndController: PostsTableVCDelegate {
+    func scrollBegan( scrollView:UIScrollView ) {
+        if( self.lastContentOffSet < scrollView.contentOffset.y ){
+            //Scrolling to the bottom
+            UIView.animateWithDuration(1.5, delay: 1.5, options: .CurveEaseIn, animations: {
+                self.bottomView.snp_updateConstraints(closure: { make in
+                    make.bottom.equalTo(self.view.snp_bottom).offset(100)
+                })
+                }, completion: nil)
+        }else{
+            //Scrolling to the top
+            UIView.animateWithDuration(5.0, delay: 1.0, options: .CurveEaseIn, animations: {
+                self.bottomView.snp_updateConstraints(closure: { make in
+                    make.bottom.equalTo(self.view.snp_bottom)
+                })
+                }, completion: nil)
+        }
+        self.lastContentOffSet = scrollView.contentOffset.y
+        
+    }
+    
 }
