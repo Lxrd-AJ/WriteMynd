@@ -35,7 +35,7 @@ class SwipeViewController: UIViewController {
         let cancelButton = UIButton()
         cancelButton.setImage(UIImage(named: "Cancel"), forState: .Normal)
         cancelButton.sizeToFit()    
-        cancelButton.addTarget(self, action: "removeMe", forControlEvents: .TouchUpInside)
+        cancelButton.addTarget(self, action: #selector(SwipeViewController.removeMe), forControlEvents: .TouchUpInside)
         self.view.addSubview(cancelButton)
         cancelButton.snp_makeConstraints(closure: { (make:ConstraintMaker) -> Void in
             make.left.equalTo(self.view.snp_left).offset(10)

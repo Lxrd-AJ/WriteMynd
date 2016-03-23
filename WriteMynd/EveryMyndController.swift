@@ -23,7 +23,6 @@ import JTSActionSheet
  */
 class EveryMyndController: ViewController {
     
-    var dropDown:PostMethodDropdown = PostMethodDropdown()
     var posts:[Post] = []
     var empathisedPosts:[EmpathisedPost] = []
     var lastContentOffSet: CGFloat = 0.0 //tracker to determine if user scrolling up/down
@@ -47,14 +46,14 @@ class EveryMyndController: ViewController {
         return label
     }()
     
-    lazy var empathiseButton: UIButton = {
+    lazy var empathiseButton: Button = {
         let button = Button()
         button.backgroundColor = UIColor.whiteColor()
         button.setTitle("Empathised with", forState: .Normal)
         button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
         button.layer.cornerRadius = 14.0
         button.setImage(UIImage(named: "empathiseHeart"), forState: .Normal)
-        button.addTarget(self, action: "showOnlyEmphasisedPosts:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(EveryMyndController.showOnlyEmphasisedPosts(_:)), forControlEvents: .TouchUpInside)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         button.setFontSize(14.0)
         return button
@@ -75,7 +74,7 @@ class EveryMyndController: ViewController {
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
         
 
-        button.addTarget(self, action: "showPostingSheet:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(EveryMyndController.showPostingSheet(_:)), forControlEvents: .TouchUpInside)
         button.alpha = 0.8
         return button;
     }()
@@ -150,7 +149,7 @@ class EveryMyndController: ViewController {
         super.viewDidAppear(animated)
         //Check if User exists
         if let _ = PFUser.currentUser() {
-            
+            fetchPosts()
         }else{
             //Present Signup/Login Page
             let loginVC:LoginViewController = LoginViewController()

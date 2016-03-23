@@ -34,7 +34,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        segmentedControl.addTarget(self, action: "postSegmentedControlTapped:", forControlEvents: .ValueChanged)
+        //segmentedControl.addTarget(self, action: "postSegmentedControlTapped:", forControlEvents: .ValueChanged)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,7 +44,7 @@ class PostViewController: UIViewController {
         postTextView.placeholder = dailyQuestion[questionIndex]
         
         //Register for the keyboard will show notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -107,22 +107,22 @@ class PostViewController: UIViewController {
         })
     }
     
-    func keyboardDidShow( notification:NSNotification ){
-        let keyboardFrame:CGRect = notification.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue
-        displayEmojiView(keyboardFrame)
-    }
+//    func keyboardDidShow( notification:NSNotification ){
+//        let keyboardFrame:CGRect = notification.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue
+//        displayEmojiView(keyboardFrame)
+//    }
     
-    func displayEmojiView( keyboardFrame:CGRect ){
-        let emojiView:EmojiView = EmojiView.loadFromNibName("EmojiView") as! EmojiView
-        let emojiHeight:CGFloat = 100.0
-        emojiView.frame = CGRect(x: 0, y: keyboardFrame.origin.y - (emojiHeight+10), width: emojiView.frame.width, height: emojiHeight)
-        self.canvasView.addSubview(emojiView)
-        _ = emojiView.subviews.map({ (emoji:UIView) -> Void in
-            if let emojiButton = emoji as? UIButton {
-                emojiButton.addTarget(self, action: "emojiTouched:", forControlEvents: .TouchUpInside)
-            }
-        })
-    }
+//    func displayEmojiView( keyboardFrame:CGRect ){
+//        let emojiView:EmojiView = EmojiView.loadFromNibName("EmojiView") as! EmojiView
+//        let emojiHeight:CGFloat = 100.0
+//        emojiView.frame = CGRect(x: 0, y: keyboardFrame.origin.y - (emojiHeight+10), width: emojiView.frame.width, height: emojiHeight)
+//        self.canvasView.addSubview(emojiView)
+//        _ = emojiView.subviews.map({ (emoji:UIView) -> Void in
+//            if let emojiButton = emoji as? UIButton {
+//                emojiButton.addTarget(self, action: "emojiTouched:", forControlEvents: .TouchUpInside)
+//            }
+//        })
+//    }
     
     func emojiTouched( emojiButton:UIButton ){
         let emoji:String = (emojiButton.titleLabel?.text!)!

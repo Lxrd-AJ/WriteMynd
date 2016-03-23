@@ -100,7 +100,7 @@ class DashboardController: UIViewController {
             }
             self.emojiSegmentedControl.hidden = false
             self.emojiSegmentedControl.selectedSegmentIndex = 0
-            self.emojiSegmentedControl.addTarget(self, action: "emojiSegmentControlTapped:", forControlEvents: .ValueChanged)
+            self.emojiSegmentedControl.addTarget(self, action: #selector(DashboardController.emojiSegmentControlTapped(_:)), forControlEvents: .ValueChanged)
             //print( self.emojiMap )
             self.drawLineGraph((self.emojiMap?.keys.first!)!, map: self.emojiMap!)
             print(self.lineGraphCanvas.frame.width)

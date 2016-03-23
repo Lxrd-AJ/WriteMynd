@@ -381,7 +381,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
         animating = true
         visibleCards.removeFirst()
         
-        currentCardNumber++
+        currentCardNumber += 1
         let shownCardsCount = currentCardNumber + countOfVisibleCards
         if shownCardsCount - 1 < countOfCards {
             
@@ -489,7 +489,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
                 }
             }
             
-            currentCardNumber--
+            currentCardNumber -= 1
             
             
             if let dataSource = self.dataSource {

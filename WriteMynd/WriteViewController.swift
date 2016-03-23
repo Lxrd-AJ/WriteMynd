@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Parse
 
 /**
  - todo: 
@@ -17,6 +18,7 @@ import SnapKit
 class WriteViewController: ViewController {
     
     var currentTextField: UITextField? //The Current textfield the user is editing
+    var post: Post?
     
     lazy var bigEmojiImage: UIImageView = {
         let image = UIImageView()
@@ -30,6 +32,7 @@ class WriteViewController: ViewController {
         label.text = "Which emotion best describes you now?"
         label.font = label.font.fontWithSize(17)
         label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .Left
         return label
     }()
     
@@ -43,6 +46,8 @@ class WriteViewController: ViewController {
         //button.setImage(UIImage(named: "happy"), forState: .Normal)
         button.setBackgroundImage(UIImage(named: "happy"), forState: .Normal)
         button.imageView?.contentMode = .ScaleAspectFit
+        button.tag = 0
+        button.addTarget(self, action: #selector(WriteViewController.emojiButtonTouched(_:)), forControlEvents: .TouchUpInside)
         return button
     }()
     
@@ -77,23 +82,27 @@ class WriteViewController: ViewController {
         return field
     }()
     
-    lazy var postToMeButton: UIButton = {
+    lazy var postToMeButton: Button = {
         let button = Button()
         button.setTitle("Post to me", forState: .Normal)
         button.backgroundColor = UIColor.wmGreenishTealColor()
+        button.tag = 0
+        button.addTarget(self, action: #selector(WriteViewController.postButtonTapped(_:)), forControlEvents: .TouchUpInside)
         return button
     }()
     
-    lazy var postToAllButton: UIButton = {
+    lazy var postToAllButton: Button = {
         let button = Button()
         button.setTitle("Post to all", forState: .Normal)
         button.backgroundColor = UIColor.wmCoolBlueColor()
+        button.tag = 1
+        button.addTarget(self, action: #selector(WriteViewController.postButtonTapped(_:)), forControlEvents: .TouchUpInside)
         return button
     }()
     
     lazy var focusView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
-        view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
+        view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.97)
         return view
     }()
 
@@ -101,6 +110,11 @@ class WriteViewController: ViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.wmBackgroundColor()
+        
+        if self.post == nil {
+            self.post = Post(emoji: .None, text: "", hashTags: [], author: PFUser.currentUser()!)
+        }
+        
         //Add the UI elements 
         self.view.addSubview(bigEmojiImage)
         bigEmojiImage.snp_makeConstraints(closure: { make in
@@ -169,7 +183,7 @@ class WriteViewController: ViewController {
     
     override func viewWillAppear(animated: Bool) {
         //Register for the keyboard will show notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil) //UIKeyboardDidShowNotification
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WriteViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil) //UIKeyboardDidShowNotification
     }
     
     deinit {
@@ -184,18 +198,102 @@ class WriteViewController: ViewController {
 }
 
 extension WriteViewController {
+    func displayErrorMessage( message:String ){
+        //"You need to enter how you feel, select an emoji and type an hashtag"
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert )
+        let okAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+}
+
+extension WriteViewController {
+    
+    /**
+     The following must be complete before a post can be made
+        - An Emoji must be selected
+        - HashTag(s) must be present
+        - Feelings text must be populated
+     */
+    func postButtonTapped( sender:Button ){
+        guard self.post!.emoji != .None else { displayErrorMessage("No Emoji"); return }
+        guard self.post!.hashTags.count > 0 else{ displayErrorMessage("No HashTags"); return}
+        guard !self.post!.text.isEmpty else { displayErrorMessage("No Feeling"); return }
+        
+        if sender.tag == 0 { //Private post
+            self.post!.isPrivate = true
+        }else if sender.tag == 1 {
+            self.post!.isPrivate = false
+        }
+        
+        self.post!.save()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    /**
+    Reciever for touching the emoji images/button
+     - todo 
+        [ ] Put an emoji struct in a UIButton subclass `Button` and switch on the struct instead
+     */
+    func emojiButtonTouched( sender: UIButton ){
+        switch sender.tag {
+        case 0:
+            self.descriptionLabel.text = "Happy"
+            self.post?.emoji = .Happy
+        default:
+            break;
+        }
+    }
+    
+    /**
+     On keyboard show, present the appropriate textfield to capture the data, a faux textfield whose data would be returned to the textfield on `self.view`. It also populates `self.post` with the respective values captured here
+     */
     func keyboardWillShow(notification:NSNotification){
         let keyboardFrame:CGRect = notification.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue
-        print("Keyboard Did appear \(keyboardFrame)")
+        //print("Keyboard Did appear \(keyboardFrame)")
         
         if let textField = self.currentTextField {
-            //self.view.addSubview(focusView)
-//            self.view.insertSubview(textField, aboveSubview: focusView)
-//            if textField.tag == 5 { //hashtag Textfield
-//                textField.snp_updateConstraints(closure: { make in
-//                    make.bottom.equalTo(self.view.snp_top).offset(keyboardFrame.origin.y - 50);
-//                })
-//            }
+            textField.resignFirstResponder()
+            
+            if textField.tag == 5 { //HashTag field
+                let hashtagView = HashTagView()
+                self.focusView.addSubview(hashtagView)
+                hashtagView.snp_makeConstraints(closure: { make in
+                    make.bottom.equalTo(self.view.snp_top).offset(keyboardFrame.origin.y - 100)
+                    make.left.equalTo(self.view.snp_left)//.offset(10)
+                    make.width.equalTo(self.view.snp_width)
+                    make.centerX.equalTo(self.view.snp_centerX)
+                })
+                hashtagView.setupConstraints()
+                
+                hashtagView.hashtagField.becomeFirstResponder()
+                hashtagView.hashtagField.text = textField.text
+                hashtagView.onFinishCallback = {
+                    textField.text = hashtagView.hashtagField.text
+                    self.post!.hashTags = textField.text!.componentsSeparatedByString(" ").filter({ (text:String) -> Bool in
+                        guard text != "" else { return false }
+                        return text[text.startIndex] == "#"
+                    })
+                    self.focusView.removeFromSuperview()
+                }
+            }else if textField.tag == 10 { //Feeling field
+                let feelingsView = FeelingsView()
+                self.focusView.addSubview(feelingsView)
+                feelingsView.snp_makeConstraints(closure: { make in
+                    make.bottom.equalTo(self.view.snp_bottom).offset(-keyboardFrame.origin.y)
+                    make.left.equalTo(self.view.snp_left)
+                    make.width.equalTo(self.view.snp_width)
+                    make.centerX.equalTo(self.view.snp_centerX)
+                })
+                feelingsView.setupConstraints()
+                feelingsView.feelingsTextView.becomeFirstResponder()
+                feelingsView.feelingsTextView.text = textField.text
+                feelingsView.onFinishCallback = {
+                    textField.text = feelingsView.feelingsTextView.text
+                    self.post!.text = textField.text!
+                    self.focusView.removeFromSuperview()
+                }
+            }
         }//end if
     }
     
@@ -204,24 +302,12 @@ extension WriteViewController {
 extension WriteViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        print("Editing began")
         self.currentTextField = textField
-        if textField.tag == 5 { //hashtag TextField
-            print("HAshTag TextField")
-        }else if textField.tag == 10 { //feeling textfield
-            print("Feeling Textfield")
-        }
+        self.view.addSubview(focusView)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        //self.focusView.removeFromSuperview()
-        
-        if textField.tag == 5 { //hashtag Textfield
-//            textField.snp_remakeConstraints(closure: { make in
-//            })
-        }
-        
         return true
     }
 }
