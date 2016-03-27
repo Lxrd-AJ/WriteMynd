@@ -53,7 +53,7 @@ class EveryMyndController: ViewController {
         button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
         button.layer.cornerRadius = 14.0
         button.setImage(UIImage(named: "empathiseHeart"), forState: .Normal)
-        button.addTarget(self, action: #selector(EveryMyndController.showOnlyEmphasisedPosts(_:)), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .showOnlyEmphasisedPosts,forControlEvents: .TouchUpInside)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         button.setFontSize(14.0)
         return button
@@ -74,7 +74,7 @@ class EveryMyndController: ViewController {
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
         
 
-        button.addTarget(self, action: #selector(EveryMyndController.showPostingSheet(_:)), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .showPostingSheet, forControlEvents: .TouchUpInside)
         button.alpha = 0.8
         return button;
     }()
@@ -166,13 +166,6 @@ class EveryMyndController: ViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated. 
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let button = sender as? UIButton where segue.identifier == "showPostViewController" {
-            let postVC = segue.destinationViewController as! PostViewController
-            postVC.selectedSegmentIndex = button.tag //Each Button's tag corresponds to the `segmentedControl` in `PostViewController`
-        }
     }
     
     @IBAction func unwindToSegue( segue:UIStoryboardSegue ) {}
@@ -267,7 +260,11 @@ extension EveryMyndController: PostsTableVCDelegate {
                 }, completion: nil)
         }
         self.lastContentOffSet = scrollView.contentOffset.y
-        
     }
     
+}
+
+private extension Selector {
+    static let showOnlyEmphasisedPosts = #selector(EveryMyndController.showOnlyEmphasisedPosts(_:))
+    static let showPostingSheet = #selector(EveryMyndController.showPostingSheet(_:))
 }

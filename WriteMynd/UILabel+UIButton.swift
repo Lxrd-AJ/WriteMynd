@@ -13,8 +13,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
-        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: <#T##UIImage?#>, style: <#T##UIBarButtonItemStyle#>, target: <#T##AnyObject?#>, action: <#T##Selector#>)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .Plain, target: self, action: nil)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: .Plain, target: self, action: .toggleMenu)
     }
+    
+    func toggleMenu( sender:UIBarButtonItem ){
+        self.mm_drawerController.toggleDrawerSide(.Left, animated: true, completion: nil)
+    }
+}
+
+private extension Selector {
+    static let toggleMenu = #selector(ViewController.toggleMenu(_:))
 }
 
 func global_getActionSheetTheme() -> JTSActionSheetTheme {

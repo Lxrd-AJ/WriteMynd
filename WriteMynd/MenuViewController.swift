@@ -52,7 +52,7 @@ class MenuViewController: UITableViewController {
         case "Every Mynd":
             controller = storyboard!.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
         case "My Mynd":
-            controller = storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
+            controller = MyMyndViewController()//storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
         case "Science":
             controller = storyboard!.instantiateViewControllerWithIdentifier("ScienceViewController") as! ScienceViewController
         case "Settings":

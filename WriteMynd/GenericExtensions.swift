@@ -34,6 +34,7 @@ extension UIColor {
 }
 
 extension UIView{
+    
     class func loadFromNibName( nibNamed:String, bundle:NSBundle? = nil ) -> UIView? {
         return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil , options: nil)[0] as? UIView
     }

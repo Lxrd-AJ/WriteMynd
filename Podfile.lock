@@ -3,7 +3,6 @@ PODS:
   - Charts (2.2.3):
     - Charts/Core (= 2.2.3)
   - Charts/Core (2.2.3)
-  - DOFavoriteButton (0.0.4)
   - JTSActionSheet (1.0.1)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
@@ -29,7 +28,6 @@ PODS:
   - SnapKit (0.15.0)
   - SwiftDate (2.0.2)
   - SwiftSpinner (0.8.0)
-  - SZTextView (1.2.2)
   - ZendeskSDK (1.5.4.1):
     - ZendeskSDK/Core (= 1.5.4.1)
     - ZendeskSDK/Localization (= 1.5.4.1)
@@ -41,7 +39,6 @@ PODS:
 
 DEPENDENCIES:
   - Charts
-  - DOFavoriteButton (~> 0.0.4)
   - JTSActionSheet (~> 1.0.1)
   - MMDrawerController
   - Parse
@@ -51,13 +48,11 @@ DEPENDENCIES:
   - SnapKit (~> 0.15.0)
   - SwiftDate (~> 2.0)
   - SwiftSpinner
-  - SZTextView
   - ZendeskSDK (~> 1.5)
 
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   Charts: f54267bb3f0f0e74520c6f248517cf5074dfd6fc
-  DOFavoriteButton: 866e15af173d2dd5233971a1f657a5f31d2491d5
   JTSActionSheet: d7e5350ce63b5ff23ced9db653ed1c768358124e
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
@@ -68,9 +63,8 @@ SPEC CHECKSUMS:
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftDate: b4f4d0962afe48365ad2800c9850a6626deb9359
   SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
-  SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
   ZendeskSDK: 45b7a2812a04c3c5c2510aeeeded5818e6e705a5
 
-PODFILE CHECKSUM: 9c5a75ed60d9e58fe5b71d6a0b54ae049f0beb89
+PODFILE CHECKSUM: 42827da9f9eff023c044057f36b7f0590b69cf78
 
 COCOAPODS: 1.0.0.beta.1

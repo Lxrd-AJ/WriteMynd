@@ -8,7 +8,15 @@
 
 import UIKit
 import Parse
-import DOFavoriteButton
+//import DOFavoriteButton
+
+/***
+ ScrollViewDelegate Extensions and Protocol definition
+ The protocol propagates the scroll messages to the `PostsTableViewController` delegate
+ */
+protocol PostsTableVCDelegate {
+    func scrollBegan( scrollView:UIScrollView )
+}
 
 /**
  - note: https://github.com/dzenbot/DZNEmptyDataSet for Empty Posts UI
@@ -64,11 +72,14 @@ class PostsTableViewController: UITableViewController {
             cell.isPrivateLabel.text = "me"
             cell.isPrivateLabel.textColor = UIColor.blueColor()
             cell.empathiseButton.hidden = true
+            cell.ellipsesButton.hidden = true
         }else{
             cell.backgroundColor = UIColor.whiteColor()
             cell.isPrivateLabel.text = ""
             cell.empathiseButton.setImage(UIImage(named: "empathise_heart")!, forState: .Normal)
             cell.empathiseButton.hidden = false
+            cell.ellipsesButton.hidden = false
+            cell.ellipsesButton.addTarget(self, action: .showActionSheet, forControlEvents: .TouchUpInside)
         }
         
         if post.text.characters.count > 100 && currentCellSelection != indexPath.section {
@@ -102,9 +113,10 @@ class PostsTableViewController: UITableViewController {
         cell.hashTagsLabel.text = post.hashTags.reduce("", combine: { $0! + " " + $1 })
         cell.dateLabel.font = cell.dateLabel.font.fontWithSize(13)
         cell.hashTagsLabel.font = cell.hashTagsLabel.font.fontWithSize(15)
-        cell.empathiseButton.addTarget(self, action: "empathisePost:", forControlEvents: .TouchUpInside)
-        cell.readMoreButton.addTarget(self, action: "extendPostInCell:", forControlEvents: .TouchUpInside)
+        cell.empathiseButton.addTarget(self, action: .empathisePost, forControlEvents: .TouchUpInside)
+        cell.readMoreButton.addTarget(self, action: .extendPostInCell, forControlEvents: .TouchUpInside)
         cell.readMoreButton.tag = indexPath.section
+        cell.ellipsesButton.tag = indexPath.section
         
         return cell
     }
@@ -113,16 +125,9 @@ class PostsTableViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        let count = posts[indexPath.section].text.characters.count * 20
-//        guard count < 200 else{ return 200.0 }//Maximum height
-//        guard count >= 0 else{ return 100.0 }//Minimum height
         if( indexPath.section == currentCellSelection){ return 225 }
         return 150.0
     }
-    
-//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return 250.0
-//    }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5.0
@@ -134,6 +139,25 @@ class PostsTableViewController: UITableViewController {
 }
 
 extension PostsTableViewController {
+    
+    /**
+     - note: A good alternative is https://github.com/okmr-d/DOAlertController if it were updated
+     */
+    func showActionSheet( sender:Button ){
+        let alertController = UIAlertController(title: "Post Actions", message: "Choose an action to perform on the post", preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: { cancelAction in })
+        let hidePost = UIAlertAction(title: "Hide Post", style: .Default, handler: { hideAction in
+            let index = sender.tag
+            let postToHide = HiddenPost(postID: self.posts[ index ].ID!, user: PFUser.currentUser()!)
+            self.posts.removeAtIndex(index)
+            postToHide.save()
+            self.tableView.reloadData()
+        })
+        alertController.addAction(hidePost)
+        alertController.addAction(cancelAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
     
     func extendPostInCell( sender:Button ) {
         print("Before anim: \(sender.selected)")
@@ -157,7 +181,7 @@ extension PostsTableViewController {
         print("After \(sender.selected)")
     }
     
-    func empathisePost( sender:DOFavoriteButton ){
+    func empathisePost( sender:Button ){
         let post = self.posts[sender.tag]
         if post.isEmpathised {
             //Dempathise the post
@@ -179,7 +203,9 @@ extension PostsTableViewController {
             post.isEmpathised = true
         }
     }
-    
+}
+
+extension PostsTableViewController {
     func reloadData(){
         //Merge the empathises posts to the current posts
         let _ = self.posts.map({ post in
@@ -191,20 +217,14 @@ extension PostsTableViewController {
     }
 }
 
-/***
-ScrollViewDelegate Extensions and Protocol definition
- The protocol propagates the scroll messages to the `PostsTableViewController` delegate
-*/
-protocol PostsTableVCDelegate {
-    func scrollBegan( scrollView:UIScrollView )
-}
 extension PostsTableViewController {
     override func scrollViewWillBeginDragging( scrollView: UIScrollView){
         delegate?.scrollBegan( scrollView )
     }
-    
-//    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-//        print("Dragging ended")
-//        delegate?.scrollEnded()
-//    }
+}
+
+private extension Selector {
+    static let extendPostInCell = #selector(PostsTableViewController.extendPostInCell(_:))
+    static let empathisePost = #selector(PostsTableViewController.empathisePost(_:))
+    static let showActionSheet = #selector(PostsTableViewController.showActionSheet(_:))
 }

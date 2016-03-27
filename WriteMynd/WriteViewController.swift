@@ -15,7 +15,7 @@ import Parse
     [x] Add Constraints to the emojiContainerView
     [ ] Make the Buttons bouncy ~ https://github.com/StyleShare/SSBouncyButton
  */
-class WriteViewController: ViewController {
+class WriteViewController: UIViewController {
     
     var currentTextField: UITextField? //The Current textfield the user is editing
     var post: Post?
@@ -47,7 +47,7 @@ class WriteViewController: ViewController {
         button.setBackgroundImage(UIImage(named: "happy"), forState: .Normal)
         button.imageView?.contentMode = .ScaleAspectFit
         button.tag = 0
-        button.addTarget(self, action: #selector(WriteViewController.emojiButtonTouched(_:)), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
         return button
     }()
     
@@ -110,6 +110,7 @@ class WriteViewController: ViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.wmBackgroundColor()
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
         
         if self.post == nil {
             self.post = Post(emoji: .None, text: "", hashTags: [], author: PFUser.currentUser()!)
@@ -216,9 +217,15 @@ extension WriteViewController {
         - Feelings text must be populated
      */
     func postButtonTapped( sender:Button ){
-        guard self.post!.emoji != .None else { displayErrorMessage("No Emoji"); return }
-        guard self.post!.hashTags.count > 0 else{ displayErrorMessage("No HashTags"); return}
-        guard !self.post!.text.isEmpty else { displayErrorMessage("No Feeling"); return }
+        guard self.post!.emoji != .None else {
+            displayErrorMessage("You need to select an emotion button before posting ");
+            return
+        }
+        guard self.post!.hashTags.count > 0 else{
+            displayErrorMessage("You need to add a hashtag before posting");
+            return
+        }
+        //guard !self.post!.text.isEmpty else { displayErrorMessage("No Feeling"); return }
         
         if sender.tag == 0 { //Private post
             self.post!.isPrivate = true
@@ -235,7 +242,7 @@ extension WriteViewController {
      - todo 
         [ ] Put an emoji struct in a UIButton subclass `Button` and switch on the struct instead
      */
-    func emojiButtonTouched( sender: UIButton ){
+    func emojiButtonTapped( sender: UIButton ){
         switch sender.tag {
         case 0:
             self.descriptionLabel.text = "Happy"
@@ -310,4 +317,8 @@ extension WriteViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+private extension Selector {
+    static let emojiButtonTapped = #selector(WriteViewController.emojiButtonTapped(_:))
 }
