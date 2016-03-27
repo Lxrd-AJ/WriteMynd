@@ -243,6 +243,13 @@ extension EveryMyndController {
 }
 
 extension EveryMyndController: PostsTableVCDelegate {
+    
+    func editPost(post: Post) {
+        let writeVC = self.storyboard?.instantiateViewControllerWithIdentifier("WriteViewController") as! WriteViewController
+        writeVC.post = post
+        self.navigationController?.pushViewController(writeVC, animated: true)
+    }
+    
     func scrollBegan( scrollView:UIScrollView ) {
         if( self.lastContentOffSet < scrollView.contentOffset.y ){
             //Scrolling to the bottom

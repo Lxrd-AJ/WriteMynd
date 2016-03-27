@@ -16,6 +16,7 @@ import Parse
  */
 protocol PostsTableVCDelegate {
     func scrollBegan( scrollView:UIScrollView )
+    func editPost( post:Post )
 }
 
 /**
@@ -72,14 +73,11 @@ class PostsTableViewController: UITableViewController {
             cell.isPrivateLabel.text = "me"
             cell.isPrivateLabel.textColor = UIColor.blueColor()
             cell.empathiseButton.hidden = true
-            cell.ellipsesButton.hidden = true
         }else{
             cell.backgroundColor = UIColor.whiteColor()
             cell.isPrivateLabel.text = ""
             cell.empathiseButton.setImage(UIImage(named: "empathise_heart")!, forState: .Normal)
             cell.empathiseButton.hidden = false
-            cell.ellipsesButton.hidden = false
-            cell.ellipsesButton.addTarget(self, action: .showActionSheet, forControlEvents: .TouchUpInside)
         }
         
         if post.text.characters.count > 100 && currentCellSelection != indexPath.section {
@@ -115,6 +113,7 @@ class PostsTableViewController: UITableViewController {
         cell.hashTagsLabel.font = cell.hashTagsLabel.font.fontWithSize(15)
         cell.empathiseButton.addTarget(self, action: .empathisePost, forControlEvents: .TouchUpInside)
         cell.readMoreButton.addTarget(self, action: .extendPostInCell, forControlEvents: .TouchUpInside)
+        cell.ellipsesButton.addTarget(self, action: .showActionSheet, forControlEvents: .TouchUpInside)
         cell.readMoreButton.tag = indexPath.section
         cell.ellipsesButton.tag = indexPath.section
         
@@ -144,16 +143,26 @@ extension PostsTableViewController {
      - note: A good alternative is https://github.com/okmr-d/DOAlertController if it were updated
      */
     func showActionSheet( sender:Button ){
+        let index = sender.tag
+        let post = self.posts[ index ]
         let alertController = UIAlertController(title: "Post Actions", message: "Choose an action to perform on the post", preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: { cancelAction in })
         let hidePost = UIAlertAction(title: "Hide Post", style: .Default, handler: { hideAction in
-            let index = sender.tag
-            let postToHide = HiddenPost(postID: self.posts[ index ].ID!, user: PFUser.currentUser()!)
+            let postToHide = HiddenPost(postID: post.ID!, user: PFUser.currentUser()!)
             self.posts.removeAtIndex(index)
             postToHide.save()
             self.tableView.reloadData()
         })
-        alertController.addAction(hidePost)
+        let editPostAction = UIAlertAction(title: "Edit Post", style: .Default, handler: { editAction in
+            self.delegate?.editPost(post)
+        })
+        
+        if post.author.objectId == PFUser.currentUser()?.objectId {
+            alertController.addAction(editPostAction)
+        }else{
+            alertController.addAction(hidePost)
+        }
+        
         alertController.addAction(cancelAction)
         self.presentViewController(alertController, animated: true, completion: nil)
         

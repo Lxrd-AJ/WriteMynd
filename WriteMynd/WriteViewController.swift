@@ -114,6 +114,8 @@ class WriteViewController: UIViewController {
         
         if self.post == nil {
             self.post = Post(emoji: .None, text: "", hashTags: [], author: PFUser.currentUser()!)
+        }else{
+            populateViewWithPost(self.post!)
         }
         
         //Add the UI elements 
@@ -199,6 +201,20 @@ class WriteViewController: UIViewController {
 }
 
 extension WriteViewController {
+    
+    func populateViewWithPost( post:Post ){
+        self.feelingField.text = post.text
+        self.hashTagField.text = post.hashTags.reduce("", combine: { hashtags, tag in
+            return "\(hashtags!)\(tag)"
+        })
+        switch post.emoji {
+        case .Happy:
+            self.descriptionLabel.text = post.emoji.value().name
+        default:
+            break
+        }
+    }
+    
     func displayErrorMessage( message:String ){
         //"You need to enter how you feel, select an emoji and type an hashtag"
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert )

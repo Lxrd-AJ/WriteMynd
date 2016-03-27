@@ -27,14 +27,25 @@ class Post {
         self.text = text; self.hashTags = hashTags; self.author = author
     }
     
+    /**
+     Saves the current object by creating a new one if the object doesn't exists i.e ID is nil or updates the 
+     current object on the server
+     */
     func save() {
-        let postData: PFObject = PFObject(className: "Post")
+        var postData: PFObject
+        if self.ID != nil { //Update the object
+            postData = PFObject(withoutDataWithClassName: "Post", objectId: self.ID)
+        }else{
+            postData = PFObject(className: "Post")
+            self.ID = postData.objectId
+        }
+        
         postData["emoji"] = self.emoji.value().name
         postData["text"] = self.text
         postData["hashTags"] = self.hashTags
         postData["private"] = self.isPrivate
         postData["parent"] = author
-        self.ID = postData.objectId
+        
         postData.saveInBackground()
     }
     
