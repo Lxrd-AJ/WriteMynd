@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import SwiftDate
 //import DOFavoriteButton
 
 /***
@@ -63,10 +64,6 @@ class PostsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: PostTableViewCell = tableView.dequeueReusableCellWithIdentifier(CELL_IDENTIFIER, forIndexPath: indexPath) as! PostTableViewCell
         let post: Post = self.posts[ indexPath.section ]
-        let dateFormatter = NSDateFormatter()
-    
-        dateFormatter.dateStyle = .LongStyle
-        dateFormatter.timeStyle = .MediumStyle
 
         if let user = PFUser.currentUser() where post.author.objectId == user.objectId {
             cell.backgroundColor = UIColor.wmDarkSkyBlue10Color()
@@ -107,9 +104,9 @@ class PostsTableViewController: UITableViewController {
         
         cell.empathiseButton.tag = indexPath.section
         cell.emojiImageView.image = UIImage( named: post.emoji.value().imageName )
-        cell.dateLabel.text = dateFormatter.stringFromDate(post.createdAt!)
         cell.hashTagsLabel.text = post.hashTags.reduce("", combine: { $0! + " " + $1 })
         cell.dateLabel.font = cell.dateLabel.font.fontWithSize(13)
+        cell.dateLabel.text = "\(post.createdAt!.monthName) " + post.createdAt!.toString(DateFormat.Custom("dd 'at' HH:mm"))!
         cell.hashTagsLabel.font = cell.hashTagsLabel.font.fontWithSize(15)
         cell.empathiseButton.addTarget(self, action: .empathisePost, forControlEvents: .TouchUpInside)
         cell.readMoreButton.addTarget(self, action: .extendPostInCell, forControlEvents: .TouchUpInside)
