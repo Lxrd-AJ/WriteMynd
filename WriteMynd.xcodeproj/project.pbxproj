@@ -28,7 +28,6 @@
 		2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC031C11CFF9003446AC /* SignUpViewController.swift */; };
 		2172FC061C11D037003446AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC051C11D037003446AC /* LoginViewController.swift */; };
 		2172FC081C11E073003446AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC071C11E073003446AC /* Utilities.swift */; };
-		2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC091C123ED9003446AC /* PostViewController.swift */; };
 		2172FC111C1258B7003446AC /* GenericExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC101C1258B7003446AC /* GenericExtensions.swift */; };
 		217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */; };
 		217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BDB1C8A25290085D71B /* SwipeViewController.swift */; };
@@ -70,7 +69,6 @@
 		2172FC031C11CFF9003446AC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		2172FC051C11D037003446AC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2172FC071C11E073003446AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		2172FC091C123ED9003446AC /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		2172FC101C1258B7003446AC /* GenericExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericExtensions.swift; sourceTree = "<group>"; };
 		217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSwipeView.swift; sourceTree = "<group>"; };
 		217F3BDB1C8A25290085D71B /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 		21FE51C91C90ADD0002F8874 /* Posting */ = {
 			isa = PBXGroup;
 			children = (
-				2172FC091C123ED9003446AC /* PostViewController.swift */,
 				217F3BDB1C8A25290085D71B /* SwipeViewController.swift */,
 				213016711C9D524500A4598D /* WriteViewController.swift */,
 			);
@@ -422,7 +419,6 @@
 				21F6193C1C9A0B5F0089542F /* DraggableCardView.swift in Sources */,
 				2130167B1C9DACEC00A4598D /* Emoji.swift in Sources */,
 				21623EA81CA3C761005F117F /* MyMyndViewController.swift in Sources */,
-				2172FC0A1C123ED9003446AC /* PostViewController.swift in Sources */,
 				2172FC081C11E073003446AC /* Utilities.swift in Sources */,
 				21F548CB1C8F1DA6004E85F3 /* ScienceViewController.swift in Sources */,
 				21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */,

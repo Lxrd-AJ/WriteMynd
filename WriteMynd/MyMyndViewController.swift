@@ -83,6 +83,7 @@ extension MyMyndViewController {
             
             //Add the Dashboard as a child view controller
 //            self.addChildViewController(dashboardVC)
+//            dashboardVC.frame = self.view.bounds
 //            self.view.addSubview(dashboardVC.view)
 //            dashboardVC.didMoveToParentViewController(self)
         }else if sender.tag == 1 {

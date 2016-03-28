@@ -31,28 +31,28 @@ class SwipeViewController: UIViewController {
         self.view.addSubview( kolodaView )
         self.view.backgroundColor = UIColor.brownColor()
         
-        //MARK - Customisations
-        let cancelButton = UIButton()
-        cancelButton.setImage(UIImage(named: "Cancel"), forState: .Normal)
-        cancelButton.sizeToFit()    
-        cancelButton.addTarget(self, action: #selector(SwipeViewController.removeMe), forControlEvents: .TouchUpInside)
-        self.view.addSubview(cancelButton)
-        cancelButton.snp_makeConstraints(closure: { (make:ConstraintMaker) -> Void in
-            make.left.equalTo(self.view.snp_left).offset(10)
-            make.top.equalTo(self.view.snp_top).offset(20)
-        })
-        //END MARK
+//        //MARK - Customisations
+//        let cancelButton = UIButton()
+//        cancelButton.setImage(UIImage(named: "Cancel"), forState: .Normal)
+//        cancelButton.sizeToFit()    
+//        cancelButton.addTarget(self, action: #selector(SwipeViewController.removeMe), forControlEvents: .TouchUpInside)
+//        self.view.addSubview(cancelButton)
+//        cancelButton.snp_makeConstraints(closure: { (make:ConstraintMaker) -> Void in
+//            make.left.equalTo(self.view.snp_left).offset(10)
+//            make.top.equalTo(self.view.snp_top).offset(20)
+//        })
+//        //END MARK
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func removeMe(){
-        if let delegate = delegate{
-            delegate.removeMe()
-        }else{ self.dismissViewControllerAnimated(true, completion: nil) }
-    }
+//    func removeMe(){
+//        if let delegate = delegate{
+//            delegate.removeMe()
+//        }else{ self.dismissViewControllerAnimated(true, completion: nil) }
+//    }
 }
 
 extension SwipeViewController: SwipeViewDataSource {

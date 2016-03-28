@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import DOFavoriteButton
 
+/**
+ - todo:
+    [ ] Replace the ellipses button with https://github.com/Ramotion/circle-menu
+ */
 class PostTableViewCell: UITableViewCell {
 
     var emojiImageView: UIImageView = UIImageView()

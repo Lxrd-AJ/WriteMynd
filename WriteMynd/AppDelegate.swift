@@ -23,7 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //UI Configurations
         UILabel.appearance().font = UIFont(name: "Montserrat-Regular.ttf", size: 17.0)
         UINavigationBar.appearance().barTintColor = UIColor.whiteColor()//
+        UINavigationBar.appearance().tintColor = UIColor.wmCoolBlueColor()
         UIBarButtonItem.appearance().tintColor = UIColor(red: 99/255, green: 60/255, blue: 134/255, alpha: 1) //UIColor.whiteColor()
+        UIBarButtonItem.appearance().setTitleTextAttributes([
+            NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 15.0)!,
+            NSForegroundColorAttributeName: UIColor.wmCoolBlueColor()]
+        , forState: .Normal)
+        UIBarButtonItem.appearance()
         
         //App Configurations
         let meVC: EveryMyndController = storyboard.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
