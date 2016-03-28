@@ -50,6 +50,10 @@ class Label: UILabel {
         self.font = UIFont(name: "Montserrat-Bold", size: 15.0)
     }
     
+    func setFontSize( size:CGFloat ){
+        self.font = UIFont(name: "Montserrat-Regular", size: size)!
+    }
+    
     static func font() -> UIFont{
         return UIFont(name: "Montserrat-Regular", size: 15.0)!
     }

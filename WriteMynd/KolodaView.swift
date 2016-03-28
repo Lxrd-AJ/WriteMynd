@@ -68,7 +68,7 @@ extension SwipeViewDelegate {
     func koloda(koloda: SwipeView, didSelectCardAtIndex index: UInt) {}
     func koloda(kolodaShouldApplyAppearAnimation koloda: SwipeView) -> Bool {return true}
     func koloda(kolodaShouldMoveBackgroundCard koloda: SwipeView) -> Bool {return true}
-    func koloda(kolodaShouldTransparentizeNextCard koloda: SwipeView) -> Bool {return true}
+    func koloda(kolodaShouldTransparentizeNextCard koloda: SwipeView) -> Bool {return false}
     func koloda(kolodaBackgroundCardAnimation koloda: SwipeView) -> POPPropertyAnimation? {return nil}
     func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {}
     func koloda(kolodaDidResetCard koloda: SwipeView) {}

@@ -20,6 +20,7 @@
 		21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA41CA2E9B0005F117F /* FeelingsView.swift */; };
 		21623EA81CA3C761005F117F /* MyMyndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA71CA3C761005F117F /* MyMyndViewController.swift */; };
 		21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA91CA76AAD005F117F /* HiddenPost.swift */; };
+		217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */; };
 		2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FBEC1C11B65E003446AC /* AppDelegate.swift */; };
 		2172FBF21C11B65E003446AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF01C11B65E003446AC /* Main.storyboard */; };
 		2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF31C11B65E003446AC /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		21623EA41CA2E9B0005F117F /* FeelingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingsView.swift; sourceTree = "<group>"; };
 		21623EA71CA3C761005F117F /* MyMyndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMyndViewController.swift; sourceTree = "<group>"; };
 		21623EA91CA76AAD005F117F /* HiddenPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenPost.swift; sourceTree = "<group>"; };
+		217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeOnBoarding.swift; sourceTree = "<group>"; };
 		2172FBE91C11B65E003446AC /* WriteMynd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteMynd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2172FBEC1C11B65E003446AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2172FBF11C11B65E003446AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				2117E9671CA097E20008A1E3 /* HashTagView.swift */,
 				21623EA41CA2E9B0005F117F /* FeelingsView.swift */,
+				217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */,
 			);
 			name = Posting;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
 				217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */,
+				217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */,
 				21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */,
 				21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */,
 				2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */,
