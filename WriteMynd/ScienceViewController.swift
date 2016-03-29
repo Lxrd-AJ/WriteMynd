@@ -9,6 +9,8 @@
 import UIKit
 /**
  Explains the Science behind WriteMynd
+ - todo:
+    [ ] Replace with https://github.com/hyperoslo/Pages
  */
 class ScienceViewController: UIPageViewController {
     

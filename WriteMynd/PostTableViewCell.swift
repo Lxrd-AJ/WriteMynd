@@ -19,7 +19,7 @@ class PostTableViewCell: UITableViewCell {
     var emojiImageView: UIImageView = UIImageView()
     var dateLabel: Label = Label()
     var postLabel: Label = Label()
-    var hashTagsLabel: Label = Label()
+    var hashTagsLabel: Button = Button()
     var isPrivateLabel: Label = Label()
     var ellipsesButton: UIButton = UIButton()
     var empathiseButton: UIButton = UIButton() //DOFavoriteButton = DOFavoriteButton()
@@ -107,7 +107,7 @@ class PostTableViewCell: UITableViewCell {
         
         //Family HashTag 
         topView.addSubview(hashTagsLabel)
-        hashTagsLabel.textColor = UIColor.wmSlateGreyColor()
+        hashTagsLabel.setTitleColor(UIColor.wmSlateGreyColor(), forState: .Normal)
         hashTagsLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(emojiImageView.snp_top)
             make.left.equalTo(emojiImageView.snp_right).offset(3)

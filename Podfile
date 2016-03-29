@@ -7,7 +7,7 @@ target 'WriteMynd' do
     
 	pod 'Parse'
     pod 'ParseUI'
-    #pod 'SZTextView'
+    #pod 'PromiseKit', '~> 2.0'
     pod 'SwiftSpinner'
     pod 'MMDrawerController'
     pod 'Charts'

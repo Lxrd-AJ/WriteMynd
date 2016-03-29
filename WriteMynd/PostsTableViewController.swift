@@ -18,6 +18,10 @@ import SwiftDate
 protocol PostsTableVCDelegate {
     func scrollBegan( scrollView:UIScrollView )
     func editPost( post:Post )
+    func shouldShowSearchController() -> Bool
+}
+extension PostsTableVCDelegate {
+    func shouldShowSearchController() -> Bool { return true }
 }
 
 /**
@@ -104,10 +108,11 @@ class PostsTableViewController: UITableViewController {
         
         cell.empathiseButton.tag = indexPath.section
         cell.emojiImageView.image = UIImage( named: post.emoji.value().imageName )
-        cell.hashTagsLabel.text = post.hashTags.reduce("", combine: { $0! + " " + $1 })
+        cell.hashTagsLabel.setTitle(post.hashTags.reduce("", combine: { $0! + " " + $1 }), forState: .Normal)
+        cell.hashTagsLabel.setFontSize(15)
+        cell.hashTagsLabel.addTarget(self, action: .hashTagsButtonTapped, forControlEvents: .TouchUpInside)
         cell.dateLabel.font = cell.dateLabel.font.fontWithSize(13)
         cell.dateLabel.text = "\(post.createdAt!.monthName) " + post.createdAt!.toString(DateFormat.Custom("dd 'at' HH:mm"))!
-        cell.hashTagsLabel.font = cell.hashTagsLabel.font.fontWithSize(15)
         cell.empathiseButton.addTarget(self, action: .empathisePost, forControlEvents: .TouchUpInside)
         cell.readMoreButton.addTarget(self, action: .extendPostInCell, forControlEvents: .TouchUpInside)
         cell.ellipsesButton.addTarget(self, action: .showActionSheet, forControlEvents: .TouchUpInside)
@@ -134,7 +139,22 @@ class PostsTableViewController: UITableViewController {
     }
 }
 
+/**
+ Extension to contain all Selectors used in `PostsTableViewController`
+ */
 extension PostsTableViewController {
+    
+    /**
+     - todo:
+        [ ] Check with delegate if you should show the SearchController
+     */
+    func hashTagsButtonTapped( sender:Button ){
+        let searchController = SearchViewController()
+        searchController.searchParameters = sender.titleLabel!.text!.componentsSeparatedByString("#")
+            .filter({ $0 != " " })//Extra Space added by us in `reduce`
+            .map({ "#\($0)" })
+        self.navigationController?.pushViewController(searchController, animated: true)
+    }
     
     /**
      - note: A good alternative is https://github.com/okmr-d/DOAlertController if it were updated
@@ -230,6 +250,7 @@ extension PostsTableViewController {
 }
 
 private extension Selector {
+    static let hashTagsButtonTapped = #selector(PostsTableViewController.hashTagsButtonTapped(_:))
     static let extendPostInCell = #selector(PostsTableViewController.extendPostInCell(_:))
     static let empathisePost = #selector(PostsTableViewController.empathisePost(_:))
     static let showActionSheet = #selector(PostsTableViewController.showActionSheet(_:))

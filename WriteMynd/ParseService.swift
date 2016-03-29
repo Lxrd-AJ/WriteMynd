@@ -15,6 +15,18 @@ import Parse
  */
 class ParseService {
     
+    class func getPostsWith( hashTags:[String], callback:(posts:[Post]) -> Void ){
+        let query = PFQuery(className: "Post")
+        query.whereKey("hashTags", containedIn: hashTags)
+        //query.whereKey("hashTags", containsAllObjectsInArray: hashTags)
+        query.orderByDescending("createdAt")
+        query.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
+            if let objects = posts {
+                callback(posts: objects.map( Post.convertPFObjectToPost ) )
+            }else{ callback(posts: []) }
+        })
+    }
+    
     /**
      - todo:
         [ ] Change to use Promises

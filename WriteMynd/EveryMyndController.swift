@@ -93,7 +93,6 @@ class EveryMyndController: ViewController {
         //Adding the table view controller to display posts
         self.addChildViewController(postsController)
         self.view.addSubview(postsController.tableView)
-        //Height is calculated as 120 offset from top + bottom view's height
         postsController.didMoveToParentViewController(self)
         postsController.delegate = self
         
