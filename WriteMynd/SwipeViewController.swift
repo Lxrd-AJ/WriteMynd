@@ -73,6 +73,20 @@ class SwipeViewController: UIViewController {
     }
 }
 
+extension SwipeViewController {
+    func animateToColor( color: UIColor ){
+        UIView.animateWithDuration(1.0, delay: 0.1, options: .CurveEaseIn, animations: {
+            self.view.backgroundColor = color
+            }, completion: nil)
+    }
+    
+    func resetView(){
+        self.animateToColor(.wmBackgroundColor())
+        self.topMessage.promptLabel.text = "Which of these emotions do you feel right now?"
+        self.topMessage.promptLabel.textColor = UIColor.wmSilverColor()
+    }
+}
+
 extension SwipeViewController: SwipeViewDataSource {
  
     func koloda(kolodaNumberOfCards koloda: SwipeView) -> UInt {
@@ -95,10 +109,15 @@ extension SwipeViewController: SwipeViewDataSource {
 }
 
 extension SwipeViewController: SwipeViewDelegate {
+    func koloda(kolodaDidResetCard koloda: SwipeView) {
+        self.resetView()
+    }
+    
     func koloda(koloda: SwipeView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeDirection) {
         var swipe = Swipe(value: -1, feeling: questions[Int(index)])
         swipe.value = direction.rawValue
         swipe.save()
+        self.resetView()
         print(direction)
     }
     
@@ -108,6 +127,23 @@ extension SwipeViewController: SwipeViewDelegate {
     
     func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {
         print("\(finishPercent)% in direction \(direction)")
+        self.topMessage.instructionLabel.hidden = true
+        self.topMessage.promptLabel.textColor = .whiteColor()
+        
+        var alpha = finishPercent/100.0
+        if alpha <= 50 { alpha = 0.7 }
+        
+        switch direction {
+        case .Left, .Ragnarok:
+            self.animateToColor(UIColor.redColor().colorWithAlphaComponent(alpha))
+            self.topMessage.promptLabel.text = "I don't feel like this"
+        case ._15Degrees, ._30Degrees, ._45Degrees, ._60Degrees, ._75Degrees, ._90Degrees:
+            self.animateToColor(UIColor.wmGreenishTealColor().colorWithAlphaComponent(alpha))
+            self.topMessage.promptLabel.text = "Strongly feel like this"
+        default:        
+            self.animateToColor(UIColor.lightGrayColor().colorWithAlphaComponent(alpha))
+            self.topMessage.promptLabel.text = "Feel a bit like this"
+        }
     }
     
     func koloda(kolodaSwipeThresholdMargin koloda: SwipeView) -> CGFloat? {
