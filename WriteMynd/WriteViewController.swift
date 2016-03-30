@@ -202,6 +202,21 @@ class WriteViewController: UIViewController {
 
 extension WriteViewController {
     
+    /**
+     Executes the closure using grand central dispatch on the main queue
+     - parameters: 
+        - delay: The amount in seconds to wait before executing `closure`
+        - closure: The lambda block to execute
+     */
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+    
     func populateViewWithPost( post:Post ){
         self.feelingField.text = post.text
         self.hashTagField.text = post.hashTags.reduce("", combine: { hashtags, tag in
@@ -241,16 +256,32 @@ extension WriteViewController {
             displayErrorMessage("You need to add a hashtag before posting");
             return
         }
-        //guard !self.post!.text.isEmpty else { displayErrorMessage("No Feeling"); return }
+        
+        //Add the written post notification view
+        let notificationView = WrittenPostNotificationView()
+        notificationView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.0)
+        self.view.addSubview(notificationView)
+        notificationView.snp_makeConstraints(closure: { make in
+            make.size.equalTo(self.view.snp_size)
+        })
         
         if sender.tag == 0 { //Private post
             self.post!.isPrivate = true
+            notificationView.message.text = "Posting to MyMynd"
         }else if sender.tag == 1 {
             self.post!.isPrivate = false
+            notificationView.message.text = "Posting to everyone"
         }
         
-        self.post!.save()
-        self.navigationController?.popViewControllerAnimated(true)
+        UIView.animateWithDuration(0.1, delay: 0, options: [.CurveEaseIn,.CurveEaseOut], animations: {
+                notificationView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
+            }, completion: { bool in
+                self.post!.save()
+                self.delay(3, closure: {
+                    notificationView.removeFromSuperview()
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+        })
     }
     
     /**

@@ -23,6 +23,7 @@
 		217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */; };
 		217138B41CAA6A39008CC4D1 /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B31CAA6A39008CC4D1 /* FloatLabelTextField.swift */; };
 		217138B61CAAE189008CC4D1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B51CAAE189008CC4D1 /* SearchViewController.swift */; };
+		217138B81CAC00ED008CC4D1 /* WrittenPostNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B71CAC00ED008CC4D1 /* WrittenPostNotificationView.swift */; };
 		2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FBEC1C11B65E003446AC /* AppDelegate.swift */; };
 		2172FBF21C11B65E003446AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF01C11B65E003446AC /* Main.storyboard */; };
 		2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF31C11B65E003446AC /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeOnBoarding.swift; sourceTree = "<group>"; };
 		217138B31CAA6A39008CC4D1 /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
 		217138B51CAAE189008CC4D1 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		217138B71CAC00ED008CC4D1 /* WrittenPostNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrittenPostNotificationView.swift; sourceTree = "<group>"; };
 		2172FBE91C11B65E003446AC /* WriteMynd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteMynd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2172FBEC1C11B65E003446AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2172FBF11C11B65E003446AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				2117E9671CA097E20008A1E3 /* HashTagView.swift */,
 				21623EA41CA2E9B0005F117F /* FeelingsView.swift */,
 				217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */,
+				217138B71CAC00ED008CC4D1 /* WrittenPostNotificationView.swift */,
 			);
 			name = Posting;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				21B89FC41C77BF5B00E6D4E7 /* ScienceMessage.swift in Sources */,
 				21F6193A1C9952CB0089542F /* KolodaView.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
+				217138B81CAC00ED008CC4D1 /* WrittenPostNotificationView.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
 				217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */,
 				217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */,

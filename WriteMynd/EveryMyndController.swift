@@ -148,7 +148,7 @@ class EveryMyndController: ViewController {
         super.viewDidAppear(animated)
         //Check if User exists
         if let _ = PFUser.currentUser() {
-            fetchPosts()
+            fetchPosts()            
         }else{
             //Present Signup/Login Page
             let loginVC:LoginViewController = LoginViewController()
