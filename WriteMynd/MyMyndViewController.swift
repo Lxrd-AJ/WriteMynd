@@ -10,6 +10,8 @@ import UIKit
 
 class MyMyndViewController: ViewController {
     
+    let dashboardVC = DashboardController()
+    
     lazy var myProfileButton: Button = {
         let button = Button()
         button.setTitle("My Profile", forState: .Normal)
@@ -41,11 +43,7 @@ class MyMyndViewController: ViewController {
         //MARK: Constraints 
         self.view.addSubview(myProfileButton)
         myProfileButton.snp_makeConstraints(closure: { make in
-            var topOffset:Float = 21;//font height + 2
-            if let navHeight = self.navigationController?.navigationBar.bounds.height{
-                topOffset += Float(navHeight);
-            }
-            make.top.equalTo(self.view.snp_top).offset(topOffset)
+            make.top.equalTo(self.snp_topLayoutGuideBottom)
             make.left.equalTo(self.view.snp_left)
             make.width.equalTo(self.view.snp_width).multipliedBy(0.5)
             make.height.equalTo(50)
@@ -59,6 +57,9 @@ class MyMyndViewController: ViewController {
             make.width.equalTo(self.view.snp_width).multipliedBy(0.5)
             make.height.equalTo(50)
         })
+        
+        //Toggle to the My profile tab
+        self.toggleProfileAndPost(myProfileButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,30 +71,26 @@ class MyMyndViewController: ViewController {
 
 extension MyMyndViewController {
     func toggleProfileAndPost( sender: Button ){
-        //Customise the current button
-        //sender.addBorder(edges: [.Bottom], colour: .wmCoolBlueColor(), thickness: 5.0)
         sender.backgroundColor = UIColor.wmSlateGreyColor()
         
         if sender.tag == 0 { //My profile button //DashboardController
-            
-            //Declutter the other button
             self.myPostsButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()
-            //self.myPostsButton.addBorder(edges: [.Bottom], colour: .clearColor(), thickness: 0.0)
-            
             
             //Add the Dashboard as a child view controller
-//            self.addChildViewController(dashboardVC)
-//            dashboardVC.frame = self.view.bounds
-//            self.view.addSubview(dashboardVC.view)
-//            dashboardVC.didMoveToParentViewController(self)
+            self.addChildViewController(dashboardVC)
+            self.view.addSubview(dashboardVC.view)
+            dashboardVC.didMoveToParentViewController(self)
+            dashboardVC.view.snp_makeConstraints(closure: { make in
+                make.top.equalTo(myProfileButton.snp_bottom)
+                make.size.equalTo(self.view.snp_size)
+            })
         }else if sender.tag == 1 {
-            self.myProfileButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()
-            //self.myProfileButton.addBorder(edges: [.Bottom], colour: .clearColor(), thickness: 0.0)
+            self.myProfileButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()            
             
             //Remove the Dashboard Child Controller
-//            dashboardVC.willMoveToParentViewController(nil)
-//            dashboardVC.view.removeFromSuperview()
-//            dashboardVC.removeFromParentViewController()
+            dashboardVC.willMoveToParentViewController(nil)
+            dashboardVC.view.removeFromSuperview()
+            dashboardVC.removeFromParentViewController()
         }
     }
 }

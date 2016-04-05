@@ -17,12 +17,12 @@ enum Emoji {
     case Meh
     case None
     
-    func value() -> (name:String, imageName:String ){
+    func value() -> (name:String, imageName:String, color:UIColor ){
         switch self {
         case .Happy:
-            return (name:"Happy", imageName:"happy")
+            return (name:"Happy", imageName:"happy", color: UIColor.wmLightGoldColor() )
         default:
-            return (name:"", imageName:"")
+            return (name:"", imageName:"", color: UIColor.lightGrayColor() )
         }
     }
     

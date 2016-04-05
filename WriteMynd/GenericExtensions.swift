@@ -31,6 +31,9 @@ extension UIColor {
     class func wmBackgroundColor() -> UIColor {
         return UIColor(red: 246/255, green: 247/255, blue: 251/255, alpha: 1)
     }
+    class func wmLightGoldColor() -> UIColor {
+        return UIColor(red: 253.0 / 255.0, green: 206.0 / 255.0, blue: 88.0 / 255.0, alpha: 1.0)
+    }
 }
 
 extension UIView{

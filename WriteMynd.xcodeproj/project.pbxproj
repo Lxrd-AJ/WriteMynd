@@ -41,6 +41,8 @@
 		21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1341C2949A90047306D /* MenuViewController.swift */; };
 		21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1361C2A129A0047306D /* MenuViewCell.swift */; };
 		21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1381C2AECCC0047306D /* DashboardController.swift */; };
+		21D467C71CB24C4D00412C3C /* HashTagsPieCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D467C61CB24C4D00412C3C /* HashTagsPieCharts.swift */; };
+		21D467C91CB346D300412C3C /* EmojiPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D467C81CB346D300412C3C /* EmojiPieChart.swift */; };
 		21E120CA1C9BB43B00DB1C8D /* PostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */; };
 		21F548CB1C8F1DA6004E85F3 /* ScienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */; };
 		21F6193A1C9952CB0089542F /* KolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F619391C9952CB0089542F /* KolodaView.swift */; };
@@ -87,6 +89,8 @@
 		21C0A1341C2949A90047306D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		21C0A1361C2A129A0047306D /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
 		21C0A1381C2AECCC0047306D /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
+		21D467C61CB24C4D00412C3C /* HashTagsPieCharts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagsPieCharts.swift; sourceTree = "<group>"; };
+		21D467C81CB346D300412C3C /* EmojiPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiPieChart.swift; sourceTree = "<group>"; };
 		21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTableViewController.swift; sourceTree = "<group>"; };
 		21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScienceViewController.swift; sourceTree = "<group>"; };
 		21F619391C9952CB0089542F /* KolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KolodaView.swift; sourceTree = "<group>"; };
@@ -141,6 +145,15 @@
 				21623EA91CA76AAD005F117F /* HiddenPost.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		217138B91CACF8AB008CC4D1 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				21D467C61CB24C4D00412C3C /* HashTagsPieCharts.swift */,
+				21D467C81CB346D300412C3C /* EmojiPieChart.swift */,
+			);
+			name = Charts;
 			sourceTree = "<group>";
 		};
 		2172FBE01C11B65E003446AC = {
@@ -200,6 +213,7 @@
 		2172FC0F1C125823003446AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				217138B91CACF8AB008CC4D1 /* Charts */,
 				2117E9661CA0953A0008A1E3 /* Posting */,
 				2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */,
 				21C0A1361C2A129A0047306D /* MenuViewCell.swift */,
@@ -425,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				213016721C9D524500A4598D /* WriteViewController.swift in Sources */,
+				21D467C91CB346D300412C3C /* EmojiPieChart.swift in Sources */,
 				217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */,
 				213016791C9D780F00A4598D /* UILabel+UIButton.swift in Sources */,
 				2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */,
@@ -456,6 +471,7 @@
 				217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */,
 				217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */,
 				21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */,
+				21D467C71CB24C4D00412C3C /* HashTagsPieCharts.swift in Sources */,
 				21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */,
 				2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */,
 				2130167D1C9DFA2800A4598D /* EmpathisedPost.swift in Sources */,
