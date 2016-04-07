@@ -180,11 +180,13 @@ extension EveryMyndController {
         if sender.selected {
             sender.backgroundColor = UIColor.whiteColor()
             sender.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
+            sender.setImage(UIImage(named:"empathiseHeart"), forState: .Normal)
             sender.selected = false
             self.postsController.posts = self.posts
         }else{
             sender.backgroundColor = UIColor.wmCoolBlueColor()
             sender.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            sender.setImage(UIImage(named:"empathise_heart_filled"), forState: .Normal)
             sender.selected = true
             self.postsController.posts = self.postsEmphasised
         }

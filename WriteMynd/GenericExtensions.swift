@@ -34,6 +34,20 @@ extension UIColor {
     class func wmLightGoldColor() -> UIColor {
         return UIColor(red: 253.0 / 255.0, green: 206.0 / 255.0, blue: 88.0 / 255.0, alpha: 1.0)
     }
+    class func wmSoftBlueColor() -> UIColor {
+        return UIColor(red: 93.0 / 255.0, green: 155.0 / 255.0, blue: 236.0 / 255.0, alpha: 1.0)
+    }
+    class func wmOrangePinkColor() -> UIColor {
+        return UIColor(red: 251.0 / 255.0, green: 110.0 / 255.0, blue: 82.0 / 255.0, alpha: 1.0)
+    }
+    
+    class func wmGreenishTealTwoColor() -> UIColor {
+        return UIColor(red: 73.0 / 255.0, green: 207.0 / 255.0, blue: 174.0 / 255.0, alpha: 1.0)
+    }
+    
+    class func wmSilverTwoColor() -> UIColor {
+        return UIColor(red: 205.0 / 255.0, green: 208.0 / 255.0, blue: 218.0 / 255.0, alpha: 1.0)
+    }
 }
 
 extension UIView{

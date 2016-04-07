@@ -50,6 +50,38 @@ class WriteViewController: UIViewController {
         button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
         return button
     }()
+    lazy var sadEmoji : UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "sad"), forState: .Normal)
+        button.imageView?.contentMode = .ScaleAspectFit
+        button.tag = 1
+        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
+        return button
+    }()
+    lazy var angryEmoji: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "angry"), forState: .Normal)
+        button.imageView?.contentMode = .ScaleAspectFit
+        button.tag = 2
+        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
+        return button
+    }()
+    lazy var fearEmoji: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "fear"), forState: .Normal)
+        button.imageView?.contentMode = .ScaleAspectFit
+        button.tag = 3
+        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
+        return button
+    }()
+    lazy var mehEmoji: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "meh"), forState: .Normal)
+        button.imageView?.contentMode = .ScaleAspectFit
+        button.tag = 4
+        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
+        return button
+    }()
     
     lazy var hashTagField: UITextField = { //this has the tag of 5
         let field = UITextField()
@@ -136,10 +168,12 @@ class WriteViewController: UIViewController {
             make.width.lessThanOrEqualTo(self.view.snp_width)
         })
         
+        
+        
         self.view.addSubview(emojisContainerView)
         emojisContainerView.snp_makeConstraints(closure: { make in
             make.top.equalTo(descriptionLabel.snp_bottom).offset(10)
-            make.width.equalTo(self.view.snp_width).offset(-20)
+            make.width.equalTo(self.view.snp_width)
             make.centerX.equalTo(self.view.snp_centerX)
             make.height.equalTo(50.0)
         })
@@ -148,9 +182,37 @@ class WriteViewController: UIViewController {
         happyEmoji.snp_makeConstraints(closure: { make in
             make.width.equalTo(50)
             make.height.equalTo(50)
-            make.left.equalTo(emojisContainerView.snp_left)
+            make.left.equalTo(emojisContainerView.snp_left).offset(20)
             make.top.equalTo(emojisContainerView.snp_top)
         })
+        //Sad Emoji
+        emojisContainerView.addSubview(sadEmoji)
+        sadEmoji.snp_makeConstraints(closure: {make in
+            make.size.equalTo(happyEmoji.snp_size)
+            make.top.equalTo(happyEmoji.snp_top)
+            make.left.equalTo(happyEmoji.snp_right).offset(20)
+        })
+        //Angry
+        emojisContainerView.addSubview(angryEmoji)
+        angryEmoji.snp_makeConstraints(closure: { make in
+            make.size.equalTo(sadEmoji.snp_size)
+            make.top.equalTo(sadEmoji.snp_top)
+            make.left.equalTo(sadEmoji.snp_right).offset(20)
+        })
+        emojisContainerView.addSubview(fearEmoji)
+        fearEmoji.snp_makeConstraints(closure: { make in
+            make.size.equalTo(angryEmoji.snp_size)
+            make.top.equalTo(angryEmoji.snp_top)
+            make.left.equalTo(angryEmoji.snp_right).offset(20)
+        })
+        emojisContainerView.addSubview(mehEmoji)
+        mehEmoji.snp_makeConstraints(closure: { make in
+            make.size.equalTo(fearEmoji.snp_size)
+            make.top.equalTo(fearEmoji.snp_top)
+            make.left.equalTo(fearEmoji.snp_right).offset(20)
+        })
+        
+        
         
         self.view.addSubview(hashTagField)
         hashTagField.snp_makeConstraints(closure: { make in
@@ -222,13 +284,7 @@ extension WriteViewController {
         self.hashTagField.text = post.hashTags.reduce("", combine: { hashtags, tag in
             return "\(hashtags!)\(tag)"
         })
-        switch post.emoji {
-        case .Happy:
-            self.descriptionLabel.text = post.emoji.value().name
-        default:
-            break
-        }
-    }
+        self.descriptionLabel.text = post.emoji.value().name    }
     
     func displayErrorMessage( message:String ){
         //"You need to enter how you feel, select an emoji and type an hashtag"
@@ -242,6 +298,7 @@ extension WriteViewController {
 extension WriteViewController {
     
     /**
+     Here a post is saved if it conforms to our requirements
      The following must be complete before a post can be made
         - An Emoji must be selected
         - HashTag(s) must be present
@@ -287,13 +344,26 @@ extension WriteViewController {
     /**
     Reciever for touching the emoji images/button
      - todo 
-        [ ] Put an emoji struct in a UIButton subclass `Button` and switch on the struct instead
+        [ ] Put an emoji struct in a UIButton subclass `Button` and switch on the struct instead 
+        [ ] Also add the emoji selectors to this subclass
      */
     func emojiButtonTapped( sender: UIButton ){
         switch sender.tag {
         case 0:
             self.descriptionLabel.text = "Happy"
             self.post?.emoji = .Happy
+        case 1:
+            self.descriptionLabel.text = "Sad"
+            self.post?.emoji = .Sad
+        case 2:
+            self.descriptionLabel.text = "Angry"
+            self.post?.emoji = .Angry
+        case 3:
+            self.descriptionLabel.text = "Fear"
+            self.post?.emoji = .Scared
+        case 4:
+            self.descriptionLabel.text = "Meh"
+            self.post?.emoji = .Meh
         default:
             break;
         }

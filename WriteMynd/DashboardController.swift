@@ -16,7 +16,7 @@ import SnapKit
  My Mynd Section. 
  - note
     Consider switching to ~~https://github.com/i-schuetz/SwiftCharts~~ especially for the line charts or
-    use https://www.codebeaulieu.com/57/How-to-create-a-Line-Chart-using-ios-charts for the line charts | *http://www.appcoda.com/ios-charts-api-tutorial/ 
+    use https://www.codebeaulieu.com/57/How-to-create-a-Line-Chart-using-ios-charts for the line charts | *http://www.appcoda.com/ios-charts-api-tutorial/
  */
 class DashboardController: UIViewController {
     
@@ -122,9 +122,10 @@ class DashboardController: UIViewController {
             let emojiDictionary: [Emoji:Int] = posts.reduce([:], combine: { map,post in
                 var _map = map
                 if let count = map[post.emoji] { _map[post.emoji] = (count + 1)
-                }else{ _map[post.emoji] = 0 }
+                }else{ _map[post.emoji] = 1 }
                 return _map
-            })
+            });
+            print(emojiDictionary)
             
             self.setupMaxHashTagsPieChart(hashTagMap)
             self.setupMinHashTagsPieChart(hashTagMap)

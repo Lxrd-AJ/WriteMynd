@@ -77,7 +77,7 @@ class PostsTableViewController: UITableViewController {
         }else{
             cell.backgroundColor = UIColor.whiteColor()
             cell.isPrivateLabel.text = ""
-            cell.empathiseButton.setImage(UIImage(named: "empathise_heart")!, forState: .Normal)
+            cell.empathiseButton.setImage(UIImage(named: "empathise_heart_filled")!, forState: .Normal)
             cell.empathiseButton.hidden = false
         }
         
@@ -97,9 +97,9 @@ class PostsTableViewController: UITableViewController {
         }
         
         if post.isEmpathised {
-            cell.empathiseButton.backgroundColor = UIColor.redColor()
+            cell.empathiseButton.setBackgroundImage(UIImage(named: "empathise_heart_filled"), forState: .Normal)
         }else{
-            cell.empathiseButton.backgroundColor = UIColor.clearColor()
+            cell.empathiseButton.setImage(UIImage(named: "empathise_heart"), forState: .Normal)
         }
         
         cell.layer.cornerRadius = 5
@@ -218,9 +218,9 @@ extension PostsTableViewController {
                 }else{ return true }
             })
             post.isEmpathised = false
-            sender.backgroundColor = UIColor.clearColor()
+            sender.setImage(UIImage(named: "empathise_heart"), forState: .Normal)
         }else{
-            sender.backgroundColor = UIColor.redColor()
+            sender.setImage(UIImage(named: "empathise_heart_filled"), forState: .Normal)
             
             //Save the post
             let empathisedPost = EmpathisedPost(user: PFUser.currentUser()!, ID: post.ID!)
