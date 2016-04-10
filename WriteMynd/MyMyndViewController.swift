@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import Parse
 
 class MyMyndViewController: ViewController {
     
+    let scrollView = UIScrollView()
     let dashboardVC = DashboardController()
+    let myPostsTableVC = PostsTableViewController()
+    
+    var posts:[Post] = []
     
     lazy var myProfileButton: Button = {
         let button = Button()
@@ -57,9 +62,14 @@ class MyMyndViewController: ViewController {
             make.width.equalTo(self.view.snp_width).multipliedBy(0.5)
             make.height.equalTo(50)
         })
+        //END MARK
         
         //Toggle to the My profile tab
         self.toggleProfileAndPost(myProfileButton)
+        
+        ParseService.fetchPrivatePostsForUser(PFUser.currentUser()!, callback: { posts in
+            self.posts = posts
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,13 +86,28 @@ extension MyMyndViewController {
         if sender.tag == 0 { //My profile button //DashboardController
             self.myPostsButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()
             
+            //Remove the posts table view controller if in the view 
+            if self.myPostsTableVC.tableView.superview != nil {
+                myPostsTableVC.willMoveToParentViewController(nil)
+                myPostsTableVC.tableView.removeFromSuperview()
+                myPostsTableVC.removeFromParentViewController()
+            }
+            
+            //Prepare the scroll view
+            scrollView.contentSize = self.view.bounds.size
+            self.view.addSubview(scrollView)
+            scrollView.snp_makeConstraints(closure: { make in
+                make.top.equalTo(myProfileButton.snp_bottom)
+                make.bottom.equalTo(self.view.snp_bottom)
+                make.width.equalTo(self.view.snp_width)
+            })
             //Add the Dashboard as a child view controller
             self.addChildViewController(dashboardVC)
-            self.view.addSubview(dashboardVC.view)
+            self.scrollView.addSubview(dashboardVC.view);
             dashboardVC.didMoveToParentViewController(self)
             dashboardVC.view.snp_makeConstraints(closure: { make in
-                make.top.equalTo(myProfileButton.snp_bottom)
-                make.size.equalTo(self.view.snp_size)
+                make.top.equalTo(self.scrollView.snp_top)
+                make.width.equalTo(self.view.snp_width)
             })
         }else if sender.tag == 1 {
             self.myProfileButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()            
@@ -91,6 +116,19 @@ extension MyMyndViewController {
             dashboardVC.willMoveToParentViewController(nil)
             dashboardVC.view.removeFromSuperview()
             dashboardVC.removeFromParentViewController()
+            self.scrollView.removeFromSuperview()
+            
+            //Add the posts table view controller
+            self.addChildViewController(myPostsTableVC)
+            self.view.addSubview(myPostsTableVC.tableView)
+            myPostsTableVC.didMoveToParentViewController(self)
+            myPostsTableVC.tableView.snp_makeConstraints(closure: { make in
+                make.top.equalTo(myProfileButton.snp_bottom)
+                make.bottom.equalTo(self.view.snp_bottom)
+                make.width.equalTo(self.view.snp_width).offset(-20)
+                make.centerX.equalTo(self.view.snp_centerX)
+            })
+            myPostsTableVC.posts = self.posts
         }
     }
 }

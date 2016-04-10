@@ -29,7 +29,7 @@ extension UIColor {
         return UIColor(red: 63.0 / 255.0, green: 208.0 / 255.0, blue: 174.0 / 255.0, alpha: 1.0)
     }
     class func wmBackgroundColor() -> UIColor {
-        return UIColor(red: 246/255, green: 247/255, blue: 251/255, alpha: 1)
+        return UIColor(red: 246/255, green: 247/255, blue: 251/255, alpha: 1)//246 247 251
     }
     class func wmLightGoldColor() -> UIColor {
         return UIColor(red: 253.0 / 255.0, green: 206.0 / 255.0, blue: 88.0 / 255.0, alpha: 1.0)

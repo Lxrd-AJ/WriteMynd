@@ -113,9 +113,20 @@ extension SwipeViewController: SwipeViewDelegate {
         self.resetView()
     }
     
+    /**
+     - todo:
+        [ ] If the feeling is in the negative space then add a negative value 
+     */
     func koloda(koloda: SwipeView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeDirection) {
-        var swipe = Swipe(value: -1, feeling: questions[Int(index)])
-        swipe.value = direction.rawValue
+        let feeling = questions[Int(index)]
+        var swipe = Swipe(value: -1, feeling: feeling)
+        
+        if negativeSwipeQuestions.contains(feeling) {
+            swipe.value = -direction.rawValue
+        }else{
+            swipe.value = direction.rawValue
+        }
+        
         swipe.save()
         self.resetView()
         print(direction)

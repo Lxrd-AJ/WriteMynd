@@ -15,6 +15,18 @@ import Parse
  */
 class ParseService {
     
+    class func getSwipesForUser( user:PFUser, callback:(swipes:[Swipe]) -> Void ) -> Void {
+        let query = PFQuery(className: "Swipe")
+        query.whereKey("parent", equalTo: user)
+        query.orderByDescending("createdAt")
+        query.limit = 1000;
+        query.findObjectsInBackgroundWithBlock({ (swipes:[PFObject]?, error:NSError?) -> Void in
+            if let objects = swipes {
+                callback(swipes: objects.map(Swipe.convertToSwipe) )
+            }else{ callback(swipes: []) }
+        })
+    }
+    
     class func getPostsWith( hashTags:[String], callback:(posts:[Post]) -> Void ){
         let query = PFQuery(className: "Post")
         query.whereKey("hashTags", containedIn: hashTags)
@@ -37,6 +49,16 @@ class ParseService {
         hiddenPostsQuery.whereKey("user", equalTo: user)
         fetchQuery.whereKey("private", notEqualTo: true)
         fetchQuery.whereKey("objectId", doesNotMatchKey: "postID", inQuery: hiddenPostsQuery)
+        fetchQuery.orderByDescending("createdAt")
+        fetchQuery.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
+            if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }
+            else{ callback(posts: []) }
+        })
+    }
+    
+    class func fetchPrivatePostsForUser( user:PFUser, callback:(posts:[Post]) -> Void ) {
+        let fetchQuery: PFQuery = PFQuery( className: "Post" )
+        fetchQuery.whereKey("parent", equalTo: user)
         fetchQuery.orderByDescending("createdAt")
         fetchQuery.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
             if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }

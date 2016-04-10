@@ -374,7 +374,7 @@ extension WriteViewController {
      */
     func keyboardWillShow(notification:NSNotification){
         let keyboardFrame:CGRect = notification.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue
-        //print("Keyboard Did appear \(keyboardFrame)")
+        print("Keyboard Did appear \(keyboardFrame)")
         
         if let textField = self.currentTextField {
             textField.resignFirstResponder()
@@ -427,7 +427,11 @@ extension WriteViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         self.currentTextField = textField
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         self.view.addSubview(focusView)
+        return true
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

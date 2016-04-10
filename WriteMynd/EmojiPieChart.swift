@@ -52,7 +52,13 @@ class EmojiPieChart: UIView {
         chart.holeRadiusPercent = 0.7
 //        chart.centerTextRadiusPercent = 1
         chart.descriptionTextPosition = CGPointZero
-        chart.legend.enabled = false
+        chart.legend.enabled = true
+        chart.legend.position = .RightOfChartCenter
+        chart.legend.form = .Circle
+        chart.legend.font = Label.font()
+        chart.legend.xOffset = 20.0
+        chart.legend.maxSizePercent = 0.3
+        
         chart.userInteractionEnabled = false
         chart.animate(xAxisDuration: 1, yAxisDuration: 1, easingOption: .EaseInOutCirc)
         

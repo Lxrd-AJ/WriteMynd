@@ -26,6 +26,7 @@ class DashboardController: UIViewController {
     
     let emojiPieChart = EmojiPieChart()
     let hashtagsPieCharts = HashTagsPieCharts()
+    let swipeChart = SwipeChart()
     
     lazy var myHashTagsLabel: Label = {
         let label = Label()
@@ -40,7 +41,13 @@ class DashboardController: UIViewController {
         label.textColor = UIColor.wmCoolBlueColor()
         return label
     }()
-
+    
+    lazy var swipeLabel: Label = {
+        let label = Label()
+        label.text = "My moods"
+        label.textColor = UIColor.wmCoolBlueColor()
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +58,7 @@ class DashboardController: UIViewController {
         self.view.addSubview(middleView)
         self.view.addSubview(bottomView)
         
-        _ = [topView,middleView,bottomView].map({ $0.addBorder(edges: [.Bottom], colour: UIColor.wmSilverColor(), thickness: 0.9) })
+        _ = [topView,middleView].map({ $0.addBorder(edges: [.Bottom], colour: UIColor.wmSilverColor(), thickness: 0.9) })
         
         //MARK: - Top level view constraints
         topView.snp_makeConstraints(closure: { make in
@@ -79,12 +86,12 @@ class DashboardController: UIViewController {
             make.top.equalTo(topView.snp_bottom).offset(10)
             make.size.equalTo(topView.snp_size)
         })
-        self.view.addSubview(myEmojisLabel)
+        middleView.addSubview(myEmojisLabel)
         myEmojisLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(middleView.snp_top)
             make.left.equalTo(middleView.snp_left).offset(5)
         })
-        self.view.addSubview(emojiPieChart)
+        middleView.addSubview(emojiPieChart)
         emojiPieChart.snp_makeConstraints(closure: { make in
             make.width.equalTo(middleView.snp_width)
             make.top.equalTo(myEmojisLabel.snp_bottom)
@@ -92,6 +99,25 @@ class DashboardController: UIViewController {
             make.height.equalTo(middleView.snp_height).offset(-25)
         })
         //emojiPieChart.backgroundColor = .wmSilverColor()
+        //END MARK
+        
+        //MARK: Bottom View Constraints 
+        bottomView.snp_makeConstraints(closure: { make in
+            make.top.equalTo(middleView.snp_bottom).offset(10)
+            make.size.equalTo(middleView.snp_size)
+        })
+        bottomView.addSubview(swipeLabel)
+        swipeLabel.snp_makeConstraints(closure: { make in
+            make.top.equalTo(bottomView.snp_top)
+            make.left.equalTo(bottomView.snp_left).offset(5)
+        })
+        bottomView.addSubview(swipeChart)
+        swipeChart.snp_makeConstraints(closure: { make in
+            make.width.equalTo(bottomView.snp_width)
+            make.top.equalTo(swipeLabel.snp_bottom).offset(15)
+            make.centerX.equalTo(bottomView.snp_centerX)
+            make.height.equalTo(bottomView.snp_height).offset(-25)
+        })
         //END MARK
         
         drawCharts()
@@ -125,16 +151,43 @@ class DashboardController: UIViewController {
                 }else{ _map[post.emoji] = 1 }
                 return _map
             });
-            print(emojiDictionary)
+            //print(emojiDictionary)
             
             self.setupMaxHashTagsPieChart(hashTagMap)
             self.setupMinHashTagsPieChart(hashTagMap)
             self.setupEmojiPieChart(emojiDictionary)
         })
+        
+        //Line Graph for Swipes
+        ParseService.getSwipesForUser(PFUser.currentUser()!, callback: { swipes in
+            guard swipes.count != 0 else{ return }
+            
+            let dateFormat = DateFormat.Custom("dd/MM/yyyy")
+            let swipeDictionary: [NSDate:[Swipe]] = swipes.reduce([:], combine: { map, swipe in
+                var _map = map
+                let key = swipe.createdAt.toString(dateFormat)!.toDate(dateFormat)!
+                if let swipes = map[key] {
+                    _map[key] = swipes + [swipe]
+                }else{
+                    _map[key] = [swipe]
+                }
+                return _map
+            })
+         
+            self.setupSwipeChart(swipeDictionary)
+        })
     }
 }
 
 extension DashboardController {
+    
+    func setupSwipeChart( dictionary:[NSDate:[Swipe]] ){
+        //- note: Reversing the dictionary keys & values because the sortBy on the query isn't working
+        let dataKeys: [String] = dictionary.keys.map({ $0.toString()! }).reverse()
+        let dataValues: [Double] = dictionary.keys.map({ self.averageScoreFor(dictionary[$0]!) }).reverse()
+        swipeChart.renderChart(dataKeys, values: dataValues)
+    }
+    
     func setupEmojiPieChart( dictionary:[Emoji:Int] ) {
         let dataKeys:[String] = dictionary.keys.map({ emoji in emoji.value().name })
         let dataValues:[Int] = dictionary.keys.map({ emoji in dictionary[emoji]! });
@@ -156,6 +209,18 @@ extension DashboardController {
         let minTuple: (lowest:Int, total:Int) = hashTagMap.minTuple()
         let leastTagsData = [ Double(minTuple.total - minTuple.lowest), Double(minTuple.lowest)]
         hashtagsPieCharts.renderChart(hashtagsPieCharts.minHashtagsPie, dataPoints: leastTags, values: leastTagsData, centerValue: hashTagMap.minPercent(), tag: hashTagMap.min())
+    }
+}
+
+/**
+ Utility functions
+ */
+extension DashboardController {
+    func averageScoreFor( swipes:[Swipe] ) -> Double {
+        let total = swipes.reduce(0, combine: { (total,cur) in
+            return total + cur.value
+        })
+        return (Double(total)/Double(swipes.count))
     }
 }
 
