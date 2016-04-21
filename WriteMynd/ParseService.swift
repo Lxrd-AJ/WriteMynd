@@ -39,11 +39,17 @@ class ParseService {
         })
     }
     
-    /**
-     - todo:
-        [ ] Change to use Promises
-     */
     class func fetchPostsForUser( user:PFUser, callback:(posts:[Post]) -> Void ) {
+        let fetchQuery: PFQuery = PFQuery( className: "Post" )
+        fetchQuery.whereKey("parent", equalTo: user)
+        fetchQuery.orderByDescending("createdAt")
+        fetchQuery.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
+            if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }
+            else{ callback(posts: []) }
+        })
+    }
+    
+    class func fetchPostsForUserFeed( user:PFUser, callback:(posts:[Post]) -> Void ) {
         let fetchQuery: PFQuery = PFQuery( className: "Post" )
         let hiddenPostsQuery: PFQuery = PFQuery( className: "HiddenPost")
         hiddenPostsQuery.whereKey("user", equalTo: user)
@@ -59,6 +65,7 @@ class ParseService {
     class func fetchPrivatePostsForUser( user:PFUser, callback:(posts:[Post]) -> Void ) {
         let fetchQuery: PFQuery = PFQuery( className: "Post" )
         fetchQuery.whereKey("parent", equalTo: user)
+        fetchQuery.whereKey("private", equalTo: true)
         fetchQuery.orderByDescending("createdAt")
         fetchQuery.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
             if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }
@@ -77,8 +84,7 @@ class ParseService {
     }
     
     class func dempathisePost( empathisedPost:EmpathisedPost ){
-        let object = PFObject(withoutDataWithClassName: "EmpathisedPost", objectId: empathisedPost.objectID)
-        object.deleteEventually()
+        PFObject(withoutDataWithClassName: "EmpathisedPost", objectId: empathisedPost.objectID).deleteInBackground()
     }
     
 }

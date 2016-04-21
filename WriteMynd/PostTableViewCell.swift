@@ -24,6 +24,8 @@ class PostTableViewCell: UITableViewCell {
     var ellipsesButton: UIButton = UIButton()
     var empathiseButton: UIButton = UIButton() //DOFavoriteButton = DOFavoriteButton()
     var readMoreButton: Button = Button()
+    
+    var topView: UIView?
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +34,10 @@ class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setupTopSection(self.contentView)
+        setupMiddleSection(self.contentView)
+        setupBottomSection(self.contentView)
     }
     
     override func layoutSubviews() {
@@ -42,6 +48,7 @@ class PostTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.setNeedsLayout()
     }
     
     func setupBottomSection( superView:UIView ) {
@@ -60,11 +67,6 @@ class PostTableViewCell: UITableViewCell {
         //Empathise Button
         bottomView.addSubview(empathiseButton)
         empathiseButton.setImage(UIImage(named: "empathise_heart"), forState: .Normal)
-//        empathiseButton.imageColorOff = UIColor.brownColor()
-//        empathiseButton.imageColorOn = UIColor.redColor()
-//        empathiseButton.circleColor = UIColor.greenColor()
-//        empathiseButton.lineColor = UIColor.blueColor()
-//        empathiseButton.duration = 3.0 // default: 1.0
         empathiseButton.snp_makeConstraints(closure: { make in
             make.height.equalTo(ellipsesButton.snp_height)
             make.right.equalTo(ellipsesButton.snp_left).offset(-10)
@@ -96,16 +98,26 @@ class PostTableViewCell: UITableViewCell {
     func setupTopSection( superView:UIView )  {
         let topView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: (self.bounds.height * 0.2)))
         superView.addSubview(topView)
+        self.topView = topView;
         
         //Emoji
         topView.addSubview(emojiImageView)
-        emojiImageView.snp_makeConstraints(closure: { make in
-            make.left.equalTo(topView).offset(5)
-            make.top.equalTo(topView).offset(5)
-            make.size.equalTo(CGSize(width: 28, height: 28))
-        })
+        if self.postLabel.text == "" {
+            self.emojiImageView.snp_remakeConstraints(closure: { make in
+                make.width.equalTo(self.snp_width).multipliedBy(0.5)
+                make.height.equalTo(self.snp_height)
+                make.left.equalTo(self.topView!).offset(0)
+                make.top.equalTo(self.topView!).offset(0)
+            })
+        }else{
+            emojiImageView.snp_remakeConstraints(closure: { make in
+                make.left.equalTo(self.topView!).offset(5)
+                make.top.equalTo(self.topView!).offset(5)
+                make.size.equalTo(CGSize(width: 28, height: 28))
+            })
+        }
         
-        //Family HashTag 
+        //Family HashTag
         topView.addSubview(hashTagsLabel)
         hashTagsLabel.setTitleColor(UIColor.wmSlateGreyColor(), forState: .Normal)
         hashTagsLabel.snp_makeConstraints(closure: { make in
@@ -140,4 +152,26 @@ class PostTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension PostTableViewCell {
+    
+    func updateEmojiConstraints(){
+        self.setNeedsLayout()
+        if self.postLabel.text == "" {
+            self.emojiImageView.snp_remakeConstraints(closure: { make in
+                make.width.equalTo(self.snp_width).multipliedBy(0.5)
+                make.height.equalTo(self.snp_height)
+                make.left.equalTo(self.topView!).offset(0)
+                make.top.equalTo(self.topView!).offset(0)
+            })
+        }else{
+            emojiImageView.snp_remakeConstraints(closure: { make in
+                make.left.equalTo(self.topView!).offset(5)
+                make.top.equalTo(self.topView!).offset(5)
+                make.size.equalTo(CGSize(width: 28, height: 28))
+            })
+        }
+        
+    }
 }

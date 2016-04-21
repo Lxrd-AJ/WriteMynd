@@ -63,15 +63,15 @@ class EveryMyndController: ViewController {
         let button: Button = Button()
         button.backgroundColor = UIColor.wmGreenishTealColor()
         button.setTitle("Create a post", forState: .Normal)
-        button.setImage(UIImage(named: "group")!, forState: .Normal)
+        //button.setImage(UIImage(named: "group")!, forState: .Normal)
         button.setFontSize(16)
         
-        button.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-        button.titleLabel!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-        button.imageView!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-        
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 1, bottom: 1, right: -100)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
+//        button.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+//        button.titleLabel!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+//        button.imageView!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+//        
+//        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 1, bottom: 1, right: -100)
+//        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
         
 
         button.addTarget(self, action: .showPostingSheet, forControlEvents: .TouchUpInside)
@@ -222,7 +222,7 @@ extension EveryMyndController {
     }
     
     func fetchPosts(){
-        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
+        ParseService.fetchPostsForUserFeed(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
             self.postsController.posts = posts
             self.postsController.tableView.reloadData()
             
@@ -231,13 +231,11 @@ extension EveryMyndController {
         })
         
         ParseService.fetchEmpathisedPosts(PFUser.currentUser()!, callback: { (emPosts:[EmpathisedPost]) -> Void in
-            print("Finished loading emphasis data")
             //self.postsController.posts = self.posts
             self.postsController.empathisedPosts = emPosts
             self.empathisedPosts = emPosts
             self.postsController.reloadData()
             self.postsController.tableView.hidden = false
-            print("Done")
         })
     }
 

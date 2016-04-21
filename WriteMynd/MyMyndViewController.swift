@@ -8,12 +8,13 @@
 
 import UIKit
 import Parse
+import Charts
 
 class MyMyndViewController: ViewController {
     
     let scrollView = UIScrollView()
     let dashboardVC = DashboardController()
-    let myPostsTableVC = PostsTableViewController()
+    let myPostsVC = MyPostsViewController()
     
     var posts:[Post] = []
     
@@ -67,8 +68,9 @@ class MyMyndViewController: ViewController {
         //Toggle to the My profile tab
         self.toggleProfileAndPost(myProfileButton)
         
-        ParseService.fetchPrivatePostsForUser(PFUser.currentUser()!, callback: { posts in
-            self.posts = posts
+        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { posts in
+            self.posts = posts //Check if redundant 
+            self.myPostsVC.posts = self.posts
         })
     }
 
@@ -87,19 +89,23 @@ extension MyMyndViewController {
             self.myPostsButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()
             
             //Remove the posts table view controller if in the view 
-            if self.myPostsTableVC.tableView.superview != nil {
-                myPostsTableVC.willMoveToParentViewController(nil)
-                myPostsTableVC.tableView.removeFromSuperview()
-                myPostsTableVC.removeFromParentViewController()
+            if self.myPostsVC.view.superview != nil {
+                myPostsVC.willMoveToParentViewController(nil)
+                myPostsVC.view.removeFromSuperview()
+                myPostsVC.removeFromParentViewController()
             }
             
             //Prepare the scroll view
             scrollView.contentSize = self.view.bounds.size
+            scrollView.delaysContentTouches = false
+            scrollView.canCancelContentTouches = false
+            scrollView.userInteractionEnabled = true
             self.view.addSubview(scrollView)
             scrollView.snp_makeConstraints(closure: { make in
                 make.top.equalTo(myProfileButton.snp_bottom)
                 make.bottom.equalTo(self.view.snp_bottom)
                 make.width.equalTo(self.view.snp_width)
+                make.centerX.equalTo(self.view.snp_centerX)
             })
             //Add the Dashboard as a child view controller
             self.addChildViewController(dashboardVC)
@@ -109,6 +115,8 @@ extension MyMyndViewController {
                 make.top.equalTo(self.scrollView.snp_top)
                 make.width.equalTo(self.view.snp_width)
             })
+            //Register listeners for events on the charts in the dashboard VC
+            dashboardVC.emojiPieChart.chart.delegate = self
         }else if sender.tag == 1 {
             self.myProfileButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()            
             
@@ -119,17 +127,24 @@ extension MyMyndViewController {
             self.scrollView.removeFromSuperview()
             
             //Add the posts table view controller
-            self.addChildViewController(myPostsTableVC)
-            self.view.addSubview(myPostsTableVC.tableView)
-            myPostsTableVC.didMoveToParentViewController(self)
-            myPostsTableVC.tableView.snp_makeConstraints(closure: { make in
+            self.addChildViewController(myPostsVC)
+            self.view.addSubview(myPostsVC.view)
+            myPostsVC.didMoveToParentViewController(self)
+            myPostsVC.view.snp_makeConstraints(closure: { make in
                 make.top.equalTo(myProfileButton.snp_bottom)
                 make.bottom.equalTo(self.view.snp_bottom)
-                make.width.equalTo(self.view.snp_width).offset(-20)
+                make.width.equalTo(self.view.snp_width)
                 make.centerX.equalTo(self.view.snp_centerX)
             })
-            myPostsTableVC.posts = self.posts
+            myPostsVC.postsViewController.posts = self.posts
         }
+    }
+}
+
+extension MyMyndViewController: ChartViewDelegate {
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        print(entry)
+        print(dataSetIndex)
     }
 }
 

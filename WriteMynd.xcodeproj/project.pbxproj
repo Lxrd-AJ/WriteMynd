@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		10694AE2EFBF193FE6559F7E /* Pods_WriteMynd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6860EA5839031560CC75E7E /* Pods_WriteMynd.framework */; };
+		2102B5161CC910920002BA24 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2102B5151CC910920002BA24 /* MyPostsViewController.swift */; };
 		211772561CBA4900009B6DF0 /* SwipeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211772551CBA4900009B6DF0 /* SwipeChart.swift */; };
 		2117E9681CA097E20008A1E3 /* HashTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117E9671CA097E20008A1E3 /* HashTagView.swift */; };
 		213016721C9D524500A4598D /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213016711C9D524500A4598D /* WriteViewController.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2102B5151CC910920002BA24 /* MyPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
 		211772551CBA4900009B6DF0 /* SwipeChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeChart.swift; sourceTree = "<group>"; };
 		2117E9671CA097E20008A1E3 /* HashTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagView.swift; sourceTree = "<group>"; };
 		213016711C9D524500A4598D /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
@@ -245,8 +247,9 @@
 		21E120C41C9BB2E700DB1C8D /* MyMynd */ = {
 			isa = PBXGroup;
 			children = (
-				21C0A1381C2AECCC0047306D /* DashboardController.swift */,
 				21623EA71CA3C761005F117F /* MyMyndViewController.swift */,
+				21C0A1381C2AECCC0047306D /* DashboardController.swift */,
+				2102B5151CC910920002BA24 /* MyPostsViewController.swift */,
 			);
 			name = MyMynd;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				21F6193A1C9952CB0089542F /* KolodaView.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				217138B81CAC00ED008CC4D1 /* WrittenPostNotificationView.swift in Sources */,
+				2102B5161CC910920002BA24 /* MyPostsViewController.swift in Sources */,
 				211772561CBA4900009B6DF0 /* SwipeChart.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
 				217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */,

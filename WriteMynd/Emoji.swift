@@ -17,20 +17,20 @@ enum Emoji {
     case Meh
     case None
     
-    func value() -> (name:String, imageName:String, color:UIColor ){
+    func value() -> (name:String, imageName:String, color:UIColor, imageNameLarge:String ){
         switch self {
         case .Happy:
-            return (name:"Happy", imageName:"happy", color: UIColor.wmLightGoldColor() )
+            return (name:"Happy", imageName:"happy", color: UIColor.wmLightGoldColor(), imageNameLarge:"happy-large" )
         case .Sad:
-            return (name:"Sad", imageName:"sad", color: UIColor.wmSoftBlueColor() )
+            return (name:"Sad", imageName:"sad", color: UIColor.wmSoftBlueColor(), imageNameLarge:"sad-large" )
         case .Angry:
-            return (name:"Angry", imageName:"angry", color: UIColor.wmOrangePinkColor() )
+            return (name:"Angry", imageName:"angry", color: UIColor.wmOrangePinkColor(), imageNameLarge:"angry-large" )
         case .Scared:
-            return (name:"Scared", imageName:"fear", color: UIColor.wmGreenishTealTwoColor() )
+            return (name:"Scared", imageName:"fear", color: UIColor.wmGreenishTealTwoColor(), imageNameLarge:"fear-large" )
         case .Meh:
-            return (name:"Meh", imageName:"meh", color: UIColor.wmSilverTwoColor() )
+            return (name:"Meh", imageName:"meh", color: UIColor.wmSilverTwoColor(), imageNameLarge:"mEHH" )
         default:
-            return (name:"", imageName:"", color: UIColor.lightGrayColor() )
+            return (name:"Smiley", imageName:"", color: UIColor.lightGrayColor(), imageNameLarge:"" )
         }
     }
     

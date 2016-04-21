@@ -49,6 +49,12 @@ class Post {
         postData.saveInBackground()
     }
     
+    func delete(){
+        if let id = self.ID {
+            PFObject(withoutDataWithClassName: "Post", objectId: id).deleteInBackground()
+        }
+    }
+    
     class func convertPFObjectToPost( postObj:PFObject ) -> Post {
         let emojiText = postObj["emoji"] as! String
         var emoji:Emoji

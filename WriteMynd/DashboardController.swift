@@ -14,9 +14,6 @@ import SnapKit
 
 /**
  My Mynd Section. 
- - note
-    Consider switching to ~~https://github.com/i-schuetz/SwiftCharts~~ especially for the line charts or
-    use https://www.codebeaulieu.com/57/How-to-create-a-Line-Chart-using-ios-charts for the line charts | *http://www.appcoda.com/ios-charts-api-tutorial/
  */
 class DashboardController: UIViewController {
     
@@ -30,14 +27,14 @@ class DashboardController: UIViewController {
     
     lazy var myHashTagsLabel: Label = {
         let label = Label()
-        label.text = "My Hashtags"
+        label.text = "My Themes"
         label.textColor = UIColor.wmCoolBlueColor()
         return label
     }()
     
     lazy var myEmojisLabel: Label = {
         let label = Label()
-        label.text = "My Emojis"
+        label.text = "My Emotions"
         label.textColor = UIColor.wmCoolBlueColor()
         return label
     }()
@@ -53,12 +50,30 @@ class DashboardController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.wmBackgroundColor()
+        self.view.userInteractionEnabled = true 
         
         self.view.addSubview(topView)
         self.view.addSubview(middleView)
         self.view.addSubview(bottomView)
         
         _ = [topView,middleView].map({ $0.addBorder(edges: [.Bottom], colour: UIColor.wmSilverColor(), thickness: 0.9) })
+        middleView.userInteractionEnabled = true
+        
+        drawCharts()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.setNeedsLayout()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         //MARK: - Top level view constraints
         topView.snp_makeConstraints(closure: { make in
@@ -78,10 +93,17 @@ class DashboardController: UIViewController {
             make.centerX.equalTo(topView.snp_centerX)
             make.height.equalTo(topView.snp_height).offset(-25)
         })
-        //hashtagsPieCharts.backgroundColor = UIColor.wmSilverColor()
+        let hashTagInfoButton = self.moreInfoButton()
+        self.topView.addSubview(hashTagInfoButton)
+        hashTagInfoButton.tag = 0
+        hashTagInfoButton.snp_makeConstraints(closure: {make in
+            make.top.equalTo(myHashTagsLabel.snp_top)
+            make.right.equalTo(topView.snp_right).offset(-5)
+        })
         //END MARK
         
-        //MARK: Middle View Constraintse
+        //MARK: Middle View Constraints
+        middleView.userInteractionEnabled = true
         middleView.snp_makeConstraints(closure: { make in
             make.top.equalTo(topView.snp_bottom).offset(10)
             make.size.equalTo(topView.snp_size)
@@ -98,13 +120,20 @@ class DashboardController: UIViewController {
             make.centerX.equalTo(middleView.snp_centerX)
             make.height.equalTo(middleView.snp_height).offset(-25)
         })
-        //emojiPieChart.backgroundColor = .wmSilverColor()
+        let pieChartInfoButton = self.moreInfoButton()
+        pieChartInfoButton.tag = 1
+        self.middleView.addSubview(pieChartInfoButton)
+        pieChartInfoButton.snp_makeConstraints(closure: { make in
+            make.top.equalTo(myEmojisLabel.snp_top)
+            make.right.equalTo(middleView.snp_right).offset(-5)
+        })
         //END MARK
         
-        //MARK: Bottom View Constraints 
+        //MARK: Bottom View Constraints
         bottomView.snp_makeConstraints(closure: { make in
             make.top.equalTo(middleView.snp_bottom).offset(10)
             make.size.equalTo(middleView.snp_size)
+            make.centerX.equalTo(self.view.snp_centerX)
         })
         bottomView.addSubview(swipeLabel)
         swipeLabel.snp_makeConstraints(closure: { make in
@@ -118,18 +147,14 @@ class DashboardController: UIViewController {
             make.centerX.equalTo(bottomView.snp_centerX)
             make.height.equalTo(bottomView.snp_height).offset(-25)
         })
+        let swipeInfoButton = self.moreInfoButton()
+        swipeInfoButton.tag = 2
+        self.bottomView.addSubview(swipeInfoButton)
+        swipeInfoButton.snp_makeConstraints(closure: { make in
+            make.top.equalTo(swipeLabel.snp_top)
+            make.right.equalTo(bottomView.snp_right).offset(-5)
+        })
         //END MARK
-        
-        drawCharts()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     func drawCharts(){
@@ -212,10 +237,33 @@ extension DashboardController {
     }
 }
 
+extension DashboardController {
+    func moreInfoButtonTapped( sender:UIButton ){
+        print("Button Touched")
+        print("Button tapped \(sender.tag)")
+    }
+}
+
 /**
  Utility functions
  */
 extension DashboardController {
+    func moreInfoButton() -> UIButton {
+        let button = UIButton(type: .Custom);
+        button.setImage(UIImage(named: "info"), forState: .Normal)
+        //button.backgroundColor = .redColor()
+        //button.setTitle("Info", forState: .Normal)
+        button.setTitleColor(.redColor(), forState: .Normal)
+        button.imageView?.userInteractionEnabled = false
+        button.userInteractionEnabled = true
+        button.addTarget(self, action: .infoButtonTapped, forControlEvents: .TouchUpInside)
+        button.snp_makeConstraints(closure: {make in
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+        })
+        return button;
+    }
+    
     func averageScoreFor( swipes:[Swipe] ) -> Double {
         let total = swipes.reduce(0, combine: { (total,cur) in
             return total + cur.value
@@ -224,80 +272,6 @@ extension DashboardController {
     }
 }
 
-////            //Customise the Line Graph Section
-////            self.emojiSegmentedControl.removeAllSegments()
-////            //customise the line graph
-////            self.lineChartView.backgroundColor = UIColor(red: 133/255, green: 97/255, blue: 166/255, alpha: 1.0)
-////            self.lineChartView.drawGridBackgroundEnabled = false
-////            self.lineChartView.scaleXEnabled = false; self.lineChartView.scaleYEnabled = false
-////            self.lineChartView.pinchZoomEnabled = false
-////            self.lineChartView.xAxis.valueFormatter = LineXAxis()
-////            self.lineChartView.xAxis.drawGridLinesEnabled = false
-////
-////            //Draw the Line Chart for the emoji used over time
-////            self.emojiMap = self.makeEmojiToDateCountDictionary(posts)
-////            var i = 0;
-////            for (emoji,_) in self.emojiMap! {
-////                self.emojiSegmentedControl.insertSegmentWithTitle(String(emoji), atIndex: i, animated: false);
-////                self.emojiSegmentedControl.setWidth(50.0, forSegmentAtIndex: i)
-////                i++
-////            }
-////            self.emojiSegmentedControl.hidden = false
-////            self.emojiSegmentedControl.selectedSegmentIndex = 0
-////            self.emojiSegmentedControl.addTarget(self, action: #selector(DashboardController.emojiSegmentControlTapped(_:)), forControlEvents: .ValueChanged)
-////            //print( self.emojiMap )
-////            self.drawLineGraph((self.emojiMap?.keys.first!)!, map: self.emojiMap!)
-////            print(self.lineGraphCanvas.frame.width)
-////        })
-//    }
-//    
-
-//    func drawLineGraph( emoji:Character, map:[Character: [NSDate:Int]] ){
-//        var dataPoints:[String] = []; var values:[Double] = []
-//        let data = map[emoji]
-//        let dateFormat = DateFormat.Custom("dd/MM/yyyy")
-//        for (date,count) in data! {
-//            dataPoints.append(date.toString(dateFormat)!)
-//            values.append( Double(count) )
-//        }
-//        setLineChart(dataPoints, values: values)
-//    }
-//    
-//    func setLineChart( dataPoints:[String], values:[Double] ){
-////        var dataEntries: [ChartDataEntry] = []
-////        for i in 0..<dataPoints.count {
-////            dataEntries.append( ChartDataEntry(value: values[i], xIndex: i) )
-////        }
-////        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "")
-////        let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
-////        lineChartData.setValueFont(UIFont(name: "Avenir", size: 9))
-////        lineChartView.data = lineChartData
-//    }
-//
-//    
-//    func makeEmojiToDateCountDictionary( posts:[Post] ) -> [Character: [NSDate:Int]] {
-//        var emojiToDirtyDatesCount: [Character: [NSDate]] = [:]
-//        for post in posts {
-//            if let key = post.emoji.value().name.characters.first {
-//                if emojiToDirtyDatesCount[key] != nil{ emojiToDirtyDatesCount[key]!.append(post.createdAt!) }
-//                else { emojiToDirtyDatesCount[key] = [post.createdAt!] }
-//            }
-//        }
-//        //print(emojiToDirtyDatesCount)
-//        var emojiMap: [Character:[NSDate:Int]] = [:]
-//        for (emoji,dates) in emojiToDirtyDatesCount { emojiMap[emoji] = makeDatesToCountDict(dates) }
-//        return emojiMap
-//    }
-//    
-//    func makeDatesToCountDict( dates:[NSDate] ) -> [NSDate:Int] {
-//        let dateFormat = DateFormat.Custom("dd/MM/yyyy")
-//        let result: [NSDate:Int] = dates.sort({ return $0 < $1 }).reduce([:], combine: { ( var dict:[NSDate:Int], date ) in
-//            let key = date.toString(dateFormat)!.toDate(dateFormat)!
-//            if dict[key] != nil { dict[key]! += 1 }
-//            else{ dict[key] = 1 }
-//            return dict
-//        })
-//        return result
-//    }
-
-
+private extension Selector {
+    static let infoButtonTapped = #selector(DashboardController.moreInfoButtonTapped(_:))
+}

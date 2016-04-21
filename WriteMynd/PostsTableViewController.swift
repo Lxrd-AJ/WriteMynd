@@ -19,9 +19,15 @@ protocol PostsTableVCDelegate {
     func scrollBegan( scrollView:UIScrollView )
     func editPost( post:Post )
     func shouldShowSearchController() -> Bool
+    func shouldShowMeLabelOnCell() -> Bool
+    func canDeletePost() -> Bool
 }
 extension PostsTableVCDelegate {
+    func scrollBegan( scrollView:UIScrollView ){}
+    func editPost( post:Post ){}
     func shouldShowSearchController() -> Bool { return true }
+    func shouldShowMeLabelOnCell() -> Bool { return true }
+    func canDeletePost() -> Bool { return false }
 }
 
 /**
@@ -89,6 +95,13 @@ class PostsTableViewController: UITableViewController {
             cell.readMoreButton.hidden = true
         }
         
+        if post.text == "" {
+            cell.setNeedsLayout()
+            cell.emojiImageView.image = UIImage( named: post.emoji.value().imageNameLarge )
+        }else{
+            cell.emojiImageView.image = UIImage( named: post.emoji.value().imageName )
+        }
+        
         if currentCellSelection == indexPath.section {
             cell.readMoreButton.hidden = false
             cell.readMoreButton.setTitle("Read Less", forState: .Normal)
@@ -97,7 +110,7 @@ class PostsTableViewController: UITableViewController {
         }
         
         if post.isEmpathised {
-            cell.empathiseButton.setBackgroundImage(UIImage(named: "empathise_heart_filled"), forState: .Normal)
+            cell.empathiseButton.setImage(UIImage(named: "empathise_heart_filled"), forState: .Normal)
         }else{
             cell.empathiseButton.setImage(UIImage(named: "empathise_heart"), forState: .Normal)
         }
@@ -107,7 +120,7 @@ class PostsTableViewController: UITableViewController {
         cell.clipsToBounds = true
         
         cell.empathiseButton.tag = indexPath.section
-        cell.emojiImageView.image = UIImage( named: post.emoji.value().imageName )
+        cell.empathiseButton.sizeToFit()
         cell.hashTagsLabel.setTitle(post.hashTags.reduce("", combine: { $0! + " " + $1 }), forState: .Normal)
         cell.hashTagsLabel.setFontSize(15)
         cell.hashTagsLabel.addTarget(self, action: .hashTagsButtonTapped, forControlEvents: .TouchUpInside)
@@ -118,6 +131,10 @@ class PostsTableViewController: UITableViewController {
         cell.ellipsesButton.addTarget(self, action: .showActionSheet, forControlEvents: .TouchUpInside)
         cell.readMoreButton.tag = indexPath.section
         cell.ellipsesButton.tag = indexPath.section
+        cell.updateEmojiConstraints()
+        
+        //Delegate requirements
+        self.updateDelegateRequirements(cell)
         
         return cell
     }
@@ -144,9 +161,20 @@ class PostsTableViewController: UITableViewController {
  */
 extension PostsTableViewController {
     
+    func updateDelegateRequirements( cell: PostTableViewCell ){
+        if let delegate = self.delegate {
+            if delegate.shouldShowMeLabelOnCell() {
+                cell.isPrivateLabel.hidden = false
+            }else{
+                cell.isPrivateLabel.hidden = true
+            }
+        }
+    }
+    
     /**
      - todo:
         [ ] Check with delegate if you should show the SearchController
+        [ ] Check with the delegate on whether to search all users or just the current user
      */
     func hashTagsButtonTapped( sender:Button ){
         let searchController = SearchViewController()
@@ -160,7 +188,7 @@ extension PostsTableViewController {
      - note: A good alternative is https://github.com/okmr-d/DOAlertController if it were updated
      */
     func showActionSheet( sender:Button ){
-        let index = sender.tag
+        let index = sender.tag //The index of the current cell(row) that was touched
         let post = self.posts[ index ]
         let alertController = UIAlertController(title: "Post Actions", message: "Choose an action to perform on the post", preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: { cancelAction in })
@@ -173,11 +201,20 @@ extension PostsTableViewController {
         let editPostAction = UIAlertAction(title: "Edit Post", style: .Default, handler: { editAction in
             self.delegate?.editPost(post)
         })
+        let deletePostAction = UIAlertAction(title: "Delete Post", style: .Destructive, handler: { deleteAction in
+            let post = self.posts.removeAtIndex(index)
+            post.delete()
+            self.tableView.reloadData()
+        })
         
         if post.author.objectId == PFUser.currentUser()?.objectId {
             alertController.addAction(editPostAction)
         }else{
             alertController.addAction(hidePost)
+        }
+        
+        if let _delegate = self.delegate where _delegate.canDeletePost() {
+            alertController.addAction(deletePostAction)
         }
         
         alertController.addAction(cancelAction)
@@ -208,6 +245,7 @@ extension PostsTableViewController {
     }
     
     func empathisePost( sender:Button ){
+        print("Empathise Button tapped")
         let post = self.posts[sender.tag]
         if post.isEmpathised {
             //Dempathise the post
