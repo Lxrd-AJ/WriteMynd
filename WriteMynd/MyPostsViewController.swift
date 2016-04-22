@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class MyPostsViewController: UIViewController {
     
@@ -43,7 +44,19 @@ class MyPostsViewController: UIViewController {
         self.view.addSubview(postsViewController.tableView)
         postsViewController.didMoveToParentViewController(self)
         postsViewController.posts = posts
-        postsViewController.delegate = self
+        postsViewController.delegate = self        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { posts in
+            self.posts = posts //Check if redundant
+            self.postsViewController.posts = posts
+            self.postsViewController.tableView.reloadData()
+        })
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         postsViewController.tableView.snp_makeConstraints(closure: { make in
             make.top.equalTo(self.buttonStackView.snp_bottom).offset(10)
@@ -51,11 +64,6 @@ class MyPostsViewController: UIViewController {
             make.bottom.equalTo(self.view.snp_bottom)
             make.centerX.equalTo(self.view.snp_centerX)
         })
-        
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,17 +101,16 @@ class MyPostsViewController: UIViewController {
 
 extension MyPostsViewController: PostsTableVCDelegate {
     
-    func canDeletePost() -> Bool {
-        return true 
-    }
+    func shouldSearchPrivatePosts() -> Bool{ return true }
+    func canDeletePost() -> Bool { return true }
+    func shouldShowMeLabelOnCell() -> Bool { return false }
     
     func editPost(post: Post) {
-        print("UnImplemented => Edit Post")
+        let writeVC = WriteViewController()
+        writeVC.post = post
+        self.navigationController?.pushViewController(writeVC, animated: true)
     }
-    
-    func shouldShowMeLabelOnCell() -> Bool {
-        return false
-    }
+
 }
 
 private extension Selector {

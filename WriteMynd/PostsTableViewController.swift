@@ -21,6 +21,7 @@ protocol PostsTableVCDelegate {
     func shouldShowSearchController() -> Bool
     func shouldShowMeLabelOnCell() -> Bool
     func canDeletePost() -> Bool
+    func shouldSearchPrivatePosts() -> Bool
 }
 extension PostsTableVCDelegate {
     func scrollBegan( scrollView:UIScrollView ){}
@@ -28,6 +29,7 @@ extension PostsTableVCDelegate {
     func shouldShowSearchController() -> Bool { return true }
     func shouldShowMeLabelOnCell() -> Bool { return true }
     func canDeletePost() -> Bool { return false }
+    func shouldSearchPrivatePosts() -> Bool{ return false }
 }
 
 /**
@@ -174,10 +176,14 @@ extension PostsTableViewController {
     /**
      - todo:
         [ ] Check with delegate if you should show the SearchController
-        [ ] Check with the delegate on whether to search all users or just the current user
+        [x] Check with the delegate on whether to search all users or just the current user
      */
     func hashTagsButtonTapped( sender:Button ){
         let searchController = SearchViewController()
+        if let delegate = self.delegate {
+            searchController.postsController.delegate = delegate
+            searchController.shouldSearchPrivatePosts = delegate.shouldSearchPrivatePosts()
+        }
         searchController.searchParameters = sender.titleLabel!.text!.componentsSeparatedByString("#")
             .filter({ $0 != " " })//Extra Space added by us in `reduce`
             .map({ "#\($0)" })

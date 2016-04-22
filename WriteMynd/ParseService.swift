@@ -27,10 +27,13 @@ class ParseService {
         })
     }
     
-    class func getPostsWith( hashTags:[String], callback:(posts:[Post]) -> Void ){
+    class func getPostsWith( hashTags:[String], callback:(posts:[Post]) -> Void, forUser:PFUser? ){
         let query = PFQuery(className: "Post")
         query.whereKey("hashTags", containedIn: hashTags)
         //query.whereKey("hashTags", containsAllObjectsInArray: hashTags)
+        if let user = forUser {
+            query.whereKey("parent", equalTo: user)
+        }
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
             if let objects = posts {

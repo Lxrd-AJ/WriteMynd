@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 /**
  - todo: 
@@ -16,6 +17,7 @@ class SearchViewController: UIViewController {
 
     let postsController = PostsTableViewController()
     var searchParameters: [String] = []
+    var shouldSearchPrivatePosts: Bool = false
     
     lazy var searchTextField: FloatLabelTextField = {
         let field = FloatLabelTextField()
@@ -64,11 +66,20 @@ class SearchViewController: UIViewController {
         
         if searchParameters.count > 0 {
             searchTextField.text = searchDisplayText(searchParameters)
-            ParseService.getPostsWith(searchParameters, callback: { posts in
-                print(posts)
-                self.postsController.posts = posts
-                self.postsController.tableView.reloadData()
-            })
+            if shouldSearchPrivatePosts {
+                ParseService.getPostsWith(searchParameters, callback: { posts in
+                    print(posts)
+                    self.postsController.posts = posts
+                    self.postsController.tableView.reloadData()
+                }, forUser: PFUser.currentUser()!)
+            }else{
+                ParseService.getPostsWith(searchParameters, callback: { posts in
+                    print(posts)
+                    self.postsController.posts = posts
+                    self.postsController.tableView.reloadData()
+                }, forUser: nil)
+            }
+
         }
     }
 
