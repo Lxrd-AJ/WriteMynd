@@ -352,18 +352,23 @@ extension WriteViewController {
         case 0:
             self.descriptionLabel.text = "Happy"
             self.post?.emoji = .Happy
+            self.bigEmojiImage.image = UIImage(named: "happyManStood")
         case 1:
             self.descriptionLabel.text = "Sad"
             self.post?.emoji = .Sad
+            self.bigEmojiImage.image = UIImage(named: "sadManStood")
         case 2:
             self.descriptionLabel.text = "Angry"
             self.post?.emoji = .Angry
+            self.bigEmojiImage.image = UIImage(named: "angryManStood")
         case 3:
             self.descriptionLabel.text = "Fear"
             self.post?.emoji = .Scared
+            self.bigEmojiImage.image = UIImage(named: "fearManStood")
         case 4:
             self.descriptionLabel.text = "Meh"
             self.post?.emoji = .Meh
+            self.bigEmojiImage.image = UIImage(named: "mehManStood")
         default:
             break;
         }
