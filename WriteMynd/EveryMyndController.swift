@@ -148,7 +148,10 @@ class EveryMyndController: ViewController {
         super.viewDidAppear(animated)
         //Check if User exists
         if let _ = PFUser.currentUser() {
-            fetchPosts()            
+            fetchPosts()
+            
+            //Track the user viewing `EveryMynd` event
+            MixpanelService.track("USER_VIEWED_EVERYMYND")
         }else{
             //Present Signup/Login Page
             let loginVC:LoginViewController = LoginViewController()

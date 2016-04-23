@@ -75,7 +75,7 @@ class SwipeViewController: UIViewController {
 
 extension SwipeViewController {
     func animateToColor( color: UIColor ){
-        UIView.animateWithDuration(1.0, delay: 0.1, options: .CurveEaseIn, animations: {
+        UIView.animateWithDuration(0.5, delay: 0.01, options: .CurveEaseIn, animations: {
             self.view.backgroundColor = color
             }, completion: nil)
     }
@@ -115,17 +115,25 @@ extension SwipeViewController: SwipeViewDelegate {
     
     /**
      - todo:
-        [ ] If the feeling is in the negative space then add a negative value 
+        [x] If the feeling is in the negative space then add a negative value
      */
     func koloda(koloda: SwipeView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeDirection) {
         let feeling = questions[Int(index)]
         var swipe = Swipe(value: -1, feeling: feeling)
+        var emotion = "negative"
         
         if negativeSwipeQuestions.contains(feeling) {
             swipe.value = -direction.rawValue
         }else{
             swipe.value = direction.rawValue
+            emotion = "positive"
         }
+        
+        //TRACKING
+        MixpanelService.track("USER_SWIPED", properties: [
+                "emotion": emotion
+            ])
+        //END TRACKING
         
         swipe.save()
         self.resetView()

@@ -8,3 +8,4 @@
 #import <RMActionController/RMActionController.h>
 #import <RMDateSelectionViewController/RMDateSelectionViewController.h>
 #import <JTSActionSheet/JTSActionSheet.h>
+#import "Mixpanel/Mixpanel.h"

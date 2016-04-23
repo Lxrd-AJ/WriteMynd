@@ -334,6 +334,12 @@ extension WriteViewController {
                 notificationView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
             }, completion: { bool in
                 self.post!.save()
+                //TRACK
+                MixpanelService.track("USER_MADE_POST", properties: [
+                        "Feeling": self.post!.emoji.value().name,
+                        "private_post": self.post!.isPrivate
+                    ])
+                //END TRACK
                 self.delay(3, closure: {
                     notificationView.removeFromSuperview()
                     self.navigationController?.popViewControllerAnimated(true)
