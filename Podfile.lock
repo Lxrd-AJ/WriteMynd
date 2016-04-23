@@ -27,7 +27,7 @@ PODS:
     - RMActionController (~> 1.0.5)
   - SnapKit (0.15.0)
   - SwiftDate (2.0.2)
-  - SwiftSpinner (0.9.1)
+  - SwiftSpinner (0.9.5)
   - ZendeskSDK (1.5.4.1):
     - ZendeskSDK/Core (= 1.5.4.1)
     - ZendeskSDK/Localization (= 1.5.4.1)
@@ -62,7 +62,7 @@ SPEC CHECKSUMS:
   RMDateSelectionViewController: 354a0f1fe40bac01054528b7a8735f2973bbd813
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftDate: b4f4d0962afe48365ad2800c9850a6626deb9359
-  SwiftSpinner: 09a60c00f4dfa2097b4deabd26f513ad077af4f1
+  SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
   ZendeskSDK: 45b7a2812a04c3c5c2510aeeeded5818e6e705a5
 
 PODFILE CHECKSUM: 1789abc186f953921fd4105ce335ad896b5af41a

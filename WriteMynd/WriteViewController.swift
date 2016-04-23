@@ -19,6 +19,8 @@ class WriteViewController: UIViewController {
     
     var currentTextField: UITextField? //The Current textfield the user is editing
     var post: Post?
+    var editingHashTags: Bool = true
+    let question = dailyQuestion[Int( arc4random_uniform(UInt32(dailyQuestion.count)))]
     
     lazy var bigEmojiImage: UIImageView = {
         let image = UIImageView()
@@ -42,45 +44,19 @@ class WriteViewController: UIViewController {
     }()
     
     lazy var happyEmoji: UIButton = {
-        let button = UIButton()
-        //button.setImage(UIImage(named: "happy"), forState: .Normal)
-        button.setBackgroundImage(UIImage(named: "happy"), forState: .Normal)
-        button.imageView?.contentMode = .ScaleAspectFit
-        button.tag = 0
-        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
-        return button
+        return self.createEmojiButton( "happy", tag:0 )
     }()
     lazy var sadEmoji : UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "sad"), forState: .Normal)
-        button.imageView?.contentMode = .ScaleAspectFit
-        button.tag = 1
-        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
-        return button
+        return self.createEmojiButton( "sad", tag:1 )
     }()
     lazy var angryEmoji: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "angry"), forState: .Normal)
-        button.imageView?.contentMode = .ScaleAspectFit
-        button.tag = 2
-        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
-        return button
+        return self.createEmojiButton( "angry", tag:2 )
     }()
     lazy var fearEmoji: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "fear"), forState: .Normal)
-        button.imageView?.contentMode = .ScaleAspectFit
-        button.tag = 3
-        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
-        return button
+        return self.createEmojiButton( "fear", tag:3 )
     }()
     lazy var mehEmoji: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "meh"), forState: .Normal)
-        button.imageView?.contentMode = .ScaleAspectFit
-        button.tag = 4
-        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
-        return button
+        return self.createEmojiButton( "meh", tag:4 )
     }()
     
     lazy var hashTagField: UITextField = { //this has the tag of 5
@@ -91,6 +67,7 @@ class WriteViewController: UIViewController {
         field.layer.borderColor = UIColor.lightGrayColor().CGColor
         field.font = Label.font()
         field.backgroundColor = UIColor.whiteColor()
+        field.textColor = UIColor.lightGrayColor()
         field.leftView = paddingView
         field.leftViewMode = .Always
         field.delegate = self
@@ -98,20 +75,17 @@ class WriteViewController: UIViewController {
         return field
     }()
     
-    lazy var feelingField: UITextField = {  //this has the tag of 10
-        let field = UITextField()
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
-        field.placeholder = dailyQuestion[Int( arc4random_uniform(UInt32(dailyQuestion.count)))]
-        field.layer.borderWidth = 1.0
-        field.layer.borderColor = UIColor.lightGrayColor().CGColor
-        field.font = Label.font()
-        field.backgroundColor = UIColor.whiteColor()
-        field.adjustsFontSizeToFitWidth = true
-        field.leftView = paddingView
-        field.leftViewMode = .Always
-        field.delegate = self
-        field.tag = 10
-        return field
+    lazy var feelingsTextView: UITextView = {
+        let textView = UITextView()
+        textView.textContainerInset = UIEdgeInsetsMake(5, 10, 0, 10)
+        textView.font = Label.font()
+        textView.text = self.question
+        //textView.tintColor = UIColor.blueColor()
+        textView.textColor = UIColor.lightGrayColor()
+        textView.delegate = self
+        textView.layer.borderWidth = 1.0
+        textView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        return textView
     }()
     
     lazy var postToMeButton: Button = {
@@ -152,69 +126,80 @@ class WriteViewController: UIViewController {
         
         //Add the UI elements 
         self.view.addSubview(bigEmojiImage)
+        self.view.addSubview(descriptionLabel)
+        self.view.addSubview(emojisContainerView)
+        
+
+        emojisContainerView.addSubview(happyEmoji)
+        emojisContainerView.addSubview(sadEmoji)
+        emojisContainerView.addSubview(angryEmoji)
+        emojisContainerView.addSubview(fearEmoji)
+        emojisContainerView.addSubview(mehEmoji)
+        
+        self.view.addSubview(hashTagField)
+        self.view.addSubview(feelingsTextView)
+        self.view.addSubview(postToMeButton)
+        self.view.addSubview(postToAllButton)
+        
+    }
+    
+    /** 
+     - todo:
+        [ ] Use StackViews to help layout elems
+     */
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
         bigEmojiImage.snp_makeConstraints(closure: { make in
-            var topOffset:Float = 35;
-            if let navHeight = self.navigationController?.navigationBar.bounds.height{
-                topOffset += Float(navHeight);
-            }
-            make.top.equalTo(self.view.snp_top).offset(topOffset)
+            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(10)
             make.centerX.equalTo(self.view.snp_centerX)
+            make.size.equalTo(CGSize(width: 150, height: 167))
         })
         
-        self.view.addSubview(descriptionLabel)
         descriptionLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(bigEmojiImage.snp_bottom).offset(10)
             make.centerX.equalTo(self.view.snp_centerX)
             make.width.lessThanOrEqualTo(self.view.snp_width)
         })
         
-        
-        
-        self.view.addSubview(emojisContainerView)
         emojisContainerView.snp_makeConstraints(closure: { make in
             make.top.equalTo(descriptionLabel.snp_bottom).offset(10)
             make.width.equalTo(self.view.snp_width)
             make.centerX.equalTo(self.view.snp_centerX)
             make.height.equalTo(50.0)
         })
-        //Add the Happy Emoji
-        emojisContainerView.addSubview(happyEmoji)
+        
         happyEmoji.snp_makeConstraints(closure: { make in
             make.width.equalTo(50)
             make.height.equalTo(50)
             make.left.equalTo(emojisContainerView.snp_left).offset(20)
             make.top.equalTo(emojisContainerView.snp_top)
         })
-        //Sad Emoji
-        emojisContainerView.addSubview(sadEmoji)
+        
         sadEmoji.snp_makeConstraints(closure: {make in
             make.size.equalTo(happyEmoji.snp_size)
             make.top.equalTo(happyEmoji.snp_top)
             make.left.equalTo(happyEmoji.snp_right).offset(20)
         })
-        //Angry
-        emojisContainerView.addSubview(angryEmoji)
+        
         angryEmoji.snp_makeConstraints(closure: { make in
             make.size.equalTo(sadEmoji.snp_size)
             make.top.equalTo(sadEmoji.snp_top)
             make.left.equalTo(sadEmoji.snp_right).offset(20)
         })
-        emojisContainerView.addSubview(fearEmoji)
+        
         fearEmoji.snp_makeConstraints(closure: { make in
             make.size.equalTo(angryEmoji.snp_size)
             make.top.equalTo(angryEmoji.snp_top)
             make.left.equalTo(angryEmoji.snp_right).offset(20)
         })
-        emojisContainerView.addSubview(mehEmoji)
+        
         mehEmoji.snp_makeConstraints(closure: { make in
             make.size.equalTo(fearEmoji.snp_size)
             make.top.equalTo(fearEmoji.snp_top)
             make.left.equalTo(fearEmoji.snp_right).offset(20)
         })
         
-        
-        
-        self.view.addSubview(hashTagField)
         hashTagField.snp_makeConstraints(closure: { make in
             make.top.equalTo(emojisContainerView.snp_bottom).offset(10)
             make.width.equalTo(screenWidth - 20)
@@ -222,33 +207,39 @@ class WriteViewController: UIViewController {
             make.height.equalTo(45)
         })
         
-        self.view.addSubview(feelingField)
-        feelingField.snp_makeConstraints(closure: { make in
+        feelingsTextView.snp_makeConstraints(closure: { make in
             make.top.equalTo( hashTagField.snp_bottom ).offset(10)
-            make.size.equalTo( hashTagField )
+            //make.size.equalTo( CGSize(width: 335, height: 85 ))
+            make.width.equalTo(hashTagField.snp_width)
+            make.height.equalTo(85)
             make.centerX.equalTo(self.view.snp_centerX)
         })
         
-        self.view.addSubview(postToMeButton)
         postToMeButton.snp_makeConstraints(closure: { make in
             make.left.equalTo(self.view.snp_left).offset(10)
-            make.top.equalTo(self.feelingField.snp_bottom).offset(11)
+            make.top.equalTo(self.feelingsTextView.snp_bottom).offset(11)
             make.width.equalTo(162)
             make.height.equalTo(45)
         })
         
-        self.view.addSubview(postToAllButton)
         postToAllButton.snp_makeConstraints(closure: { make in
             make.right.equalTo(self.view.snp_right).offset(-10)
-            make.top.equalTo(self.feelingField.snp_bottom).offset(11)
+            make.top.equalTo(self.feelingsTextView.snp_bottom).offset(11)
             make.width.equalTo(162)
             make.height.equalTo(45)
         })
+
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         //Register for the keyboard will show notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WriteViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil) //UIKeyboardDidShowNotification
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     deinit {
@@ -263,6 +254,15 @@ class WriteViewController: UIViewController {
 }
 
 extension WriteViewController {
+    
+    func createEmojiButton( imageName: String, tag:Int ) -> UIButton {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: imageName), forState: .Normal)
+        button.imageView?.contentMode = .ScaleAspectFit
+        button.tag = tag
+        button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
+        return button
+    }
     
     /**
      Executes the closure using grand central dispatch on the main queue
@@ -280,7 +280,7 @@ extension WriteViewController {
     }
     
     func populateViewWithPost( post:Post ){
-        self.feelingField.text = post.text
+        self.feelingsTextView.text = post.text
         self.hashTagField.text = post.hashTags.reduce("", combine: { hashtags, tag in
             return "\(hashtags!)\(tag)"
         })
@@ -382,49 +382,48 @@ extension WriteViewController {
         self.view.addSubview(self.focusView)
         print("Keyboard Did appear \(keyboardFrame)")
         
-        if let textField = self.currentTextField {
-            textField.resignFirstResponder()
+        if self.editingHashTags { //HashTag field
+            let hashtagView = HashTagView()
+            self.focusView.addSubview(hashtagView)
+            hashtagView.snp_makeConstraints(closure: { make in
+                make.bottom.equalTo(self.view.snp_top).offset(keyboardFrame.origin.y - 100)
+                make.left.equalTo(self.view.snp_left)//.offset(10)
+                make.width.equalTo(self.view.snp_width)
+                make.centerX.equalTo(self.view.snp_centerX)
+            })
+            hashtagView.setupConstraints()
             
-            if textField.tag == 5 { //HashTag field
-                let hashtagView = HashTagView()
-                self.focusView.addSubview(hashtagView)
-                hashtagView.snp_makeConstraints(closure: { make in
-                    make.bottom.equalTo(self.view.snp_top).offset(keyboardFrame.origin.y - 100)
-                    make.left.equalTo(self.view.snp_left)//.offset(10)
-                    make.width.equalTo(self.view.snp_width)
-                    make.centerX.equalTo(self.view.snp_centerX)
+            hashtagView.hashtagField.becomeFirstResponder()
+            hashtagView.hashtagField.text = self.hashTagField.text
+            hashtagView.onFinishCallback = {
+                self.hashTagField.text = hashtagView.hashtagField.text
+                self.post!.hashTags = self.hashTagField.text!.componentsSeparatedByString(" ").filter({ (text:String) -> Bool in
+                    guard text != "" else { return false }
+                    return text[text.startIndex] == "#"
                 })
-                hashtagView.setupConstraints()
-                
-                hashtagView.hashtagField.becomeFirstResponder()
-                hashtagView.hashtagField.text = textField.text
-                hashtagView.onFinishCallback = {
-                    textField.text = hashtagView.hashtagField.text
-                    self.post!.hashTags = textField.text!.componentsSeparatedByString(" ").filter({ (text:String) -> Bool in
-                        guard text != "" else { return false }
-                        return text[text.startIndex] == "#"
-                    })
-                    self.focusView.removeFromSuperview()
-                }
-            }else if textField.tag == 10 { //Feeling field
-                let feelingsView = FeelingsView()
-                self.focusView.addSubview(feelingsView)
-                feelingsView.snp_makeConstraints(closure: { make in
-                    make.bottom.equalTo(self.view.snp_bottom).offset(-keyboardFrame.origin.y)
-                    make.left.equalTo(self.view.snp_left)
-                    make.width.equalTo(self.view.snp_width)
-                    make.centerX.equalTo(self.view.snp_centerX)
-                })
-                feelingsView.setupConstraints()
-                feelingsView.feelingsTextView.becomeFirstResponder()
-                feelingsView.feelingsTextView.text = textField.text
-                feelingsView.onFinishCallback = {
-                    textField.text = feelingsView.feelingsTextView.text
-                    self.post!.text = textField.text!
-                    self.focusView.removeFromSuperview()
-                }
+                self.focusView.removeFromSuperview()
             }
-        }//end if
+        }else{ //Feeling field
+            let feelingsView = FeelingsView()
+            self.focusView.addSubview(feelingsView)
+            //BUG: The cursor isn't showing on `feelingsView.feelingsTextView`, an option is to reuse `feelingsTextView` and just remake its constraints
+            feelingsView.snp_makeConstraints(closure: { make in
+                make.bottom.equalTo(self.view.snp_bottom).offset(-keyboardFrame.origin.y)
+                make.left.equalTo(self.view.snp_left)
+                make.width.equalTo(self.view.snp_width)
+                make.centerX.equalTo(self.view.snp_centerX)
+            })
+            feelingsView.setupConstraints()
+            feelingsView.feelingsTextView.becomeFirstResponder()
+            feelingsView.feelingsTextView.text = self.feelingsTextView.text
+            feelingsView.onFinishCallback = {
+                self.feelingsTextView.text = feelingsView.feelingsTextView.text
+                self.feelingsTextView.resignFirstResponder()
+                self.post!.text = self.feelingsTextView.text!
+                self.focusView.removeFromSuperview()
+            }
+        }
+
     }
     
 }
@@ -432,7 +431,7 @@ extension WriteViewController {
 extension WriteViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        self.currentTextField = textField
+        self.editingHashTags = true
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
@@ -442,6 +441,18 @@ extension WriteViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension WriteViewController: UITextViewDelegate {
+    /**
+     - todo:
+        [ ] Consider using a placeholder for the textview
+     */
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        self.editingHashTags = false
+        self.feelingsTextView.text = ""
         return true
     }
 }

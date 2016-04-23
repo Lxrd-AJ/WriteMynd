@@ -7,7 +7,6 @@ target 'WriteMynd' do
     
 	pod 'Parse'
     pod 'ParseUI'
-    #pod 'PromiseKit', '~> 2.0'
     pod 'SwiftSpinner'
     pod 'MMDrawerController'
     pod 'Charts'
@@ -17,6 +16,9 @@ target 'WriteMynd' do
     pod 'SnapKit', '~> 0.15.0'
     pod 'pop', '~> 1.0'
     pod 'JTSActionSheet', '~> 1.0.1'
+    pod 'Mixpanel'
+    
+    #pod 'PromiseKit', '~> 2.0'
     #pod 'DOFavoriteButton', '~> 0.0.4'
     #pod 'DOAlertController'
     

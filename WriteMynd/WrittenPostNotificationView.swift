@@ -12,7 +12,7 @@ class WrittenPostNotificationView: UIView {
 
     lazy var imageView: UIImageView = {
         let icon = UIImageView()
-        icon.backgroundColor = .lightGrayColor()
+        icon.image = UIImage(named: "cloud")
         return icon
     }()
     
@@ -33,7 +33,7 @@ class WrittenPostNotificationView: UIView {
         self.addSubview(imageView)
         imageView.snp_makeConstraints(closure: { make in
             make.bottom.equalTo(message.snp_top).offset(-10)
-            make.size.equalTo(CGSize(width: 127, height: 127))
+            make.size.equalTo(CGSize(width: 121, height: 98))
             make.centerX.equalTo(self.snp_centerX)
         })
     }

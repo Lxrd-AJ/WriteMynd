@@ -8,6 +8,7 @@
 
 import UIKit
 import MMDrawerController
+import Parse
 
 /**
  - todo:
@@ -21,12 +22,32 @@ class MenuViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableFooterView = UIView()
+        
+        tableView.backgroundColor = .wmCoolBlueColor()
+        tableView.separatorColor = .whiteColor()
+        tableView.alwaysBounceVertical = false
+        tableView.tableHeaderView = self.tableViewHeader()
+        tableView.tableFooterView = self.tableViewFooter()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        tableView.tableHeaderView?.snp_makeConstraints(closure: { make in
+            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(15)
+            make.left.equalTo(self.tableView.snp_left).offset(5)
+        })
+        
+        tableView.tableFooterView?.snp_makeConstraints(closure: { make in
+            make.bottom.equalTo(self.snp_bottomLayoutGuideBottom)
+            make.width.equalTo(self.tableView.snp_width)
+            make.height.equalTo(150)
+        })
     }
 
     //Table view data source
@@ -41,7 +62,12 @@ class MenuViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as! MenuViewCell
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.wmSlateGreyColor()
         cell.titleLabel.text = menuItems[indexPath.row]
+        cell.selectedBackgroundView = backgroundView
+        
         return cell
     }
     
@@ -66,4 +92,51 @@ class MenuViewController: UITableViewController {
         self.drawerController?.closeDrawerAnimated(true, completion: nil)
     }
     
+}
+
+extension MenuViewController {
+    
+    func tableViewHeader() -> UIView {
+        let button = UIButton(type: .Custom)
+        button.setBackgroundImage(UIImage(named: "cross-menu"), forState: .Normal)
+        button.addTarget(self, action: .closeDrawer, forControlEvents: .TouchUpInside)
+        return button
+    }
+    
+    func tableViewFooter() -> UIView {
+        let footerStackView = UIStackView()
+        let logo = UIImageView(image: UIImage(named: "wm-logo-menu"))
+        let logOutButton = Button()
+        
+        logo.contentMode = .Center
+        logOutButton.setTitle("Log out", forState: .Normal)
+        logOutButton.backgroundColor = UIColor.wmGreenishTealColor()
+        logOutButton.setFontSize(17)
+        logOutButton.addTarget(self, action: .logOutUser, forControlEvents: .TouchUpInside)
+        
+        footerStackView.axis = .Vertical
+        footerStackView.alignment = .Fill
+        footerStackView.distribution = .FillProportionally
+        footerStackView.spacing = 6.0
+        
+        footerStackView.addArrangedSubview(logo)
+        footerStackView.addArrangedSubview(logOutButton)
+        
+        return footerStackView
+    }
+    
+    func closeDrawerButtonTapped( sender:Button ){
+        self.drawerController?.closeDrawerAnimated(true, completion: nil)
+    }
+    
+    func logOutButtonTapped( sender: Button ){
+        PFUser.logOut()
+        let meVC: EveryMyndController = storyboard!.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
+        self.drawerController?.centerViewController = UINavigationController(rootViewController: meVC)
+    }
+}
+
+private extension Selector{
+    static let closeDrawer = #selector(MenuViewController.closeDrawerButtonTapped(_:))
+    static let logOutUser = #selector(MenuViewController.logOutButtonTapped(_:))
 }

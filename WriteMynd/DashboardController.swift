@@ -72,6 +72,10 @@ class DashboardController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    /**
+     - todo:
+        [ ] Refactor to use UIStackViews 🔨
+     */
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         

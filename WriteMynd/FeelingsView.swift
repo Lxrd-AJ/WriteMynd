@@ -22,7 +22,7 @@ class FeelingsView: UIView {
     lazy var feelingsTextView: UITextView = {
         let textView = UITextView()
         textView.font = Label.font()
-        textView.tintColor = UIColor.blueColor()
+        //textView.tintColor = UIColor.blueColor()
         textView.textColor = UIColor.wmSlateGreyColor()
         textView.delegate = self
         textView.layer.borderWidth = 1.0
@@ -58,8 +58,12 @@ class FeelingsView: UIView {
 extension FeelingsView: UITextViewDelegate {
     
     func textViewDidBeginEditing(textView: UITextView) {
-        textView.tintColor = UIColor.blueColor()
-        print("Textfield did begin editing")
+        textView.tintColor = UIColor.wmCoolBlueColor()
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        textView.tintColor = .redColor()
+        return true 
     }
     /**
      - note: http://stackoverflow.com/questions/703754/how-to-dismiss-keyboard-for-uitextview-with-return-key
