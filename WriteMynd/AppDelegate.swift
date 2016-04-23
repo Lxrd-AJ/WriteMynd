@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 15.0)!,
             NSForegroundColorAttributeName: UIColor.wmCoolBlueColor()]
         , forState: .Normal)
-        UIBarButtonItem.appearance()
         
         //App Configurations
         let meVC: EveryMyndController = storyboard.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
@@ -59,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = drawerController
         window!.makeKeyAndVisible()
+        window!.tintColor = UIColor.wmCoolBlueColor()
         
         return true
     }

@@ -40,6 +40,8 @@ class LoginViewController: PFLogInViewController {
         //UI Customizations
         if let _ = PFUser.currentUser() {
             self.dismissViewControllerAnimated(true, completion: nil)
+        }else{
+            PFUser.logOut() //HACK: Logging out the current user is 100% guaranteed to work
         }
     }
     

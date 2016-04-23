@@ -155,7 +155,8 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
     func maxTuple () -> (Int,Int) {
         //maxTuple ( current_highest, total_value )
         guard self.keys.first != nil else{ return (0,0) }
-        return self.keys.reduce((self[self.keys.first!] as! Int, 0), combine: { (var tuple:(Int,Int), curKey) in
+        return self.keys.reduce((self[self.keys.first!] as! Int, 0), combine: { (_tuple:(Int,Int), curKey) in
+            var tuple = _tuple;
             let _curKey = self[curKey] as! Int
             if _curKey > tuple.0 { tuple.0 = _curKey }
             tuple.1 += _curKey
@@ -171,7 +172,8 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
     func minTuple () -> (Int,Int) {
         //minTuple ( current_lowest, total_value )
         guard self.keys.first != nil else{ return (0,0) }
-        return self.keys.reduce((self[self.keys.first!] as! Int, 0), combine: { (var tuple:(Int,Int), curKey) in
+        return self.keys.reduce((self[self.keys.first!] as! Int, 0), combine: { (_tuple:(Int,Int), curKey) in
+            var tuple = _tuple;
             let _curKey = self[curKey] as! Int
             if _curKey < tuple.0 { tuple.0 = _curKey }
             tuple.1 += _curKey

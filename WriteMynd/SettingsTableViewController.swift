@@ -12,6 +12,7 @@ import Parse
 import RMDateSelectionViewController
 import SwiftDate
 import ZendeskSDK
+import MessageUI
 
 /**
  Settings page for the entire app, Here the user can 
@@ -24,18 +25,18 @@ import ZendeskSDK
 class SettingsTableViewController: UITableViewController {
     
     let REMINDER_SWITCH: String = "REMINDER_SWITCH"
-    //let REMINDER_HOUR: String = "REMINDER_HOUR"
-    //let REMINDER_MINUTE: String = "REMINDER_MINUTE"
     let REMINDER_DATE: String = "REMINDER_DATE"
     
     //Settings Table
     let TROUBLE_APP = "Having trouble with the app?"
     let TIMER = "Set a Reminder"
+    let EMAIL_FEEDBACK = "Send Feedback via Email"
     
     lazy var rows: [String] = {
         return [
             "Set a daily reminder",
             self.TROUBLE_APP,
+            self.EMAIL_FEEDBACK,
             "Log out"
         ]
 
@@ -46,6 +47,10 @@ class SettingsTableViewController: UITableViewController {
         
         self.tableView.tableFooterView = UIView()
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SettingsCell")
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .Plain, target: self, action: nil)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: .Plain, target: self, action: .toggleMenu)
+
         
         //Check if the user's time string is in the user defaults, if true add the "Timer" string to after "Set a daily reminder"
         if let _ = NSUserDefaults.standardUserDefaults().objectForKey(REMINDER_DATE) where NSUserDefaults.standardUserDefaults().boolForKey(REMINDER_SWITCH) {
@@ -97,7 +102,7 @@ class SettingsTableViewController: UITableViewController {
             let reminderSwitch = UISwitch(frame: CGRectZero)
             let switchValue = NSUserDefaults.standardUserDefaults().boolForKey(REMINDER_SWITCH)
             reminderSwitch.setOn(switchValue, animated: false)
-            reminderSwitch.addTarget(self, action: "dailyReminderSwitchTapped:", forControlEvents: .ValueChanged)
+            reminderSwitch.addTarget(self, action: .reminderSwitchAction, forControlEvents: .ValueChanged)
             cell.accessoryView = reminderSwitch
         case TIMER:
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -130,6 +135,15 @@ class SettingsTableViewController: UITableViewController {
             self.mm_drawerController.centerViewController = UINavigationController(rootViewController: meVC)
         case TROUBLE_APP:
             ZDKRequests.showRequestCreationWithNavController(self.navigationController)
+        case EMAIL_FEEDBACK:
+            let mailVC = self.configureMailComposeVC()
+            if MFMailComposeViewController.canSendMail() {
+                self.presentViewController(mailVC, animated: true, completion: nil)
+            }else{
+                let alertController = UIAlertController(title: "Error 99", message: "An Error occurred, it seems we couldn't send the mail", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
         default:
             print("Unhandled cell select")
         }
@@ -154,10 +168,10 @@ class SettingsTableViewController: UITableViewController {
                 let application = UIApplication.sharedApplication()
                 
                 localNotification.fireDate = reminderDate
-                localNotification.alertBody = "Hello from WriteMynd, it's time to write a post"
+                localNotification.alertBody = "Take 10 minutes to do something good for your mind"
                 localNotification.alertAction = "Make a Post"
                 localNotification.timeZone = NSTimeZone.defaultTimeZone()
-                localNotification.alertTitle = "Yo! Yo!"
+                localNotification.alertTitle = "Hello!"
                 localNotification.repeatInterval = .Day
                 localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
                 
@@ -212,4 +226,27 @@ class SettingsTableViewController: UITableViewController {
         print( scheduleDate.toString(DateFormat.Custom("HH:mm")) )
         return scheduleDate
     }
+    
+    func configureMailComposeVC() -> MFMailComposeViewController {
+        let composerVC = MFMailComposeViewController()
+        composerVC.mailComposeDelegate = self
+        composerVC.setToRecipients(["lizziebarclay@hotmail.co.uk"])
+        composerVC.setSubject("Feedback on WriteMynd from \(PFUser.currentUser()!.email!)")
+        return composerVC
+    }
+    
+    func toggleMenu( sender:UIBarButtonItem ){
+        self.mm_drawerController.toggleDrawerSide(.Left, animated: true, completion: nil)
+    }
+}
+
+extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+private extension Selector {
+    static let reminderSwitchAction = #selector(SettingsTableViewController.dailyReminderSwitchTapped(_:))
+    static let toggleMenu = #selector(SettingsTableViewController.toggleMenu(_:))
 }
