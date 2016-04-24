@@ -106,6 +106,7 @@ class LoginViewController: UIViewController {
             if user != nil {
                 print("Log In successful")
                 SwiftSpinner.hide()
+                self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
                 self.mm_drawerController.centerViewController = UINavigationController(rootViewController: EveryMyndController())
             }else{
                 var message = error!.localizedDescription

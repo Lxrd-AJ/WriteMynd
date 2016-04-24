@@ -49,11 +49,15 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.wmCoolBlueColor()
+        self.mm_drawerController.openDrawerGestureModeMask = []
+        //self.mm_drawerController.setMaximumLeftDrawerWidth(0, animated: true, completion: nil)
         
         if PFUser.currentUser() != nil {
             print(PFUser.currentUser())
             let everyMyndVC = EveryMyndController()
+            self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
             self.mm_drawerController.centerViewController = UINavigationController(rootViewController: everyMyndVC)
+            
         }else{
             print("No User found")
         }

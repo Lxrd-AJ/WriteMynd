@@ -131,6 +131,7 @@ extension MenuViewController {
     
     func logOutButtonTapped( sender: Button ){
         PFUser.logOut()
+        self.mm_drawerController.closeDrawerAnimated(true, completion: nil)
         self.drawerController?.centerViewController = UINavigationController(rootViewController: WelcomeViewController())
     }
 }
