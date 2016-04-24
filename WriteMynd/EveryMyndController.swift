@@ -146,18 +146,21 @@ class EveryMyndController: ViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        fetchPosts()
+        
+        //Track the user viewing `EveryMynd` event
+        MixpanelService.track("USER_VIEWED_EVERYMYND")
+        
+        
         //Check if User exists
-        if let _ = PFUser.currentUser() {
-            fetchPosts()
-            
-            //Track the user viewing `EveryMynd` event
-            MixpanelService.track("USER_VIEWED_EVERYMYND")
-        }else{
-            //Present Signup/Login Page
-            let loginVC:LoginViewController = LoginViewController()
-            loginVC.signUpController = SignUpViewController()
-            self.presentViewController(loginVC, animated: true, completion: nil)
-        }
+//        if let _ = PFUser.currentUser() {
+//            
+//        }else{
+//            //Present Signup/Login Page
+//            let loginVC:LoginViewController = LoginViewController()
+//            loginVC.signUpController = SignUpViewController()
+//            self.presentViewController(loginVC, animated: true, completion: nil)
+//        }
         
     }
     

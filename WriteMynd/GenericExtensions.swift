@@ -48,6 +48,10 @@ extension UIColor {
     class func wmSilverTwoColor() -> UIColor {
         return UIColor(red: 205.0 / 255.0, green: 208.0 / 255.0, blue: 218.0 / 255.0, alpha: 1.0)
     }
+    
+    class func wmPaleGreyColor() -> UIColor {
+        return UIColor(red: 246.0 / 255.0, green: 247.0 / 255.0, blue: 251.0 / 255.0, alpha: 1.0)
+    }
 }
 
 extension UIView{

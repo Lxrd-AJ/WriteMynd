@@ -39,9 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         , forState: .Normal)
         
         //App Configurations
-        let meVC: EveryMyndController = storyboard.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
+        //let meVC: EveryMyndController = storyboard.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
+        let signupVC = WelcomeViewController()
         let menuVC: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
-        let navigationController: UINavigationController = UINavigationController(rootViewController: meVC)
+        let navigationController: UINavigationController = UINavigationController(rootViewController: signupVC)
         let drawerController: MMDrawerController = MMDrawerController(centerViewController: navigationController, leftDrawerViewController: menuVC)
         menuVC.navController = navigationController
         menuVC.drawerController = drawerController

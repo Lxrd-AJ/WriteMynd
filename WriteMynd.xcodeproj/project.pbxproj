@@ -17,6 +17,7 @@
 		213016791C9D780F00A4598D /* UILabel+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213016781C9D780F00A4598D /* UILabel+UIButton.swift */; };
 		2130167B1C9DACEC00A4598D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2130167A1C9DACEC00A4598D /* Emoji.swift */; };
 		2130167D1C9DFA2800A4598D /* EmpathisedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2130167C1C9DFA2800A4598D /* EmpathisedPost.swift */; };
+		2132E96C1CCC66EC0049E95F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132E96B1CCC66EC0049E95F /* SignupViewController.swift */; };
 		2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0751C1A3B2A00BE26FD /* ParseService.swift */; };
 		2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */; };
 		21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA41CA2E9B0005F117F /* FeelingsView.swift */; };
@@ -31,7 +32,7 @@
 		2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF31C11B65E003446AC /* Assets.xcassets */; };
 		2172FBF71C11B65E003446AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2172FBF51C11B65E003446AC /* LaunchScreen.storyboard */; };
 		2172FC021C11CD3A003446AC /* EveryMyndController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC011C11CD3A003446AC /* EveryMyndController.swift */; };
-		2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC031C11CFF9003446AC /* SignUpViewController.swift */; };
+		2172FC041C11CFF9003446AC /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC031C11CFF9003446AC /* WelcomeViewController.swift */; };
 		2172FC061C11D037003446AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC051C11D037003446AC /* LoginViewController.swift */; };
 		2172FC081C11E073003446AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC071C11E073003446AC /* Utilities.swift */; };
 		2172FC111C1258B7003446AC /* GenericExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC101C1258B7003446AC /* GenericExtensions.swift */; };
@@ -64,6 +65,7 @@
 		213016781C9D780F00A4598D /* UILabel+UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+UIButton.swift"; sourceTree = "<group>"; };
 		2130167A1C9DACEC00A4598D /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		2130167C1C9DFA2800A4598D /* EmpathisedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpathisedPost.swift; sourceTree = "<group>"; };
+		2132E96B1CCC66EC0049E95F /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		2136F0751C1A3B2A00BE26FD /* ParseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseService.swift; sourceTree = "<group>"; };
 		2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		21623EA41CA2E9B0005F117F /* FeelingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingsView.swift; sourceTree = "<group>"; };
@@ -80,7 +82,7 @@
 		2172FBF61C11B65E003446AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2172FBF81C11B65E003446AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2172FC011C11CD3A003446AC /* EveryMyndController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EveryMyndController.swift; sourceTree = "<group>"; };
-		2172FC031C11CFF9003446AC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		2172FC031C11CFF9003446AC /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		2172FC051C11D037003446AC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2172FC071C11E073003446AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2172FC101C1258B7003446AC /* GenericExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericExtensions.swift; sourceTree = "<group>"; };
@@ -265,8 +267,9 @@
 		21E120C61C9BB30F00DB1C8D /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
+				2172FC031C11CFF9003446AC /* WelcomeViewController.swift */,
 				2172FC051C11D037003446AC /* LoginViewController.swift */,
-				2172FC031C11CFF9003446AC /* SignUpViewController.swift */,
+				2132E96B1CCC66EC0049E95F /* SignupViewController.swift */,
 			);
 			name = OnBoarding;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 			files = (
 				213016721C9D524500A4598D /* WriteViewController.swift in Sources */,
 				21D467C91CB346D300412C3C /* EmojiPieChart.swift in Sources */,
+				2132E96C1CCC66EC0049E95F /* SignupViewController.swift in Sources */,
 				217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */,
 				213016791C9D780F00A4598D /* UILabel+UIButton.swift in Sources */,
 				2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */,
@@ -461,7 +465,7 @@
 				2172FC111C1258B7003446AC /* GenericExtensions.swift in Sources */,
 				2172FC021C11CD3A003446AC /* EveryMyndController.swift in Sources */,
 				21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */,
-				2172FC041C11CFF9003446AC /* SignUpViewController.swift in Sources */,
+				2172FC041C11CFF9003446AC /* WelcomeViewController.swift in Sources */,
 				219F4F581C9AFBFD00B9AB34 /* SwipeDirection.swift in Sources */,
 				21E120CA1C9BB43B00DB1C8D /* PostsTableViewController.swift in Sources */,
 				21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */,
