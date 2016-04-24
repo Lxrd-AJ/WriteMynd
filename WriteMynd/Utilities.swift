@@ -12,6 +12,21 @@ let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 let screenWidth = UIScreen.mainScreen().bounds.width
 let screenHeight = UIScreen.mainScreen().bounds.height
 
+/**
+ Executes the closure using grand central dispatch on the main queue
+ - parameters:
+ - delay: The amount in seconds to wait before executing `closure`
+ - closure: The lambda block to execute
+ */
+func delay(delay:Double, closure:()->()) {
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(delay * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), closure)
+}
+
 let dailyQuestion: [String] = [
     "What's going on?",
     "What mood are you in?",

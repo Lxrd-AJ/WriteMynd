@@ -264,20 +264,7 @@ extension WriteViewController {
         return button
     }
     
-    /**
-     Executes the closure using grand central dispatch on the main queue
-     - parameters: 
-        - delay: The amount in seconds to wait before executing `closure`
-        - closure: The lambda block to execute
-     */
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
-    }
+    
     
     func populateViewWithPost( post:Post ){
         self.feelingsTextView.text = post.text
@@ -340,7 +327,7 @@ extension WriteViewController {
                         "private_post": self.post!.isPrivate
                     ])
                 //END TRACK
-                self.delay(3, closure: {
+                delay(3, closure: {
                     notificationView.removeFromSuperview()
                     self.navigationController?.popViewControllerAnimated(true)
                 })

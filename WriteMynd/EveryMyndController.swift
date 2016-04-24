@@ -27,7 +27,7 @@ class EveryMyndController: ViewController {
     var empathisedPosts:[EmpathisedPost] = []
     var lastContentOffSet: CGFloat = 0.0 //tracker to determine if user scrolling up/down
     let postsController: PostsTableViewController = PostsTableViewController()
-    @IBOutlet weak var showMenuButton: UIBarButtonItem!
+    //@IBOutlet weak var showMenuButton: UIBarButtonItem!
     var postsEmphasised:[Post]{
         return posts.filter({ post in
             if self.empathisedPosts.containsPost(post){
@@ -211,13 +211,13 @@ extension EveryMyndController {
         let theme: JTSActionSheetTheme = global_getActionSheetTheme()
         let swipeItItem = JTSActionSheetItem(title: "Swipe It", action: {
             self.bottomView.alpha = 1.0
-            let swipeVC = self.storyboard?.instantiateViewControllerWithIdentifier("SwipeViewController") as! SwipeViewController
+            let swipeVC = SwipeViewController()
             //self.presentViewController(swipeVC, animated: true, completion: nil)
             self.navigationController?.pushViewController(swipeVC, animated: true)
             }, isDestructive: false)
         let writeItItem = JTSActionSheetItem(title: "Write It", action: {
             self.bottomView.alpha = 1.0
-            let writeVC = self.storyboard?.instantiateViewControllerWithIdentifier("WriteViewController") as! WriteViewController
+            let writeVC = WriteViewController()
             self.navigationController?.pushViewController(writeVC, animated: true)
             }, isDestructive: false)
         let cancelItem = JTSActionSheetItem(title: "Cancel", action: {

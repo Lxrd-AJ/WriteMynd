@@ -47,6 +47,7 @@ class SwipeChart: UIView {
     }
     
     func renderChart( dataPoints:[String], values:[Double] ){
+        guard values.count > 0 else{ lineChart.noDataText = "No Swipes!, yet"; return }
         //Data Entries
         var yVals = [ChartDataEntry]()
         for i in 0..<dataPoints.count {

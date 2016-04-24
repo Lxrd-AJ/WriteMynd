@@ -52,7 +52,7 @@ class WelcomeViewController: UIViewController {
         
         if PFUser.currentUser() != nil {
             print(PFUser.currentUser())
-            let everyMyndVC = storyboard!.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
+            let everyMyndVC = EveryMyndController()
             self.mm_drawerController.centerViewController = UINavigationController(rootViewController: everyMyndVC)
         }else{
             print("No User found")

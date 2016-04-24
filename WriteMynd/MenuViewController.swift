@@ -76,7 +76,7 @@ class MenuViewController: UITableViewController {
         
         switch menuItems[indexPath.row] {
         case "Every Mynd":
-            controller = storyboard!.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
+            controller = EveryMyndController()
         case "My Mynd":
             controller = MyMyndViewController()//storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
         case "Science":
@@ -131,8 +131,7 @@ extension MenuViewController {
     
     func logOutButtonTapped( sender: Button ){
         PFUser.logOut()
-        let meVC: EveryMyndController = storyboard!.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
-        self.drawerController?.centerViewController = UINavigationController(rootViewController: meVC)
+        self.drawerController?.centerViewController = UINavigationController(rootViewController: WelcomeViewController())
     }
 }
 

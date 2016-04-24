@@ -46,6 +46,8 @@ class HashTagsPieCharts: UIView {
     }
     
     func renderChart( pieChart:PieChartView, dataPoints:[String], values:[Double],centerValue:Int, tag:String ){
+        guard values.count > 0 else{ pieChart.noDataText = "No tags yet!"; return }
+        
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
             let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
