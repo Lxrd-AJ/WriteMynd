@@ -9,6 +9,7 @@
 import UIKit
 import SwiftSpinner
 import Parse
+import Onboard
 
 class SignupViewController: SignupLoginViewController {
     
@@ -172,7 +173,30 @@ extension SignupViewController {
     }
     
     func beginOnBoarding( sender:Button ){
-        print("On board begin")
+        
+        func skip( vc:OnboardingViewController ){ vc.dismissViewControllerAnimated(true, completion: nil) }
+        
+        let onboardingVC = OnboardingViewController(backgroundImage: UIImage(), contents: [])
+        let firstPage = OnboardingContentViewController(title: "write mynd", body: "An app for recording, reflecting and sharing for a clearer mind", image: UIImage(named: "happyJumpingGuy"), buttonText: "skip"){ () -> Void in skip(onboardingVC) }
+        let secondPage = OnboardingContentViewController(title: "record", body: "Get things of your chest by easily recording your thoughts and feelings", image: UIImage(named: "photoGuy"), buttonText: "skip"){ () -> Void in skip(onboardingVC) }
+        let thirdPage = OnboardingContentViewController(title: "Reflect", body: "Better understand how you're feeling by spotting the patterns in the things you have shared", image: UIImage(named: "manInTheMirror"), buttonText: "skip"){ () -> Void in skip(onboardingVC) }
+        let lastPage = OnboardingContentViewController(title: "Share", body: "Share to your feed or if you want to, with the community, and see that you are not alone", image: UIImage(named: "shareMan"), buttonText: "Get started"){ () -> Void in skip(onboardingVC) }
+        
+        firstPage.topPadding = 60
+        lastPage.buttonFontSize = 12
+        onboardingVC.viewControllers = [firstPage,secondPage,thirdPage,lastPage]
+        onboardingVC.fontName = "Montserrat-Regular"
+        onboardingVC.titleFontSize = 20
+        onboardingVC.bodyFontSize = 16
+        onboardingVC.topPadding = 60;
+        onboardingVC.underIconPadding = 20;
+        onboardingVC.underTitlePadding = 30;
+        onboardingVC.bottomPadding = 8;
+        onboardingVC.buttonFontSize = 8.5
+        onboardingVC.hidePageControl = false
+        
+        self.presentViewController(onboardingVC, animated: true, completion: nil)
+        
     }
     
     func dismissKeyboard(){

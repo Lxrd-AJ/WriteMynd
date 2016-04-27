@@ -94,6 +94,13 @@ class SearchViewController: UIViewController {
  Extension to contain custom functions for `SearchViewController`
  */
 extension SearchViewController {
+    /**
+     Creates a string to display in the label as the search text
+     
+     - parameter searchParams: Usually the hashtags
+     
+     - returns: text to display
+     */
     func searchDisplayText( searchParams:[String] ) -> String {
         return searchParams.reduce("", combine: { (searchText,param) in "\(searchText)\(param)"})
     }

@@ -52,6 +52,7 @@ class LoginViewController: SignupLoginViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.title = "Sign Up"
         
         emailStackView.axis = .Vertical
         emailStackView.alignment = .Fill
