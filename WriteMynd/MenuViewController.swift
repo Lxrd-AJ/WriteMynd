@@ -26,7 +26,7 @@ class MenuViewController: UITableViewController {
         tableView.backgroundColor = .wmCoolBlueColor()
         tableView.separatorColor = .whiteColor()
         tableView.alwaysBounceVertical = false
-        tableView.tableHeaderView = self.tableViewHeader()
+        //tableView.tableHeaderView = self.tableViewHeader()
         tableView.tableFooterView = self.tableViewFooter()
     }
 

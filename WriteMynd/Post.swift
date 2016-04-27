@@ -15,7 +15,7 @@ class Post {
     var emoji: Emoji
     var text: String
     var hashTags: [String]
-    var isPrivate: Bool = true
+    var isPrivate: Bool = true //TODO: Discard booleans and use PFACL to enforce constraints
     var author: PFUser
     var createdAt: NSDate?
     var updatedAt: NSDate?

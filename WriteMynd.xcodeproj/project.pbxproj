@@ -18,6 +18,7 @@
 		2130167B1C9DACEC00A4598D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2130167A1C9DACEC00A4598D /* Emoji.swift */; };
 		2130167D1C9DFA2800A4598D /* EmpathisedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2130167C1C9DFA2800A4598D /* EmpathisedPost.swift */; };
 		2132E96C1CCC66EC0049E95F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132E96B1CCC66EC0049E95F /* SignupViewController.swift */; };
+		2132E96E1CCDE8170049E95F /* SignupLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132E96D1CCDE8170049E95F /* SignupLoginViewController.swift */; };
 		2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0751C1A3B2A00BE26FD /* ParseService.swift */; };
 		2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */; };
 		21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA41CA2E9B0005F117F /* FeelingsView.swift */; };
@@ -66,6 +67,7 @@
 		2130167A1C9DACEC00A4598D /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		2130167C1C9DFA2800A4598D /* EmpathisedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpathisedPost.swift; sourceTree = "<group>"; };
 		2132E96B1CCC66EC0049E95F /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		2132E96D1CCDE8170049E95F /* SignupLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupLoginViewController.swift; sourceTree = "<group>"; };
 		2136F0751C1A3B2A00BE26FD /* ParseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseService.swift; sourceTree = "<group>"; };
 		2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		21623EA41CA2E9B0005F117F /* FeelingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingsView.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				2172FC031C11CFF9003446AC /* WelcomeViewController.swift */,
+				2132E96D1CCDE8170049E95F /* SignupLoginViewController.swift */,
 				2172FC051C11D037003446AC /* LoginViewController.swift */,
 				2132E96B1CCC66EC0049E95F /* SignupViewController.swift */,
 			);
@@ -456,6 +459,7 @@
 				21F6193C1C9A0B5F0089542F /* DraggableCardView.swift in Sources */,
 				2130167B1C9DACEC00A4598D /* Emoji.swift in Sources */,
 				21623EA81CA3C761005F117F /* MyMyndViewController.swift in Sources */,
+				2132E96E1CCDE8170049E95F /* SignupLoginViewController.swift in Sources */,
 				2172FC081C11E073003446AC /* Utilities.swift in Sources */,
 				21F548CB1C8F1DA6004E85F3 /* ScienceViewController.swift in Sources */,
 				217138B41CAA6A39008CC4D1 /* FloatLabelTextField.swift in Sources */,

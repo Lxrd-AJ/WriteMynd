@@ -10,13 +10,14 @@ import UIKit
 import Parse
 import SwiftSpinner
 
-class LoginViewController: UIViewController {
+class LoginViewController: SignupLoginViewController {
     
     let emailStackView = UIStackView()
     lazy var emailTextField: UITextField = {
         let field = self.createTextField("Email Address")
         field.tag = 5
         field.returnKeyType = .Next
+        field.delegate = self
         return field;
     }()
     lazy var emailErrorMessage: Label = {
@@ -29,6 +30,7 @@ class LoginViewController: UIViewController {
         field.secureTextEntry = true
         field.returnKeyType = .Send
         field.tag = 10
+        field.delegate = self
         return field
     }()
     lazy var passwordErrorMessage: Label = {
@@ -50,10 +52,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBarHidden = false
-        self.view.backgroundColor = UIColor.wmBackgroundColor()
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
         
         emailStackView.axis = .Vertical
         emailStackView.alignment = .Fill
@@ -109,61 +107,35 @@ class LoginViewController: UIViewController {
                 self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
                 self.mm_drawerController.centerViewController = UINavigationController(rootViewController: EveryMyndController())
             }else{
-                var message = error!.localizedDescription
+                var message = error!.userInfo["error"] as! String
                 self.showErrorFor(self.passwordErrorMessage, message: error!.localizedDescription);
                 if error!.code == 101 {
                     message = "Wrong Email or Password, Please retry!"
                 }
                 SwiftSpinner.show(message).addTapHandler({
-                        SwiftSpinner.hide()
-                    }, subtitle: "Tap to hide!")
+                    SwiftSpinner.hide()
+                    let alertController = UIAlertController(title: "Reset Password?", message: "Using the right email address and would like to reset your password", preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "Reset", style: .Destructive, handler: { action in
+                        self.resetPassword( self.emailTextField.text! )
+                    }))
+                    alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { action in }))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }, subtitle: "Tap to hide!")
             }
         })
     }
     
-    func showErrorFor( label:Label, message:String ) {
-        label.textColor = UIColor.wmFadedRedColor()
-        label.text = message
-        
-        delay(3.0, closure:{
-            label.textColor = UIColor.clearColor()
+    func resetPassword( email:String ){
+        PFUser.requestPasswordResetForEmailInBackground(email, block: { (success:Bool,error:NSError?) in
+            let alertController = UIAlertController(title: "Password Reset", message: "", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            if let error = error where !success {
+                alertController.message = error.userInfo["error"] as? String
+            }else{
+                alertController.message = "A Password reset link has been sent to your email address"
+            }
+            self.presentViewController(alertController, animated: true, completion: nil)
         })
-        
-    }
-    
-    func createButton( title:String ) -> Button {
-        let button = Button(type: .Custom)
-        button.setTitle(title, forState: .Normal)
-        button.backgroundColor = UIColor.wmGreenishTealColor()
-        button.layer.cornerRadius = 4.0
-        return button
-    }
-    
-    func createTextField( placeholder:String ) -> UITextField {
-        let field = UITextField()
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
-        field.placeholder = placeholder
-        field.layer.borderWidth = 1.0
-        field.layer.borderColor = UIColor.wmSilverColor().CGColor
-        field.font = Label.font()
-        field.layer.cornerRadius = 3.0
-        field.backgroundColor = UIColor.whiteColor()
-        field.textColor = UIColor.lightGrayColor()
-        field.leftView = paddingView
-        field.leftViewMode = .Always
-        field.delegate = self
-        field.autocapitalizationType = .None
-        return field
-    }
-    
-    func createLabel( title:String ) -> Label {
-        let label = Label()
-        label.textColor = UIColor.wmFadedRedColor()
-        label.text = title
-        label.setFontSize(10)
-        label.numberOfLines = 0;
-        label.textAlignment = .Left
-        return label
     }
     
     func dismissKeyboard(){
