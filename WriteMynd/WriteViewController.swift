@@ -123,6 +123,9 @@ class WriteViewController: UIViewController {
         self.view.backgroundColor = UIColor.wmBackgroundColor()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
         
+        //Register for the keyboard will show notifications
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WriteViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil) //UIKeyboardDidShowNotification
+        
         if self.post == nil {
             self.post = Post(emoji: .None, text: "", hashTags: [], author: PFUser.currentUser()!)
         }else{
@@ -206,14 +209,13 @@ class WriteViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //Register for the keyboard will show notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WriteViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil) //UIKeyboardDidShowNotification
+        
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        NSNotificationCenter.defaultCenter().removeObserver(self)
+//    }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -244,7 +246,8 @@ extension WriteViewController {
         self.hashTagField.text = post.hashTags.reduce("", combine: { hashtags, tag in
             return "\(hashtags!)\(tag)"
         })
-        self.descriptionLabel.text = post.emoji.value().name    }
+        self.descriptionLabel.text = post.emoji.value().name
+    }
     
     func displayErrorMessage( message:String ){
         //"You need to enter how you feel, select an emoji and type an hashtag"
@@ -385,7 +388,8 @@ extension WriteViewController {
             self.focusView.addSubview(feelingsView)
             //BUG: The cursor isn't showing on `feelingsView.feelingsTextView`, an option is to reuse `feelingsTextView` and just remake its constraints
             feelingsView.snp_makeConstraints(closure: { make in
-                make.bottom.equalTo(self.view.snp_bottom).offset(-keyboardFrame.origin.y)
+                //make.bottom.equalTo(self.view.snp_bottom).offset(-keyboardFrame.origin.y)
+                make.bottom.equalTo(self.view.snp_top).offset(keyboardFrame.origin.y - 150)
                 make.left.equalTo(self.view.snp_left)
                 make.width.equalTo(self.view.snp_width)
                 make.centerX.equalTo(self.view.snp_centerX)
