@@ -145,7 +145,19 @@ class PostsTableViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if( indexPath.section == currentCellSelection){ return 225 }
+        if( indexPath.section == currentCellSelection){
+            let post = self.posts[ indexPath.section ]
+//            let splitPost = post.text.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+//            var factor: CGFloat = 10.0
+//            print("split = \(splitPost.count) word count = \(post.text.characters.count)")
+//            if splitPost.count <= 25 {
+//                factor = 10.0
+//            }else{
+//                factor = 5.0
+//            }
+            return CGFloat(post.text.characters.count) + 65.0
+            //return factor * CGFloat(splitPost.count) //return 225
+        }
         return 150.0
     }
     
@@ -232,8 +244,6 @@ extension PostsTableViewController {
     }
     
     func extendPostInCell( sender:Button ) {
-        print("Before anim: \(sender.selected)")
-        
         if sender.selected {
             sender.selected = false
             self.currentCellSelection = -1000
@@ -249,8 +259,6 @@ extension PostsTableViewController {
         if self.currentCellSelection > 0 {
             self.tableView.reloadSections(NSIndexSet(index: sender.tag), withRowAnimation: UITableViewRowAnimation.Automatic)
         }
-        
-        print("After \(sender.selected)")
     }
     
     func empathisePost( sender:Button ){
