@@ -58,12 +58,14 @@ class SwipeViewController: UIViewController {
         //END MARK - Swiping
         
         //MARK: - Emoji
-        let emojiView = UIImageView(image: UIImage(named: "noEmotion")!)
+        let emojiView = UIImageView(image: UIImage(named: "standingManHandsUp")!)
+        emojiView.contentMode = .Center
         //self.view.addSubview(emojiView)
         self.view.insertSubview(emojiView, belowSubview: kolodaView)
         emojiView.snp_makeConstraints(closure: { make in
             make.centerX.equalTo(self.view.snp_centerX)
             make.top.equalTo(kolodaView.snp_bottom).offset(-5)
+            make.bottom.equalTo(self.view.snp_bottom).offset(-5)
         })
         //END MARK
     }
@@ -75,7 +77,7 @@ class SwipeViewController: UIViewController {
 
 extension SwipeViewController {
     func animateToColor( color: UIColor ){
-        UIView.animateWithDuration(0.5, delay: 0.01, options: .CurveEaseIn, animations: {
+        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseInOut, animations: {
             self.view.backgroundColor = color
             }, completion: nil)
     }

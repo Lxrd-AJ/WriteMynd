@@ -175,19 +175,22 @@ extension PostsTableViewController {
     
     /**
      - todo:
-        [ ] Check with delegate if you should show the SearchController
+        [x] Check with delegate if you should show the SearchController
         [x] Check with the delegate on whether to search all users or just the current user
      */
     func hashTagsButtonTapped( sender:Button ){
         let searchController = SearchViewController()
-        if let delegate = self.delegate {
-            searchController.postsController.delegate = delegate
-            searchController.shouldSearchPrivatePosts = delegate.shouldSearchPrivatePosts()
-        }
         searchController.searchParameters = sender.titleLabel!.text!.componentsSeparatedByString("#")
             .filter({ $0 != " " })//Extra Space added by us in `reduce`
             .map({ "#\($0)" })
-        self.navigationController?.pushViewController(searchController, animated: true)
+        if let delegate = self.delegate {
+            searchController.shouldSearchPrivatePosts = delegate.shouldSearchPrivatePosts()
+            if delegate.shouldShowSearchController() {
+                self.navigationController?.pushViewController(searchController, animated: true)
+            }
+        }else{
+            self.navigationController?.pushViewController(searchController, animated: true)
+        }
     }
     
     /**

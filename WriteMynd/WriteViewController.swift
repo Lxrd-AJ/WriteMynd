@@ -194,14 +194,15 @@ class WriteViewController: UIViewController {
         postToMeButton.snp_makeConstraints(closure: { make in
             make.left.equalTo(self.view.snp_left).offset(10)
             make.top.equalTo(self.feelingsTextView.snp_bottom).offset(11)
-            make.right.equalTo(postToAllButton.snp_left).offset(-10)
+            //make.right.equalTo(postToAllButton.snp_left).offset(-10)
+            make.width.equalTo(self.postToAllButton.snp_width)
             make.height.equalTo(45)
         })
         
         postToAllButton.snp_makeConstraints(closure: { make in
             make.right.equalTo(self.view.snp_right).offset(-10)
             make.top.equalTo(self.feelingsTextView.snp_bottom).offset(11)
-            make.width.equalTo(150)
+            make.width.equalTo(self.view.snp_width).multipliedBy(0.45)
             make.height.equalTo(45)
         })
 

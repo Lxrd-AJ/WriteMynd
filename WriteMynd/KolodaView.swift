@@ -135,7 +135,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
     //MARK: Configurations
     
     private func subscribeForNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "layoutDeck", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SwipeView.layoutDeck), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     private func unsubsribeFromNotifications() {

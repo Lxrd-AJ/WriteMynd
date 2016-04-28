@@ -22,7 +22,7 @@ class SearchViewController: UIViewController {
     lazy var searchTextField: FloatLabelTextField = {
         let field = FloatLabelTextField()
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
-        field.placeholder = "Search results"
+        field.placeholder = "Search for hashtags"
         field.font = Label.font()
         field.backgroundColor = UIColor.clearColor()
         field.adjustsFontSizeToFitWidth = true
@@ -31,6 +31,8 @@ class SearchViewController: UIViewController {
         field.textColor = .wmCoolBlueColor()
         field.titleActiveTextColour = UIColor.wmSilverColor()
         field.delegate = self
+        field.autocorrectionType = .No
+        field.autocapitalizationType = .None
         field.returnKeyType = .Search
         field.addBorder(edges: [.Bottom], colour: UIColor.lightGrayColor(), thickness: 0.5)
         return field
@@ -56,30 +58,19 @@ class SearchViewController: UIViewController {
         self.addChildViewController(postsController)
         self.view.addSubview(postsController.tableView)
         postsController.didMoveToParentViewController(self)
-        //postsController.delegate = self
+        postsController.delegate = self
         postsController.tableView.snp_makeConstraints(closure: { make in
             make.top.equalTo(searchTextField.snp_bottom)
             make.bottom.equalTo(self.view.snp_bottom)
             make.width.equalTo(self.view.snp_width).offset(-20)
             make.centerX.equalTo(self.view.snp_centerX)
         })
+        postsController.tableView.backgroundView = UIImageView(image: UIImage(named: "manInTheMirror"))
+        postsController.tableView.backgroundView?.contentMode = .Center
         
         if searchParameters.count > 0 {
             searchTextField.text = searchDisplayText(searchParameters)
-            if shouldSearchPrivatePosts {
-                ParseService.getPostsWith(searchParameters, callback: { posts in
-                    print(posts)
-                    self.postsController.posts = posts
-                    self.postsController.tableView.reloadData()
-                }, forUser: PFUser.currentUser()!)
-            }else{
-                ParseService.getPostsWith(searchParameters, callback: { posts in
-                    print(posts)
-                    self.postsController.posts = posts
-                    self.postsController.tableView.reloadData()
-                }, forUser: nil)
-            }
-
+            search(searchTextField.text!)
         }
     }
 
@@ -94,8 +85,13 @@ class SearchViewController: UIViewController {
  Extension to contain custom functions for `SearchViewController`
  */
 extension SearchViewController {
+    
+    func toggleBackground( visible:Bool ){
+        postsController.tableView.backgroundView?.hidden = visible
+    }
+    
     /**
-     Creates a string to display in the label as the search text
+     Creates a string to display in the label as the search text by combining an array of strings into a single string
      
      - parameter searchParams: Usually the hashtags
      
@@ -103,6 +99,33 @@ extension SearchViewController {
      */
     func searchDisplayText( searchParams:[String] ) -> String {
         return searchParams.reduce("", combine: { (searchText,param) in "\(searchText)\(param)"})
+    }
+    
+    func search( text:String ){
+        var searchText = text;
+        if text.characters.first != "#" {
+            searchText = "#" + text
+        }
+        print("Search text \(searchText)")
+        if shouldSearchPrivatePosts {
+            ParseService.getPostsWith([searchText], callback: { posts in
+                print(posts)
+                self.postsController.posts = posts
+                self.postsController.tableView.reloadData()
+                if posts.count > 0 {
+                    self.toggleBackground(true)
+                }else{ self.toggleBackground(false) }
+                }, forUser: PFUser.currentUser()!)
+        }else{
+            ParseService.getPostsWith([searchText], callback: { posts in
+                print(posts)
+                self.postsController.posts = posts
+                self.postsController.tableView.reloadData()
+                if posts.count > 0 {
+                    self.toggleBackground(true)
+                }else{ self.toggleBackground(false) }
+                }, forUser: nil)
+        }
     }
 }
 
@@ -113,6 +136,13 @@ extension SearchViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        self.search(textField.text!)
         return true
+    }
+}
+
+extension SearchViewController: PostsTableVCDelegate {
+    func shouldShowSearchController() -> Bool {
+        return false
     }
 }
