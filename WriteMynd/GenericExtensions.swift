@@ -56,6 +56,10 @@ extension UIColor {
     class func wmFadedRedColor() -> UIColor {
         return UIColor(red: 226.0 / 255.0, green: 57.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0)
     }
+    
+    class func wmSlateGreyTwoColor() -> UIColor {
+        return UIColor(red: 101.0 / 255.0, green: 110.0 / 255.0, blue: 121.0 / 255.0, alpha: 1.0)
+    }
 }
 
 extension UIView{

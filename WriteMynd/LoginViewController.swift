@@ -14,8 +14,9 @@ class LoginViewController: SignupLoginViewController {
     
     let emailStackView = UIStackView()
     lazy var emailTextField: UITextField = {
-        let field = self.createTextField("Email Address")
+        let field: UITextField = self.createTextField("Email Address")
         field.tag = 5
+        field.autocapitalizationType = .None
         field.returnKeyType = .Next
         field.delegate = self
         return field;
@@ -108,6 +109,7 @@ class LoginViewController: SignupLoginViewController {
                 self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
                 self.mm_drawerController.centerViewController = UINavigationController(rootViewController: EveryMyndController())
             }else{
+                print(error)
                 var message = error!.userInfo["error"] as! String
                 self.showErrorFor(self.passwordErrorMessage, message: error!.localizedDescription);
                 if error!.code == 101 {
@@ -118,6 +120,11 @@ class LoginViewController: SignupLoginViewController {
                     let alertController = UIAlertController(title: "Reset Password?", message: "Using the right email address and would like to reset your password", preferredStyle: .Alert)
                     alertController.addAction(UIAlertAction(title: "Reset", style: .Destructive, handler: { action in
                         self.resetPassword( self.emailTextField.text! )
+                    }))
+                    alertController.addAction(UIAlertAction(title: "Signup instead", style: .Default, handler: { action in
+                        let signupVC = SignupViewController()
+                        signupVC.emailTextField.text = self.emailTextField.text
+                       self.navigationController?.pushViewController(signupVC, animated: true)
                     }))
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { action in }))
                     self.presentViewController(alertController, animated: true, completion: nil)

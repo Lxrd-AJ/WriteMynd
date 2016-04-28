@@ -37,6 +37,7 @@
 		2172FC061C11D037003446AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC051C11D037003446AC /* LoginViewController.swift */; };
 		2172FC081C11E073003446AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC071C11E073003446AC /* Utilities.swift */; };
 		2172FC111C1258B7003446AC /* GenericExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC101C1258B7003446AC /* GenericExtensions.swift */; };
+		217903E31CD2172A00ECCDEA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217903E21CD2172A00ECCDEA /* UIImage.swift */; };
 		217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */; };
 		217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BDB1C8A25290085D71B /* SwipeViewController.swift */; };
 		219F4F581C9AFBFD00B9AB34 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */; };
@@ -88,6 +89,7 @@
 		2172FC051C11D037003446AC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2172FC071C11E073003446AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2172FC101C1258B7003446AC /* GenericExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericExtensions.swift; sourceTree = "<group>"; };
+		217903E21CD2172A00ECCDEA /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSwipeView.swift; sourceTree = "<group>"; };
 		217F3BDB1C8A25290085D71B /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeDirection.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				21F619381C9952B70089542F /* Koloda */,
 				2172FC101C1258B7003446AC /* GenericExtensions.swift */,
 				213016781C9D780F00A4598D /* UILabel+UIButton.swift */,
+				217903E21CD2172A00ECCDEA /* UIImage.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */,
 				217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */,
 				21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */,
+				217903E31CD2172A00ECCDEA /* UIImage.swift in Sources */,
 				21D467C71CB24C4D00412C3C /* HashTagsPieCharts.swift in Sources */,
 				21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */,
 				2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */,

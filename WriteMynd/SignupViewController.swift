@@ -182,18 +182,23 @@ extension SignupViewController {
         let thirdPage = OnboardingContentViewController(title: "Reflect", body: "Better understand how you're feeling by spotting the patterns in the things you have shared", image: UIImage(named: "manInTheMirror"), buttonText: "skip"){ () -> Void in skip(onboardingVC) }
         let lastPage = OnboardingContentViewController(title: "Share", body: "Share to your feed or if you want to, with the community, and see that you are not alone", image: UIImage(named: "shareMan"), buttonText: "Get started"){ () -> Void in skip(onboardingVC) }
         
-        firstPage.topPadding = 60
-        lastPage.buttonFontSize = 12
         onboardingVC.viewControllers = [firstPage,secondPage,thirdPage,lastPage]
         onboardingVC.fontName = "Montserrat-Regular"
         onboardingVC.titleFontSize = 20
         onboardingVC.bodyFontSize = 16
-        onboardingVC.topPadding = 60;
-        onboardingVC.underIconPadding = 20;
+        onboardingVC.topPadding = 80;
+        onboardingVC.underIconPadding = 80;
         onboardingVC.underTitlePadding = 30;
         onboardingVC.bottomPadding = 8;
         onboardingVC.buttonFontSize = 8.5
         onboardingVC.hidePageControl = false
+        firstPage.underIconPadding = 20
+        firstPage.topPadding = 60
+        lastPage.buttonFontSize = 13
+        firstPage.view.backgroundColor = UIColor.wmSoftBlueColor()
+        secondPage.view.backgroundColor = UIColor.wmSlateGreyTwoColor()
+        thirdPage.view.backgroundColor = UIColor.wmGreenishTealTwoColor()
+        lastPage.view.backgroundColor = UIColor.wmLightGoldColor()
         
         self.presentViewController(onboardingVC, animated: true, completion: nil)
         
