@@ -18,7 +18,7 @@ import Parse
 class WriteViewController: UIViewController {
     
     var currentTextField: UITextField? //The Current textfield the user is editing
-    var post: Post?
+    var post: Post? //TODO: Add a setter function here
     var editingHashTags: Bool = true
     let question = dailyQuestion[Int( arc4random_uniform(UInt32(dailyQuestion.count)))]
     
@@ -34,13 +34,18 @@ class WriteViewController: UIViewController {
         label.text = "Which emotion best describes you now?"
         label.font = label.font.fontWithSize(17)
         label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .Left
+        label.textAlignment = .Center
+        label.numberOfLines = 1
+        label.minimumScaleFactor = 0.5
         return label
     }()
     
-    lazy var emojisContainerView: UIView = {
-        let view = UIView()
-        return view
+    lazy var emojiStackView: UIStackView = {
+        let stack: UIStackView = UIStackView()
+        stack.axis = .Horizontal
+        stack.alignment = .Fill
+        stack.distribution = .EqualSpacing
+        return stack;
     }()
     
     lazy var happyEmoji: UIButton = {
@@ -127,14 +132,13 @@ class WriteViewController: UIViewController {
         //Add the UI elements 
         self.view.addSubview(bigEmojiImage)
         self.view.addSubview(descriptionLabel)
-        self.view.addSubview(emojisContainerView)
+        self.view.addSubview(emojiStackView)
         
-
-        emojisContainerView.addSubview(happyEmoji)
-        emojisContainerView.addSubview(sadEmoji)
-        emojisContainerView.addSubview(angryEmoji)
-        emojisContainerView.addSubview(fearEmoji)
-        emojisContainerView.addSubview(mehEmoji)
+        emojiStackView.addArrangedSubview(happyEmoji)
+        emojiStackView.addArrangedSubview(sadEmoji)
+        emojiStackView.addArrangedSubview(angryEmoji)
+        emojiStackView.addArrangedSubview(fearEmoji)
+        emojiStackView.addArrangedSubview(mehEmoji)
         
         self.view.addSubview(hashTagField)
         self.view.addSubview(feelingsTextView)
@@ -151,57 +155,26 @@ class WriteViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         bigEmojiImage.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(10)
+            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(9)
             make.centerX.equalTo(self.view.snp_centerX)
-            make.size.equalTo(CGSize(width: 150, height: 167))
+            make.size.equalTo(CGSize(width: 145, height: 160))
         })
         
         descriptionLabel.snp_makeConstraints(closure: { make in
-            make.top.equalTo(bigEmojiImage.snp_bottom).offset(10)
+            make.top.equalTo(bigEmojiImage.snp_bottom).offset(9)
             make.centerX.equalTo(self.view.snp_centerX)
             make.width.lessThanOrEqualTo(self.view.snp_width)
         })
         
-        emojisContainerView.snp_makeConstraints(closure: { make in
+        emojiStackView.snp_makeConstraints(closure: { make in
             make.top.equalTo(descriptionLabel.snp_bottom).offset(10)
-            make.width.equalTo(self.view.snp_width)
+            make.width.equalTo(self.view.snp_width).offset(-10)
             make.centerX.equalTo(self.view.snp_centerX)
             make.height.equalTo(50.0)
         })
         
-        happyEmoji.snp_makeConstraints(closure: { make in
-            make.width.equalTo(50)
-            make.height.equalTo(50)
-            make.left.equalTo(emojisContainerView.snp_left).offset(20)
-            make.top.equalTo(emojisContainerView.snp_top)
-        })
-        
-        sadEmoji.snp_makeConstraints(closure: {make in
-            make.size.equalTo(happyEmoji.snp_size)
-            make.top.equalTo(happyEmoji.snp_top)
-            make.left.equalTo(happyEmoji.snp_right).offset(20)
-        })
-        
-        angryEmoji.snp_makeConstraints(closure: { make in
-            make.size.equalTo(sadEmoji.snp_size)
-            make.top.equalTo(sadEmoji.snp_top)
-            make.left.equalTo(sadEmoji.snp_right).offset(20)
-        })
-        
-        fearEmoji.snp_makeConstraints(closure: { make in
-            make.size.equalTo(angryEmoji.snp_size)
-            make.top.equalTo(angryEmoji.snp_top)
-            make.left.equalTo(angryEmoji.snp_right).offset(20)
-        })
-        
-        mehEmoji.snp_makeConstraints(closure: { make in
-            make.size.equalTo(fearEmoji.snp_size)
-            make.top.equalTo(fearEmoji.snp_top)
-            make.left.equalTo(fearEmoji.snp_right).offset(20)
-        })
-        
         hashTagField.snp_makeConstraints(closure: { make in
-            make.top.equalTo(emojisContainerView.snp_bottom).offset(10)
+            make.top.equalTo(emojiStackView.snp_bottom).offset(10)
             make.width.equalTo(screenWidth - 20)
             make.centerX.equalTo(self.view.snp_centerX)
             make.height.equalTo(45)
@@ -258,7 +231,7 @@ extension WriteViewController {
     func createEmojiButton( imageName: String, tag:Int ) -> UIButton {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: imageName), forState: .Normal)
-        button.imageView?.contentMode = .ScaleAspectFit
+        button.imageView?.contentMode = .Center//.ScaleAspectFit
         button.tag = tag
         button.addTarget(self, action: .emojiButtonTapped, forControlEvents: .TouchUpInside)
         return button
@@ -341,30 +314,41 @@ extension WriteViewController {
         [ ] Also add the emoji selectors to this subclass
      */
     func emojiButtonTapped( sender: UIButton ){
+        var descriptionText = ""
+        var imageName = ""
+        
         switch sender.tag {
         case 0:
-            self.descriptionLabel.text = "Happy"
+            descriptionText = "Happy"
             self.post?.emoji = .Happy
-            self.bigEmojiImage.image = UIImage(named: "happyManStood")
+            imageName = "happyManStood"
         case 1:
-            self.descriptionLabel.text = "Sad"
+            descriptionText = "Sad"
             self.post?.emoji = .Sad
-            self.bigEmojiImage.image = UIImage(named: "sadManStood")
+            imageName = "sadManStood"
         case 2:
-            self.descriptionLabel.text = "Angry"
+            descriptionText = "Angry"
             self.post?.emoji = .Angry
-            self.bigEmojiImage.image = UIImage(named: "angryManStood")
+            imageName = "angryManStood"
         case 3:
-            self.descriptionLabel.text = "Fear"
+            descriptionText = "Fear"
             self.post?.emoji = .Scared
-            self.bigEmojiImage.image = UIImage(named: "fearManStood")
+            imageName = "fearManStood"
         case 4:
-            self.descriptionLabel.text = "Meh"
+            descriptionText = "Meh"
             self.post?.emoji = .Meh
-            self.bigEmojiImage.image = UIImage(named: "mehManStood")
+            imageName = "mehManStood"
         default:
             break;
         }
+        
+        UIView.transitionWithView(self.bigEmojiImage, duration: 0.4, options: .TransitionFlipFromRight, animations: {
+            self.bigEmojiImage.image = UIImage(named: imageName)
+            }, completion: nil)
+        
+        UIView.transitionWithView(self.descriptionLabel, duration: 0.3, options: .TransitionFlipFromLeft, animations: {
+            self.descriptionLabel.text = descriptionText
+            }, completion: nil)
     }
     
     /**
