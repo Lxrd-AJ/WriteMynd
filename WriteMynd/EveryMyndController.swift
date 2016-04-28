@@ -250,7 +250,7 @@ extension EveryMyndController {
 extension EveryMyndController: PostsTableVCDelegate {
     
     func editPost(post: Post) {
-        let writeVC = self.storyboard?.instantiateViewControllerWithIdentifier("WriteViewController") as! WriteViewController
+        let writeVC = WriteViewController()
         writeVC.post = post
         self.navigationController?.pushViewController(writeVC, animated: true)
     }

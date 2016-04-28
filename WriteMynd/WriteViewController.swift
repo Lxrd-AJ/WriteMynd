@@ -20,7 +20,9 @@ class WriteViewController: UIViewController {
     var currentTextField: UITextField? //The Current textfield the user is editing
     var post: Post? //TODO: Add a setter function here
     var editingHashTags: Bool = true
+    
     let question = dailyQuestion[Int( arc4random_uniform(UInt32(dailyQuestion.count)))]
+    let feelingsView = FeelingsView()
     
     lazy var bigEmojiImage: UIImageView = {
         let image = UIImageView()
@@ -114,6 +116,7 @@ class WriteViewController: UIViewController {
     lazy var focusView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
         view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.97)
+        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: .finishedEditingTextView))
         return view
     }()
 
@@ -122,9 +125,6 @@ class WriteViewController: UIViewController {
 
         self.view.backgroundColor = UIColor.wmBackgroundColor()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
-        
-        //Register for the keyboard will show notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WriteViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil) //UIKeyboardDidShowNotification
         
         if self.post == nil {
             self.post = Post(emoji: .None, text: "", hashTags: [], author: PFUser.currentUser()!)
@@ -194,14 +194,14 @@ class WriteViewController: UIViewController {
         postToMeButton.snp_makeConstraints(closure: { make in
             make.left.equalTo(self.view.snp_left).offset(10)
             make.top.equalTo(self.feelingsTextView.snp_bottom).offset(11)
-            make.width.equalTo(162)
+            make.right.equalTo(postToAllButton.snp_left).offset(-10)
             make.height.equalTo(45)
         })
         
         postToAllButton.snp_makeConstraints(closure: { make in
             make.right.equalTo(self.view.snp_right).offset(-10)
             make.top.equalTo(self.feelingsTextView.snp_bottom).offset(11)
-            make.width.equalTo(162)
+            make.width.equalTo(150)
             make.height.equalTo(45)
         })
 
@@ -210,15 +210,6 @@ class WriteViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-    }
-    
-//    override func viewWillDisappear(animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        NSNotificationCenter.defaultCenter().removeObserver(self)
-//    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -239,8 +230,6 @@ extension WriteViewController {
         return button
     }
     
-    
-    
     func populateViewWithPost( post:Post ){
         self.feelingsTextView.text = post.text
         self.hashTagField.text = post.hashTags.reduce("", combine: { hashtags, tag in
@@ -255,6 +244,10 @@ extension WriteViewController {
         let okAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func createRightBarButtonItem() -> UIBarButtonItem {
+        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: .finishedEditingTextView)
     }
 }
 
@@ -357,16 +350,16 @@ extension WriteViewController {
     /**
      On keyboard show, present the appropriate textfield to capture the data, a faux textfield whose data would be returned to the textfield on `self.view`. It also populates `self.post` with the respective values captured here
      */
-    func keyboardWillShow(notification:NSNotification){
-        let keyboardFrame:CGRect = notification.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue
-        self.view.addSubview(self.focusView)
-        print("Keyboard Did appear \(keyboardFrame)")
+    func beginEditingWithFocusView(){
+        if !self.focusView.isDescendantOfView(self.view){
+            self.view.addSubview(self.focusView)
+        }
         
         if self.editingHashTags { //HashTag field
             let hashtagView = HashTagView()
             self.focusView.addSubview(hashtagView)
             hashtagView.snp_makeConstraints(closure: { make in
-                make.bottom.equalTo(self.view.snp_top).offset(keyboardFrame.origin.y - 100)
+                make.top.equalTo(self.view.snp_top).offset(200)
                 make.left.equalTo(self.view.snp_left)//.offset(10)
                 make.width.equalTo(self.view.snp_width)
                 make.centerX.equalTo(self.view.snp_centerX)
@@ -384,40 +377,39 @@ extension WriteViewController {
                 self.focusView.removeFromSuperview()
             }
         }else{ //Feeling field
-            let feelingsView = FeelingsView()
-            self.focusView.addSubview(feelingsView)
-            //BUG: The cursor isn't showing on `feelingsView.feelingsTextView`, an option is to reuse `feelingsTextView` and just remake its constraints
+            if !self.feelingsView.isDescendantOfView(self.focusView){
+                self.focusView.addSubview(self.feelingsView)
+            }
+            
+            self.focusView.addSubview(self.feelingsView)
             feelingsView.snp_makeConstraints(closure: { make in
-                //make.bottom.equalTo(self.view.snp_bottom).offset(-keyboardFrame.origin.y)
-                make.bottom.equalTo(self.view.snp_top).offset(keyboardFrame.origin.y - 150)
+                make.top.equalTo(self.view.snp_top).offset(125)
                 make.left.equalTo(self.view.snp_left)
                 make.width.equalTo(self.view.snp_width)
                 make.centerX.equalTo(self.view.snp_centerX)
             })
             feelingsView.setupConstraints()
-            feelingsView.feelingsTextView.becomeFirstResponder()
+            self.feelingsView.feelingsTextView.becomeFirstResponder()
             feelingsView.feelingsTextView.text = self.feelingsTextView.text
-            feelingsView.onFinishCallback = {
-                self.feelingsTextView.text = feelingsView.feelingsTextView.text
-                self.feelingsTextView.resignFirstResponder()
-                self.post!.text = self.feelingsTextView.text!
-                self.focusView.removeFromSuperview()
-            }
         }
-
+    }
+    
+    func finishedEditingTextView( sender:AnyObject ){
+        self.feelingsTextView.text = self.feelingsView.feelingsTextView.text
+        self.feelingsTextView.resignFirstResponder()
+        self.post!.text = self.feelingsTextView.text!
+        self.focusView.removeFromSuperview()
+        self.navigationItem.rightBarButtonItem = nil 
     }
     
 }
 //thingstobegrafefulfor
 extension WriteViewController: UITextFieldDelegate {
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        self.editingHashTags = true
-    }
-    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        //self.view.addSubview(focusView)
-        return true
+        self.editingHashTags = true
+        self.beginEditingWithFocusView()
+        return false;
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -433,11 +425,14 @@ extension WriteViewController: UITextViewDelegate {
      */
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         self.editingHashTags = false
-        self.feelingsTextView.text = ""
-        return true
+        self.beginEditingWithFocusView()
+        textView.selectable = true
+        self.navigationItem.rightBarButtonItem = self.createRightBarButtonItem()
+        return false
     }
 }
 
 private extension Selector {
     static let emojiButtonTapped = #selector(WriteViewController.emojiButtonTapped(_:))
+    static let finishedEditingTextView = #selector(WriteViewController.finishedEditingTextView(_:))
 }
