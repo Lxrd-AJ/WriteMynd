@@ -66,7 +66,7 @@ class PostTableViewCell: UITableViewCell {
 
         //Empathise Button
         bottomView.addSubview(empathiseButton)
-        empathiseButton.setImage(UIImage(named: "empathise_heart"), forState: .Normal)
+        //empathiseButton.setImage(UIImage(named: "empathise_heart"), forState: .Normal)
         empathiseButton.snp_makeConstraints(closure: { make in
             make.height.equalTo(ellipsesButton.snp_height)
             make.right.equalTo(ellipsesButton.snp_left).offset(-10)
@@ -136,6 +136,7 @@ class PostTableViewCell: UITableViewCell {
         //me or isPrivateLabel
         topView.addSubview(isPrivateLabel)
         isPrivateLabel.textColor = UIColor.wmCoolBlueColor()
+        isPrivateLabel.setFontSize(7)
         isPrivateLabel.snp_makeConstraints(closure: { make in
             make.right.equalTo(topView.snp_right).offset(-5)
             make.top.equalTo(topView.snp_top).offset(5)

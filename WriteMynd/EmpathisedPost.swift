@@ -23,14 +23,15 @@ class EmpathisedPost {
     
     func save() {
         let object = PFObject(className: "EmpathisedPost")
-        object["user"] = self.user
+        object["userID"] = self.user.objectId
         object["postID"] = self.postID
         self.objectID = object.objectId
         object.saveInBackground()
     }
     
     class func convertPFObjectToEmpathisedPost( object:PFObject ) -> EmpathisedPost {
-        let empathisedPost = EmpathisedPost(user: object["user"] as! PFUser, ID: object["postID"] as! String)
+        let user = PFUser(outDataWithObjectId: (object["userID"] as! String))
+        let empathisedPost = EmpathisedPost(user: user, ID: object["postID"] as! String)
         empathisedPost.likedDate = object.createdAt
         empathisedPost.objectID = object.objectId
         return empathisedPost

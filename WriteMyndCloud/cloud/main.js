@@ -8,12 +8,16 @@ Parse.Cloud.define("hello", function(request, response) {
 Parse.Cloud.beforeSave("EmpathisedPost", function(request,response){
     var newEntry = request.object;
     var queryPosts = new Parse.Query("EmpathisedPost");
-    queryPosts.equalTo("user", newEntry.get("user"));
+    queryPosts.equalTo("userID", newEntry.get("userID"));
     queryPosts.equalTo("postID", newEntry.get("postID"));
 
     queryPosts.first({
         success: function(res){
-            response.error("Post already empathised");
+            if (res) {
+                response.error("Post already empathised");
+            } else {
+                response.success();
+            }
         },error: function(err){
             response.success();
         }

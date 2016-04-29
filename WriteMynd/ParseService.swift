@@ -78,7 +78,7 @@ class ParseService {
     
     class func fetchEmpathisedPosts( user:PFUser, callback:(empathisesPosts:[EmpathisedPost]) -> Void ){
         let query = PFQuery(className: "EmpathisedPost")
-        query.whereKey("user", equalTo: user)
+        query.whereKey("userID", equalTo: user.objectId!)
         query.findObjectsInBackgroundWithBlock({ (emPosts:[PFObject]?, error:NSError?) -> Void in
             if let posts = emPosts {
                 callback(empathisesPosts: posts.map(EmpathisedPost.convertPFObjectToEmpathisedPost))

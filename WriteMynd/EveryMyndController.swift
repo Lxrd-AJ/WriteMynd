@@ -6,8 +6,6 @@
 //  Copyright © 2015 The Leaf. All rights reserved.
 //
 
-//TODO: Make use of a tableview controller and add it as a child controller of MeViewController
-
 import UIKit
 import Parse
 import ParseUI
@@ -16,24 +14,15 @@ import MMDrawerController
 import SnapKit
 import JTSActionSheet
 
-/**
- - todo:
-    [x] Use a ContainerView to represent the `MeViewController` and the `tableView`
-    [x] Once the user starts scrolling, hide the bottomView
- */
+
 class EveryMyndController: ViewController {
     
     var posts:[Post] = []
-    var empathisedPosts:[EmpathisedPost] = []
     var lastContentOffSet: CGFloat = 0.0 //tracker to determine if user scrolling up/down
     let postsController: PostsTableViewController = PostsTableViewController()
-    //@IBOutlet weak var showMenuButton: UIBarButtonItem!
     var postsEmphasised:[Post]{
-        return posts.filter({ post in
-            if self.empathisedPosts.containsPost(post){
-                post.isEmpathised = true
-                return true
-            }else{ return false }
+        return postsController.posts.filter({ post in
+            return post.isEmpathised
         })
     }
     
@@ -65,15 +54,6 @@ class EveryMyndController: ViewController {
         button.setTitle("Create a post", forState: .Normal)
         //button.setImage(UIImage(named: "group")!, forState: .Normal)
         button.setFontSize(16)
-        
-//        button.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-//        button.titleLabel!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-//        button.imageView!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-//        
-//        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 1, bottom: 1, right: -100)
-//        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
-        
-
         button.addTarget(self, action: .showPostingSheet, forControlEvents: .TouchUpInside)
         button.alpha = 0.8
         return button;
@@ -99,11 +79,7 @@ class EveryMyndController: ViewController {
         //MARK: View Customisations and Constraints
         self.view.addSubview( everyMyndLabel )
         everyMyndLabel.snp_makeConstraints(closure: { make in
-            var topOffset:Float = 35;
-            if let navHeight = self.navigationController?.navigationBar.bounds.height{
-                topOffset += Float(navHeight);
-            }
-            make.top.equalTo(self.view).offset(topOffset)
+            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(5)
             make.left.equalTo(self.view).offset(10)
             make.width.lessThanOrEqualTo(screenWidth * 0.4)
         })
@@ -130,7 +106,7 @@ class EveryMyndController: ViewController {
         
         //Posts TableViewController constraints
         postsController.tableView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(everyMyndLabel.snp_bottom).offset(5)
+            make.top.equalTo(everyMyndLabel.snp_bottom).offset(6)
             make.centerX.equalTo(self.view.snp_centerX)
             make.bottom.equalTo(bottomView.snp_top).offset(-5)
             make.width.equalTo(screenWidth - 20)
@@ -150,17 +126,6 @@ class EveryMyndController: ViewController {
         
         //Track the user viewing `EveryMynd` event
         MixpanelService.track("USER_VIEWED_EVERYMYND")
-        
-        
-        //Check if User exists
-//        if let _ = PFUser.currentUser() {
-//            
-//        }else{
-//            //Present Signup/Login Page
-//            let loginVC:LoginViewController = LoginViewController()
-//            loginVC.signUpController = SignUpViewController()
-//            self.presentViewController(loginVC, animated: true, completion: nil)
-//        }
         
     }
     
@@ -195,6 +160,7 @@ extension EveryMyndController {
             sender.setImage(UIImage(named:"empathise_heart_filled"), forState: .Normal)
             sender.selected = true
             self.postsController.posts = self.postsEmphasised
+            print("Empathised posts on button touch \(self.postsEmphasised)")
         }
         
         self.postsController.tableView.reloadData()
@@ -227,21 +193,22 @@ extension EveryMyndController {
         actionSheet.showInView(self.view)
     }
     
+    /**
+     Fechtes the posts for the user within limits and also fetches the empathises posts by the user
+     - todo:
+        [ ] Use Promises to eradicate the callbacks
+     */
     func fetchPosts(){
         ParseService.fetchPostsForUserFeed(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
             self.postsController.posts = posts
             self.postsController.tableView.reloadData()
-            
             self.posts = posts
-            SwiftSpinner.hide()
-        })
-        
-        ParseService.fetchEmpathisedPosts(PFUser.currentUser()!, callback: { (emPosts:[EmpathisedPost]) -> Void in
-            //self.postsController.posts = self.posts
-            self.postsController.empathisedPosts = emPosts
-            self.empathisedPosts = emPosts
-            self.postsController.reloadData()
-            self.postsController.tableView.hidden = false
+            
+            ParseService.fetchEmpathisedPosts(PFUser.currentUser()!, callback: { (emPosts:[EmpathisedPost]) -> Void in
+                self.postsController.empathisedPosts = emPosts
+                self.postsController.tableView.hidden = false
+                self.postsController.tableView.reloadData()
+            })
         })
     }
 
@@ -258,7 +225,7 @@ extension EveryMyndController: PostsTableVCDelegate {
     func scrollBegan( scrollView:UIScrollView ) {
         if( self.lastContentOffSet < scrollView.contentOffset.y ){
             //Scrolling to the bottom
-            UIView.animateWithDuration(1.5, delay: 1.5, options: .CurveEaseIn, animations: {
+            UIView.animateWithDuration(1.5, delay: 1.5, options: .CurveEaseInOut, animations: {
                 self.bottomView.snp_updateConstraints(closure: { make in
                     make.bottom.equalTo(self.view.snp_bottom).offset(100)
                 })

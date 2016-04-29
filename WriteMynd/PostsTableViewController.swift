@@ -40,7 +40,18 @@ class PostsTableViewController: UITableViewController {
     
     let CELL_IDENTIFIER = "WriteMynd And Chill Cell"
     var posts:[Post] = []
-    var empathisedPosts: [EmpathisedPost] = []
+    var empathisedPosts: [EmpathisedPost] = [] {
+        //Mark the respective posts as empathised
+        didSet(emPosts){
+            let _ = emPosts.map({ emPost in
+                let _ = self.posts.map({ post in
+                    if emPost.postID == post.ID {
+                        post.isEmpathised = true
+                    }
+                })
+            })
+        }
+    }
     var currentCellSelection = -1
     var delegate: PostsTableVCDelegate?
 
@@ -79,7 +90,7 @@ class PostsTableViewController: UITableViewController {
 
         if let user = PFUser.currentUser() where post.author.objectId == user.objectId {
             cell.backgroundColor = UIColor.wmDarkSkyBlue10Color()
-            cell.isPrivateLabel.text = "me"
+            cell.isPrivateLabel.text = "mine"
             cell.isPrivateLabel.textColor = UIColor.blueColor()
             cell.empathiseButton.hidden = true
         }else{
@@ -111,6 +122,7 @@ class PostsTableViewController: UITableViewController {
             cell.readMoreButton.setTitle("Read More", forState: .Normal)
         }
         
+        //Check if the user has empathised the post 
         if post.isEmpathised {
             cell.empathiseButton.setImage(UIImage(named: "empathise_heart_filled"), forState: .Normal)
         }else{
@@ -147,16 +159,7 @@ class PostsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if( indexPath.section == currentCellSelection){
             let post = self.posts[ indexPath.section ]
-//            let splitPost = post.text.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-//            var factor: CGFloat = 10.0
-//            print("split = \(splitPost.count) word count = \(post.text.characters.count)")
-//            if splitPost.count <= 25 {
-//                factor = 10.0
-//            }else{
-//                factor = 5.0
-//            }
             return CGFloat(post.text.characters.count) + 65.0
-            //return factor * CGFloat(splitPost.count) //return 225
         }
         return 150.0
     }
@@ -185,11 +188,6 @@ extension PostsTableViewController {
         }
     }
     
-    /**
-     - todo:
-        [x] Check with delegate if you should show the SearchController
-        [x] Check with the delegate on whether to search all users or just the current user
-     */
     func hashTagsButtonTapped( sender:Button ){
         let searchController = SearchViewController()
         searchController.searchParameters = sender.titleLabel!.text!.componentsSeparatedByString("#")
@@ -262,7 +260,6 @@ extension PostsTableViewController {
     }
     
     func empathisePost( sender:Button ){
-        print("Empathise Button tapped")
         let post = self.posts[sender.tag]
         if post.isEmpathised {
             //Dempathise the post
@@ -283,19 +280,12 @@ extension PostsTableViewController {
             empathisedPost.save()
             post.isEmpathised = true
         }
+        print(empathisedPosts)
     }
 }
 
 extension PostsTableViewController {
-    func reloadData(){
-        //Merge the empathises posts to the current posts
-        let _ = self.posts.map({ post in
-            if self.empathisedPosts.containsPost(post){
-                post.isEmpathised = true
-                self.tableView.reloadData()
-            }
-        })
-    }
+
 }
 
 extension PostsTableViewController {
