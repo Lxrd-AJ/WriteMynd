@@ -69,7 +69,9 @@ class EveryMyndController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(red: 246/255, green: 247/255, blue: 251/255, alpha: 1)     
+        self.view.backgroundColor = UIColor(red: 246/255, green: 247/255, blue: 251/255, alpha: 1)
+        self.automaticallyAdjustsScrollViewInsets = false 
+        
         //Adding the table view controller to display posts
         self.addChildViewController(postsController)
         self.view.addSubview(postsController.tableView)

@@ -64,7 +64,7 @@ class SwipeViewController: UIViewController {
         self.view.insertSubview(emojiView, belowSubview: kolodaView)
         emojiView.snp_makeConstraints(closure: { make in
             make.centerX.equalTo(self.view.snp_centerX)
-            make.top.equalTo(kolodaView.snp_bottom).offset(-5)
+            make.top.equalTo(kolodaView.snp_bottom).offset(-20)
             make.bottom.equalTo(self.view.snp_bottom).offset(-5)
         })
         //END MARK

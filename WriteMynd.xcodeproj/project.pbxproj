@@ -38,6 +38,9 @@
 		2172FC081C11E073003446AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC071C11E073003446AC /* Utilities.swift */; };
 		2172FC111C1258B7003446AC /* GenericExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172FC101C1258B7003446AC /* GenericExtensions.swift */; };
 		217903E31CD2172A00ECCDEA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217903E21CD2172A00ECCDEA /* UIImage.swift */; };
+		217903E51CD3887C00ECCDEA /* legal.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903E41CD3887C00ECCDEA /* legal.txt */; };
+		217903E71CD38E9100ECCDEA /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217903E61CD38E9100ECCDEA /* LegalViewController.swift */; };
+		217903E91CD390BF00ECCDEA /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217903E81CD390BF00ECCDEA /* UIColor.swift */; };
 		217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */; };
 		217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BDB1C8A25290085D71B /* SwipeViewController.swift */; };
 		219F4F581C9AFBFD00B9AB34 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */; };
@@ -90,6 +93,9 @@
 		2172FC071C11E073003446AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2172FC101C1258B7003446AC /* GenericExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericExtensions.swift; sourceTree = "<group>"; };
 		217903E21CD2172A00ECCDEA /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		217903E41CD3887C00ECCDEA /* legal.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = legal.txt; sourceTree = "<group>"; };
+		217903E61CD38E9100ECCDEA /* LegalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
+		217903E81CD390BF00ECCDEA /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSwipeView.swift; sourceTree = "<group>"; };
 		217F3BDB1C8A25290085D71B /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeDirection.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				213016741C9D745000A4598D /* Montserrat-Bold.ttf */,
+				217903E41CD3887C00ECCDEA /* legal.txt */,
 				213016751C9D745A00A4598D /* Montserrat-Regular.ttf */,
 			);
 			name = Resources;
@@ -211,7 +218,7 @@
 				21E120C61C9BB30F00DB1C8D /* OnBoarding */,
 				21E120C51C9BB30400DB1C8D /* Settings */,
 				21E120C41C9BB2E700DB1C8D /* MyMynd */,
-				21E120C31C9BB2C100DB1C8D /* Science */,
+				21E120C31C9BB2C100DB1C8D /* Thinking */,
 				219F4F591C9BA27700B9AB34 /* EveryMynd */,
 				21FE51C91C90ADD0002F8874 /* Posting */,
 				21C0A1341C2949A90047306D /* MenuViewController.swift */,
@@ -241,13 +248,13 @@
 			name = EveryMynd;
 			sourceTree = "<group>";
 		};
-		21E120C31C9BB2C100DB1C8D /* Science */ = {
+		21E120C31C9BB2C100DB1C8D /* Thinking */ = {
 			isa = PBXGroup;
 			children = (
 				21B89FC31C77BF5B00E6D4E7 /* ScienceMessage.swift */,
 				21F548CA1C8F1DA6004E85F3 /* ScienceViewController.swift */,
 			);
-			name = Science;
+			name = Thinking;
 			sourceTree = "<group>";
 		};
 		21E120C41C9BB2E700DB1C8D /* MyMynd */ = {
@@ -264,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */,
+				217903E61CD38E9100ECCDEA /* LegalViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -287,6 +295,7 @@
 				2172FC101C1258B7003446AC /* GenericExtensions.swift */,
 				213016781C9D780F00A4598D /* UILabel+UIButton.swift */,
 				217903E21CD2172A00ECCDEA /* UIImage.swift */,
+				217903E81CD390BF00ECCDEA /* UIColor.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -392,6 +401,7 @@
 			files = (
 				213016771C9D74F100A4598D /* Montserrat-Regular.ttf in Resources */,
 				213016761C9D74EE00A4598D /* Montserrat-Bold.ttf in Resources */,
+				217903E51CD3887C00ECCDEA /* legal.txt in Resources */,
 				2172FBF71C11B65E003446AC /* LaunchScreen.storyboard in Resources */,
 				2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */,
 				2172FBF21C11B65E003446AC /* Main.storyboard in Resources */,
@@ -482,9 +492,11 @@
 				21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */,
 				21B89FC41C77BF5B00E6D4E7 /* ScienceMessage.swift in Sources */,
 				21F6193A1C9952CB0089542F /* KolodaView.swift in Sources */,
+				217903E91CD390BF00ECCDEA /* UIColor.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				217138B81CAC00ED008CC4D1 /* WrittenPostNotificationView.swift in Sources */,
 				2102B5161CC910920002BA24 /* MyPostsViewController.swift in Sources */,
+				217903E71CD38E9100ECCDEA /* LegalViewController.swift in Sources */,
 				211772561CBA4900009B6DF0 /* SwipeChart.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
 				217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */,

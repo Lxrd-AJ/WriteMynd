@@ -122,7 +122,7 @@ class PostsTableViewController: UITableViewController {
             cell.readMoreButton.setTitle("Read More", forState: .Normal)
         }
         
-        //Check if the user has empathised the post 
+        //Check if the user has empathised the post
         if post.isEmpathised {
             cell.empathiseButton.setImage(UIImage(named: "empathise_heart_filled"), forState: .Normal)
         }else{
@@ -280,7 +280,6 @@ extension PostsTableViewController {
             empathisedPost.save()
             post.isEmpathised = true
         }
-        print(empathisedPosts)
     }
 }
 

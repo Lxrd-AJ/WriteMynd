@@ -136,7 +136,7 @@ class PostTableViewCell: UITableViewCell {
         //me or isPrivateLabel
         topView.addSubview(isPrivateLabel)
         isPrivateLabel.textColor = UIColor.wmCoolBlueColor()
-        isPrivateLabel.setFontSize(7)
+        isPrivateLabel.setFontSize(8)
         isPrivateLabel.snp_makeConstraints(closure: { make in
             make.right.equalTo(topView.snp_right).offset(-5)
             make.top.equalTo(topView.snp_top).offset(5)
