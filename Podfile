@@ -18,6 +18,7 @@ target 'WriteMynd' do
     pod 'JTSActionSheet', '~> 1.0.1'
     pod 'Mixpanel'
     pod 'Onboard'
+    pod 'DGElasticPullToRefresh'
     
     #pod 'PromiseKit', '~> 2.0'
     #pod 'DOFavoriteButton', '~> 0.0.4'

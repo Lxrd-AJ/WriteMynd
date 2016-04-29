@@ -3,10 +3,11 @@ PODS:
   - Charts (2.2.4):
     - Charts/Core (= 2.2.4)
   - Charts/Core (2.2.4)
+  - DGElasticPullToRefresh (1.0.3)
   - JTSActionSheet (1.0.1)
-  - Mixpanel (2.9.7):
-    - Mixpanel/Mixpanel (= 2.9.7)
-  - Mixpanel/Mixpanel (2.9.7)
+  - Mixpanel (2.9.8):
+    - Mixpanel/Mixpanel (= 2.9.8)
+  - Mixpanel/Mixpanel (2.9.8)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -43,6 +44,7 @@ PODS:
 
 DEPENDENCIES:
   - Charts
+  - DGElasticPullToRefresh
   - JTSActionSheet (~> 1.0.1)
   - Mixpanel
   - MMDrawerController
@@ -59,8 +61,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Charts: a9e735c83c6d376ade20f6612dcf0ba217394a49
+  DGElasticPullToRefresh: 040f39ae69840b3261d163fe6735c5901bf851e9
   JTSActionSheet: d7e5350ce63b5ff23ced9db653ed1c768358124e
-  Mixpanel: 511b829df757acc1c15d54e50342e85e6023d64d
+  Mixpanel: 39c8e140d74d914e460ea3b4c770434fcd29c8a0
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   Onboard: 4d92c763ed15f939071dec12e87ed9e8dc036746
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
@@ -73,6 +76,6 @@ SPEC CHECKSUMS:
   SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
   ZendeskSDK: 45b7a2812a04c3c5c2510aeeeded5818e6e705a5
 
-PODFILE CHECKSUM: 4d3abb7124865203d32d9aeec30549359265ead0
+PODFILE CHECKSUM: 6249da5fbe1207a9c2748c0fba048841ada23564
 
 COCOAPODS: 1.0.0.beta.1

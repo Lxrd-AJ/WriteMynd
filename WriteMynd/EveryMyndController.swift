@@ -13,6 +13,7 @@ import SwiftSpinner
 import MMDrawerController
 import SnapKit
 import JTSActionSheet
+import DGElasticPullToRefresh
 
 
 class EveryMyndController: ViewController {
@@ -20,6 +21,7 @@ class EveryMyndController: ViewController {
     var posts:[Post] = []
     var lastContentOffSet: CGFloat = 0.0 //tracker to determine if user scrolling up/down
     let postsController: PostsTableViewController = PostsTableViewController()
+    let loadingView: DGElasticPullToRefreshLoadingView = DGElasticPullToRefreshLoadingViewCircle()
     var postsEmphasised:[Post]{
         return postsController.posts.filter({ post in
             return post.isEmpathised
@@ -78,15 +80,33 @@ class EveryMyndController: ViewController {
         postsController.didMoveToParentViewController(self)
         postsController.delegate = self
         
-        //MARK: View Customisations and Constraints
+        loadingView.tintColor = UIColor.wmCoolBlueColor()
+        postsController.tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            self?.fetchPosts()
+        }, loadingView: loadingView)
+        postsController.tableView.dg_setPullToRefreshFillColor(UIColor.wmSoftBlueColor())
+        postsController.tableView.dg_setPullToRefreshBackgroundColor(UIColor.wmBackgroundColor())
+        
         self.view.addSubview( everyMyndLabel )
+        self.view.addSubview(empathiseButton)
+        self.view.addSubview(bottomView);
+        bottomView.addSubview(createPostButton)
+        
+        if (PFUser.currentUser() != nil) {
+            postsController.tableView.hidden = true
+            fetchPosts()
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
         everyMyndLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(self.snp_topLayoutGuideBottom).offset(5)
             make.left.equalTo(self.view).offset(10)
             make.width.lessThanOrEqualTo(screenWidth * 0.4)
         })
         
-        self.view.addSubview(empathiseButton)
         empathiseButton.snp_makeConstraints(closure: { make in
             make.top.equalTo(everyMyndLabel.snp_top)
             make.right.equalTo(self.view.snp_right).offset(-10)
@@ -94,32 +114,22 @@ class EveryMyndController: ViewController {
             make.height.equalTo(29.0)
         })
         
-        self.view.addSubview(bottomView);
         bottomView.snp_makeConstraints(closure: { make in
             make.width.equalTo(self.view.snp_width)
             make.bottom.equalTo(self.view.snp_bottom)
             make.height.equalTo(75)
         })
         
-        bottomView.addSubview(createPostButton)
         createPostButton.snp_makeConstraints(closure: { make in
             make.edges.equalTo(bottomView).inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         })
         
-        //Posts TableViewController constraints
         postsController.tableView.snp_makeConstraints(closure: { make in
             make.top.equalTo(everyMyndLabel.snp_bottom).offset(6)
             make.centerX.equalTo(self.view.snp_centerX)
             make.bottom.equalTo(bottomView.snp_top).offset(-5)
             make.width.equalTo(screenWidth - 20)
         })
-    
-        //END MARK
-        
-        if (PFUser.currentUser() != nil) {
-            postsController.tableView.hidden = true
-            fetchPosts()
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -129,6 +139,10 @@ class EveryMyndController: ViewController {
         //Track the user viewing `EveryMynd` event
         MixpanelService.track("USER_VIEWED_EVERYMYND")
         
+    }
+    
+    deinit{
+        self.postsController.tableView.dg_removePullToRefresh()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -202,6 +216,8 @@ extension EveryMyndController {
      */
     func fetchPosts(){
         ParseService.fetchPostsForUserFeed(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
+            self.postsController.tableView.dg_stopLoading()
+            
             self.postsController.posts = posts
             self.postsController.tableView.reloadData()
             self.posts = posts
@@ -210,6 +226,7 @@ extension EveryMyndController {
                 self.postsController.empathisedPosts = emPosts
                 self.postsController.tableView.hidden = false
                 self.postsController.tableView.reloadData()
+                self.view.setNeedsLayout()
             })
         })
     }

@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import MMDrawerController
 import Mixpanel
+import SwiftDate
 
 let MixpanelService = Mixpanel.sharedInstanceWithToken("35657d737e9e58ce0c79c4bb4cc8a94e");
 
@@ -50,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         drawerController.closeDrawerGestureModeMask = [.BezelPanningCenterView,.PanningCenterView]
         
         //Local Notifications
+        SwiftDate.Region.setDefaultRegion(Region.LocalRegion())
         if let localNotification:UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
             application.applicationIconBadgeNumber = 0 //localNotification.applicationIconBadgeNumber--
             print("Application launched by local Notification \n \(localNotification.applicationIconBadgeNumber)")
