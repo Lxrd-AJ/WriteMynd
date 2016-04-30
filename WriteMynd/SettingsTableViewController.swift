@@ -13,6 +13,7 @@ import RMDateSelectionViewController
 import SwiftDate
 import ZendeskSDK
 import MessageUI
+import SwiftSpinner
 
 /**
  Settings page for the entire app, Here the user can 
@@ -24,14 +25,15 @@ import MessageUI
  */
 class SettingsTableViewController: UITableViewController {
     
-    let REMINDER_SWITCH: String = "REMINDER_SWITCH"
-    let REMINDER_DATE: String = "REMINDER_DATE"
+    let REMINDER_SWITCH: String = "REMINDER_SWITCH_" + PFUser.currentUser()!.username!
+    let REMINDER_DATE: String = "REMINDER_DATE_" + PFUser.currentUser()!.username!
     
     //Settings Table
     let TROUBLE_APP = "Having trouble with the app?"
     let TIMER = "Reminder set"
     let EMAIL_FEEDBACK = "Send Feedback via Email"
     let LEGAL = "Legal Stuff"
+    let REGISTER_ACCOUNT = "Register your account"
     let reminderSwitch = UISwitch(frame: CGRectZero)
     
     lazy var rows: [String] = {
@@ -64,6 +66,11 @@ class SettingsTableViewController: UITableViewController {
         if let _ = NSUserDefaults.standardUserDefaults().objectForKey(REMINDER_DATE) where NSUserDefaults.standardUserDefaults().boolForKey(REMINDER_SWITCH) {
             self.rows.insert(TIMER, atIndex: 1)
         }
+        
+        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
+            self.rows.insert(REGISTER_ACCOUNT, atIndex: self.rows.count - 1 )
+        }
+        
         
         //Zendesk Configurations
         ZDKConfig.instance().initializeWithAppId("5da13e96950d04535c6ae060f94b79cd713ef65de89b0ef2", zendeskUrl: "https://writemynd.zendesk.com", andClientId: "mobile_sdk_client_8deeb7714b32b75f45de")
@@ -138,11 +145,20 @@ class SettingsTableViewController: UITableViewController {
         
         switch rowText {
         case "Log out":
-            PFUser.logOut()
-            let meVC: EveryMyndController = storyboard!.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
-            self.mm_drawerController.centerViewController = UINavigationController(rootViewController: meVC)
+            if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
+                let alertController = UIAlertController(title: "Err", message: "Looks like you don't have an account. If you log out, you'll lose all your data", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "That's ok, log me out", style: .Destructive, handler: { _ in self.logout() }))
+                alertController.addAction(UIAlertAction(title: "Register me so I keep my data", style: .Default, handler: { _ in
+                    self.registerUser()
+                }))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }else{
+                print("Logging out")
+               self.logout()
+            }
         case TROUBLE_APP:
-            ZDKRequests.showRequestCreationWithNavController(self.navigationController)
+            //ZDKRequests.showRequestCreationWithNavController(self.navigationController)
+            ZDKRequests.presentRequestCreationWithViewController(self.navigationController)
         case EMAIL_FEEDBACK:
             let mailVC = self.configureMailComposeVC()
             if MFMailComposeViewController.canSendMail() {
@@ -156,6 +172,8 @@ class SettingsTableViewController: UITableViewController {
             self.navigationController?.pushViewController(LegalViewController(), animated: true)
         case TIMER:
             self.dailyReminderSwitchTapped(reminderSwitch)
+        case REGISTER_ACCOUNT:
+            self.registerUser()
         default:
             print("Unhandled cell select")
         }
@@ -164,6 +182,83 @@ class SettingsTableViewController: UITableViewController {
 }
 
 extension SettingsTableViewController {
+    
+    func logout(){
+        SwiftSpinner.show("")
+        PFUser.logOut()
+        self.mm_drawerController.centerViewController = UINavigationController(rootViewController: WelcomeViewController())
+        SwiftSpinner.hide()
+    }
+    
+    func registerUser(){
+        let alertController = UIAlertController(title: "Account Registration", message: "Enter a username and password to link your current data with your new account", preferredStyle: .Alert )
+        let registerAction = UIAlertAction(title: "Register", style: .Default, handler: { _ in
+            let email = alertController.textFields![0] as UITextField
+            let password1 = alertController.textFields![1] as UITextField
+            //let password2 = alertController.textFields![2] as UITextField
+            
+            PFUser.currentUser()!.username = email.text
+            PFUser.currentUser()!.email = email.text
+            PFUser.currentUser()!.password = password1.text
+            
+            SwiftSpinner.setTitleFont(Label.font())
+            
+            do{
+                try PFUser.currentUser()?.signUp()
+            }catch let error as NSError {
+                print(error)
+                print(error.localizedDescription)
+                SwiftSpinner.show(error.localizedDescription).addTapHandler({ SwiftSpinner.hide() }, subtitle: "Tap to dismiss!")
+            }
+            //Check if the user is signed in
+            if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
+                print("Error - user is still anonymous")
+            }else{
+                SwiftSpinner.show("Successfully registered your account", animated: true).addTapHandler({
+                    if self.rows.contains(self.REGISTER_ACCOUNT) {
+                        let idx = self.rows.indexOf(self.REGISTER_ACCOUNT)
+                        self.rows.removeAtIndex(idx!)
+                        self.tableView.reloadData()
+                    }
+                    SwiftSpinner.hide()
+                }, subtitle: "Tap to dismiss!")
+            }
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
+        
+        alertController.addTextFieldWithConfigurationHandler({ textField in
+            textField.placeholder = "Email"
+        })
+        alertController.addTextFieldWithConfigurationHandler({ textfield in
+            textfield.placeholder = "Password"
+            textfield.secureTextEntry = true
+        })
+        alertController.addTextFieldWithConfigurationHandler({ textfield in
+            textfield.placeholder = "Confirm password"
+            textfield.secureTextEntry = true
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textfield, queue: NSOperationQueue.mainQueue(), usingBlock: { notification in
+                var enable = false
+                if let emailField = alertController.textFields![0] as UITextField? where emailField.text != "" {
+                    enable = true
+                }
+                if let pass1 = alertController.textFields![1] as UITextField?, pass2 = alertController.textFields![2] as UITextField? {
+                    if pass1.text == pass2.text {
+                        enable = true
+                    }else{ enable = false }
+                }
+                
+                registerAction.enabled = enable
+            })
+        })
+        registerAction.enabled = false
+        
+        alertController.addAction(registerAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
     func dailyReminderSwitchTapped( sender:UISwitch ){
         NSUserDefaults.standardUserDefaults().setBool(sender.on, forKey: REMINDER_SWITCH)
         

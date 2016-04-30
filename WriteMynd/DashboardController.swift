@@ -98,12 +98,12 @@ class DashboardController: UIViewController {
             make.height.equalTo(topView.snp_height).offset(-25)
         })
         let hashTagInfoButton = self.moreInfoButton()
-        self.topView.addSubview(hashTagInfoButton)
+        //self.topView.addSubview(hashTagInfoButton)
         hashTagInfoButton.tag = 0
-        hashTagInfoButton.snp_makeConstraints(closure: {make in
-            make.top.equalTo(myHashTagsLabel.snp_top)
-            make.right.equalTo(topView.snp_right).offset(-5)
-        })
+//        hashTagInfoButton.snp_makeConstraints(closure: {make in
+//            make.top.equalTo(myHashTagsLabel.snp_top)
+//            make.right.equalTo(topView.snp_right).offset(-5)
+//        })
         //END MARK
         
         //MARK: Middle View Constraints
@@ -126,11 +126,11 @@ class DashboardController: UIViewController {
         })
         let pieChartInfoButton = self.moreInfoButton()
         pieChartInfoButton.tag = 1
-        self.middleView.addSubview(pieChartInfoButton)
-        pieChartInfoButton.snp_makeConstraints(closure: { make in
-            make.top.equalTo(myEmojisLabel.snp_top)
-            make.right.equalTo(middleView.snp_right).offset(-5)
-        })
+        //self.middleView.addSubview(pieChartInfoButton)
+//        pieChartInfoButton.snp_makeConstraints(closure: { make in
+//            make.top.equalTo(myEmojisLabel.snp_top)
+//            make.right.equalTo(middleView.snp_right).offset(-5)
+//        })
         //END MARK
         
         //MARK: Bottom View Constraints
@@ -153,11 +153,11 @@ class DashboardController: UIViewController {
         })
         let swipeInfoButton = self.moreInfoButton()
         swipeInfoButton.tag = 2
-        self.bottomView.addSubview(swipeInfoButton)
-        swipeInfoButton.snp_makeConstraints(closure: { make in
-            make.top.equalTo(swipeLabel.snp_top)
-            make.right.equalTo(bottomView.snp_right).offset(-5)
-        })
+        //self.bottomView.addSubview(swipeInfoButton)
+//        swipeInfoButton.snp_makeConstraints(closure: { make in
+//            make.top.equalTo(swipeLabel.snp_top)
+//            make.right.equalTo(bottomView.snp_right).offset(-5)
+//        })
         //END MARK
     }
     

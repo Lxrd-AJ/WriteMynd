@@ -96,25 +96,29 @@ extension MyMyndViewController {
             }
             
             //Prepare the scroll view
-            scrollView.contentSize = self.view.bounds.size
+            scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height + 60.0)
             scrollView.delaysContentTouches = false
             scrollView.canCancelContentTouches = false
             scrollView.userInteractionEnabled = true
             self.view.addSubview(scrollView)
-            scrollView.snp_makeConstraints(closure: { make in
-                make.top.equalTo(myProfileButton.snp_bottom)
-                make.bottom.equalTo(self.view.snp_bottom)
-                make.width.equalTo(self.view.snp_width)
-                make.centerX.equalTo(self.view.snp_centerX)
-            })
+            
             //Add the Dashboard as a child view controller
             self.addChildViewController(dashboardVC)
             self.scrollView.addSubview(dashboardVC.view);
             dashboardVC.didMoveToParentViewController(self)
+            
+            scrollView.snp_makeConstraints(closure: { make in
+                make.top.equalTo(myProfileButton.snp_bottom)
+                make.width.equalTo(self.view.snp_width)
+                make.centerX.equalTo(self.view.snp_centerX)
+                make.bottom.equalTo(self.view.snp_bottom)
+            })
+
             dashboardVC.view.snp_makeConstraints(closure: { make in
                 make.top.equalTo(self.scrollView.snp_top)
                 make.width.equalTo(self.view.snp_width)
             })
+            
             //Register listeners for events on the charts in the dashboard VC
             dashboardVC.emojiPieChart.chart.delegate = self
         }else if sender.tag == 1 {

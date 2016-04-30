@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import MMDrawerController
+import SwiftSpinner
 
 class WelcomeViewController: UIViewController {
     
@@ -27,7 +28,7 @@ class WelcomeViewController: UIViewController {
     }()
     
     lazy var signupButton: Button = {
-        let button: Button = self.createButton("Are you a new user?", iconName: "")
+        let button: Button = self.createButton("Register an account", iconName: "")
         button.backgroundColor = UIColor.wmGreenishTealColor()
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.addTarget(self, action: .signup, forControlEvents: .TouchUpInside)
@@ -46,6 +47,14 @@ class WelcomeViewController: UIViewController {
         return label
     }()
     
+    lazy var signupLaterButton: Button = {
+        let button: Button = Button(type: .Custom)
+        button.setTitle("Take me straight to the app", forState: .Normal)
+        button.setTitleColor(.whiteColor(), forState: .Normal)
+        button.addTarget(self, action: .anonymousSignin, forControlEvents: .TouchUpInside)
+        return button;
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.wmCoolBlueColor()
@@ -58,16 +67,14 @@ class WelcomeViewController: UIViewController {
             self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
             self.mm_drawerController.centerViewController = UINavigationController(rootViewController: everyMyndVC)
             
-        }else{
-            print("No User found")
         }
-        
         
         self.view.addSubview(iconImageView)
         self.view.addSubview(signInButton)
         self.view.addSubview(orLabel)
         self.view.addSubview(signupButton)
         self.view.addSubview(warningLabel)
+        self.view.addSubview(signupLaterButton)
         
     }
     
@@ -105,6 +112,25 @@ class WelcomeViewController: UIViewController {
             make.width.lessThanOrEqualTo(self.signupButton.snp_width)
         })
         
+        signupLaterButton.snp_makeConstraints(closure: { make in
+            make.bottom.equalTo(self.view.snp_bottom).offset(-10)
+            make.centerX.equalTo(self.view.snp_centerX)
+        })
+        
+    }
+    
+    func signInAnonymously(){
+        SwiftSpinner.show("")
+        PFAnonymousUtils.logInWithBlock{ (user:PFUser?, error:NSError?) -> Void in
+            if error != nil || user == nil {
+                print("Anonymous log in failed")
+            }else{
+                let everyMyndVC = EveryMyndController()
+                self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+                self.mm_drawerController.centerViewController = UINavigationController(rootViewController: everyMyndVC)
+                SwiftSpinner.hide()
+            }
+        }
     }
     
     func signupAction( button:Button ){
@@ -141,4 +167,5 @@ class WelcomeViewController: UIViewController {
 private extension Selector {
     static let signin = #selector(WelcomeViewController.signinAction(_:))
     static let signup = #selector(WelcomeViewController.signupAction(_:))
+    static let anonymousSignin = #selector(WelcomeViewController.signInAnonymously)
 }

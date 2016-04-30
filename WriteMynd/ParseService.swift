@@ -52,10 +52,11 @@ class ParseService {
         })
     }
     
-    class func fetchPostsForUserFeed( user:PFUser, callback:(posts:[Post]) -> Void ) {
+    class func fetchPostsForUserFeed( user:PFUser?, callback:(posts:[Post]) -> Void ) {
+        guard user != nil else{ return; }
         let fetchQuery: PFQuery = PFQuery( className: "Post" )
         let hiddenPostsQuery: PFQuery = PFQuery( className: "HiddenPost")
-        hiddenPostsQuery.whereKey("user", equalTo: user)
+        hiddenPostsQuery.whereKey("user", equalTo: user!)
         fetchQuery.whereKey("private", notEqualTo: true)
         fetchQuery.whereKey("objectId", doesNotMatchKey: "postID", inQuery: hiddenPostsQuery)
         fetchQuery.orderByDescending("createdAt")
@@ -76,9 +77,10 @@ class ParseService {
         })
     }
     
-    class func fetchEmpathisedPosts( user:PFUser, callback:(empathisesPosts:[EmpathisedPost]) -> Void ){
+    class func fetchEmpathisedPosts( user:PFUser?, callback:(empathisesPosts:[EmpathisedPost]) -> Void ){
+        guard user != nil else{ return; }
         let query = PFQuery(className: "EmpathisedPost")
-        query.whereKey("userID", equalTo: user.objectId!)
+        query.whereKey("userID", equalTo: user!.objectId!)
         query.findObjectsInBackgroundWithBlock({ (emPosts:[PFObject]?, error:NSError?) -> Void in
             if let posts = emPosts {
                 callback(empathisesPosts: posts.map(EmpathisedPost.convertPFObjectToEmpathisedPost))

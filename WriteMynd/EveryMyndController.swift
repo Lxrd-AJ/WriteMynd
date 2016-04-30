@@ -94,6 +94,7 @@ class EveryMyndController: ViewController {
         bottomView.addSubview(createPostButton)
         
         if (PFUser.currentUser() != nil) {
+            print(PFUser.currentUser())
             postsController.tableView.hidden = true
             fetchPosts()
         }
@@ -220,14 +221,14 @@ extension EveryMyndController {
         [ ] Use Promises to eradicate the callbacks
      */
     func fetchPosts(){
-        ParseService.fetchPostsForUserFeed(PFUser.currentUser()!, callback: { (posts:[Post]) -> Void in
+        ParseService.fetchPostsForUserFeed(PFUser.currentUser(), callback: { (posts:[Post]) -> Void in
             self.postsController.tableView.dg_stopLoading()
             
             self.postsController.posts = posts
             self.postsController.tableView.reloadData()
             self.posts = posts
             
-            ParseService.fetchEmpathisedPosts(PFUser.currentUser()!, callback: { (emPosts:[EmpathisedPost]) -> Void in
+            ParseService.fetchEmpathisedPosts(PFUser.currentUser(), callback: { (emPosts:[EmpathisedPost]) -> Void in
                 self.postsController.empathisedPosts = emPosts
                 self.postsController.tableView.hidden = false
                 self.postsController.tableView.reloadData()

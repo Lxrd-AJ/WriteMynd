@@ -17,8 +17,8 @@ class HashTagsPieCharts: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        maxHashtagsPie.noDataText = "Max.."
-        minHashtagsPie.noDataText = "Min.."
+        maxHashtagsPie.noDataText = ""
+        minHashtagsPie.noDataText = ""
         
         self.addSubview(maxHashtagsPie)
         self.addSubview(minHashtagsPie)

@@ -16,7 +16,7 @@ class SwipeChart: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        lineChart.noDataText = "Cooking..."
+        lineChart.noDataText = "Try swiping how you feel..."
         lineChart.backgroundColor = UIColor.wmGreenishTealColor()
         lineChart.layer.cornerRadius = 6.0
         lineChart.legend.enabled = false
