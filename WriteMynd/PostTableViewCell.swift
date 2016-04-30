@@ -102,8 +102,13 @@ class PostTableViewCell: UITableViewCell {
         superView.addSubview(topView)
         self.topView = topView;
         
-        //Emoji
         topView.addSubview(emojiImageView)
+        topView.addSubview(hashTagsLabel)
+        topView.addSubview(dateLabel)
+        topView.addSubview(isPrivateLabel)
+        
+        hashTagsLabel.titleLabel?.lineBreakMode = .ByTruncatingTail
+        //Emoji
         if self.postLabel.text == "" {
             self.emojiImageView.snp_remakeConstraints(closure: { make in
                 make.width.equalTo(self.snp_width).multipliedBy(0.5)
@@ -120,15 +125,14 @@ class PostTableViewCell: UITableViewCell {
         }
         
         //Family HashTag
-        topView.addSubview(hashTagsLabel)
         hashTagsLabel.setTitleColor(UIColor.wmSlateGreyColor(), forState: .Normal)
         hashTagsLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(emojiImageView.snp_top)
             make.left.equalTo(emojiImageView.snp_right).offset(3)
+            make.right.lessThanOrEqualTo(isPrivateLabel.snp_left).offset(-3)
         })
         
-        //Date 
-        topView.addSubview(dateLabel)
+        //Date
         dateLabel.textColor = UIColor.wmSilverColor()
         dateLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(hashTagsLabel.snp_bottom)
@@ -136,7 +140,6 @@ class PostTableViewCell: UITableViewCell {
         })
         
         //me or isPrivateLabel
-        topView.addSubview(isPrivateLabel)
         isPrivateLabel.textColor = UIColor.wmCoolBlueColor()
         isPrivateLabel.setFontSize(8)
         isPrivateLabel.snp_makeConstraints(closure: { make in
