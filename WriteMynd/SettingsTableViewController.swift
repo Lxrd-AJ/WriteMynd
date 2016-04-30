@@ -151,6 +151,7 @@ class SettingsTableViewController: UITableViewController {
                 alertController.addAction(UIAlertAction(title: "Register me so I keep my data", style: .Default, handler: { _ in
                     self.registerUser()
                 }))
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
             }else{
                 print("Logging out")

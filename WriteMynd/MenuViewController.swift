@@ -139,6 +139,7 @@ extension MenuViewController {
                 self.mm_drawerController.centerViewController = UINavigationController(rootViewController: settingsVC)
                 settingsVC.registerUser()
             }))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }else{
             self.logout()

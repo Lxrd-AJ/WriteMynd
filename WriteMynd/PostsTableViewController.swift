@@ -39,7 +39,11 @@ extension PostsTableVCDelegate {
 class PostsTableViewController: UITableViewController {
     
     let CELL_IDENTIFIER = "WriteMynd And Chill Cell"
-    var posts:[Post] = []
+    var posts:[Post] = [] {
+        didSet(_posts){
+            self.updateBackground()
+        }
+    }
     var empathisedPosts: [EmpathisedPost] = [] {
         //Mark the respective posts as empathised
         didSet(emPosts){
@@ -74,6 +78,7 @@ class PostsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.updateBackground() //Because this method gets called on `reloadData`
         return 1
     }
     
@@ -177,6 +182,16 @@ class PostsTableViewController: UITableViewController {
  Extension to contain all Selectors used in `PostsTableViewController`
  */
 extension PostsTableViewController {
+    
+    func updateBackground(){
+        if self.posts.count > 0 {
+            self.tableView.backgroundView?.hidden = true
+        }else{
+            let imgV = UIImageView(image: UIImage(named: "manInTheMirror"))
+            imgV.contentMode = .Center
+            self.tableView.backgroundView = imgV
+        }
+    }
     
     func updateDelegateRequirements( cell: PostTableViewCell ){
         if let delegate = self.delegate {
