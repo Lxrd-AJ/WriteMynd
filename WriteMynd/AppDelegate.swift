@@ -55,6 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let localNotification:UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
             application.applicationIconBadgeNumber = 0 //localNotification.applicationIconBadgeNumber--
             print("Application launched by local Notification \n \(localNotification.applicationIconBadgeNumber)")
+            let everyMyndVC = EveryMyndController()
+            everyMyndVC.shouldShowPostingSheet = true 
+            drawerController.centerViewController = UINavigationController(rootViewController: everyMyndVC)
         }
         application.applicationIconBadgeNumber = 0 //HACK: Remove later
         

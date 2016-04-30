@@ -20,6 +20,7 @@ class EveryMyndController: ViewController {
     
     var posts:[Post] = []
     var lastContentOffSet: CGFloat = 0.0 //tracker to determine if user scrolling up/down
+    var shouldShowPostingSheet: Bool = false 
     let postsController: PostsTableViewController = PostsTableViewController()
     let loadingView: DGElasticPullToRefreshLoadingView = DGElasticPullToRefreshLoadingViewCircle()
     var postsEmphasised:[Post]{
@@ -138,6 +139,10 @@ class EveryMyndController: ViewController {
         
         //Track the user viewing `EveryMynd` event
         MixpanelService.track("USER_VIEWED_EVERYMYND")
+        
+        if shouldShowPostingSheet {
+            self.showPostingSheet(self.createPostButton)
+        }
         
     }
     
