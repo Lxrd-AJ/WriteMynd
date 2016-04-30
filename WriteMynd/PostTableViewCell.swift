@@ -41,6 +41,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         setupTopSection(self.contentView)
         setupMiddleSection(self.contentView)
         setupBottomSection(self.contentView)

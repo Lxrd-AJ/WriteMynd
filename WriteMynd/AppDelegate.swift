@@ -70,7 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
         if application.applicationState == .Active {
             print("Local Notification recieved whilst active")
-            //TODO: Display an unintrusive notification
+            //TODO: Display an unintrusive notification **google whisper**
+        }else if application.applicationState == .Inactive || application.applicationState == .Background{
+            //Opened from local push notification in background
         }
     }
 

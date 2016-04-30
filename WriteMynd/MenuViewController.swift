@@ -16,7 +16,7 @@ import Parse
  */
 class MenuViewController: UITableViewController {
     
-    let menuItems: [String] = ["Every Mynd","My Mynd","Science","Settings"]
+    let menuItems: [String] = ["Every Mynd","My Mynd","The Thinking","Settings"]
     var navController: UINavigationController?
     var drawerController: MMDrawerController?
 
@@ -79,8 +79,8 @@ class MenuViewController: UITableViewController {
             controller = EveryMyndController()
         case "My Mynd":
             controller = MyMyndViewController()//storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
-        case "Science":
-            controller = storyboard!.instantiateViewControllerWithIdentifier("ScienceViewController") as! ScienceViewController
+        case "The Thinking":
+            controller = ThinkingViewController()
         case "Settings":
             controller = storyboard!.instantiateViewControllerWithIdentifier("SettingsTableViewController") as! SettingsTableViewController
         default:

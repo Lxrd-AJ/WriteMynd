@@ -8,10 +8,12 @@
 
 import UIKit
 import Parse
+import DGElasticPullToRefresh
 
 class MyPostsViewController: UIViewController {
     
     let postsViewController = PostsTableViewController()
+    let loadingView: DGElasticPullToRefreshLoadingView = DGElasticPullToRefreshLoadingViewCircle()
     let buttonStackView = UIStackView()
     var posts: [Post] = []
 
@@ -19,6 +21,12 @@ class MyPostsViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.wmBackgroundColor()
+        loadingView.tintColor = UIColor.wmCoolBlueColor()
+        postsViewController.tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            self?.fetchPosts()
+            }, loadingView: loadingView)
+        postsViewController.tableView.dg_setPullToRefreshFillColor(UIColor.wmSoftBlueColor())
+        postsViewController.tableView.dg_setPullToRefreshBackgroundColor(UIColor.wmBackgroundColor())
         
         let postsToMeButton = self.createFilterButton("Posts to me")
         let postsToAllButton = self.createFilterButton("Posts to all")
@@ -48,11 +56,7 @@ class MyPostsViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { posts in
-            self.posts = posts //Check if redundant
-            self.postsViewController.posts = posts
-            self.postsViewController.tableView.reloadData()
-        })
+        self.fetchPosts()
     }
     
     override func viewWillLayoutSubviews() {
@@ -96,6 +100,14 @@ class MyPostsViewController: UIViewController {
         self.postsViewController.tableView.reloadData()
     }
     
+    func fetchPosts(){
+        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { posts in
+            self.posts = posts //Check if redundant
+            self.postsViewController.posts = posts
+            self.postsViewController.tableView.reloadData()
+            self.postsViewController.tableView.dg_stopLoading()
+        })
+    }
 
 }
 

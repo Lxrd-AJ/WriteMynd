@@ -11,6 +11,12 @@ import Foundation
 // Color palette
 
 extension UIColor {
+    class func wmBoogerColor() -> UIColor {
+        return UIColor(red: 148.0 / 255.0, green: 198.0 / 255.0, blue: 73.0 / 255.0, alpha: 1.0)
+    }
+    class func wmFrenchBlueColor() -> UIColor {
+        return UIColor(red: 68.0 / 255.0, green: 112.0 / 255.0, blue: 185.0 / 255.0, alpha: 1.0)
+    }
     class func wmCoolBlueColor() -> UIColor {
         return UIColor(red: 87.0 / 255.0, green: 132.0 / 255.0, blue: 199.0 / 255.0, alpha: 1.0)
     }

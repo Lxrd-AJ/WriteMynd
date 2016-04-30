@@ -15,6 +15,8 @@ class ViewController: UIViewController {
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .Plain, target: self, action: .search)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: .Plain, target: self, action: .toggleMenu)
+        self.navigationItem.rightBarButtonItem?.tintColor = .wmCoolBlueColor()
+        self.navigationItem.leftBarButtonItem?.tintColor = .wmCoolBlueColor()
     }
     
     func toggleMenu( sender:UIBarButtonItem ){
