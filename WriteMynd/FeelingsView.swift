@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SZTextView
 
 class FeelingsView: UIView {
 
@@ -19,8 +20,8 @@ class FeelingsView: UIView {
         return label
     }()
     
-    lazy var feelingsTextView: UITextView = {
-        let textView = UITextView()
+    lazy var feelingsTextView: SZTextView = {
+        let textView = SZTextView()
         textView.font = Label.font()
         textView.textColor = UIColor.wmSlateGreyColor()
         textView.delegate = self

@@ -19,6 +19,7 @@ target 'WriteMynd' do
     pod 'Mixpanel'
     pod 'Onboard'
     pod 'DGElasticPullToRefresh'
+    pod 'SZTextView'
     
     #pod 'PromiseKit', '~> 2.0'
     #pod 'DOFavoriteButton', '~> 0.0.4'

@@ -59,7 +59,7 @@ class PostTableViewCell: UITableViewCell {
         
         //Ellipsis Button
         bottomView.addSubview(ellipsesButton)
-        ellipsesButton.setImage(UIImage(named:"group2"), forState: .Normal)
+        ellipsesButton.setImage(UIImage(named:"ellipses"), forState: .Normal)
         ellipsesButton.snp_makeConstraints(closure: { make in
             make.right.equalTo(bottomView.snp_right).offset(-14.9)
             make.bottom.equalTo(bottomView.snp_bottom).offset(-21.5)
@@ -91,6 +91,7 @@ class PostTableViewCell: UITableViewCell {
         postLabel.numberOfLines = 0
         postLabel.textColor = UIColor.wmSilverColor()
         postLabel.snp_makeConstraints(closure: { make in
+            //make.top.equalTo(superview.snp_top).offset(5)
             make.width.equalTo(superview.snp_width).offset(-10)
             make.center.equalTo(superview.snp_center)
         })

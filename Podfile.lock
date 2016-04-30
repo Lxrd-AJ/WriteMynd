@@ -33,6 +33,7 @@ PODS:
   - SnapKit (0.15.0)
   - SwiftDate (2.0.2)
   - SwiftSpinner (0.9.5)
+  - SZTextView (1.2.2)
   - ZendeskSDK (1.5.4.1):
     - ZendeskSDK/Core (= 1.5.4.1)
     - ZendeskSDK/Localization (= 1.5.4.1)
@@ -56,6 +57,7 @@ DEPENDENCIES:
   - SnapKit (~> 0.15.0)
   - SwiftDate (~> 2.0)
   - SwiftSpinner
+  - SZTextView
   - ZendeskSDK (~> 1.5)
 
 SPEC CHECKSUMS:
@@ -74,8 +76,9 @@ SPEC CHECKSUMS:
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftDate: b4f4d0962afe48365ad2800c9850a6626deb9359
   SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
+  SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
   ZendeskSDK: 45b7a2812a04c3c5c2510aeeeded5818e6e705a5
 
-PODFILE CHECKSUM: 6249da5fbe1207a9c2748c0fba048841ada23564
+PODFILE CHECKSUM: 663b82a5909b0cee0c4cfd61f738911a821a308e
 
 COCOAPODS: 1.0.0.beta.1

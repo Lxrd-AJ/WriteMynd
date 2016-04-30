@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Parse
+import SZTextView
 
 /**
  - todo: 
@@ -82,11 +83,11 @@ class WriteViewController: UIViewController {
         return field
     }()
     
-    lazy var feelingsTextView: UITextView = {
-        let textView = UITextView()
+    lazy var feelingsTextView: SZTextView = {
+        let textView = SZTextView()
         textView.textContainerInset = UIEdgeInsetsMake(5, 10, 0, 10)
         textView.font = Label.font()
-        textView.text = self.question
+        textView.placeholder = self.question
         //textView.tintColor = UIColor.blueColor()
         textView.textColor = UIColor.lightGrayColor()
         textView.delegate = self
@@ -391,6 +392,7 @@ extension WriteViewController {
             })
             feelingsView.setupConstraints()
             self.feelingsView.feelingsTextView.becomeFirstResponder()
+            self.feelingsView.feelingsTextView.placeholder = question
             feelingsView.feelingsTextView.text = self.feelingsTextView.text
         }
     }

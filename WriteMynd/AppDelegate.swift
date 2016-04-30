@@ -18,6 +18,7 @@ let MixpanelService = Mixpanel.sharedInstanceWithToken("35657d737e9e58ce0c79c4bb
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var drawerController: MMDrawerController = MMDrawerController()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -44,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let signupVC = WelcomeViewController()
         let menuVC: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
         let navigationController: UINavigationController = UINavigationController(rootViewController: signupVC)
-        let drawerController: MMDrawerController = MMDrawerController(centerViewController: navigationController, leftDrawerViewController: menuVC)
+        drawerController = MMDrawerController(centerViewController: navigationController, leftDrawerViewController: menuVC)
         menuVC.navController = navigationController
         menuVC.drawerController = drawerController
         drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
@@ -66,7 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         window!.tintColor = UIColor.wmCoolBlueColor()
         
-        return true
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
+            print("Application launched from shortcut item => \(shortcutItem.type)")
+            handleQuickAction(shortcutItem)
+            return false
+        }
+        return true //so that `performActionForShortcutItem` would not be called
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
@@ -77,6 +83,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else if application.applicationState == .Inactive || application.applicationState == .Background{
             //Opened from local push notification in background
         }
+    }
+    
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        print("Performing shortcut item \(shortcutItem.type)")
+        completionHandler( handleQuickAction(shortcutItem) )
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -90,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background. 
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
@@ -103,5 +114,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate {
+    
+    enum ShortCut: String {
+        case WriteIt = "writeIt"
+        case SwipeIt = "swipeIt"
+        case Reflect = "reflect"
+    }
+    
+    func handleQuickAction( shortcutItem: UIApplicationShortcutItem ) -> Bool {
+        print("Handling Action \(shortcutItem.localizedTitle)")
+        guard PFUser.currentUser() != nil else{ return false }
+        var actionHandled = false
+        
+        let everymynd = EveryMyndController()
+        let type = shortcutItem.type.componentsSeparatedByString(".").last!
+        if let shortcutType = ShortCut.init(rawValue: type) , nav = drawerController.centerViewController as? UINavigationController{
+            switch shortcutType {
+            case .WriteIt:
+                actionHandled = true
+                nav.pushViewController(everymynd, animated: true)
+                nav.pushViewController(WriteViewController(), animated: true)
+            case .SwipeIt:
+                actionHandled = true
+                nav.pushViewController(everymynd, animated: true)
+                nav.pushViewController(SwipeViewController(), animated: true)
+            case .Reflect:
+                actionHandled = true
+                nav.pushViewController(MyMyndViewController(), animated: true)
+            }
+        }
+        
+        return actionHandled
+    }
 }
 
