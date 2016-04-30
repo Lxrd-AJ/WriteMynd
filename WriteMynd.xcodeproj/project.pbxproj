@@ -44,6 +44,9 @@
 		217903EB1CD4331A00ECCDEA /* ThinkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217903EA1CD4331A00ECCDEA /* ThinkingViewController.swift */; };
 		217903ED1CD43CA400ECCDEA /* ThinkingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217903EC1CD43CA400ECCDEA /* ThinkingPage.swift */; };
 		217903EF1CD4426C00ECCDEA /* thinking1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903EE1CD4426C00ECCDEA /* thinking1.txt */; };
+		217903F11CD4F46400ECCDEA /* thinking2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903F01CD4F46400ECCDEA /* thinking2.txt */; };
+		217903F31CD4F46F00ECCDEA /* thinking3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903F21CD4F46F00ECCDEA /* thinking3.txt */; };
+		217903F51CD4F4A200ECCDEA /* thinking4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903F41CD4F4A200ECCDEA /* thinking4.txt */; };
 		217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */; };
 		217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BDB1C8A25290085D71B /* SwipeViewController.swift */; };
 		219F4F581C9AFBFD00B9AB34 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */; };
@@ -100,6 +103,9 @@
 		217903EA1CD4331A00ECCDEA /* ThinkingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThinkingViewController.swift; sourceTree = "<group>"; };
 		217903EC1CD43CA400ECCDEA /* ThinkingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThinkingPage.swift; sourceTree = "<group>"; };
 		217903EE1CD4426C00ECCDEA /* thinking1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking1.txt; sourceTree = "<group>"; };
+		217903F01CD4F46400ECCDEA /* thinking2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking2.txt; sourceTree = "<group>"; };
+		217903F21CD4F46F00ECCDEA /* thinking3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking3.txt; sourceTree = "<group>"; };
+		217903F41CD4F4A200ECCDEA /* thinking4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking4.txt; sourceTree = "<group>"; };
 		217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSwipeView.swift; sourceTree = "<group>"; };
 		217F3BDB1C8A25290085D71B /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeDirection.swift; sourceTree = "<group>"; };
@@ -151,6 +157,9 @@
 				217903E41CD3887C00ECCDEA /* legal.txt */,
 				213016751C9D745A00A4598D /* Montserrat-Regular.ttf */,
 				217903EE1CD4426C00ECCDEA /* thinking1.txt */,
+				217903F01CD4F46400ECCDEA /* thinking2.txt */,
+				217903F21CD4F46F00ECCDEA /* thinking3.txt */,
+				217903F41CD4F4A200ECCDEA /* thinking4.txt */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -403,12 +412,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				213016771C9D74F100A4598D /* Montserrat-Regular.ttf in Resources */,
+				217903F11CD4F46400ECCDEA /* thinking2.txt in Resources */,
 				213016761C9D74EE00A4598D /* Montserrat-Bold.ttf in Resources */,
 				217903E51CD3887C00ECCDEA /* legal.txt in Resources */,
+				217903F31CD4F46F00ECCDEA /* thinking3.txt in Resources */,
 				2172FBF71C11B65E003446AC /* LaunchScreen.storyboard in Resources */,
 				2172FBF41C11B65E003446AC /* Assets.xcassets in Resources */,
 				217903EF1CD4426C00ECCDEA /* thinking1.txt in Resources */,
 				2172FBF21C11B65E003446AC /* Main.storyboard in Resources */,
+				217903F51CD4F4A200ECCDEA /* thinking4.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,12 +32,15 @@ class ThinkingViewController: ViewController {
         self.contentView.addSubview(page4)
 
         let page1Path = NSBundle.mainBundle().pathForResource("thinking1", ofType: "txt")
+        let page2Path = NSBundle.mainBundle().pathForResource("thinking2", ofType: "txt")
+        let page3Path = NSBundle.mainBundle().pathForResource("thinking3", ofType: "txt")
+        let page4Path = NSBundle.mainBundle().pathForResource("thinking4", ofType: "txt")
         do {
             let contents = try String(contentsOfFile: page1Path!)
             self.page1.page1Message.text = contents
-            self.page2.page1Message.text = contents
-            self.page3.page1Message.text = contents
-            self.page4.page1Message.text = contents
+            self.page2.page1Message.text = try String(contentsOfFile: page2Path!)
+            self.page3.page1Message.text = try String(contentsOfFile: page3Path!)
+            self.page4.page1Message.text = try String(contentsOfFile: page4Path!)
         }catch{
             print(error)
         }

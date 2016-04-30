@@ -205,15 +205,6 @@ extension SettingsTableViewController {
             
             do{
                 try PFUser.currentUser()?.signUp()
-            }catch let error as NSError {
-                print(error)
-                print(error.localizedDescription)
-                SwiftSpinner.show(error.localizedDescription).addTapHandler({ SwiftSpinner.hide() }, subtitle: "Tap to dismiss!")
-            }
-            //Check if the user is signed in
-            if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
-                print("Error - user is still anonymous")
-            }else{
                 SwiftSpinner.show("Successfully registered your account", animated: true).addTapHandler({
                     if self.rows.contains(self.REGISTER_ACCOUNT) {
                         let idx = self.rows.indexOf(self.REGISTER_ACCOUNT)
@@ -222,6 +213,10 @@ extension SettingsTableViewController {
                     }
                     SwiftSpinner.hide()
                 }, subtitle: "Tap to dismiss!")
+            }catch let error as NSError {
+                print(error)
+                print(error.localizedDescription)
+                SwiftSpinner.show(error.localizedDescription).addTapHandler({ SwiftSpinner.hide() }, subtitle: "Tap to dismiss!")
             }
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
