@@ -16,7 +16,7 @@ import Parse
  */
 class MenuViewController: UITableViewController {
     
-    let menuItems: [String] = ["Every Mynd","My Mynd","The Thinking","Settings"]
+    let menuItems: [String] = ["My Mynd","Every Mynd","The Thinking","Settings"]
     var navController: UINavigationController?
     var drawerController: MMDrawerController?
 

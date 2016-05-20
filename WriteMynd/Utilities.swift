@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 let screenWidth = UIScreen.mainScreen().bounds.width

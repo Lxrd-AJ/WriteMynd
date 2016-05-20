@@ -10,8 +10,6 @@ import UIKit
 import SZTextView
 
 class FeelingsView: UIView {
-
-    var onFinishCallback: (() -> Void)?
     
     lazy var promptMessage: Label = {
         var label = Label()
@@ -27,7 +25,7 @@ class FeelingsView: UIView {
         textView.delegate = self
         textView.layer.borderWidth = 1.0
         textView.layer.borderColor = UIColor.lightGrayColor().CGColor
-        textView.userInteractionEnabled = false 
+
         return textView
     }()
     
@@ -37,6 +35,11 @@ class FeelingsView: UIView {
         self.addSubview(promptMessage)
         self.addSubview(feelingsTextView)
         
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupConstraints()
     }
     
     func setupConstraints() -> Void {
@@ -60,11 +63,12 @@ class FeelingsView: UIView {
 extension FeelingsView: UITextViewDelegate {
     
     func textViewDidBeginEditing(textView: UITextView) {
-        textView.tintColor = UIColor.wmCoolBlueColor()
     }
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        textView.tintColor = .redColor()
-        return true 
+        textView.userInteractionEnabled = true
+        textView.editable = true
+        textView.scrollEnabled = true
+        return true
     }
 }

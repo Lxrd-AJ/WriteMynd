@@ -12,8 +12,6 @@ import MMDrawerController
 import Mixpanel
 import SwiftDate
 
-let MixpanelService = Mixpanel.sharedInstanceWithToken("35657d737e9e58ce0c79c4bb4cc8a94e");
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -23,12 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //Parse configurations
+        Parse.enableLocalDatastore()
         Parse.setApplicationId("psbQTCZJnowKHs9FT534pLsRKOtgxQvkNTmYctOD",clientKey: "JZVNrhm8472sSy8tuXNibdzOI7Xx1k3OJnVoIAXt")
         
         //Mixpanel Config
-        if let email = PFUser.currentUser()?.email {
-            MixpanelService.registerSuperProperties(["user":email])
-        }
+        Analytics.setup()
         
         //UI Configurations
         UILabel.appearance().font = UIFont(name: "Montserrat-Regular.ttf", size: 17.0)
@@ -41,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         , forState: .Normal)
         
         //App Configurations
-        //let meVC: EveryMyndController = storyboard.instantiateViewControllerWithIdentifier("EveryMyndController") as! EveryMyndController
         let signupVC = WelcomeViewController()
         let menuVC: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
         let navigationController: UINavigationController = UINavigationController(rootViewController: signupVC)
@@ -112,7 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 

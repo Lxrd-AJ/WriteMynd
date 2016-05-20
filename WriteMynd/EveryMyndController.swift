@@ -98,6 +98,7 @@ class EveryMyndController: ViewController {
             postsController.tableView.hidden = true
             fetchPosts()
         }
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -139,21 +140,18 @@ class EveryMyndController: ViewController {
         fetchPosts()
         
         //Track the user viewing `EveryMynd` event
-        MixpanelService.track("USER_VIEWED_EVERYMYND")
+        Analytics.trackUserViewed( self )
         
         if shouldShowPostingSheet {
             self.showPostingSheet(self.createPostButton)
+            shouldShowPostingSheet = !shouldShowPostingSheet
         }
-        
     }
     
     deinit{
         self.postsController.tableView.dg_removePullToRefresh()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

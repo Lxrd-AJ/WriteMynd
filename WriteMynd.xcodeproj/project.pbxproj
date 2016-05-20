@@ -24,6 +24,7 @@
 		21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA41CA2E9B0005F117F /* FeelingsView.swift */; };
 		21623EA81CA3C761005F117F /* MyMyndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA71CA3C761005F117F /* MyMyndViewController.swift */; };
 		21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA91CA76AAD005F117F /* HiddenPost.swift */; };
+		216BDFD41CED790600D8F115 /* TestTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216BDFD31CED790600D8F115 /* TestTextViewController.swift */; };
 		217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */; };
 		217138B41CAA6A39008CC4D1 /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B31CAA6A39008CC4D1 /* FloatLabelTextField.swift */; };
 		217138B61CAAE189008CC4D1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B51CAAE189008CC4D1 /* SearchViewController.swift */; };
@@ -54,6 +55,7 @@
 		21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1341C2949A90047306D /* MenuViewController.swift */; };
 		21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1361C2A129A0047306D /* MenuViewCell.swift */; };
 		21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1381C2AECCC0047306D /* DashboardController.swift */; };
+		21C387791CEF147100B22F08 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C387781CEF147100B22F08 /* Analytics.swift */; };
 		21D467C71CB24C4D00412C3C /* HashTagsPieCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D467C61CB24C4D00412C3C /* HashTagsPieCharts.swift */; };
 		21D467C91CB346D300412C3C /* EmojiPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D467C81CB346D300412C3C /* EmojiPieChart.swift */; };
 		21E120CA1C9BB43B00DB1C8D /* PostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */; };
@@ -81,6 +83,7 @@
 		21623EA41CA2E9B0005F117F /* FeelingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingsView.swift; sourceTree = "<group>"; };
 		21623EA71CA3C761005F117F /* MyMyndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMyndViewController.swift; sourceTree = "<group>"; };
 		21623EA91CA76AAD005F117F /* HiddenPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenPost.swift; sourceTree = "<group>"; };
+		216BDFD31CED790600D8F115 /* TestTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTextViewController.swift; sourceTree = "<group>"; };
 		217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeOnBoarding.swift; sourceTree = "<group>"; };
 		217138B31CAA6A39008CC4D1 /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
 		217138B51CAAE189008CC4D1 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +117,7 @@
 		21C0A1341C2949A90047306D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		21C0A1361C2A129A0047306D /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
 		21C0A1381C2AECCC0047306D /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
+		21C387781CEF147100B22F08 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		21D467C61CB24C4D00412C3C /* HashTagsPieCharts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagsPieCharts.swift; sourceTree = "<group>"; };
 		21D467C81CB346D300412C3C /* EmojiPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiPieChart.swift; sourceTree = "<group>"; };
 		21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTableViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 				2172FBF81C11B65E003446AC /* Info.plist */,
 				2172FC071C11E073003446AC /* Utilities.swift */,
 				21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */,
+				21C387781CEF147100B22F08 /* Analytics.swift */,
 				2136F0751C1A3B2A00BE26FD /* ParseService.swift */,
 				2172FBF31C11B65E003446AC /* Assets.xcassets */,
 				2172FC0F1C125823003446AC /* Views */,
@@ -328,6 +333,7 @@
 			children = (
 				217F3BDB1C8A25290085D71B /* SwipeViewController.swift */,
 				213016711C9D524500A4598D /* WriteViewController.swift */,
+				216BDFD31CED790600D8F115 /* TestTextViewController.swift */,
 			);
 			name = Posting;
 			sourceTree = "<group>";
@@ -356,12 +362,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2172FBFB1C11B65E003446AC /* Build configuration list for PBXNativeTarget "WriteMynd" */;
 			buildPhases = (
-				EA5AAC53AC47BA4834997D2A /* Check Pods Manifest.lock */,
+				EA5AAC53AC47BA4834997D2A /* 📦 Check Pods Manifest.lock */,
 				2172FBE51C11B65E003446AC /* Sources */,
 				2172FBE61C11B65E003446AC /* Frameworks */,
 				2172FBE71C11B65E003446AC /* Resources */,
-				F3F59AF7B4A37B6AE4333E98 /* Embed Pods Frameworks */,
-				54E50041EB9ACC2C03EECDD8 /* Copy Pods Resources */,
+				F3F59AF7B4A37B6AE4333E98 /* 📦 Embed Pods Frameworks */,
+				54E50041EB9ACC2C03EECDD8 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -427,14 +433,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		54E50041EB9ACC2C03EECDD8 /* Copy Pods Resources */ = {
+		54E50041EB9ACC2C03EECDD8 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,14 +448,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA5AAC53AC47BA4834997D2A /* Check Pods Manifest.lock */ = {
+		EA5AAC53AC47BA4834997D2A /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,14 +463,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F3F59AF7B4A37B6AE4333E98 /* Embed Pods Frameworks */ = {
+		F3F59AF7B4A37B6AE4333E98 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +502,7 @@
 				21F6193E1C9A11190089542F /* OverlayView.swift in Sources */,
 				2117E9681CA097E20008A1E3 /* HashTagView.swift in Sources */,
 				2172FC111C1258B7003446AC /* GenericExtensions.swift in Sources */,
+				216BDFD41CED790600D8F115 /* TestTextViewController.swift in Sources */,
 				2172FC021C11CD3A003446AC /* EveryMyndController.swift in Sources */,
 				21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */,
 				2172FC041C11CFF9003446AC /* WelcomeViewController.swift in Sources */,
@@ -514,6 +521,7 @@
 				2102B5161CC910920002BA24 /* MyPostsViewController.swift in Sources */,
 				217903E71CD38E9100ECCDEA /* LegalViewController.swift in Sources */,
 				211772561CBA4900009B6DF0 /* SwipeChart.swift in Sources */,
+				21C387791CEF147100B22F08 /* Analytics.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
 				217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */,
 				217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */,

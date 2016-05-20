@@ -5,9 +5,9 @@ PODS:
   - Charts/Core (2.2.4)
   - DGElasticPullToRefresh (1.0.3)
   - JTSActionSheet (1.0.1)
-  - Mixpanel (2.9.8):
-    - Mixpanel/Mixpanel (= 2.9.8)
-  - Mixpanel/Mixpanel (2.9.8)
+  - Mixpanel (2.9.9):
+    - Mixpanel/Mixpanel (= 2.9.9)
+  - Mixpanel/Mixpanel (2.9.9)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -20,13 +20,14 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - Onboard (2.1.9)
+  - Onboard (2.2.0)
   - Parse (1.13.0):
     - Bolts/Tasks (~> 1.6)
   - ParseUI (1.2.0):
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
   - pop (1.0.9)
+  - PSPDFTextView (1.2.0)
   - RMActionController (1.0.5)
   - RMDateSelectionViewController (2.0.3):
     - RMActionController (~> 1.0.5)
@@ -34,11 +35,11 @@ PODS:
   - SwiftDate (2.0.2)
   - SwiftSpinner (0.9.5)
   - SZTextView (1.2.2)
-  - ZendeskSDK (1.6.0.1):
-    - ZendeskSDK/Providers (= 1.6.0.1)
-    - ZendeskSDK/UI (= 1.6.0.1)
-  - ZendeskSDK/Providers (1.6.0.1)
-  - ZendeskSDK/UI (1.6.0.1):
+  - ZendeskSDK (1.6.1.1):
+    - ZendeskSDK/Providers (= 1.6.1.1)
+    - ZendeskSDK/UI (= 1.6.1.1)
+  - ZendeskSDK/Providers (1.6.1.1)
+  - ZendeskSDK/UI (1.6.1.1):
     - ZendeskSDK/Providers
 
 DEPENDENCIES:
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - Parse
   - ParseUI
   - pop (~> 1.0)
+  - PSPDFTextView
   - RMDateSelectionViewController (~> 2.0.3)
   - SnapKit (~> 0.15.0)
   - SwiftDate (~> 2.0)
@@ -63,20 +65,21 @@ SPEC CHECKSUMS:
   Charts: a9e735c83c6d376ade20f6612dcf0ba217394a49
   DGElasticPullToRefresh: 040f39ae69840b3261d163fe6735c5901bf851e9
   JTSActionSheet: d7e5350ce63b5ff23ced9db653ed1c768358124e
-  Mixpanel: 39c8e140d74d914e460ea3b4c770434fcd29c8a0
+  Mixpanel: 818d1940c2d9402453b349545022a86968097f57
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
-  Onboard: 4d92c763ed15f939071dec12e87ed9e8dc036746
+  Onboard: c46261255c0bcbe26ab2823782764c96fca7a33e
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  PSPDFTextView: 805ff07dca594c05ab1f762309b998daedca79a3
   RMActionController: b83653e7452ed51492094d65dc82151c36443c03
   RMDateSelectionViewController: 354a0f1fe40bac01054528b7a8735f2973bbd813
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftDate: b4f4d0962afe48365ad2800c9850a6626deb9359
   SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
   SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
-  ZendeskSDK: 5eacccb6f5ca7129dbc2df05a057ccde0e62b9e3
+  ZendeskSDK: b08a24cdf036a61dc8c680c389b208be4d6dc5ae
 
-PODFILE CHECKSUM: 663b82a5909b0cee0c4cfd61f738911a821a308e
+PODFILE CHECKSUM: 17cc494a58aceb8e9523d63d03a6dfba540b3b70
 
-COCOAPODS: 1.0.0.beta.1
+COCOAPODS: 1.0.0.rc.1

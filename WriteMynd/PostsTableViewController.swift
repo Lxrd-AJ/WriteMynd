@@ -286,7 +286,7 @@ extension PostsTableViewController {
             })
             post.isEmpathised = false
             sender.setImage(UIImage(named: "empathise_heart"), forState: .Normal)
-        }else{
+        }else{ //Empathise the post
             sender.setImage(UIImage(named: "empathise_heart_filled"), forState: .Normal)
             
             //Save the post
@@ -294,6 +294,8 @@ extension PostsTableViewController {
             empathisedPosts += [empathisedPost]
             empathisedPost.save()
             post.isEmpathised = true
+            
+            Analytics.trackUserEmpathisesWith(post)
         }
     }
 }

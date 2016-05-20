@@ -25,6 +25,12 @@ class DashboardController: UIViewController {
     let hashtagsPieCharts = HashTagsPieCharts()
     let swipeChart = SwipeChart()
     
+    let stackView = UIStackView()
+    
+    lazy var hashTagInfoButton: UIButton = { return self.moreInfoButton() }()
+    lazy var pieChartInfoButton: UIButton = { return self.moreInfoButton() }()
+    lazy var swipeInfoButton: UIButton = { self.moreInfoButton() }()
+    
     lazy var myHashTagsLabel: Label = {
         let label = Label()
         label.text = "My Themes"
@@ -50,14 +56,35 @@ class DashboardController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.wmBackgroundColor()
-        self.view.userInteractionEnabled = true 
+        self.view.userInteractionEnabled = true
+        self.automaticallyAdjustsScrollViewInsets = false
         
-        self.view.addSubview(topView)
-        self.view.addSubview(middleView)
-        self.view.addSubview(bottomView)
+        stackView.axis = .Vertical
+        stackView.alignment = .Fill
+        stackView.distribution = .FillEqually
+        
+        self.stackView.addArrangedSubview(topView)
+        self.stackView.addArrangedSubview(middleView)
+        self.stackView.addArrangedSubview(bottomView)
+        self.view.addSubview(stackView)
         
         _ = [topView,middleView].map({ $0.addBorder(edges: [.Bottom], colour: UIColor.wmSilverColor(), thickness: 0.9) })
-        middleView.userInteractionEnabled = true
+        
+        hashTagInfoButton.tag = 0
+        pieChartInfoButton.tag = 1
+        swipeInfoButton.tag = 2
+        
+        self.topView.addSubview(myHashTagsLabel)
+        self.topView.addSubview(hashtagsPieCharts)
+        self.topView.addSubview(hashTagInfoButton)
+        
+        self.middleView.addSubview(myEmojisLabel)
+        self.middleView.addSubview(emojiPieChart)
+        self.middleView.addSubview(pieChartInfoButton)
+        
+        self.bottomView.addSubview(swipeLabel)
+        self.bottomView.addSubview(swipeChart)
+        self.bottomView.addSubview(swipeInfoButton)
         
         drawCharts()
     }
@@ -65,7 +92,6 @@ class DashboardController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.view.setNeedsLayout()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,90 +100,69 @@ class DashboardController: UIViewController {
     
     /**
      - todo:
-        [ ] Refactor to use UIStackViews 🔨
+        [x] Refactor to use UIStackViews 🔨
      */
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        //MARK: - Top level view constraints
-        topView.snp_makeConstraints(closure: { make in
+        stackView.snp_makeConstraints(closure: { make in
             make.top.equalTo(self.view.snp_top)
             make.width.equalTo(self.view.snp_width)
-            make.height.equalTo(200)
+            make.height.equalTo(600)
         })
-        self.topView.addSubview(myHashTagsLabel)
+        //MARK: - Top level view constraints
         myHashTagsLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(topView.snp_top).offset(5)
             make.left.equalTo(topView.snp_left).offset(5)
         })
-        self.topView.addSubview(hashtagsPieCharts)
         hashtagsPieCharts.snp_makeConstraints(closure: { make in
             make.width.equalTo(topView.snp_width)
             make.top.equalTo(myHashTagsLabel.snp_bottom)
             make.centerX.equalTo(topView.snp_centerX)
             make.height.equalTo(topView.snp_height).offset(-25)
         })
-        let hashTagInfoButton = self.moreInfoButton()
-        //self.topView.addSubview(hashTagInfoButton)
-        hashTagInfoButton.tag = 0
-//        hashTagInfoButton.snp_makeConstraints(closure: {make in
-//            make.top.equalTo(myHashTagsLabel.snp_top)
-//            make.right.equalTo(topView.snp_right).offset(-5)
-//        })
+        hashTagInfoButton.snp_makeConstraints(closure: {make in
+            make.top.equalTo(myHashTagsLabel.snp_top)
+            make.right.equalTo(topView.snp_right).offset(-5)
+        })
         //END MARK
         
         //MARK: Middle View Constraints
-        middleView.userInteractionEnabled = true
-        middleView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(topView.snp_bottom).offset(10)
-            make.size.equalTo(topView.snp_size)
-        })
-        middleView.addSubview(myEmojisLabel)
+//        middleView.snp_makeConstraints(closure: { make in
+//            make.top.equalTo(topView.snp_bottom).offset(10)
+//            make.size.equalTo(topView.snp_size)
+//        })
         myEmojisLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(middleView.snp_top)
             make.left.equalTo(middleView.snp_left).offset(5)
         })
-        middleView.addSubview(emojiPieChart)
         emojiPieChart.snp_makeConstraints(closure: { make in
             make.width.equalTo(middleView.snp_width)
             make.top.equalTo(myEmojisLabel.snp_bottom)
             make.centerX.equalTo(middleView.snp_centerX)
             make.height.equalTo(middleView.snp_height).offset(-25)
         })
-        let pieChartInfoButton = self.moreInfoButton()
-        pieChartInfoButton.tag = 1
-        //self.middleView.addSubview(pieChartInfoButton)
-//        pieChartInfoButton.snp_makeConstraints(closure: { make in
-//            make.top.equalTo(myEmojisLabel.snp_top)
-//            make.right.equalTo(middleView.snp_right).offset(-5)
-//        })
+        pieChartInfoButton.snp_makeConstraints(closure: { make in
+            make.top.equalTo(myEmojisLabel.snp_top)
+            make.right.equalTo(middleView.snp_right).offset(-5)
+        })
         //END MARK
         
         //MARK: Bottom View Constraints
-        bottomView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(middleView.snp_bottom).offset(10)
-            make.size.equalTo(middleView.snp_size)
-            make.centerX.equalTo(self.view.snp_centerX)
-        })
-        bottomView.addSubview(swipeLabel)
         swipeLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(bottomView.snp_top)
             make.left.equalTo(bottomView.snp_left).offset(5)
         })
-        bottomView.addSubview(swipeChart)
         swipeChart.snp_makeConstraints(closure: { make in
             make.width.equalTo(bottomView.snp_width)
             make.top.equalTo(swipeLabel.snp_bottom).offset(15)
             make.centerX.equalTo(bottomView.snp_centerX)
             make.height.equalTo(bottomView.snp_height).offset(-25)
         })
-        let swipeInfoButton = self.moreInfoButton()
-        swipeInfoButton.tag = 2
-        //self.bottomView.addSubview(swipeInfoButton)
-//        swipeInfoButton.snp_makeConstraints(closure: { make in
-//            make.top.equalTo(swipeLabel.snp_top)
-//            make.right.equalTo(bottomView.snp_right).offset(-5)
-//        })
+        swipeInfoButton.snp_makeConstraints(closure: { make in
+            make.top.equalTo(swipeLabel.snp_top)
+            make.right.equalTo(bottomView.snp_right).offset(-5)
+        })
         //END MARK
     }
     
@@ -255,16 +260,10 @@ extension DashboardController {
     func moreInfoButton() -> UIButton {
         let button = UIButton(type: .Custom);
         button.setImage(UIImage(named: "info"), forState: .Normal)
-        //button.backgroundColor = .redColor()
-        //button.setTitle("Info", forState: .Normal)
-        button.setTitleColor(.redColor(), forState: .Normal)
-        button.imageView?.userInteractionEnabled = false
         button.userInteractionEnabled = true
+        button.setTitle("Info", forState: .Normal)
+        button.setTitleColor(.redColor(), forState: .Normal)
         button.addTarget(self, action: .infoButtonTapped, forControlEvents: .TouchUpInside)
-        button.snp_makeConstraints(closure: {make in
-            make.width.equalTo(20)
-            make.height.equalTo(20)
-        })
         return button;
     }
     

@@ -20,7 +20,6 @@ class WriteViewController: UIViewController {
     
     var currentTextField: UITextField? //The Current textfield the user is editing
     var post: Post? //TODO: Add a setter function here
-    var editingHashTags: Bool = true
     
     let question = dailyQuestion[Int( arc4random_uniform(UInt32(dailyQuestion.count)))]
     let feelingsView = FeelingsView()
@@ -248,9 +247,9 @@ extension WriteViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    func createRightBarButtonItem() -> UIBarButtonItem {
-        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: .finishedEditingTextView)
-    }
+//    func createRightBarButtonItem() -> UIBarButtonItem {
+//        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: .finishedEditingTextView)
+//    }
 }
 
 extension WriteViewController {
@@ -293,10 +292,7 @@ extension WriteViewController {
             }, completion: { bool in
                 self.post!.save()
                 //TRACK
-                MixpanelService.track("USER_MADE_POST", properties: [
-                        "Feeling": self.post!.emoji.value().name,
-                        "private_post": self.post!.isPrivate
-                    ])
+                Analytics.trackUserMade(self.post!)
                 //END TRACK
                 delay(3, closure: {
                     notificationView.removeFromSuperview()
@@ -357,60 +353,64 @@ extension WriteViewController {
             self.view.addSubview(self.focusView)
         }
         
-        if self.editingHashTags { //HashTag field
-            let hashtagView = HashTagView()
-            self.focusView.addSubview(hashtagView)
-            hashtagView.snp_makeConstraints(closure: { make in
-                make.top.equalTo(self.view.snp_top).offset(200)
-                make.left.equalTo(self.view.snp_left)//.offset(10)
-                make.width.equalTo(self.view.snp_width)
-                make.centerX.equalTo(self.view.snp_centerX)
+        //Editing HashTags
+        let hashtagView = HashTagView()
+        self.focusView.addSubview(hashtagView)
+        hashtagView.snp_makeConstraints(closure: { make in
+            make.top.equalTo(self.view.snp_top).offset(200)
+            make.left.equalTo(self.view.snp_left)//.offset(10)
+            make.width.equalTo(self.view.snp_width)
+            make.centerX.equalTo(self.view.snp_centerX)
+        })
+        hashtagView.setupConstraints()
+        
+        hashtagView.hashtagField.becomeFirstResponder()
+        hashtagView.hashtagField.text = self.hashTagField.text
+        hashtagView.onFinishCallback = {
+            self.hashTagField.text = hashtagView.hashtagField.text
+            self.post!.hashTags = self.hashTagField.text!.componentsSeparatedByString(" ").filter({ (text:String) -> Bool in
+                guard text != "" else { return false }
+                return text[text.startIndex] == "#"
             })
-            hashtagView.setupConstraints()
-            
-            hashtagView.hashtagField.becomeFirstResponder()
-            hashtagView.hashtagField.text = self.hashTagField.text
-            hashtagView.onFinishCallback = {
-                self.hashTagField.text = hashtagView.hashtagField.text
-                self.post!.hashTags = self.hashTagField.text!.componentsSeparatedByString(" ").filter({ (text:String) -> Bool in
-                    guard text != "" else { return false }
-                    return text[text.startIndex] == "#"
-                })
-                self.focusView.removeFromSuperview()
-            }
-        }else{ //Feeling field
-            if !self.feelingsView.isDescendantOfView(self.focusView){
-                self.focusView.addSubview(self.feelingsView)
-            }
-            
-            self.focusView.addSubview(self.feelingsView)
-            feelingsView.snp_makeConstraints(closure: { make in
-                make.top.equalTo(self.view.snp_top).offset(125)
-                make.left.equalTo(self.view.snp_left)
-                make.width.equalTo(self.view.snp_width)
-                make.centerX.equalTo(self.view.snp_centerX)
-            })
-            feelingsView.setupConstraints()
-            self.feelingsView.feelingsTextView.becomeFirstResponder()
-            self.feelingsView.feelingsTextView.placeholder = question
-            feelingsView.feelingsTextView.text = self.feelingsTextView.text
+            self.focusView.removeFromSuperview()
         }
+//        else{ //Feeling field
+//            //TODO: Deprecate
+//            if !self.feelingsView.isDescendantOfView(self.focusView){
+//                self.focusView.addSubview(self.feelingsView)
+//            }
+//            
+//            self.focusView.addSubview(self.feelingsView)
+//            feelingsView.snp_makeConstraints(closure: { make in
+//                make.top.equalTo(self.view.snp_top).offset(125)
+//                make.left.equalTo(self.view.snp_left)
+//                make.width.equalTo(self.view.snp_width)
+//                make.centerX.equalTo(self.view.snp_centerX)
+//            })
+//            self.feelingsView.feelingsTextView.becomeFirstResponder()
+//            
+//        }
     }
     
-    func finishedEditingTextView( sender:AnyObject ){
-        self.feelingsTextView.text = self.feelingsView.feelingsTextView.text
-        self.feelingsTextView.resignFirstResponder()
-        self.post!.text = self.feelingsTextView.text!
-        self.focusView.removeFromSuperview()
-        self.navigationItem.rightBarButtonItem = nil 
-    }
+    /**
+     -todo : DEPRECATE
+     
+     - parameter sender: <#sender description#>
+     */
+//    func finishedEditingTextView( sender:AnyObject ){
+//        self.feelingsTextView.hidden = false
+//        self.feelingsTextView.text = self.feelingsView.feelingsTextView.text
+//        self.feelingsTextView.resignFirstResponder()
+//        self.post!.text = self.feelingsTextView.text!
+//        self.focusView.removeFromSuperview()
+//        self.navigationItem.rightBarButtonItem = nil
+//    }
     
 }
 //thingstobegrafefulfor
 extension WriteViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        self.editingHashTags = true
         self.beginEditingWithFocusView()
         return false;
     }
@@ -423,19 +423,25 @@ extension WriteViewController: UITextFieldDelegate {
 
 extension WriteViewController: UITextViewDelegate {
     /**
-     - todo:
-        [ ] Consider using a placeholder for the textview
+     Delegate
+     
+     - parameter textView: The current dummy textview
+     - returns: false always
+     - todo: Consider pushing a view controller [x]
      */
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        self.editingHashTags = false
-        self.beginEditingWithFocusView()
-        textView.selectable = true
-        self.navigationItem.rightBarButtonItem = self.createRightBarButtonItem()
+        let postController = TestTextViewController()
+        postController.textView.placeholder = question
+        postController.textView.text = self.feelingsTextView.text
+        postController.onFinishCallback = {
+            self.feelingsTextView.text = postController.textView.text
+            self.post!.text = self.feelingsTextView.text!
+        }
+        self.navigationController?.pushViewController(postController, animated: true)
         return false
     }
 }
 
 private extension Selector {
     static let emojiButtonTapped = #selector(WriteViewController.emojiButtonTapped(_:))
-    static let finishedEditingTextView = #selector(WriteViewController.finishedEditingTextView(_:))
 }

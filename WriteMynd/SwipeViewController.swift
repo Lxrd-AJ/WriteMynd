@@ -132,9 +132,7 @@ extension SwipeViewController: SwipeViewDelegate {
         }
         
         //TRACKING
-        MixpanelService.track("USER_SWIPED", properties: [
-                "emotion": emotion
-            ])
+        Analytics.trackUserMade(swipe)  
         //END TRACKING
         
         swipe.save()

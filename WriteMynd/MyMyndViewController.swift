@@ -45,6 +45,7 @@ class MyMyndViewController: ViewController {
         
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.whiteColor()
+        self.automaticallyAdjustsScrollViewInsets = false
         
         //MARK: Constraints 
         self.view.addSubview(myProfileButton)
@@ -65,13 +66,13 @@ class MyMyndViewController: ViewController {
         })
         //END MARK
         
-        //Toggle to the My profile tab
-        self.toggleProfileAndPost(myProfileButton)
-        
         ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { posts in
             self.posts = posts //Check if redundant 
             self.myPostsVC.posts = self.posts
         })
+        
+        //Toggle to the My profile tab
+        self.toggleProfileAndPost(myPostsButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -96,7 +97,7 @@ extension MyMyndViewController {
             }
             
             //Prepare the scroll view
-            scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height + 60.0)
+            scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height )//+ 60.0
             scrollView.delaysContentTouches = false
             scrollView.canCancelContentTouches = false
             scrollView.userInteractionEnabled = true

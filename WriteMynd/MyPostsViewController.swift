@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import DGElasticPullToRefresh
+import JTSActionSheet
 
 class MyPostsViewController: UIViewController {
     
@@ -16,6 +17,24 @@ class MyPostsViewController: UIViewController {
     let loadingView: DGElasticPullToRefreshLoadingView = DGElasticPullToRefreshLoadingViewCircle()
     let buttonStackView = UIStackView()
     var posts: [Post] = []
+    var lastContentOffSet: CGFloat = 0.0 //tracker to determine if user scrolling up/down
+    var shouldShowPostingSheet: Bool = false
+    lazy var bottomView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.whiteColor()
+        view.alpha = 1.0
+        return view;
+    }()
+    lazy var createPostButton: Button = {
+        let button: Button = Button()
+        button.backgroundColor = UIColor.wmGreenishTealColor()
+        button.setTitle("Create a post", forState: .Normal)
+        //button.setImage(UIImage(named: "group")!, forState: .Normal)
+        button.setFontSize(16)
+        button.addTarget(self, action: .showPostingSheet, forControlEvents: .TouchUpInside)
+        button.alpha = 0.8
+        return button;
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,11 +71,22 @@ class MyPostsViewController: UIViewController {
         self.view.addSubview(postsViewController.tableView)
         postsViewController.didMoveToParentViewController(self)
         postsViewController.posts = posts
-        postsViewController.delegate = self        
+        postsViewController.delegate = self
+        
+        self.view.addSubview(bottomView)
+        self.view.addSubview(createPostButton)
     }
     
     override func viewWillAppear(animated: Bool) {
         self.fetchPosts()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if shouldShowPostingSheet {
+            self.showPostingSheet(self.createPostButton)
+            shouldShowPostingSheet = !shouldShowPostingSheet
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -68,6 +98,17 @@ class MyPostsViewController: UIViewController {
             make.bottom.equalTo(self.view.snp_bottom)
             make.centerX.equalTo(self.view.snp_centerX)
         })
+        
+        bottomView.snp_makeConstraints(closure: { make in
+            make.width.equalTo(self.view.snp_width)
+            make.bottom.equalTo(self.view.snp_bottom)
+            make.height.equalTo(75)
+        })
+        
+        createPostButton.snp_makeConstraints(closure: { make in
+            make.edges.equalTo(bottomView).inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        })
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,12 +129,33 @@ class MyPostsViewController: UIViewController {
         return button
     }
     
-    func filterButtonTapped( button: UIButton ){
+    func filterButtonTapped( button: Button ){
+        if button.selected {
+            button.backgroundColor = .whiteColor()
+            button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
+        }else{
+            button.backgroundColor = UIColor.wmCoolBlueColor()
+            button.setTitleColor(.whiteColor(), forState: .Normal)
+        }
+        
         switch button.tag {
         case 0: //Posts to me tapped
-            self.postsViewController.posts = self.posts.filter({ $0.isPrivate == true })
+            if button.selected {
+                self.postsViewController.posts += self.posts.filter({ $0.isPrivate == false })
+                button.selected = false
+            }else{
+                self.postsViewController.posts = self.posts.filter({ $0.isPrivate == true })
+                button.selected = true
+            }
         case 1:
-            self.postsViewController.posts = self.posts.filter({ $0.isPrivate == false })
+            if button.selected {
+                self.postsViewController.posts += self.posts.filter({ $0.isPrivate == true })
+                button.selected = false
+            }else{
+                self.postsViewController.posts = self.posts.filter({ $0.isPrivate == false })
+                button.selected = true
+            }
+            //self.postsViewController.posts = self.posts.filter({ $0.isPrivate == false })
         default:
             break;
         }
@@ -108,6 +170,33 @@ class MyPostsViewController: UIViewController {
             self.postsViewController.tableView.dg_stopLoading()
         })
     }
+    
+    /**
+     Selector method to show the different methods available to make a post
+     - note: Another option https://github.com/okmr-d/DOAlertController
+     UIActionSheet does not allow images so an option might be to mimic UIActionSheet with a View
+     Controller and View and present them
+     */
+    func showPostingSheet( sender:UIButton ){
+        self.bottomView.alpha = 0.0
+        let theme: JTSActionSheetTheme = global_getActionSheetTheme()
+        let swipeItItem = JTSActionSheetItem(title: "Swipe It", action: {
+            self.bottomView.alpha = 1.0
+            let swipeVC = SwipeViewController()
+            //self.presentViewController(swipeVC, animated: true, completion: nil)
+            self.navigationController?.pushViewController(swipeVC, animated: true)
+            }, isDestructive: false)
+        let writeItItem = JTSActionSheetItem(title: "Write It", action: {
+            self.bottomView.alpha = 1.0
+            let writeVC = WriteViewController()
+            self.navigationController?.pushViewController(writeVC, animated: true)
+            }, isDestructive: false)
+        let cancelItem = JTSActionSheetItem(title: "Cancel", action: {
+            self.bottomView.alpha = 1.0
+            }, isDestructive: true)
+        let actionSheet = JTSActionSheet(theme: theme, title: "", actionItems: [swipeItItem, writeItItem], cancelItem: cancelItem)
+        actionSheet.showInView(self.view)
+    }
 
 }
 
@@ -117,14 +206,48 @@ extension MyPostsViewController: PostsTableVCDelegate {
     func canDeletePost() -> Bool { return true }
     func shouldShowMeLabelOnCell() -> Bool { return false }
     
+    /**
+     Editing a Post
+     
+     - parameter post: The post to be edited
+     - todo
+        [ ] Migrate to `PostsTableViewController` as the functionality is common to both EveryMynd and MyMynd
+     */
     func editPost(post: Post) {
         let writeVC = WriteViewController()
         writeVC.post = post
         self.navigationController?.pushViewController(writeVC, animated: true)
+    }
+    
+    /**
+     Delegate method
+     
+     - parameter scrollView: The current scrollview in the view port
+     - todo: 
+        [ ] Migrate this method to the `PostsTableViewController` as it common in both `EveryMynd` and `MyMynd`
+     */
+    func scrollBegan( scrollView:UIScrollView ) {
+        if( self.lastContentOffSet < scrollView.contentOffset.y ){
+            //Scrolling to the bottom
+            UIView.animateWithDuration(1.5, delay: 1.5, options: .CurveEaseInOut, animations: {
+                self.bottomView.snp_updateConstraints(closure: { make in
+                    make.bottom.equalTo(self.view.snp_bottom).offset(100)
+                })
+                }, completion: nil)
+        }else{
+            //Scrolling to the top
+            UIView.animateWithDuration(5.0, delay: 1.0, options: .CurveEaseIn, animations: {
+                self.bottomView.snp_updateConstraints(closure: { make in
+                    make.bottom.equalTo(self.view.snp_bottom)
+                })
+                }, completion: nil)
+        }
+        self.lastContentOffSet = scrollView.contentOffset.y
     }
 
 }
 
 private extension Selector {
     static let filterButtonTapped = #selector(MyPostsViewController.filterButtonTapped(_:))
+    static let showPostingSheet = #selector(MyPostsViewController.showPostingSheet(_:))
 }
