@@ -107,6 +107,8 @@ extension SearchViewController {
             searchText = "#" + text
         }
         print("Search text \(searchText)")
+        
+        Analytics.trackSearchFor(searchText)
         if shouldSearchPrivatePosts {
             ParseService.getPostsWith([searchText], callback: { posts in
                 print(posts)
