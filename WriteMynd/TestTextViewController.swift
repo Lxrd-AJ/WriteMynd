@@ -1,5 +1,5 @@
 //
-//  TestTextViewController.swift
+//  TextViewController.swift
 //  WriteMynd
 //
 //  Created by AJ Ibraheem on 19/05/2016.
@@ -9,7 +9,7 @@
 import UIKit
 import SZTextView
 
-class TestTextViewController: UIViewController {
+class TextViewController: UIViewController {
 
     var onFinishCallback: (() -> Void)?
     
@@ -72,12 +72,12 @@ class TestTextViewController: UIViewController {
     }
 }
 
-extension TestTextViewController: UITextViewDelegate {
+extension TextViewController: UITextViewDelegate {
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         return true
     }
 }
 
 private extension Selector {
-    static let finishedEditingTextView = #selector(TestTextViewController.finishedEditingTextView(_:))
+    static let finishedEditingTextView = #selector(TextViewController.finishedEditingTextView(_:))
 }

@@ -56,6 +56,7 @@
 		21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1361C2A129A0047306D /* MenuViewCell.swift */; };
 		21C0A1391C2AECCC0047306D /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1381C2AECCC0047306D /* DashboardController.swift */; };
 		21C387791CEF147100B22F08 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C387781CEF147100B22F08 /* Analytics.swift */; };
+		21C3877B1CEF6E3700B22F08 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C3877A1CEF6E3700B22F08 /* TestViewController.swift */; };
 		21D467C71CB24C4D00412C3C /* HashTagsPieCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D467C61CB24C4D00412C3C /* HashTagsPieCharts.swift */; };
 		21D467C91CB346D300412C3C /* EmojiPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D467C81CB346D300412C3C /* EmojiPieChart.swift */; };
 		21E120CA1C9BB43B00DB1C8D /* PostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */; };
@@ -118,6 +119,7 @@
 		21C0A1361C2A129A0047306D /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
 		21C0A1381C2AECCC0047306D /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		21C387781CEF147100B22F08 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		21C3877A1CEF6E3700B22F08 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		21D467C61CB24C4D00412C3C /* HashTagsPieCharts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagsPieCharts.swift; sourceTree = "<group>"; };
 		21D467C81CB346D300412C3C /* EmojiPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiPieChart.swift; sourceTree = "<group>"; };
 		21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTableViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				21623EA71CA3C761005F117F /* MyMyndViewController.swift */,
 				21C0A1381C2AECCC0047306D /* DashboardController.swift */,
 				2102B5151CC910920002BA24 /* MyPostsViewController.swift */,
+				21C3877A1CEF6E3700B22F08 /* TestViewController.swift */,
 			);
 			name = MyMynd;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C3877B1CEF6E3700B22F08 /* TestViewController.swift in Sources */,
 				213016721C9D524500A4598D /* WriteViewController.swift in Sources */,
 				21D467C91CB346D300412C3C /* EmojiPieChart.swift in Sources */,
 				2132E96C1CCC66EC0049E95F /* SignupViewController.swift in Sources */,

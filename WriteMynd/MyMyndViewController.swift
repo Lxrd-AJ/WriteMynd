@@ -15,6 +15,7 @@ class MyMyndViewController: ViewController {
     let scrollView = UIScrollView()
     let dashboardVC = DashboardController()
     let myPostsVC = MyPostsViewController()
+    let testVC = TestViewController()
     
     var posts:[Post] = []
     
@@ -44,7 +45,7 @@ class MyMyndViewController: ViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.wmBackgroundColor()
         self.automaticallyAdjustsScrollViewInsets = false
         
         //MARK: Constraints 
@@ -86,7 +87,7 @@ extension MyMyndViewController {
     func toggleProfileAndPost( sender: Button ){
         sender.backgroundColor = UIColor.wmSlateGreyColor()
         
-        if sender.tag == 0 { //My profile button //DashboardController
+        if sender.tag == 0 { //My profile button
             self.myPostsButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()
             
             //Remove the posts table view controller if in the view 
@@ -96,39 +97,42 @@ extension MyMyndViewController {
                 myPostsVC.removeFromParentViewController()
             }
             
-            //Prepare the scroll view
-            scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height )//+ 60.0
-            scrollView.delaysContentTouches = false
-            scrollView.canCancelContentTouches = false
-            scrollView.userInteractionEnabled = true
-            self.view.addSubview(scrollView)
-            
             //Add the Dashboard as a child view controller
-            self.addChildViewController(dashboardVC)
-            self.scrollView.addSubview(dashboardVC.view);
-            dashboardVC.didMoveToParentViewController(self)
+//            self.addChildViewController(dashboardVC)
+            self.addChildViewController(testVC)
             
-            scrollView.snp_makeConstraints(closure: { make in
-                make.top.equalTo(myProfileButton.snp_bottom)
-                make.width.equalTo(self.view.snp_width)
-                make.centerX.equalTo(self.view.snp_centerX)
-                make.bottom.equalTo(self.view.snp_bottom)
-            })
+//            self.scrollView.addSubview(dashboardVC.view);
+//            self.view.addSubview(dashboardVC.view)
+            self.view.addSubview(testVC.view)
+            testVC.didMoveToParentViewController(self)
+            
+//            dashboardVC.didMoveToParentViewController(self
 
-            dashboardVC.view.snp_makeConstraints(closure: { make in
-                make.top.equalTo(self.scrollView.snp_top)
+//            dashboardVC.view.snp_makeConstraints(closure: { make in
+//                //make.top.equalTo(self.scrollView.snp_top)
+//                make.top.equalTo(self.myProfileButton.snp_bottom)
+//                
+//                make.width.equalTo(self.view.snp_width)
+//            })
+            testVC.view.snp_makeConstraints(closure: { make in
+                make.top.equalTo(self.myProfileButton.snp_bottom)
                 make.width.equalTo(self.view.snp_width)
+                make.bottom.equalTo(self.view.snp_bottom)
+                make.centerX.equalTo(self.view.snp_centerX)
             })
             
             //Register listeners for events on the charts in the dashboard VC
-            dashboardVC.emojiPieChart.chart.delegate = self
+            testVC.emojiPieChart.chart.delegate = self
         }else if sender.tag == 1 {
             self.myProfileButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()            
             
             //Remove the Dashboard Child Controller
-            dashboardVC.willMoveToParentViewController(nil)
-            dashboardVC.view.removeFromSuperview()
-            dashboardVC.removeFromParentViewController()
+//            dashboardVC.willMoveToParentViewController(nil)
+//            dashboardVC.view.removeFromSuperview()
+//            dashboardVC.removeFromParentViewController()
+            testVC.willMoveToParentViewController(nil)
+            testVC.view.removeFromSuperview()
+            testVC.removeFromParentViewController()
             self.scrollView.removeFromSuperview()
             
             //Add the posts table view controller

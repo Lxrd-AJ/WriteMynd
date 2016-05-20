@@ -374,37 +374,7 @@ extension WriteViewController {
             })
             self.focusView.removeFromSuperview()
         }
-//        else{ //Feeling field
-//            //TODO: Deprecate
-//            if !self.feelingsView.isDescendantOfView(self.focusView){
-//                self.focusView.addSubview(self.feelingsView)
-//            }
-//            
-//            self.focusView.addSubview(self.feelingsView)
-//            feelingsView.snp_makeConstraints(closure: { make in
-//                make.top.equalTo(self.view.snp_top).offset(125)
-//                make.left.equalTo(self.view.snp_left)
-//                make.width.equalTo(self.view.snp_width)
-//                make.centerX.equalTo(self.view.snp_centerX)
-//            })
-//            self.feelingsView.feelingsTextView.becomeFirstResponder()
-//            
-//        }
     }
-    
-    /**
-     -todo : DEPRECATE
-     
-     - parameter sender: <#sender description#>
-     */
-//    func finishedEditingTextView( sender:AnyObject ){
-//        self.feelingsTextView.hidden = false
-//        self.feelingsTextView.text = self.feelingsView.feelingsTextView.text
-//        self.feelingsTextView.resignFirstResponder()
-//        self.post!.text = self.feelingsTextView.text!
-//        self.focusView.removeFromSuperview()
-//        self.navigationItem.rightBarButtonItem = nil
-//    }
     
 }
 //thingstobegrafefulfor
@@ -430,7 +400,7 @@ extension WriteViewController: UITextViewDelegate {
      - todo: Consider pushing a view controller [x]
      */
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        let postController = TestTextViewController()
+        let postController = TextViewController()
         postController.textView.placeholder = question
         postController.textView.text = self.feelingsTextView.text
         postController.onFinishCallback = {
