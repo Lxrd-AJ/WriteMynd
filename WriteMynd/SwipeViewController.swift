@@ -122,13 +122,11 @@ extension SwipeViewController: SwipeViewDelegate {
     func koloda(koloda: SwipeView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeDirection) {
         let feeling = questions[Int(index)]
         var swipe = Swipe(value: -1, feeling: feeling)
-        var emotion = "negative"
         
         if negativeSwipeQuestions.contains(feeling) {
             swipe.value = -direction.rawValue
         }else{
             swipe.value = direction.rawValue
-            emotion = "positive"
         }
         
         //TRACKING

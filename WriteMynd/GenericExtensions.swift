@@ -97,11 +97,17 @@ extension UIView{
 
 extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralConvertible {
     func max() -> String {
-        var maxValue: Int = -1; var maxKey: String = "";
-        for key in self.keys {
-            if (self[key] as? Int) > maxValue { maxValue = (self[key] as? Int)!; maxKey = String(key); }
-        }
-        return maxKey
+//        var maxValue: Int = -1; var maxKey: String = "";
+//        for key in self.keys {
+//            if (self[key] as? Int) > maxValue { maxValue = (self[key] as? Int)!; maxKey = String(key); }
+//        }
+//        return maxKey
+        guard self.keys.first != nil else{ return "" }
+//        return String(self.keys.reduce(self.keys.first! , combine: {
+//            if (self[$0] as? Int) > (self[$1] as? Int) { return $0 }
+//            else{ return $1 }
+//        }))
+        return self.keys().sort{ s1,s2 in return (self[s1] as? Int) > (self[s2] as? Int) }.first! as! String
     }
     
     func min() -> String {

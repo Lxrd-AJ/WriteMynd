@@ -12,10 +12,8 @@ import Charts
 
 class MyMyndViewController: ViewController {
     
-    let scrollView = UIScrollView()
     let dashboardVC = DashboardController()
     let myPostsVC = MyPostsViewController()
-    let testVC = TestViewController()
     
     var posts:[Post] = []
     
@@ -98,42 +96,25 @@ extension MyMyndViewController {
             }
             
             //Add the Dashboard as a child view controller
-//            self.addChildViewController(dashboardVC)
-            self.addChildViewController(testVC)
+            self.addChildViewController(dashboardVC)
             
-//            self.scrollView.addSubview(dashboardVC.view);
-//            self.view.addSubview(dashboardVC.view)
-            self.view.addSubview(testVC.view)
-            testVC.didMoveToParentViewController(self)
+            self.view.addSubview(dashboardVC.view)
             
-//            dashboardVC.didMoveToParentViewController(self
-
-//            dashboardVC.view.snp_makeConstraints(closure: { make in
-//                //make.top.equalTo(self.scrollView.snp_top)
-//                make.top.equalTo(self.myProfileButton.snp_bottom)
-//                
-//                make.width.equalTo(self.view.snp_width)
-//            })
-            testVC.view.snp_makeConstraints(closure: { make in
+            dashboardVC.didMoveToParentViewController(self)
+            dashboardVC.view.snp_makeConstraints(closure: { make in
                 make.top.equalTo(self.myProfileButton.snp_bottom)
                 make.width.equalTo(self.view.snp_width)
                 make.bottom.equalTo(self.view.snp_bottom)
                 make.centerX.equalTo(self.view.snp_centerX)
             })
             
-            //Register listeners for events on the charts in the dashboard VC
-            testVC.emojiPieChart.chart.delegate = self
         }else if sender.tag == 1 {
             self.myProfileButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()            
             
             //Remove the Dashboard Child Controller
-//            dashboardVC.willMoveToParentViewController(nil)
-//            dashboardVC.view.removeFromSuperview()
-//            dashboardVC.removeFromParentViewController()
-            testVC.willMoveToParentViewController(nil)
-            testVC.view.removeFromSuperview()
-            testVC.removeFromParentViewController()
-            self.scrollView.removeFromSuperview()
+            dashboardVC.willMoveToParentViewController(nil)
+            dashboardVC.view.removeFromSuperview()
+            dashboardVC.removeFromParentViewController()
             
             //Add the posts table view controller
             self.addChildViewController(myPostsVC)
@@ -147,13 +128,6 @@ extension MyMyndViewController {
             })
             myPostsVC.postsViewController.posts = self.posts
         }
-    }
-}
-
-extension MyMyndViewController: ChartViewDelegate {
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        print(entry)
-        print(dataSetIndex)
     }
 }
 

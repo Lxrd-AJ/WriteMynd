@@ -20,7 +20,6 @@ class EmojiPieChart: UIView {
         self.addSubview(chart)
         
         chart.userInteractionEnabled = true
-        self.userInteractionEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +30,7 @@ class EmojiPieChart: UIView {
         super.layoutSubviews()
         
         chart.snp_makeConstraints(closure: { make in
-            make.size.equalTo(self.snp_size).inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+            make.size.equalTo(self.snp_size).inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
             make.center.equalTo(self.snp_center)
         })
     }
@@ -40,6 +39,7 @@ class EmojiPieChart: UIView {
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
             let dataEntry = ChartDataEntry(value: Double(values[i]), xIndex: i)
+            dataEntry.data = dataPoints[i]
             dataEntries.append(dataEntry)
         }
         let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "");
@@ -48,7 +48,7 @@ class EmojiPieChart: UIView {
         pieChartDataSet.highlightEnabled = false
         pieChartDataSet.drawValuesEnabled = false
         pieChartDataSet.selectionShift = 9.0
-        chartData.highlightEnabled = false
+        chartData.highlightEnabled = true
         chart.data = chartData
         chart.drawSliceTextEnabled = false
         chart.usePercentValuesEnabled = true
@@ -64,9 +64,7 @@ class EmojiPieChart: UIView {
         chart.legend.yEntrySpace = -50
         chart.legend.maxSizePercent = 0.3
         
-        
         chart.animate(xAxisDuration: 1, yAxisDuration: 1, easingOption: .EaseInOutCirc)
-        
     }
 
 }
