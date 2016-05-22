@@ -130,6 +130,7 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
         })
     }
     
+    
     func maxPercent () -> Int {
         let maxTuple: (highest:Int,total:Int) = self.maxTuple()
         return Int((Float(maxTuple.highest) / Float(maxTuple.total)) * Float(100))

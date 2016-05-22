@@ -16,6 +16,7 @@ private let POST_EMPATHISED = "USER_EMPATHISES A POST"
 private let USER_SEARCHED = "USER_SEARCHED_FOR"
 private let APP_USAGE_BEGAN = "APP_USAGE_BEGAN"
 private let APP_LAUNCH_FROM_LOCAL_NOTIFICATION = "APP_LAUNCH_FROM_LOCAL_NOTIFICATION"
+private let APP_USAGE = "APP_USAGE"
 
 class Analytics {
     
@@ -31,7 +32,11 @@ class Analytics {
         MixpanelService.track(APP_LAUNCH_FROM_LOCAL_NOTIFICATION)
     }
     
-    class func trackAppUsageBegan(){ MixpanelService.timeEvent(APP_USAGE_BEGAN) }
+    class func trackAppUsageBegan(){
+        MixpanelService.identify(email)
+        MixpanelService.people.increment([APP_USAGE:1])
+        MixpanelService.timeEvent(APP_USAGE_BEGAN)
+    }
     
     class func trackAppUsageEnded(){ MixpanelService.track(APP_USAGE_BEGAN) }
     

@@ -26,6 +26,7 @@ class SwipeChart: UIView {
         lineChart.descriptionText = ""
         lineChart.leftAxis.axisMaxValue = 10.0
         lineChart.leftAxis.axisMinValue = -10.0
+        lineChart.userInteractionEnabled = false
         
         self.addSubview(lineChart)
     }

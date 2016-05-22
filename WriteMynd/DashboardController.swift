@@ -276,12 +276,32 @@ extension DashboardController {
         hashtagsPieCharts.renderChart(hashtagsPieCharts.maxHashtagsPie, dataPoints: mostTags, values: mostTagsData, centerValue: hashTagMap.maxPercent(), tag: hashTagMap.max())
     }
     
+    /**
+     Draws the second pie chart. The pie chart with the second most used hashtag, if there isn't enough data
+     It displays the least used hashtag instead
+     - todo: Needs refactoring as this method is not elegant enough
+     - parameter hashTagMap: a dictionary of the hashtags to their frequency
+     */
     func setupMinHashTagsPieChart( hashTagMap:[String:Int] ){
         //Least Used HashTag
-        let leastTags = ["Others", hashTagMap.min()]
+        let tags = hashTagMap.keys().sort({ s1,s2 in return hashTagMap[s1]! > hashTagMap[s2]! })
+        let total = hashTagMap.values.reduce(0, combine: +)
         let minTuple: (lowest:Int, total:Int) = hashTagMap.minTuple()
-        let leastTagsData = [ Double(minTuple.total - minTuple.lowest), Double(minTuple.lowest)]
-        hashtagsPieCharts.renderChart(hashtagsPieCharts.minHashtagsPie, dataPoints: leastTags, values: leastTagsData, centerValue: hashTagMap.minPercent(), tag: hashTagMap.min())
+        var tag = hashTagMap.min()
+        var count = minTuple.lowest
+        
+        if tags.count >= 2 {
+            tag = tags[1]
+            count = Int((Float(hashTagMap[tag]!) / Float(total)) * Float(100))
+        }
+        
+        print(tag)
+        print(count)
+        
+        let leastTags = ["Others", tag]
+        let leastTagsData = [ Double(total - count), Double(count)]
+        
+        hashtagsPieCharts.renderChart(hashtagsPieCharts.minHashtagsPie, dataPoints: leastTags, values: leastTagsData, centerValue: count, tag: tag)
     }
     
     func averageScoreFor( swipes:[Swipe] ) -> Double {
