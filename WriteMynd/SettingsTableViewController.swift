@@ -309,8 +309,8 @@ extension SettingsTableViewController {
         //Show the time selector/picker
         let selectAction: RMAction = RMAction(title: "Select", style: .Done, andHandler: {
             (controller:RMActionController) -> Void in
-            let _date:NSDate = (controller.contentView as! UIDatePicker).date
-            let date:NSDate = NSDate(refDate: _date).inRegion(Region.LocalRegion()).localDate! //DateInRegion.DefaultRegion(_date)
+            let date:NSDate = (controller.contentView as! UIDatePicker).date
+            //let date:NSDate = NSDate(refDate: _date).inRegion(Region.LocalRegion()).localDate! //DateInRegion.DefaultRegion(_date)
             print("Date selected = \(date)") //date.inRegion(Region.LocalRegion()).hour!
             let reminderDate = self.createRepeatingNotification(date.hour, minute: date.minute)
             //Add the new time cell string to the table rows array

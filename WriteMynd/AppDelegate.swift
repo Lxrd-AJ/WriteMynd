@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         drawerController.closeDrawerGestureModeMask = [.BezelPanningCenterView,.PanningCenterView]
         
         //Local Notifications
-        SwiftDate.Region.setDefaultRegion(Region.LocalRegion())
+        //SwiftDate.Region.setDefaultRegion(Region.LocalRegion())
         if let localNotification:UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
             application.applicationIconBadgeNumber = 0 //localNotification.applicationIconBadgeNumber--
             print("Application launched by local Notification \n \(localNotification.applicationIconBadgeNumber)")

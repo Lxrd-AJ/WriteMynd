@@ -49,7 +49,6 @@ class EmojiPieChart: UIView {
         pieChartDataSet.drawValuesEnabled = false
         pieChartDataSet.selectionShift = 9.0
         chartData.highlightEnabled = true
-        chart.data = chartData
         chart.drawSliceTextEnabled = false
         chart.usePercentValuesEnabled = true
         chart.holeRadiusPercent = 0.7
@@ -63,6 +62,7 @@ class EmojiPieChart: UIView {
         //chart.legend.yOffset = 60.0
         chart.legend.yEntrySpace = -50
         chart.legend.maxSizePercent = 0.3
+        chart.data = chartData
         
         chart.animate(xAxisDuration: 1, yAxisDuration: 1, easingOption: .EaseInOutCirc)
     }
