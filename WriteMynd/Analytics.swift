@@ -15,6 +15,7 @@ private let MixpanelService = Mixpanel.sharedInstanceWithToken("35657d737e9e58ce
 private let POST_EMPATHISED = "USER_EMPATHISES A POST"
 private let USER_SEARCHED = "USER_SEARCHED_FOR"
 private let APP_USAGE_BEGAN = "APP_USAGE_BEGAN"
+private let APP_LAUNCH_FROM_LOCAL_NOTIFICATION = "APP_LAUNCH_FROM_LOCAL_NOTIFICATION"
 
 class Analytics {
     
@@ -24,6 +25,10 @@ class Analytics {
         if let email = PFUser.currentUser()?.email {
             MixpanelService.registerSuperProperties(["user":email])
         }
+    }
+    
+    class func trackAppLaunchFromNotification( local:Bool ){
+        MixpanelService.track(APP_LAUNCH_FROM_LOCAL_NOTIFICATION)
     }
     
     class func trackAppUsageBegan(){ MixpanelService.timeEvent(APP_USAGE_BEGAN) }

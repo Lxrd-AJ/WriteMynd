@@ -56,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let everyMyndVC = EveryMyndController()
             everyMyndVC.shouldShowPostingSheet = true 
             drawerController.centerViewController = UINavigationController(rootViewController: everyMyndVC)
+            Analytics.trackAppLaunchFromNotification(true)
         }
         application.applicationIconBadgeNumber = 0 //HACK: Remove later
         
@@ -74,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         application.applicationIconBadgeNumber = 0
+        Analytics.trackAppLaunchFromNotification(true)
         if application.applicationState == .Active {
             print("Local Notification recieved whilst active")
             //TODO: Display an unintrusive notification **google whisper**

@@ -247,7 +247,7 @@ extension PostsTableViewController {
             alertController.addAction(hidePost)
         }
         
-        if let _delegate = self.delegate where _delegate.canDeletePost() {
+        if let _delegate = self.delegate where _delegate.canDeletePost() && (post.author.objectId == PFUser.currentUser()?.objectId){
             alertController.addAction(deletePostAction)
         }
         

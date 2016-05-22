@@ -245,6 +245,8 @@ extension EveryMyndController: PostsTableVCDelegate {
         self.navigationController?.pushViewController(writeVC, animated: true)
     }
     
+    func canDeletePost() -> Bool { return true }
+    
     func scrollBegan( scrollView:UIScrollView ) {
         if( self.lastContentOffSet < scrollView.contentOffset.y ){
             //Scrolling to the bottom
