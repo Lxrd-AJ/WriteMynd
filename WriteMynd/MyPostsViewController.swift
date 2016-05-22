@@ -118,14 +118,15 @@ class MyPostsViewController: UIViewController {
     
     func createFilterButton( title:String ) -> Button {
         let button = Button(type: .Custom)
-        button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.setTitle(title, forState: .Normal)
         button.setImage(UIImage(named: "oval")!, forState: .Normal)
         button.addTarget(self, action: .filterButtonTapped, forControlEvents: .TouchUpInside)
-        button.backgroundColor = UIColor.whiteColor()
+        button.backgroundColor = UIColor.wmCoolBlueColor()
         button.layer.cornerRadius = 15.0
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         button.setFontSize(14.0)
+        button.selected = true; //By default they are selected
         return button
     }
     
@@ -139,26 +140,26 @@ class MyPostsViewController: UIViewController {
         }
         
         switch button.tag {
-        case 0: //Posts to me tapped
+        case 0: //Posts to me tapped aka Private posts
             if button.selected {
-                self.postsViewController.posts += self.posts.filter({ $0.isPrivate == false })
+                self.postsViewController.posts = self.postsViewController.posts.filter({ !$0.isPrivate })
                 button.selected = false
             }else{
-                self.postsViewController.posts = self.posts.filter({ $0.isPrivate == true })
+                self.postsViewController.posts += self.posts.filter({ $0.isPrivate })
                 button.selected = true
             }
         case 1:
-            if button.selected {
-                self.postsViewController.posts += self.posts.filter({ $0.isPrivate == true })
+            if button.selected { //Non private posts
+                self.postsViewController.posts = self.postsViewController.posts.filter({ $0.isPrivate })
                 button.selected = false
             }else{
-                self.postsViewController.posts = self.posts.filter({ $0.isPrivate == false })
+                self.postsViewController.posts += self.posts.filter({ !$0.isPrivate  })
                 button.selected = true
             }
-            //self.postsViewController.posts = self.posts.filter({ $0.isPrivate == false })
         default:
             break;
         }
+        self.postsViewController.posts.sortInPlace({ $0.createdAt!.compare($1.createdAt!) == NSComparisonResult.OrderedDescending})
         self.postsViewController.tableView.reloadData()
     }
     
