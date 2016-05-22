@@ -11,7 +11,7 @@ import Parse
 
 /**
  - todo: 
-    [ ] Implement a delegate protocol to prevent the posts from displaying further search controller
+    [x] Implement a delegate protocol to prevent the posts from displaying further search controller
  */
 class SearchViewController: UIViewController {
 

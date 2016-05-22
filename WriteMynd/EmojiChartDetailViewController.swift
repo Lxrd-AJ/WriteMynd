@@ -26,7 +26,7 @@ class EmojiChartDetailViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool { return false }
+//    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool { return false }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Stuff that made me \(self.emoji.value().name)"
@@ -41,6 +41,14 @@ class EmojiChartDetailViewController: UITableViewController {
         let key = self.contentKey[ indexPath.row ]
         cell.textLabel?.text = "\(key)\t\(String(self.hashTags[key]!))"
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let hashtags = self.contentKey[ indexPath.row ]
+        let searchController = SearchViewController()
+        searchController.shouldSearchPrivatePosts = true
+        searchController.searchParameters = [hashtags]
+        self.navigationController?.pushViewController(searchController, animated: true)
     }
     
 }

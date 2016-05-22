@@ -148,8 +148,47 @@ class DashboardController: UIViewController {
     }
     
     func moreInfoButtonTapped( sender:UIButton ){
-        print("Button Touched")
-        print("Button tapped \(sender.tag)")
+        var infoMessage = ""
+        var containerView:UIView!
+        
+        switch sender.tag {
+        case 0:
+            //My hashtags
+            self.myHashTagsLabel.hidden = !self.myHashTagsLabel.hidden
+            containerView = self.topView
+            infoMessage = "What you’re posting about most and least according to the hashtags you’ve used"
+        case 1:
+            infoMessage = "How you’re feeling  and what you’re writing  about according to the emotion buttons you’ve selected"
+            self.myEmojisLabel.hidden = !self.myEmojisLabel.hidden
+            containerView = self.middleView
+        case 2:
+            infoMessage = "How positive or negative you’re feeling  over time according to the words you’ve swiped through"
+            self.swipeLabel.hidden = !self.swipeLabel.hidden
+            containerView = self.bottomView
+        default:
+            containerView = UIView()
+            break;
+        }
+        
+        if !sender.selected {
+            sender.selected = true
+            sender.backgroundColor = UIColor.wmCoolBlueColor()
+            sender.setTitle(infoMessage, forState: .Normal)
+            sender.snp_updateConstraints(closure: { make in
+                make.width.equalTo(self.view.snp_width).offset(-10)
+                make.height.equalTo(20)
+            })
+        }else{
+            sender.selected = false
+            sender.backgroundColor = UIColor.clearColor()
+            //sender.snp_removeConstraints()
+            sender.setTitle("", forState: .Normal)
+            sender.snp_remakeConstraints(closure: { make in
+                //make.width.equalTo(15)
+                make.top.equalTo(containerView.snp_top).offset(5)
+                make.right.equalTo(containerView.snp_right).offset(-5)
+            })
+        }
     }
 
 }
@@ -256,6 +295,10 @@ extension DashboardController {
         let button = UIButton(type: .Custom);
         button.setImage(UIImage(named: "info"), forState: .Normal)
         button.addTarget(self, action: .infoButtonTapped, forControlEvents: .TouchUpInside)
+        button.titleLabel?.font = Label.font().fontWithSize(9)
+        button.setTitleColor(.whiteColor(), forState: .Normal)
+        button.titleLabel?.numberOfLines = 0
+        button.layer.cornerRadius = 5.0
         return button;
     }
 
