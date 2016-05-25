@@ -34,7 +34,7 @@ extension PostsTableVCDelegate {
 
 /**
  - note: https://github.com/dzenbot/DZNEmptyDataSet for Empty Posts UI
- - note: Pull to refresh UI https://github.com/uzysjung/UzysAnimatedGifPullToRefresh
+ - note: https://github.com/Ramotion/circle-menu to replace the Action sheet
  */
 class PostsTableViewController: UITableViewController {
     

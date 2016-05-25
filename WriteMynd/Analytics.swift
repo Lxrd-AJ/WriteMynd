@@ -20,7 +20,7 @@ private let APP_USAGE = "APP_USAGE"
 
 class Analytics {
     
-    private static let email:String = PFUser.currentUser()!.email!
+    private static let email:String? = PFUser.currentUser()?.email
     
     class func setup(){
         if let email = PFUser.currentUser()?.email {
@@ -33,7 +33,7 @@ class Analytics {
     }
     
     class func trackAppUsageBegan(){
-        MixpanelService.identify(email)
+        if let email = email { MixpanelService.identify(email) }
         MixpanelService.people.increment([APP_USAGE:1])
         MixpanelService.timeEvent(APP_USAGE_BEGAN)
     }
@@ -70,7 +70,7 @@ class Analytics {
      - parameter post: The post to track
      */
     class func trackUserMade( post:Post ){
-        MixpanelService.identify(email)
+        if let email = email { MixpanelService.identify(email) }
         MixpanelService.people.increment(["POSTS_MADE":1])
         MixpanelService.track("USER_MADE_POST", properties: [
             "Feeling": post.emoji.value().name,

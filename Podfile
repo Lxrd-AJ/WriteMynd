@@ -17,9 +17,11 @@ target 'WriteMynd' do
     pod 'pop', '~> 1.0'
     pod 'JTSActionSheet', '~> 1.0.1'
     pod 'Mixpanel'
-    pod 'Onboard'
+    #pod 'Onboard'
     pod 'DGElasticPullToRefresh'
     pod 'SZTextView'
+    pod 'Gifu'
+    pod 'Pages'
     
     #pod 'PromiseKit', '~> 2.0'
     #pod 'DOFavoriteButton', '~> 0.0.4'
