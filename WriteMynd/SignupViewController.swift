@@ -9,7 +9,6 @@
 import UIKit
 import SwiftSpinner
 import Parse
-import Gifu
 import Pages
 
 class SignupViewController: SignupLoginViewController {
@@ -179,10 +178,15 @@ extension SignupViewController {
      - parameter sender: <#sender description#>
      */
     func beginOnBoarding( sender:Button ){
-        let firstPage = OnboardViewController(title: "write mynd", body: "An app for recording, reflecting and sharing for a clearer mind", imageName: "happyJumpingGuy", backgroundColor: UIColor.wmSoftBlueColor())
-        let secondPage = OnboardViewController(title: "record", body: "Get things of your chest by easily recording your thoughts and feelings", imageName: "photoGuy", backgroundColor: UIColor.wmSlateGreyColor())
-        let thirdPage = OnboardViewController(title: "Reflect", body: "Better understand how you're feeling by spotting the patterns in the things you have shared", imageName: "manInTheMirror", backgroundColor: UIColor.wmGreenishTealTwoColor())
-        let lastPage = OnboardViewController(title: "Share", body: "Share to your feed or if you want to, with the community, and see that you are not alone", imageName: "shareMan", backgroundColor: UIColor.wmLightGoldColor())
+        let firstPageAnimationImages = ["happyJumpingGuy1","happyJumpingGuy2","happyJumpingGuy3","happyJumpingGuy4","happyJumpingGuy5"]
+        let secondPageAnimationImages = ["photoGuy1","photoGuy2","photoGuy3","photoGuy4","photoGuy5"]
+        let thirdAnimationImages = ["manInTheMirror1","manInTheMirror2","manInTheMirror3","manInTheMirror4","manInTheMirror5"]
+        let lastAnimationImages = ["shareMan1","shareMan2","shareMan3","shareMan4","shareMan5","shareMan6","shareMan7","shareMan8","shareMan9"]
+        
+        let firstPage = OnboardViewController(title: "write mynd", body: "An app for recording, reflecting and sharing for a clearer mind", animationImageNames: firstPageAnimationImages, imageName: "happyJumpingGuy",backgroundColor: UIColor.wmSoftBlueColor()) //happyJumpingGuy
+        let secondPage = OnboardViewController(title: "record", body: "Get things of your chest by easily recording your thoughts and feelings", animationImageNames: secondPageAnimationImages, imageName: "photoGuy", backgroundColor: UIColor.wmSlateGreyColor())
+        let thirdPage = OnboardViewController(title: "Reflect", body: "Better understand how you're feeling by spotting the patterns in the things you have shared", animationImageNames: thirdAnimationImages, imageName: "manInTheMirror", backgroundColor: UIColor.wmGreenishTealTwoColor())
+        let lastPage = OnboardViewController(title: "Share", body: "Share to your feed or if you want to, with the community, and see that you are not alone", animationImageNames: lastAnimationImages, imageName:"shareMan", backgroundColor: UIColor.wmLightGoldColor())
         
         let pages = [firstPage,secondPage,thirdPage,lastPage]
         let onboardingVC = PagesController(pages)
