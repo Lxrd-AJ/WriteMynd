@@ -295,8 +295,8 @@ extension DashboardController {
             count = Int((Float(hashTagMap[tag]!) / Float(total)) * Float(100))
         }
         
-        print(tag)
-        print(count)
+        //print(tag)
+        //print(count)
         
         let leastTags = ["Others", tag]
         let leastTagsData = [ Double(total - count), Double(count)]

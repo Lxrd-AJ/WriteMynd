@@ -25,7 +25,9 @@ class PostTableViewCell: UITableViewCell {
     var empathiseButton: UIButton = UIButton() //DOFavoriteButton = DOFavoriteButton()
     var readMoreButton: Button = Button()
     
-    var topView: UIView?
+    let bottomView: UIView = UIView()
+    let middleView: UIView = UIView()
+    let topView: UIView = UIView()
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,9 +37,28 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupTopSection(self.contentView)
-        setupMiddleSection(self.contentView)
-        setupBottomSection(self.contentView)
+        self.contentView.addSubview(topView)
+        self.contentView.addSubview(middleView)
+        self.contentView.addSubview(postLabel)
+        self.contentView.addSubview(bottomView)
+        
+        topView.addSubview(emojiImageView)
+        topView.addSubview(hashTagsLabel)
+        topView.addSubview(dateLabel)
+        topView.addSubview(isPrivateLabel)
+        
+        bottomView.addSubview(ellipsesButton)
+        bottomView.addSubview(empathiseButton)
+        bottomView.addSubview(readMoreButton)
+        
+        readMoreButton.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
+        hashTagsLabel.titleLabel?.lineBreakMode = .ByTruncatingTail
+        hashTagsLabel.setTitleColor(UIColor.wmSlateGreyColor(), forState: .Normal)
+        dateLabel.textColor = UIColor.wmSilverColor()
+        isPrivateLabel.textColor = UIColor.wmCoolBlueColor()
+        isPrivateLabel.setFontSize(8);
+        postLabel.numberOfLines = 0
+        postLabel.textColor = UIColor.wmSilverColor()
     }
     
     override func layoutSubviews() {
@@ -52,30 +73,28 @@ class PostTableViewCell: UITableViewCell {
         self.setNeedsLayout()
     }
     
-    func setupBottomSection( superView:UIView ) {
-        let bottomView = UIView(frame: CGRect(x: 0, y: superView.bounds.height * 0.8, width: superView.bounds.width, height: superView.bounds.height * 0.2))
-        superView.addSubview(bottomView)
-        //bottomView.backgroundColor = UIColor.greenColor()
+    func setupBottomSection( superview:UIView ) {
+        bottomView.snp_makeConstraints(closure: { make in
+            //make.top.equalTo(self.middleView.snp_bottom)
+            make.bottom.equalTo(superview.snp_bottom)
+            make.width.equalTo(superview.snp_width)
+            make.height.equalTo(superview.snp_height).multipliedBy(0.2)
+        })
         
         //Ellipsis Button
-        bottomView.addSubview(ellipsesButton)
         ellipsesButton.setImage(UIImage(named:"ellipses"), forState: .Normal)
         ellipsesButton.snp_makeConstraints(closure: { make in
             make.right.equalTo(bottomView.snp_right).offset(-14.9)
-            make.bottom.equalTo(bottomView.snp_bottom).offset(-21.5)
+            make.bottom.equalTo(bottomView.snp_bottom).offset(-10)
         })
 
         //Empathise Button
-        bottomView.addSubview(empathiseButton)
-        //empathiseButton.setImage(UIImage(named: "empathise_heart"), forState: .Normal)
         empathiseButton.snp_makeConstraints(closure: { make in
-            make.height.equalTo(ellipsesButton.snp_height)
+            //make.height.equalTo(ellipsesButton.snp_height)
             make.right.equalTo(ellipsesButton.snp_left).offset(-10)
             make.bottom.equalTo(ellipsesButton.snp_bottom)
         })
         
-        bottomView.addSubview(readMoreButton)
-        readMoreButton.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
         readMoreButton.snp_makeConstraints(closure: { make in
             make.bottom.equalTo(ellipsesButton.snp_bottom).offset(5)
             make.left.equalTo(bottomView.snp_left).offset(5)
@@ -83,65 +102,56 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func setupMiddleSection( superview:UIView ){
-        let view = UIView(frame: CGRect(x: 0, y: superview.bounds.height * 0.2, width: superview.bounds.width, height: superview.bounds.height * 0.6))
-        superview.addSubview(view)
-        
+        self.middleView.snp_makeConstraints(closure: { make in
+            make.top.equalTo(self.topView.snp_bottom)
+            make.height.equalTo(superview.snp_height).multipliedBy(0.5)
+            make.width.equalTo(superview.snp_width)
+            make.centerX.equalTo(superview.snp_centerX)
+        })
         //Posts Label
-        superview.addSubview(postLabel)
-        postLabel.numberOfLines = 0
-        postLabel.textColor = UIColor.wmSilverColor()
         postLabel.snp_makeConstraints(closure: { make in
             //make.top.equalTo(superview.snp_top).offset(5)
-            make.width.equalTo(superview.snp_width).offset(-10)
-            make.center.equalTo(superview.snp_center)
+            //make.width.equalTo(superview.snp_width).offset(-10)
+            //make.center.equalTo(superview.snp_center)
+            make.center.equalTo(self.middleView.snp_center)
+            make.edges.equalTo(self.middleView.snp_edges).inset(5)
         })
     }
     
-    func setupTopSection( superView:UIView )  {
-        let topView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: (self.bounds.height * 0.2)))
-        superView.addSubview(topView)
-        self.topView = topView;
-        
-        topView.addSubview(emojiImageView)
-        topView.addSubview(hashTagsLabel)
-        topView.addSubview(dateLabel)
-        topView.addSubview(isPrivateLabel)
-        
-        hashTagsLabel.titleLabel?.lineBreakMode = .ByTruncatingTail
+    func setupTopSection( superview:UIView )  {
+        self.topView.snp_makeConstraints(closure: { make in
+            make.top.equalTo(superview.snp_top)
+            make.width.equalTo(superview.snp_width)
+            make.centerX.equalTo(superview.snp_centerX)
+            make.height.equalTo(superview.snp_height).multipliedBy(0.3)
+        })
         //Emoji
         if self.postLabel.text == "" {
             self.emojiImageView.snp_remakeConstraints(closure: { make in
                 make.width.equalTo(self.snp_width).multipliedBy(0.5)
                 make.height.equalTo(self.snp_height)
-                make.left.equalTo(self.topView!).offset(0)
-                make.top.equalTo(self.topView!).offset(0)
+                make.left.equalTo(self.topView.snp_left)
+                make.top.equalTo(self.topView.snp_top)
             })
         }else{
             emojiImageView.snp_remakeConstraints(closure: { make in
-                make.left.equalTo(self.topView!).offset(5)
-                make.top.equalTo(self.topView!).offset(5)
+                make.left.equalTo(self.topView).offset(5)
+                make.top.equalTo(self.topView).offset(5)
                 make.size.equalTo(CGSize(width: 28, height: 28))
             })
         }
-        
         //Family HashTag
-        hashTagsLabel.setTitleColor(UIColor.wmSlateGreyColor(), forState: .Normal)
         hashTagsLabel.snp_makeConstraints(closure: { make in
-            make.top.equalTo(emojiImageView.snp_top)
+            make.top.equalTo(self.topView.snp_top)
             make.left.equalTo(emojiImageView.snp_right).offset(3)
             make.right.lessThanOrEqualTo(isPrivateLabel.snp_left).offset(-3)
         })
-        
         //Date
-        dateLabel.textColor = UIColor.wmSilverColor()
         dateLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(hashTagsLabel.snp_bottom)
             make.left.equalTo(emojiImageView.snp_right).offset(3)
         })
-        
         //me or isPrivateLabel
-        isPrivateLabel.textColor = UIColor.wmCoolBlueColor()
-        isPrivateLabel.setFontSize(8)
         isPrivateLabel.snp_makeConstraints(closure: { make in
             make.right.equalTo(topView.snp_right).offset(-5)
             make.top.equalTo(topView.snp_top).offset(5)
@@ -151,13 +161,6 @@ class PostTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
 
 extension PostTableViewCell {
@@ -168,13 +171,13 @@ extension PostTableViewCell {
             self.emojiImageView.snp_remakeConstraints(closure: { make in
                 make.width.equalTo(self.snp_width).multipliedBy(0.5)
                 make.height.equalTo(self.snp_height)
-                make.left.equalTo(self.topView!).offset(0)
-                make.top.equalTo(self.topView!).offset(0)
+                make.left.equalTo(self.topView).offset(0)
+                make.top.equalTo(self.topView).offset(0)
             })
         }else{
             emojiImageView.snp_remakeConstraints(closure: { make in
-                make.left.equalTo(self.topView!).offset(5)
-                make.top.equalTo(self.topView!).offset(5)
+                make.left.equalTo(self.topView).offset(5)
+                make.top.equalTo(self.topView).offset(5)
                 make.size.equalTo(CGSize(width: 28, height: 28))
             })
         }

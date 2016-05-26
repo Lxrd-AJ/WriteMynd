@@ -39,20 +39,12 @@ extension PostsTableVCDelegate {
 class PostsTableViewController: UITableViewController {
     
     let CELL_IDENTIFIER = "WriteMynd And Chill Cell"
-    var posts:[Post] = [] {
-        didSet(_posts){
-            self.updateBackground()
-        }
-    }
+    var posts:[Post] = [] { didSet(_posts){ self.updateBackground() } }
     var empathisedPosts: [EmpathisedPost] = [] {
         //Mark the respective posts as empathised
         didSet(emPosts){
             let _ = emPosts.map({ emPost in
-                let _ = self.posts.map({ post in
-                    if emPost.postID == post.ID {
-                        post.isEmpathised = true
-                    }
-                })
+                let _ = self.posts.map({ post in if emPost.postID == post.ID { post.isEmpathised = true } })
             })
         }
     }
@@ -64,6 +56,8 @@ class PostsTableViewController: UITableViewController {
         self.tableView.registerClass(PostTableViewCell.self , forCellReuseIdentifier: CELL_IDENTIFIER)
         self.tableView.backgroundColor = UIColor.clearColor()
         self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 150.0
     }
 
     override func didReceiveMemoryWarning() {
@@ -105,12 +99,20 @@ class PostsTableViewController: UITableViewController {
             cell.empathiseButton.hidden = false
         }
         
-        if post.text.characters.count > 100 && currentCellSelection != indexPath.section {
-            cell.postLabel.text = "\(post.text.substringToIndex(post.text.startIndex.advancedBy(100)))..."
+        if post.text.characters.count > 150 && currentCellSelection != indexPath.section {
+            cell.postLabel.text = "\(post.text.substringToIndex(post.text.startIndex.advancedBy(150)))..."
             cell.readMoreButton.hidden = false
         }else{
             cell.postLabel.text = post.text
             cell.readMoreButton.hidden = true
+        }
+        
+        if currentCellSelection == indexPath.section {
+            cell.readMoreButton.hidden = false
+            cell.postLabel.sizeToFit()
+            cell.readMoreButton.setTitle("Read Less", forState: .Normal)
+        }else{
+            cell.readMoreButton.setTitle("Read More", forState: .Normal)
         }
         
         if post.text == "" {
@@ -118,13 +120,6 @@ class PostsTableViewController: UITableViewController {
             cell.emojiImageView.image = UIImage( named: post.emoji.value().imageNameLarge )
         }else{
             cell.emojiImageView.image = UIImage( named: post.emoji.value().imageName )
-        }
-        
-        if currentCellSelection == indexPath.section {
-            cell.readMoreButton.hidden = false
-            cell.readMoreButton.setTitle("Read Less", forState: .Normal)
-        }else{
-            cell.readMoreButton.setTitle("Read More", forState: .Normal)
         }
         
         //Check if the user has empathised the post
@@ -160,11 +155,17 @@ class PostsTableViewController: UITableViewController {
     
     
     // MARK: - Table view delegate
-    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if( indexPath.section == currentCellSelection){
+            return UITableViewAutomaticDimension
+        }
+        return 150.0
+    }
+
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if( indexPath.section == currentCellSelection){
             let post = self.posts[ indexPath.section ]
-            return CGFloat(post.text.characters.count) + 65.0
+            return CGFloat(post.text.characters.filter({ $0 != " " }).count)
         }
         return 150.0
     }
@@ -253,7 +254,6 @@ extension PostsTableViewController {
         
         alertController.addAction(cancelAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-        
     }
     
     func extendPostInCell( sender:Button ) {
@@ -270,7 +270,9 @@ extension PostsTableViewController {
         self.tableView.reloadData()
         
         if self.currentCellSelection > 0 {
+            let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: sender.tag))!
             self.tableView.reloadSections(NSIndexSet(index: sender.tag), withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.tableView.scrollRectToVisible(cell.frame, animated: true)
         }
     }
     
@@ -298,10 +300,6 @@ extension PostsTableViewController {
             Analytics.trackUserEmpathisesWith(post)
         }
     }
-}
-
-extension PostsTableViewController {
-
 }
 
 extension PostsTableViewController {

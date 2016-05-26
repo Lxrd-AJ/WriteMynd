@@ -75,6 +75,8 @@ class MyPostsViewController: UIViewController {
         
         self.view.addSubview(bottomView)
         self.view.addSubview(createPostButton)
+        
+        self.scrollBegan(UIScrollView()) //Decieve the page so it automatically adjusts the bottom view
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -101,7 +103,6 @@ class MyPostsViewController: UIViewController {
         
         bottomView.snp_makeConstraints(closure: { make in
             make.width.equalTo(self.view.snp_width)
-            make.bottom.equalTo(self.view.snp_bottom)
             make.height.equalTo(75)
         })
         
@@ -234,6 +235,7 @@ extension MyPostsViewController: PostsTableVCDelegate {
                 self.bottomView.snp_updateConstraints(closure: { make in
                     make.bottom.equalTo(self.view.snp_bottom).offset(100)
                 })
+                //self.bottomView.snp
                 }, completion: nil)
         }else{
             //Scrolling to the top

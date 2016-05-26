@@ -92,9 +92,9 @@ class EveryMyndController: ViewController {
         self.view.addSubview(empathiseButton)
         self.view.addSubview(bottomView);
         bottomView.addSubview(createPostButton)
+        self.scrollBegan(UIScrollView()) //Decieve the page so it automatically adjusts the bottom view
         
         if (PFUser.currentUser() != nil) {
-            print(PFUser.currentUser())
             postsController.tableView.hidden = true
             fetchPosts()
         }
@@ -119,7 +119,7 @@ class EveryMyndController: ViewController {
         
         bottomView.snp_makeConstraints(closure: { make in
             make.width.equalTo(self.view.snp_width)
-            make.bottom.equalTo(self.view.snp_bottom)
+            make.centerX.equalTo(self.view.snp_centerX)
             make.height.equalTo(75)
         })
         
@@ -130,7 +130,7 @@ class EveryMyndController: ViewController {
         postsController.tableView.snp_makeConstraints(closure: { make in
             make.top.equalTo(everyMyndLabel.snp_bottom).offset(6)
             make.centerX.equalTo(self.view.snp_centerX)
-            make.bottom.equalTo(bottomView.snp_top).offset(-5)
+            make.bottom.equalTo(self.view.snp_bottom)
             make.width.equalTo(screenWidth - 20)
         })
     }

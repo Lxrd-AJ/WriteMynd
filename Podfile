@@ -20,7 +20,7 @@ target 'WriteMynd' do
     #pod 'Onboard'
     pod 'DGElasticPullToRefresh'
     pod 'SZTextView'
-    pod 'Gifu'
+    #pod 'Gifu'
     pod 'Pages'
     
     #pod 'PromiseKit', '~> 2.0'
