@@ -193,7 +193,9 @@ extension SignupViewController {
         _ = pages.map({ page in page.buttonAction = { onboardingVC.dismissViewControllerAnimated(true, completion: nil) } })
         onboardingVC.view.backgroundColor = UIColor.wmSilverColor()
         
-        self.presentViewController(onboardingVC, animated: true, completion: nil)
+        self.presentViewController(onboardingVC, animated: true, completion: {
+            firstPage.iconView.startAnimating()
+        })
 
     }
     

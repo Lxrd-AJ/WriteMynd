@@ -37,8 +37,8 @@ class OnboardViewController: UIViewController {
     init( title:String, body:String, animationImageNames:[String], imageName:String, backgroundColor: UIColor ){
         self.iconView = UIImageView(image: UIImage(named: imageName))
         self.iconView.animationImages = animationImageNames.map({ return UIImage(named: $0)! })
-        self.iconView.animationDuration = 3
-        //self.iconView.animationRepeatCount = 2;
+        self.iconView.animationDuration = 1.5
+        self.iconView.animationRepeatCount = 1;
         self.iconView.contentMode = .Center
         self.pageTitle.text = title
         self.body.text = body;
@@ -68,8 +68,6 @@ class OnboardViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         self.iconView.startAnimating()
-//        if self.iconView.isAnimating() { print("IconView animatiing") }
-//        else { print("IconView not animating") }
     }
     
     override func viewWillLayoutSubviews() {
@@ -85,7 +83,9 @@ class OnboardViewController: UIViewController {
             //make.left.equalTo(self.view.snp_left).multipliedBy(0.4)
             make.centerX.equalTo(self.view.snp_centerX)
             //make.centerY.equalTo(100)
-            make.size.equalTo(CGSize(width: 150, height: 190)) //130,170
+            //make.size.equalTo(CGSize(width: 150, height: 190)) //130,170
+            make.width.equalTo(self.view.snp_width)
+            make.height.equalTo(180)
         })
         
         pageTitle.snp_makeConstraints(closure: { make in
