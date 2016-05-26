@@ -9,6 +9,7 @@
 import UIKit
 import MMDrawerController
 import Parse
+import SwiftSpinner
 
 /**
  - todo:
@@ -16,7 +17,7 @@ import Parse
  */
 class MenuViewController: UITableViewController {
     
-    let menuItems: [String] = ["My Mynd","Every Mynd","The Thinking","Settings"]
+    let menuItems: [String] = ["My Posts","Every Mynd","Dashboard","The Thinking","Settings"]
     var navController: UINavigationController?
     var drawerController: MMDrawerController?
 
@@ -75,21 +76,27 @@ class MenuViewController: UITableViewController {
         var controller: UIViewController
         
         switch menuItems[indexPath.row] {
+        case "My Posts":
+            controller = MyPostsViewController()
         case "Every Mynd":
             controller = EveryMyndController()
-        case "My Mynd":
-            controller = MyMyndViewController()//storyboard!.instantiateViewControllerWithIdentifier("DashboardController") as! DashboardController
+        case "Dashboard":
+            controller = DashboardController()
         case "The Thinking":
             controller = ThinkingViewController()
         case "Settings":
             controller = storyboard!.instantiateViewControllerWithIdentifier("SettingsTableViewController") as! SettingsTableViewController
         default:
-            controller = UIViewController()
+            controller = ViewController()
             break;
         }
         
         self.drawerController?.centerViewController = UINavigationController(rootViewController: controller)
         self.drawerController?.closeDrawerAnimated(true, completion: nil)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80.0
     }
     
 }
@@ -147,7 +154,9 @@ extension MenuViewController {
     }
     
     func logout(){
+        SwiftSpinner.show("Logging out...", animated: true)
         PFUser.logOut()
+        SwiftSpinner.hide()
         self.mm_drawerController.closeDrawerAnimated(true, completion: nil)
         self.drawerController?.centerViewController = UINavigationController(rootViewController: WelcomeViewController())
     }

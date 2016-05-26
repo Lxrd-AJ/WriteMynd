@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import Charts
 
+/// DEPRECATED
 class MyMyndViewController: ViewController {
     
     let dashboardVC = DashboardController()

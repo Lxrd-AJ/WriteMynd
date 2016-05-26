@@ -12,7 +12,8 @@ import SwiftDate
 import SnapKit
 import Charts
 
-class DashboardController: UIViewController {
+/// - todo [ ]: Consider using a table view instead of dividing it into 3 tier sections
+class DashboardController: ViewController {
     
     typealias HashTag = String
     
@@ -57,6 +58,7 @@ class DashboardController: UIViewController {
         super.viewDidLoad()
 
         self.automaticallyAdjustsScrollViewInsets = false
+        self.view.backgroundColor = UIColor.wmBackgroundColor()
         self.scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height )
         emojiPieChart.chart.delegate = self
         stackView.axis = .Vertical
@@ -107,8 +109,8 @@ class DashboardController: UIViewController {
         
         scrollView.snp_makeConstraints(closure: { make in
             make.centerX.equalTo(self.view.snp_centerX)
-            make.top.equalTo(self.view.snp_top)
-            make.bottom.equalTo(self.stackView.snp_bottom)
+            make.top.equalTo(self.snp_topLayoutGuideBottom)
+            make.bottom.equalTo(self.stackView.snp_bottom).offset(50)
             make.size.equalTo(self.view.snp_size)
         })
         

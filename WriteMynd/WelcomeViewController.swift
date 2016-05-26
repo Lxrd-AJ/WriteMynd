@@ -63,10 +63,10 @@ class WelcomeViewController: UIViewController {
         
         if PFUser.currentUser() != nil {
 //            print(PFUser.currentUser())
-            let myMyndVC = MyMyndViewController()
-            myMyndVC.myPostsVC.shouldShowPostingSheet = true
+            let launchCont = MyPostsViewController()
+            launchCont.shouldShowPostingSheet = true
             self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
-            self.mm_drawerController.centerViewController = UINavigationController(rootViewController: myMyndVC)
+            self.mm_drawerController.centerViewController = UINavigationController(rootViewController: launchCont)
             
         }
         

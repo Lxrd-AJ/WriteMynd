@@ -107,7 +107,7 @@ class LoginViewController: SignupLoginViewController {
                 print("Log In successful")
                 SwiftSpinner.hide()
                 self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
-                self.mm_drawerController.centerViewController = UINavigationController(rootViewController: MyMyndViewController())
+                self.mm_drawerController.centerViewController = UINavigationController(rootViewController: MyPostsViewController())
             }else{
                 print(error)
                 var message = error!.userInfo["error"] as! String

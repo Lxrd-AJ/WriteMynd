@@ -11,7 +11,7 @@ import Parse
 import DGElasticPullToRefresh
 import JTSActionSheet
 
-class MyPostsViewController: UIViewController {
+class MyPostsViewController: ViewController {
     
     let postsViewController = PostsTableViewController()
     let loadingView: DGElasticPullToRefreshLoadingView = DGElasticPullToRefreshLoadingViewCircle()
@@ -61,7 +61,7 @@ class MyPostsViewController: UIViewController {
         buttonStackView.addArrangedSubview(postsToMeButton)
         buttonStackView.addArrangedSubview(postsToAllButton)
         buttonStackView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.view.snp_top).offset(10)
+            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(10)
             make.left.equalTo(self.view.snp_left).offset(10)
             make.width.equalTo(250)
             make.height.equalTo(30)
