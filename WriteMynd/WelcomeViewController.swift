@@ -20,7 +20,7 @@ class WelcomeViewController: UIViewController {
     }()
     
     lazy var signInButton: Button = {
-        let button = self.createButton("Sign in with Email", iconName: "")
+        let button = self.createButton("Sign in", iconName: "")
         button.backgroundColor = UIColor.wmPaleGreyColor()
         button.setTitleColor(UIColor.wmSlateGreyColor(), forState: .Normal)
         button.addTarget(self, action: .signin, forControlEvents: .TouchUpInside)
@@ -28,7 +28,7 @@ class WelcomeViewController: UIViewController {
     }()
     
     lazy var signupButton: Button = {
-        let button: Button = self.createButton("Register an account", iconName: "")
+        let button: Button = self.createButton("Create an account", iconName: "")
         button.backgroundColor = UIColor.wmGreenishTealColor()
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.addTarget(self, action: .signup, forControlEvents: .TouchUpInside)
@@ -42,14 +42,14 @@ class WelcomeViewController: UIViewController {
     }()
     
     lazy var warningLabel: Label = {
-        let label: Label = self.createLabel("Don't worry you would still remain anonymous to the write mynd community")
+        let label: Label = self.createLabel("Don’t worry. You’ll always remain anonymous.")
         label.setFontSize(10)
         return label
     }()
     
     lazy var signupLaterButton: Button = {
         let button: Button = Button(type: .Custom)
-        button.setTitle("Take me straight to the app", forState: .Normal)
+        button.setTitle("I want to look around now", forState: .Normal)
         button.setTitleColor(.whiteColor(), forState: .Normal)
         button.addTarget(self, action: .anonymousSignin, forControlEvents: .TouchUpInside)
         return button;
@@ -67,7 +67,6 @@ class WelcomeViewController: UIViewController {
             launchCont.shouldShowPostingSheet = true
             self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
             self.mm_drawerController.centerViewController = UINavigationController(rootViewController: launchCont)
-            
         }
         
         self.view.addSubview(iconImageView)

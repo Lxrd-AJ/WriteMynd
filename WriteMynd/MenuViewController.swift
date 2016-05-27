@@ -138,14 +138,14 @@ extension MenuViewController {
     
     func logOutButtonTapped( sender: Button ){
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
-            let alertController = UIAlertController(title: "Err", message: "Looks like you don't have an account. If you log out, you'll lose all your data", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "That's ok, log me out", style: .Destructive, handler: { _ in self.logout() }))
-            alertController.addAction(UIAlertAction(title: "Register me so I keep my data", style: .Default, handler: { _ in
+            let alertController = UIAlertController(title: "Wait", message: "It looks like you haven’t created an account yet. If you log out now you’ll lose everything.", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Create account to keep my data", style: .Default, handler: { _ in
                 let settingsVC = SettingsTableViewController()
                 self.mm_drawerController.closeDrawerAnimated(true, completion: nil)
                 self.mm_drawerController.centerViewController = UINavigationController(rootViewController: settingsVC)
                 settingsVC.registerUser()
             }))
+            alertController.addAction(UIAlertAction(title: "That's ok, log me out", style: .Destructive, handler: { _ in self.logout() }))
             alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }else{

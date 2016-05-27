@@ -18,28 +18,41 @@ class EmojiChartDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.registerClass(UITableViewCell.self , forCellReuseIdentifier: "EMOJI_DETAIL_CELL")
+        self.tableView.registerClass(DetailTableViewCell.self , forCellReuseIdentifier: "EMOJI_DETAIL_CELL")
         self.tableView.tableFooterView = UIView()
+        self.tableView.separatorColor = UIColor.wmPaleGreyTwoColor()
+        self.tableView.bounces = false 
     }
 
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
     
-//    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool { return false }
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Stuff that made me \(self.emoji.value().name)"
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = EmojiDetailHeaderView()
+        view.header.text = self.emoji.value().name
+        view.header.backgroundColor = self.emoji.value().color
+        return view
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.hashTags.count
     }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("EMOJI_DETAIL_CELL", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("EMOJI_DETAIL_CELL", forIndexPath: indexPath) as! DetailTableViewCell
         let key = self.contentKey[ indexPath.row ]
-        cell.textLabel?.text = "\(key)\t\(String(self.hashTags[key]!))"
+        cell.countLabel.text = String(self.hashTags[key]!)
+        cell.hashtagLabel.text = key
+        cell.countLabel.textColor = self.emoji.value().color
         return cell
     }
     

@@ -21,6 +21,7 @@ protocol PostsTableVCDelegate {
     func shouldShowSearchController() -> Bool
     func shouldShowMeLabelOnCell() -> Bool
     func canDeletePost() -> Bool
+    func canShowOptionsButton() -> Bool
     func shouldSearchPrivatePosts() -> Bool
 }
 extension PostsTableVCDelegate {
@@ -30,6 +31,7 @@ extension PostsTableVCDelegate {
     func shouldShowMeLabelOnCell() -> Bool { return true }
     func canDeletePost() -> Bool { return false }
     func shouldSearchPrivatePosts() -> Bool{ return false }
+    func canShowOptionsButton() -> Bool { return true }
 }
 
 /**
@@ -200,6 +202,12 @@ extension PostsTableViewController {
                 cell.isPrivateLabel.hidden = false
             }else{
                 cell.isPrivateLabel.hidden = true
+            }
+            
+            if delegate.canShowOptionsButton() {
+                cell.ellipsesButton.hidden = false
+            }else{
+                cell.ellipsesButton.hidden = true
             }
         }
     }

@@ -12,7 +12,7 @@ import SnapKit
 let ON_BOARDING_MESSAGE_VIEWS = "ON_BOARDING_MESSAGE_VIEWS"
 
 /**
- Sublcass KolodaView to implement custom swiping feature or copy and paste and match
+ Sublcass KolodaView to implement custom swiping feature or copy and paste and match or use https://github.com/zhxnlai/ZLSwipeableViewSwift
  */
 class SwipeViewController: UIViewController {
 

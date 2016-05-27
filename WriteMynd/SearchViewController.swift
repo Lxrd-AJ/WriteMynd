@@ -147,4 +147,7 @@ extension SearchViewController: PostsTableVCDelegate {
     func shouldShowSearchController() -> Bool {
         return false
     }
+    func canShowOptionsButton() -> Bool {
+        return false
+    }
 }

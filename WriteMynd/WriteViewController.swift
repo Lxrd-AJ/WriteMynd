@@ -86,7 +86,7 @@ class WriteViewController: UIViewController {
         let textView = SZTextView()
         textView.textContainerInset = UIEdgeInsetsMake(5, 10, 0, 10)
         textView.font = Label.font()
-        textView.placeholder = self.question
+        //textView.placeholder = self.question
         //textView.tintColor = UIColor.blueColor()
         textView.textColor = UIColor.lightGrayColor()
         textView.delegate = self
@@ -401,7 +401,7 @@ extension WriteViewController: UITextViewDelegate {
      */
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         let postController = TextViewController()
-        postController.textView.placeholder = question
+        //postController.textView.placeholder = question
         postController.textView.text = self.feelingsTextView.text
         postController.onFinishCallback = {
             self.feelingsTextView.text = postController.textView.text

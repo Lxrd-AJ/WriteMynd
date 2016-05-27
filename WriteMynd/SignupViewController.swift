@@ -16,7 +16,7 @@ class SignupViewController: SignupLoginViewController {
     let formStackView: UIStackView = UIStackView()
     
     lazy var onboardButton: Button = {
-        let button: Button = self.createButton("Wait, What is WriteMynd")
+        let button: Button = self.createButton("Tell me more about the Write Mynd")
         button.backgroundColor = UIColor.wmSilverColor()
         button.layer.cornerRadius = 0.0
         button.addTarget(self, action: .beginOnBoarding, forControlEvents: .TouchUpInside)
@@ -183,10 +183,10 @@ extension SignupViewController {
         let thirdAnimationImages = ["manInTheMirror1","manInTheMirror2","manInTheMirror3","manInTheMirror4","manInTheMirror5"]
         let lastAnimationImages = ["shareMan1","shareMan2","shareMan3","shareMan4","shareMan5","shareMan6","shareMan7","shareMan8","shareMan9"]
         
-        let firstPage = OnboardViewController(title: "write mynd", body: "An app for recording, reflecting and sharing for a clearer mind", animationImageNames: firstPageAnimationImages, imageName: "happyJumpingGuy",backgroundColor: UIColor.wmSoftBlueColor()) //happyJumpingGuy
-        let secondPage = OnboardViewController(title: "record", body: "Get things of your chest by easily recording your thoughts and feelings", animationImageNames: secondPageAnimationImages, imageName: "photoGuy", backgroundColor: UIColor.wmSlateGreyColor())
-        let thirdPage = OnboardViewController(title: "Reflect", body: "Better understand how you're feeling by spotting the patterns in the things you have shared", animationImageNames: thirdAnimationImages, imageName: "manInTheMirror", backgroundColor: UIColor.wmGreenishTealTwoColor())
-        let lastPage = OnboardViewController(title: "Share", body: "Share to your feed or if you want to, with the community, and see that you are not alone", animationImageNames: lastAnimationImages, imageName:"shareMan", backgroundColor: UIColor.wmLightGoldColor())
+        let firstPage = OnboardViewController(title: "", body: "To put it simply: Write Mynd is a place where you can anonymously record, reflect and share your honest thoughts and feelings for a clearer mind", animationImageNames: firstPageAnimationImages, imageName: "happyJumpingGuy",backgroundColor: UIColor.wmSoftBlueColor()) //happyJumpingGuy
+        let secondPage = OnboardViewController(title: "Record", body: "Getting things off your chest is proven to have a positive impact on mental wellbeing. And with Write Mynd, you can easily express how you feel by simply swiping or writing.", animationImageNames: secondPageAnimationImages, imageName: "photoGuy", backgroundColor: UIColor.wmSlateGreyColor())
+        let thirdPage = OnboardViewController(title: "Reflect", body: "Checking in on your thoughts helps clarify your emotions and allows you to better understand them. Write Mynd lets you track your mood, spot thought patterns and uncover what makes you feel the way you do.", animationImageNames: thirdAnimationImages, imageName: "manInTheMirror", backgroundColor: UIColor.wmGreenishTealTwoColor())
+        let lastPage = OnboardViewController(title: "Share", body: "Seeing the honest thoughts and feelings of others alleviates social pressures and helps us understand we’re not alone. Write Mynd allows you to see how other people are feeling as well as anonymously share your own thoughts.", animationImageNames: lastAnimationImages, imageName:"shareMan", backgroundColor: UIColor.wmLightGoldColor())
         
         let pages = [firstPage,secondPage,thirdPage,lastPage]
         let onboardingVC = PagesController(pages)

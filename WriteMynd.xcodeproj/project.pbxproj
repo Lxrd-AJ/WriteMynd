@@ -11,6 +11,8 @@
 		2102B5161CC910920002BA24 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2102B5151CC910920002BA24 /* MyPostsViewController.swift */; };
 		211772561CBA4900009B6DF0 /* SwipeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211772551CBA4900009B6DF0 /* SwipeChart.swift */; };
 		2117E9681CA097E20008A1E3 /* HashTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117E9671CA097E20008A1E3 /* HashTagView.swift */; };
+		211B5FE11CF8AA4A00E7D240 /* EmojiDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211B5FE01CF8AA4A00E7D240 /* EmojiDetailHeaderView.swift */; };
+		211B5FE31CF8BBF200E7D240 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211B5FE21CF8BBF200E7D240 /* DetailTableViewCell.swift */; };
 		213016721C9D524500A4598D /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213016711C9D524500A4598D /* WriteViewController.swift */; };
 		213016761C9D74EE00A4598D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 213016741C9D745000A4598D /* Montserrat-Bold.ttf */; };
 		213016771C9D74F100A4598D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 213016751C9D745A00A4598D /* Montserrat-Regular.ttf */; };
@@ -24,7 +26,7 @@
 		21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA41CA2E9B0005F117F /* FeelingsView.swift */; };
 		21623EA81CA3C761005F117F /* MyMyndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA71CA3C761005F117F /* MyMyndViewController.swift */; };
 		21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA91CA76AAD005F117F /* HiddenPost.swift */; };
-		216BDFD41CED790600D8F115 /* TestTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216BDFD31CED790600D8F115 /* TestTextViewController.swift */; };
+		216BDFD41CED790600D8F115 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216BDFD31CED790600D8F115 /* TextViewController.swift */; };
 		217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */; };
 		217138B41CAA6A39008CC4D1 /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B31CAA6A39008CC4D1 /* FloatLabelTextField.swift */; };
 		217138B61CAAE189008CC4D1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217138B51CAAE189008CC4D1 /* SearchViewController.swift */; };
@@ -48,7 +50,6 @@
 		217903F11CD4F46400ECCDEA /* thinking2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903F01CD4F46400ECCDEA /* thinking2.txt */; };
 		217903F31CD4F46F00ECCDEA /* thinking3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903F21CD4F46F00ECCDEA /* thinking3.txt */; };
 		217903F51CD4F4A200ECCDEA /* thinking4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903F41CD4F4A200ECCDEA /* thinking4.txt */; };
-		217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */; };
 		217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BDB1C8A25290085D71B /* SwipeViewController.swift */; };
 		219F4F581C9AFBFD00B9AB34 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */; };
 		21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC1B1C14D9B600F629FF /* Post.swift */; };
@@ -76,6 +77,8 @@
 		2102B5151CC910920002BA24 /* MyPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
 		211772551CBA4900009B6DF0 /* SwipeChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeChart.swift; sourceTree = "<group>"; };
 		2117E9671CA097E20008A1E3 /* HashTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagView.swift; sourceTree = "<group>"; };
+		211B5FE01CF8AA4A00E7D240 /* EmojiDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiDetailHeaderView.swift; sourceTree = "<group>"; };
+		211B5FE21CF8BBF200E7D240 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		213016711C9D524500A4598D /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		213016741C9D745000A4598D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Assets.xcassets/Montserrat-Bold.dataset/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		213016751C9D745A00A4598D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Assets.xcassets/Montserrat-Regular.dataset/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
@@ -89,7 +92,7 @@
 		21623EA41CA2E9B0005F117F /* FeelingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingsView.swift; sourceTree = "<group>"; };
 		21623EA71CA3C761005F117F /* MyMyndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMyndViewController.swift; sourceTree = "<group>"; };
 		21623EA91CA76AAD005F117F /* HiddenPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenPost.swift; sourceTree = "<group>"; };
-		216BDFD31CED790600D8F115 /* TestTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTextViewController.swift; sourceTree = "<group>"; };
+		216BDFD31CED790600D8F115 /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		217138B11CA9A993008CC4D1 /* SwipeOnBoarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeOnBoarding.swift; sourceTree = "<group>"; };
 		217138B31CAA6A39008CC4D1 /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
 		217138B51CAAE189008CC4D1 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -115,7 +118,6 @@
 		217903F01CD4F46400ECCDEA /* thinking2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking2.txt; sourceTree = "<group>"; };
 		217903F21CD4F46F00ECCDEA /* thinking3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking3.txt; sourceTree = "<group>"; };
 		217903F41CD4F4A200ECCDEA /* thinking4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking4.txt; sourceTree = "<group>"; };
-		217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSwipeView.swift; sourceTree = "<group>"; };
 		217F3BDB1C8A25290085D71B /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeDirection.swift; sourceTree = "<group>"; };
 		21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WriteMynd-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -164,6 +166,24 @@
 				217138B71CAC00ED008CC4D1 /* WrittenPostNotificationView.swift */,
 			);
 			name = Posting;
+			sourceTree = "<group>";
+		};
+		211B5FDE1CF8A9C300E7D240 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				21C3877A1CEF6E3700B22F08 /* DashboardController.swift */,
+				21C3877C1CF07B9E00B22F08 /* EmojiChartDetailViewController.swift */,
+			);
+			name = Dashboard;
+			sourceTree = "<group>";
+		};
+		211B5FDF1CF8AA1C00E7D240 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				211B5FE01CF8AA4A00E7D240 /* EmojiDetailHeaderView.swift */,
+				211B5FE21CF8BBF200E7D240 /* DetailTableViewCell.swift */,
+			);
+			name = Dashboard;
 			sourceTree = "<group>";
 		};
 		213016731C9D743900A4598D /* Resources */ = {
@@ -232,10 +252,10 @@
 				2172FBF01C11B65E003446AC /* Main.storyboard */,
 				2172FBF51C11B65E003446AC /* LaunchScreen.storyboard */,
 				2172FBF81C11B65E003446AC /* Info.plist */,
-				2172FC071C11E073003446AC /* Utilities.swift */,
 				21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */,
 				21C387781CEF147100B22F08 /* Analytics.swift */,
 				2136F0751C1A3B2A00BE26FD /* ParseService.swift */,
+				2172FC071C11E073003446AC /* Utilities.swift */,
 				2172FBF31C11B65E003446AC /* Assets.xcassets */,
 				2172FC0F1C125823003446AC /* Views */,
 				2136F0741C19415500BE26FD /* Models */,
@@ -248,6 +268,7 @@
 		2172FBFE1C11BBBD003446AC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				211B5FDE1CF8A9C300E7D240 /* Dashboard */,
 				21E120C61C9BB30F00DB1C8D /* OnBoarding */,
 				21E120C51C9BB30400DB1C8D /* Settings */,
 				21E120C41C9BB2E700DB1C8D /* MyMynd */,
@@ -264,11 +285,11 @@
 		2172FC0F1C125823003446AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				211B5FDF1CF8AA1C00E7D240 /* Dashboard */,
 				217138B91CACF8AB008CC4D1 /* Charts */,
 				2117E9661CA0953A0008A1E3 /* Posting */,
 				2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */,
 				21C0A1361C2A129A0047306D /* MenuViewCell.swift */,
-				217F3BD91C8A1D8C0085D71B /* TestSwipeView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -295,8 +316,6 @@
 			children = (
 				21623EA71CA3C761005F117F /* MyMyndViewController.swift */,
 				2102B5151CC910920002BA24 /* MyPostsViewController.swift */,
-				21C3877A1CEF6E3700B22F08 /* DashboardController.swift */,
-				21C3877C1CF07B9E00B22F08 /* EmojiChartDetailViewController.swift */,
 			);
 			name = MyMynd;
 			sourceTree = "<group>";
@@ -351,7 +370,7 @@
 			children = (
 				217F3BDB1C8A25290085D71B /* SwipeViewController.swift */,
 				213016711C9D524500A4598D /* WriteViewController.swift */,
-				216BDFD31CED790600D8F115 /* TestTextViewController.swift */,
+				216BDFD31CED790600D8F115 /* TextViewController.swift */,
 			);
 			name = Posting;
 			sourceTree = "<group>";
@@ -512,7 +531,6 @@
 				213016721C9D524500A4598D /* WriteViewController.swift in Sources */,
 				21D467C91CB346D300412C3C /* EmojiPieChart.swift in Sources */,
 				2132E96C1CCC66EC0049E95F /* SignupViewController.swift in Sources */,
-				217F3BDA1C8A1D8C0085D71B /* TestSwipeView.swift in Sources */,
 				213016791C9D780F00A4598D /* UILabel+UIButton.swift in Sources */,
 				217903EB1CD4331A00ECCDEA /* ThinkingViewController.swift in Sources */,
 				2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */,
@@ -526,7 +544,7 @@
 				21F6193E1C9A11190089542F /* OverlayView.swift in Sources */,
 				2117E9681CA097E20008A1E3 /* HashTagView.swift in Sources */,
 				2172FC111C1258B7003446AC /* GenericExtensions.swift in Sources */,
-				216BDFD41CED790600D8F115 /* TestTextViewController.swift in Sources */,
+				216BDFD41CED790600D8F115 /* TextViewController.swift in Sources */,
 				2172FC021C11CD3A003446AC /* EveryMyndController.swift in Sources */,
 				21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */,
 				2172FC041C11CFF9003446AC /* WelcomeViewController.swift in Sources */,
@@ -538,9 +556,11 @@
 				21FA7FA61C61C49400D0836F /* Swipe.swift in Sources */,
 				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,
 				217903ED1CD43CA400ECCDEA /* ThinkingPage.swift in Sources */,
+				211B5FE31CF8BBF200E7D240 /* DetailTableViewCell.swift in Sources */,
 				21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */,
 				21F6193A1C9952CB0089542F /* KolodaView.swift in Sources */,
 				217903E91CD390BF00ECCDEA /* UIColor.swift in Sources */,
+				211B5FE11CF8AA4A00E7D240 /* EmojiDetailHeaderView.swift in Sources */,
 				2172FC061C11D037003446AC /* LoginViewController.swift in Sources */,
 				217138B81CAC00ED008CC4D1 /* WrittenPostNotificationView.swift in Sources */,
 				2102B5161CC910920002BA24 /* MyPostsViewController.swift in Sources */,
