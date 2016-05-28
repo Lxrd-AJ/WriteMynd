@@ -12,13 +12,6 @@ import UIKit
 class Notifications {
     
     class func scheduleRepeatingNotification( date:NSDate, interval: NSCalendarUnit ) -> NSDate{
-        
-//        var scheduleDate = NSDate() //start counting from now
-//        let dateComponent:NSDateComponents = calendar.components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year,NSCalendarUnit.Hour , NSCalendarUnit.Minute], fromDate: scheduleDate)
-//        dateComponent.hour = hour;
-//        dateComponent.minute = minute; //scheduleDate.toString(DateFormat.Custom("HH:mm"))
-//        scheduleDate = calendar.dateFromComponents(dateComponent)!
-        
         let calendar:NSCalendar = NSCalendar.autoupdatingCurrentCalendar()
         let scheduleDate = calendar.dateBySettingHour(date.hour, minute: date.minute, second: date.second, ofDate: NSDate(), options: NSCalendarOptions.MatchNextTime)
         let localNotification:UILocalNotification = UILocalNotification()

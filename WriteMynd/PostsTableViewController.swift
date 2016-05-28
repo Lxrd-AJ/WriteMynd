@@ -41,7 +41,10 @@ extension PostsTableVCDelegate {
 class PostsTableViewController: UITableViewController {
     
     let CELL_IDENTIFIER = "WriteMynd And Chill Cell"
-    var posts:[Post] = [] { didSet(_posts){ self.updateBackground() } }
+    let backgroundView = UIView()
+    let backgroundImageView = UIImageView(image: UIImage(named: "sadManStood"))
+    let infoLabel: Label = Label()
+    var posts:[Post] = [] { didSet(_posts){ self.updateBackgroundView() } }
     var empathisedPosts: [EmpathisedPost] = [] {
         //Mark the respective posts as empathised
         didSet(emPosts){
@@ -60,11 +63,22 @@ class PostsTableViewController: UITableViewController {
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 150.0
+        
+        infoLabel.text = "There doesn't seem to be any posts here at the moment. Why not write how you feel?"
+        infoLabel.textAlignment = .Center
+        infoLabel.numberOfLines = 0
+        backgroundImageView.contentMode = .Center
+        backgroundView.addSubview(backgroundImageView)
+        backgroundView.addSubview(infoLabel)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillLayoutSubviews() {
+        self.updateBackgroundView()
     }
 
     // MARK: - Table view data source
@@ -74,7 +88,7 @@ class PostsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.updateBackground() //Because this method gets called on `reloadData`
+        self.updateBackgroundView() //Because this method gets called on `reloadData`
         return 1
     }
     
@@ -179,6 +193,7 @@ class PostsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
+    
 }
 
 /**
@@ -186,13 +201,24 @@ class PostsTableViewController: UITableViewController {
  */
 extension PostsTableViewController {
     
-    func updateBackground(){
+    func updateBackgroundView(){
         if self.posts.count > 0 {
             self.tableView.backgroundView?.hidden = true
         }else{
-            let imgV = UIImageView(image: UIImage(named: "manInTheMirror"))
-            imgV.contentMode = .Center
-            self.tableView.backgroundView = imgV
+            self.tableView.backgroundView = backgroundView
+            
+            backgroundView.snp_makeConstraints(closure: { make in
+                make.centerX.equalTo(self.view.snp_centerX)
+                make.centerY.equalTo(self.view.snp_centerY).offset(-100)
+            })
+            backgroundImageView.snp_makeConstraints(closure: { make in
+                make.center.equalTo(backgroundView.snp_center)
+            })
+            infoLabel.snp_makeConstraints(closure: { make in
+                make.top.equalTo(backgroundImageView.snp_bottom)
+                make.centerX.equalTo(backgroundView.snp_centerX)
+                make.width.equalTo(self.tableView.snp_width).offset(-25)
+            })
         }
     }
     

@@ -47,8 +47,8 @@ class MyPostsViewController: ViewController {
         postsViewController.tableView.dg_setPullToRefreshFillColor(UIColor.wmSoftBlueColor())
         postsViewController.tableView.dg_setPullToRefreshBackgroundColor(UIColor.wmBackgroundColor())
         
-        let postsToMeButton = self.createFilterButton("Posts to me")
-        let postsToAllButton = self.createFilterButton("Posts to all")
+        let postsToMeButton = self.createFilterButton("Only posts to me")
+        let postsToAllButton = self.createFilterButton("Only shared posts")
         postsToMeButton.tag = 0
         postsToAllButton.tag = 1
         
@@ -62,8 +62,8 @@ class MyPostsViewController: ViewController {
         buttonStackView.addArrangedSubview(postsToAllButton)
         buttonStackView.snp_makeConstraints(closure: { make in
             make.top.equalTo(self.snp_topLayoutGuideBottom).offset(10)
-            make.left.equalTo(self.view.snp_left).offset(10)
-            make.width.equalTo(250)
+            make.centerX.equalTo(self.view.snp_centerX)
+            make.width.equalTo(self.view.snp_width).offset(-5)
             make.height.equalTo(30)
         })
         
@@ -126,7 +126,7 @@ class MyPostsViewController: ViewController {
         button.backgroundColor = UIColor.wmCoolBlueColor()
         button.layer.cornerRadius = 15.0
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
-        button.setFontSize(14.0)
+        button.setFontSize(12.0)
         button.selected = true; //By default they are selected
         return button
     }

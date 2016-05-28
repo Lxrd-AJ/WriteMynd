@@ -83,6 +83,7 @@ class EveryMyndController: ViewController {
         
         loadingView.tintColor = UIColor.wmCoolBlueColor()
         postsController.tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            self?.postsController.tableView.backgroundView?.hidden = true
             self?.fetchPosts()
         }, loadingView: loadingView)
         postsController.tableView.dg_setPullToRefreshFillColor(UIColor.wmSoftBlueColor())

@@ -48,7 +48,7 @@ class DashboardController: ViewController {
     }()
     lazy var swipeLabel: Label = {
         let label = Label()
-        label.text = "My moods"
+        label.text = "My Mood"
         label.textColor = UIColor.wmCoolBlueColor()
         return label
     }()
@@ -158,13 +158,13 @@ class DashboardController: ViewController {
             //My hashtags
             self.myHashTagsLabel.hidden = !self.myHashTagsLabel.hidden
             containerView = self.topView
-            infoMessage = "What you’re posting about most and least according to the hashtags you’ve used"
-        case 1:
-            infoMessage = "How you’re feeling  and what you’re writing  about according to the emotion buttons you’ve selected"
+            infoMessage = "These are your most popular themes based on how you've categorised your posts"
+        case 1: //My Emotions
+            infoMessage = "This chart maps the emotions you have expressed when writing. Click through to see the posts that are connected to each of them."
             self.myEmojisLabel.hidden = !self.myEmojisLabel.hidden
             containerView = self.middleView
-        case 2:
-            infoMessage = "How positive or negative you’re feeling  over time according to the words you’ve swiped through"
+        case 2: //My Mood
+            infoMessage = "This graph tracks your mood based on your swiping. Anything above the line represents positive emotions, anything below the line represents negative emotions."
             self.swipeLabel.hidden = !self.swipeLabel.hidden
             containerView = self.bottomView
         default:
@@ -178,7 +178,7 @@ class DashboardController: ViewController {
             sender.setTitle(infoMessage, forState: .Normal)
             sender.snp_updateConstraints(closure: { make in
                 make.width.equalTo(self.view.snp_width).offset(-10)
-                make.height.equalTo(20)
+                make.height.equalTo(35)
             })
         }else{
             sender.selected = false
