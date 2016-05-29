@@ -17,6 +17,8 @@ private let USER_SEARCHED = "USER_SEARCHED_FOR"
 private let APP_USAGE_BEGAN = "APP_USAGE_BEGAN"
 private let APP_LAUNCH_FROM_LOCAL_NOTIFICATION = "APP_LAUNCH_FROM_LOCAL_NOTIFICATION"
 private let APP_USAGE = "APP_USAGE"
+private let USER_MADE_POST_WITH_MORE_100_WORDS = "USER_MADE_POST_WITH_MORE_100_WORDS"
+private let USER_MADE_POST_WITH_MORE_50_WORDS = "USER_MADE_POST_WITH_MORE_50_WORDS"
 
 class Analytics {
     
@@ -65,7 +67,8 @@ class Analytics {
     
     /**
      Tracks the post made by the user.
-     Updates the count of posts made by the user and tracks the feeling and privacy of the post
+     Updates the count of posts made by the user and tracks the feeling and privacy of the post.
+     Also checks the number of words used in the post to determine if they are above 50, 100
      
      - parameter post: The post to track
      */
@@ -76,6 +79,14 @@ class Analytics {
             "Feeling": post.emoji.value().name,
             "private_post": post.isPrivate
             ])
+        //Categorise based on the number of words
+        guard post.text != "" else{ return }
+        let words = post.text.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if words.count >= 100 {
+            MixpanelService.track(USER_MADE_POST_WITH_MORE_100_WORDS)
+        }else if words.count >= 50 {
+            MixpanelService.track(USER_MADE_POST_WITH_MORE_50_WORDS)
+        }
     }
     
     class func trackUserEmpathisesWith( post:Post ){ MixpanelService.track( POST_EMPATHISED ) }

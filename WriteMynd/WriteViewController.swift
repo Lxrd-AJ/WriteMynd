@@ -20,9 +20,11 @@ class WriteViewController: UIViewController {
     
     var currentTextField: UITextField? //The Current textfield the user is editing
     var post: Post? //TODO: Add a setter function here
+    var previousEmojiButton: UIButton?
     
     let question = dailyQuestion[Int( arc4random_uniform(UInt32(dailyQuestion.count)))]
     let feelingsView = FeelingsView()
+    private let BUTTON_TICK_TAG = 100
     
     lazy var bigEmojiImage: UIImageView = {
         let image = UIImageView()
@@ -87,7 +89,7 @@ class WriteViewController: UIViewController {
         textView.textContainerInset = UIEdgeInsetsMake(5, 10, 0, 10)
         textView.font = Label.font()
         //textView.placeholder = self.question
-        //textView.tintColor = UIColor.blueColor()
+        textView.placeholder = "What's on your mind?"
         textView.textColor = UIColor.lightGrayColor()
         textView.delegate = self
         textView.layer.borderWidth = 1.0
@@ -284,7 +286,7 @@ extension WriteViewController {
             notificationView.message.text = "Posting to MyMynd"
         }else if sender.tag == 1 {
             self.post!.isPrivate = false
-            notificationView.message.text = "Posting to everyone"
+            notificationView.message.text = "Sharing your post..."
         }
         
         UIView.animateWithDuration(0.1, delay: 0, options: [.CurveEaseIn,.CurveEaseOut], animations: {
@@ -308,6 +310,26 @@ extension WriteViewController {
         [ ] Also add the emoji selectors to this subclass
      */
     func emojiButtonTapped( sender: UIButton ){
+        
+        func addTickMark( button:UIButton ){
+            let imageView = UIImageView(image: UIImage(named: "tickGreen"))
+            imageView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.65)
+            imageView.layer.cornerRadius = sender.frame.width / 2
+            imageView.contentMode = .Center
+            imageView.tag = BUTTON_TICK_TAG;
+            //sender.layer.masksToBounds = true
+            button.addSubview(imageView)
+            imageView.snp_makeConstraints(closure: { make in
+                make.size.equalTo(button.snp_size)
+                make.center.equalTo(button.snp_center)
+            })
+        }
+        
+        func removeTickMark( button: UIButton? ){
+            let imgView = button?.viewWithTag(BUTTON_TICK_TAG)
+            imgView?.removeFromSuperview()
+        }
+        
         var descriptionText = ""
         var imageName = ""
         
@@ -343,6 +365,13 @@ extension WriteViewController {
         UIView.transitionWithView(self.descriptionLabel, duration: 0.3, options: .TransitionFlipFromLeft, animations: {
             self.descriptionLabel.text = descriptionText
             }, completion: nil)
+        
+        //Animate the emoji Buttons
+        if previousEmojiButton?.tag != sender.tag { //A different emoji was tapped
+            removeTickMark(previousEmojiButton)
+            addTickMark(sender)
+            previousEmojiButton = sender; previousEmojiButton?.tag = sender.tag;
+        }
     }
     
     /**
@@ -402,6 +431,7 @@ extension WriteViewController: UITextViewDelegate {
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         let postController = TextViewController()
         //postController.textView.placeholder = question
+        postController.textView.placeholder = self.feelingsTextView.placeholder
         postController.textView.text = self.feelingsTextView.text
         postController.onFinishCallback = {
             self.feelingsTextView.text = postController.textView.text
