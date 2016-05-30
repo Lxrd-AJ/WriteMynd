@@ -16,6 +16,10 @@ class SignupLoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.wmBackgroundColor()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false
     }
 

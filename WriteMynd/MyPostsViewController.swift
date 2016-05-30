@@ -169,30 +169,6 @@ class MyPostsViewController: ViewController {
         button.selected = !button.selected
         self.postsViewController.posts.sortInPlace({ $0.createdAt!.compare($1.createdAt!) == NSComparisonResult.OrderedDescending})
         self.postsViewController.tableView.reloadData()
-        
-        print("Button tag = \(button.tag)\nSelected = \(button.selected)\n")
-        
-//        switch button.tag {
-//        case 0: //Posts to me tapped aka Private posts
-//            if button.selected {
-//                self.postsViewController.posts = self.postsViewController.posts.filter({ !$0.isPrivate })
-//                button.selected = false
-//            }else{
-//                self.postsViewController.posts += self.posts.filter({ $0.isPrivate })
-//                button.selected = true
-//            }
-//        case 1:
-//            if button.selected { //Non private posts
-//                self.postsViewController.posts = self.postsViewController.posts.filter({ $0.isPrivate })
-//                button.selected = false
-//            }else{
-//                self.postsViewController.posts += self.posts.filter({ !$0.isPrivate  })
-//                button.selected = true
-//            }
-//        default:
-//            break;
-//        }
-        
     }
     
     func fetchPosts(){

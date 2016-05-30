@@ -62,9 +62,8 @@ class WelcomeViewController: UIViewController {
         //self.mm_drawerController.setMaximumLeftDrawerWidth(0, animated: true, completion: nil)
         
         if PFUser.currentUser() != nil {
-//            print(PFUser.currentUser())
             let launchCont = MyPostsViewController()
-            launchCont.shouldShowPostingSheet = true
+            //launchCont.shouldShowPostingSheet = true
             self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
             self.mm_drawerController.centerViewController = UINavigationController(rootViewController: launchCont)
         }
