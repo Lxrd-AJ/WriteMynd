@@ -270,6 +270,7 @@ extension PostsTableViewController {
             let postToHide = HiddenPost(postID: post.ID!, user: PFUser.currentUser()!)
             self.posts.removeAtIndex(index)
             postToHide.save()
+            Analytics.trackUserHid(post)
             self.tableView.reloadData()
         })
         let editPostAction = UIAlertAction(title: "Edit Post", style: .Default, handler: { editAction in

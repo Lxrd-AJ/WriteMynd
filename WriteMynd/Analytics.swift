@@ -34,6 +34,13 @@ class Analytics {
         }
     }
     
+    class func trackUserHid( post: Post ){
+        MixpanelService.track("USER_HID_POST", properties: [
+            "post_text":post.text,
+            "post_emoji": post.emoji.value().name
+            ])
+    }
+    
     class func trackAppLaunchFromNotification( local:Bool ){
         MixpanelService.track(APP_LAUNCH_FROM_LOCAL_NOTIFICATION)
     }
