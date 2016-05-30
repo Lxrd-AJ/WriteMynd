@@ -156,7 +156,7 @@ class WelcomeViewController: UIViewController {
         let button = Button(type: .Custom)
         button.setTitle(title, forState: .Normal)
         button.setImage(UIImage(named: iconName), forState: .Normal)
-        button.layer.cornerRadius = 4.0
+        //button.layer.cornerRadius = 4.0
         button.snp_makeConstraints(closure: { make in
             make.size.equalTo(CGSize(width: 256, height: 45))
         })

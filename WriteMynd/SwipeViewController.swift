@@ -101,8 +101,8 @@ extension SwipeViewController: SwipeViewDataSource {
         label.textAlignment = .Center
         label.backgroundColor = UIColor.whiteColor()
         label.layer.masksToBounds = false
-        label.layer.shadowOffset = CGSize(width: 5, height: 10)
-        label.layer.shadowRadius = 5
+        label.layer.shadowOffset = CGSize(width: 0, height: 2)
+        label.layer.shadowRadius = 1
         label.layer.shadowOpacity = 0.1
         label.setFontSize(20.0)
         label.textColor = .wmCoolBlueColor()
@@ -142,6 +142,13 @@ extension SwipeViewController: SwipeViewDelegate {
         print("Cards Finished")
     }
     
+    /**
+     - todo: [ ] Change the defauot 
+     
+     - parameter koloda:        <#koloda description#>
+     - parameter finishPercent: <#finishPercent description#>
+     - parameter direction:     <#direction description#>
+     */
     func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {
         print("\(finishPercent)% in direction \(direction)")
         self.topMessage.instructionLabel.hidden = true

@@ -17,7 +17,7 @@ class SwipeChart: UIView {
         super.init(frame: frame)
         
         lineChart.noDataText = "Try swiping how you feel..."
-        lineChart.backgroundColor = UIColor.wmGreenishTealColor()
+        lineChart.backgroundColor = UIColor.clearColor()
         lineChart.layer.cornerRadius = 6.0
         lineChart.legend.enabled = false
         lineChart.xAxis.enabled = false
@@ -58,11 +58,12 @@ class SwipeChart: UIView {
         //Date Set 
         let set = LineChartDataSet(yVals: yVals, label: "Mood over time")
         set.axisDependency = .Left
-        set.setCircleColor(UIColor.whiteColor())
-        set.setColor(UIColor.whiteColor())
+        set.setCircleColor(UIColor.wmGreenishTealColor())
+        //set.setColor(UIColor.whiteColor())
+        set.setColor(UIColor.wmGreenishTealColor())
         set.lineWidth = 2.0
         set.circleRadius = 3.5
-        set.circleHoleColor = UIColor.wmGreenishTealColor()
+        set.circleHoleColor = UIColor.whiteColor()//UIColor.wmGreenishTealColor()
         set.valueTextColor = UIColor.clearColor()
         
         //Array of Line Chart Data sets 
@@ -73,7 +74,7 @@ class SwipeChart: UIView {
         
         //Limitline 
         let limitLine = ChartLimitLine(limit: 0.0)
-        limitLine.lineColor = UIColor.whiteColor()
+        limitLine.lineColor = UIColor.wmGreenishTealColor()//UIColor.whiteColor()
         limitLine.lineWidth = 2.0
         self.lineChart.leftAxis.addLimitLine(limitLine)
         

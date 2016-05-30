@@ -23,7 +23,7 @@ class SignupViewController: SignupLoginViewController {
         return button
     }()
     lazy var emailTextField: UITextField = {
-        let field: UITextField = self.createTextField("Email Address")
+        let field: UITextField = self.createTextField("Email address")
         field.tag = 1
         field.returnKeyType = .Next
         return field
@@ -36,14 +36,14 @@ class SignupViewController: SignupLoginViewController {
         return field
     }()
     lazy var password2Field: UITextField = {
-        let field: UITextField = self.createTextField("Confirm Password")
+        let field: UITextField = self.createTextField("Confirm password")
         field.tag = 3;
         field.returnKeyType = .Done
         field.secureTextEntry = true
         return field
     }()
     lazy var signupButton: Button = {
-        let button = self.createButton("Confirm & Continue")
+        let button = self.createButton("Create account")
         button.addTarget(self, action: .signup, forControlEvents: .TouchUpInside)
         return button
     }()
@@ -147,9 +147,9 @@ extension SignupViewController {
     func signup( sender:Button ){
         dismissKeyboard()
         
-        guard self.emailTextField.text != "" else{ self.showError("Email address cannot be empty"); return; }
-        guard self.password1Field.text != "" else{ self.showError("Password field cannot be empty"); return; }
-        guard self.password1Field.text == self.password2Field.text else{ self.showError("Both Password fields must match"); return; }
+        guard self.emailTextField.text != "" else{ self.showError("Woah there. Enter your email address if you want to create an account."); return; }
+        guard self.password1Field.text != "" else{ self.showError("Aren’t you forgetting something? Enter a password to create an account."); return; }
+        guard self.password1Field.text == self.password2Field.text else{ self.showError("Oops. Both passwords must match in order to create an account"); return; }
         
         SwiftSpinner.show("Creating WriteMynd account ...", animated: true)
         
@@ -161,7 +161,12 @@ extension SignupViewController {
             if let error = error where !succeeded {
                 print(error)
                 print(error.code)
-                let errorString = error.userInfo["error"] as? NSString
+                var errorString = error.userInfo["error"] as? NSString
+                if error.code == 202 {
+                    errorString = "\(user.email!) is already registered to an account"
+                }else if error.code == 125 {
+                    errorString = "Email address doesn’t seem to be valid."
+                }
                 self.showError(errorString as! String)
             }else{
                 SwiftSpinner.hide()
@@ -175,7 +180,7 @@ extension SignupViewController {
     /**
      - todo: Replace with pages https://github.com/hyperoslo/Pages 
      
-     - parameter sender: <#sender description#>
+     - parameter sender: button to begin onboarding
      */
     func beginOnBoarding( sender:Button ){
         let firstPageAnimationImages = ["happyJumpingGuy1","happyJumpingGuy2","happyJumpingGuy3","happyJumpingGuy4","happyJumpingGuy5"]
@@ -183,10 +188,10 @@ extension SignupViewController {
         let thirdAnimationImages = ["manInTheMirror1","manInTheMirror2","manInTheMirror3","manInTheMirror4","manInTheMirror5"]
         let lastAnimationImages = ["shareMan1","shareMan2","shareMan3","shareMan4","shareMan5","shareMan6","shareMan7","shareMan8","shareMan9"]
         
-        let firstPage = OnboardViewController(title: "", body: "To put it simply: Write Mynd is a place where you can anonymously record, reflect and share your honest thoughts and feelings for a clearer mind", animationImageNames: firstPageAnimationImages, imageName: "happyJumpingGuy",backgroundColor: UIColor.wmSoftBlueColor()) //happyJumpingGuy
-        let secondPage = OnboardViewController(title: "Record", body: "Getting things off your chest is proven to have a positive impact on mental wellbeing. And with Write Mynd, you can easily express how you feel by simply swiping or writing.", animationImageNames: secondPageAnimationImages, imageName: "photoGuy", backgroundColor: UIColor.wmSlateGreyColor())
-        let thirdPage = OnboardViewController(title: "Reflect", body: "Checking in on your thoughts helps clarify your emotions and allows you to better understand them. Write Mynd lets you track your mood, spot thought patterns and uncover what makes you feel the way you do.", animationImageNames: thirdAnimationImages, imageName: "manInTheMirror", backgroundColor: UIColor.wmGreenishTealTwoColor())
-        let lastPage = OnboardViewController(title: "Share", body: "Seeing the honest thoughts and feelings of others alleviates social pressures and helps us understand we’re not alone. Write Mynd allows you to see how other people are feeling as well as anonymously share your own thoughts.", animationImageNames: lastAnimationImages, imageName:"shareMan", backgroundColor: UIColor.wmLightGoldColor())
+        let firstPage = OnboardViewController(title: "", body: "To put it simply: Write Mynd is a place where you can anonymously record, reflect and share your honest thoughts and feelings for a clearer mind.", animationImageNames: firstPageAnimationImages, imageName: "happyJumpingGuy",backgroundColor: UIColor.wmSoftBlueColor()) //happyJumpingGuy
+        let secondPage = OnboardViewController(title: "Record", body: "Get things off your chest. With Write Mynd, you can easily express how you feel by simply swiping or writing.", animationImageNames: secondPageAnimationImages, imageName: "photoGuy", backgroundColor: UIColor.wmSlateGreyColor())
+        let thirdPage = OnboardViewController(title: "Reflect", body: "Check in on your emotions. Write Mynd helps you spot thought patterns and uncover what makes you feel the way you do.", animationImageNames: thirdAnimationImages, imageName: "manInTheMirror", backgroundColor: UIColor.wmGreenishTealTwoColor())
+        let lastPage = OnboardViewController(title: "Share", body: "See that you’re not alone. Write Mynd lets you see how other people are feeling as well as anonymously share your own thoughts.", animationImageNames: lastAnimationImages, imageName:"shareMan", backgroundColor: UIColor.wmLightGoldColor())
         
         let pages = [firstPage,secondPage,thirdPage,lastPage]
         let onboardingVC = PagesController(pages)

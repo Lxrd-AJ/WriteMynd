@@ -91,7 +91,7 @@ class LoginViewController: SignupLoginViewController {
     func signInButton( sender: Button ){
         dismissKeyboard()
         guard self.emailTextField.text != "" else {
-            showErrorFor(self.emailErrorMessage, message: "! Email Cannot be empty");
+            showErrorFor(self.emailErrorMessage, message: "! Email can't empty");
             return;
         }
         guard self.passwordTextField.text != "" else{ showErrorFor(self.passwordErrorMessage, message: "! Password Cannot be empty");
@@ -117,16 +117,16 @@ class LoginViewController: SignupLoginViewController {
                 }
                 SwiftSpinner.show(message).addTapHandler({
                     SwiftSpinner.hide()
-                    let alertController = UIAlertController(title: "Reset Password?", message: "Using the right email address and would like to reset your password", preferredStyle: .Alert)
-                    alertController.addAction(UIAlertAction(title: "Reset", style: .Destructive, handler: { action in
+                    let alertController = UIAlertController(title: "Oops", message: "Looks like you’ve entered the wrong email address or password.", preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "Give it another go", style: .Cancel, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "Reset password", style: .Destructive, handler: { action in
                         self.resetPassword( self.emailTextField.text! )
                     }))
-                    alertController.addAction(UIAlertAction(title: "Signup instead", style: .Default, handler: { action in
+                    alertController.addAction(UIAlertAction(title: "Create account", style: .Default, handler: { action in
                         let signupVC = SignupViewController()
                         signupVC.emailTextField.text = self.emailTextField.text
                        self.navigationController?.pushViewController(signupVC, animated: true)
                     }))
-                    alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { action in }))
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }, subtitle: "Tap to hide!")
             }

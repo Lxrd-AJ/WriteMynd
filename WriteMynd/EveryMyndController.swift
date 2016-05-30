@@ -14,6 +14,7 @@ import MMDrawerController
 import SnapKit
 import JTSActionSheet
 import DGElasticPullToRefresh
+import JTImageButton
 
 
 class EveryMyndController: ViewController {
@@ -61,6 +62,17 @@ class EveryMyndController: ViewController {
         button.alpha = 0.8
         return button;
     }()
+//    lazy var createPostButton: JTImageButton = {
+//        let button: JTImageButton = JTImageButton(type: .Custom)
+//        button.createTitle("Create a post", withIcon: UIImage(named: "Pencil")!, font: Label.font(), iconOffsetY: JTImageButtonIconOffsetYNone)
+//        //button.backgroundColor = UIColor.wmGreenishTealColor()
+//        button.bgColor = UIColor.wmGreenishTealColor()
+//        button.titleColor = .whiteColor()
+//        button.padding = JTImageButtonPaddingMedium
+//        button.iconSide = JTImageButtonIconSideRight
+//        button.addTarget(self, action: .showPostingSheet, forControlEvents: .TouchUpInside)
+//        return button
+//    }()
     
     lazy var bottomView: UIView = {
         let view = UIView()

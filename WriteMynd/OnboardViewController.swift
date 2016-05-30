@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Gifu
 
 class OnboardViewController: UIViewController {
 

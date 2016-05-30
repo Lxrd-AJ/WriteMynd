@@ -16,6 +16,7 @@ target 'WriteMynd' do
     pod 'SnapKit', '~> 0.21.0'
     pod 'pop', '~> 1.0'
     pod 'JTSActionSheet', '~> 1.0.1'
+    pod 'JTImageButton'
     pod 'Mixpanel'
     #pod 'Onboard'
     pod 'DGElasticPullToRefresh'

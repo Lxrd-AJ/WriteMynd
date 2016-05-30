@@ -49,8 +49,8 @@ class MyPostsViewController: ViewController {
         
         let postsToMeButton = self.createFilterButton("Only posts to me")
         let postsToAllButton = self.createFilterButton("Only shared posts")
-        postsToMeButton.tag = 0
-        postsToAllButton.tag = 1
+        postsToMeButton.tag = 5
+        postsToAllButton.tag = 10
         
         //Constaints
         self.view.addSubview(buttonStackView)
@@ -119,49 +119,80 @@ class MyPostsViewController: ViewController {
     
     func createFilterButton( title:String ) -> Button {
         let button = Button(type: .Custom)
-        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.setTitle(title, forState: .Normal)
         button.setImage(UIImage(named: "oval")!, forState: .Normal)
         button.addTarget(self, action: .filterButtonTapped, forControlEvents: .TouchUpInside)
-        button.backgroundColor = UIColor.wmCoolBlueColor()
+        button.backgroundColor = .whiteColor()
+        button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
         button.layer.cornerRadius = 15.0
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         button.setFontSize(12.0)
-        button.selected = true; //By default they are selected
+        button.selected = false
         return button
     }
     
+    /**
+     Filters the currently displayed posts based on the tapped button
+     
+     - note: `Post to me button` has a tag of 5 whilst `Post to all button` has a tag of 10
+     - parameter button: the tapped button
+     */
     func filterButtonTapped( button: Button ){
-        if button.selected {
-            button.backgroundColor = .whiteColor()
-            button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
-        }else{
-            button.backgroundColor = UIColor.wmCoolBlueColor()
-            button.setTitleColor(.whiteColor(), forState: .Normal)
+        func design( button:UIButton, selected:Bool ) {
+            if !selected {
+                button.backgroundColor = .whiteColor()
+                button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
+            }else{
+                button.backgroundColor = UIColor.wmCoolBlueColor()
+                button.setTitleColor(.whiteColor(), forState: .Normal)
+            }
         }
         
-        switch button.tag {
-        case 0: //Posts to me tapped aka Private posts
-            if button.selected {
-                self.postsViewController.posts = self.postsViewController.posts.filter({ !$0.isPrivate })
-                button.selected = false
+        let otherButtonTag = button.tag == 5 ? 10 : 5
+        let otherButton = self.view.viewWithTag(otherButtonTag) as! Button
+        
+        if button.selected {
+            self.postsViewController.posts = self.posts
+            design(button, selected: false)
+            design(otherButton, selected: false)
+        }else{
+            if button.tag == 5 {
+                self.postsViewController.posts = self.posts.filter({ $0.isPrivate })
             }else{
-                self.postsViewController.posts += self.posts.filter({ $0.isPrivate })
-                button.selected = true
+                self.postsViewController.posts = self.posts.filter({ !$0.isPrivate  })
             }
-        case 1:
-            if button.selected { //Non private posts
-                self.postsViewController.posts = self.postsViewController.posts.filter({ $0.isPrivate })
-                button.selected = false
-            }else{
-                self.postsViewController.posts += self.posts.filter({ !$0.isPrivate  })
-                button.selected = true
-            }
-        default:
-            break;
+            design(button, selected: !button.selected)
+            design(otherButton, selected: button.selected)
+            otherButton.selected = button.selected
         }
+        
+        button.selected = !button.selected
         self.postsViewController.posts.sortInPlace({ $0.createdAt!.compare($1.createdAt!) == NSComparisonResult.OrderedDescending})
         self.postsViewController.tableView.reloadData()
+        
+        print("Button tag = \(button.tag)\nSelected = \(button.selected)\n")
+        
+//        switch button.tag {
+//        case 0: //Posts to me tapped aka Private posts
+//            if button.selected {
+//                self.postsViewController.posts = self.postsViewController.posts.filter({ !$0.isPrivate })
+//                button.selected = false
+//            }else{
+//                self.postsViewController.posts += self.posts.filter({ $0.isPrivate })
+//                button.selected = true
+//            }
+//        case 1:
+//            if button.selected { //Non private posts
+//                self.postsViewController.posts = self.postsViewController.posts.filter({ $0.isPrivate })
+//                button.selected = false
+//            }else{
+//                self.postsViewController.posts += self.posts.filter({ !$0.isPrivate  })
+//                button.selected = true
+//            }
+//        default:
+//            break;
+//        }
+        
     }
     
     func fetchPosts(){

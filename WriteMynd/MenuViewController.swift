@@ -17,7 +17,7 @@ import SwiftSpinner
  */
 class MenuViewController: UITableViewController {
     
-    let menuItems: [String] = ["My Posts","Every Mynd","Dashboard","The Thinking","Settings"]
+    let menuItems: [String] = ["My Posts","Dashboard","Every Mynd","The Thinking","Settings"]
     var navController: UINavigationController?
     var drawerController: MMDrawerController?
 

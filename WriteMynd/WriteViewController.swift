@@ -358,7 +358,7 @@ extension WriteViewController {
             break;
         }
         
-        UIView.transitionWithView(self.bigEmojiImage, duration: 0.4, options: .TransitionFlipFromRight, animations: {
+        UIView.transitionWithView(self.bigEmojiImage, duration: 0.2, options: .TransitionCrossDissolve, animations: { //.TransitionFlipFromRight
             self.bigEmojiImage.image = UIImage(named: imageName)
             }, completion: nil)
         

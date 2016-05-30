@@ -38,7 +38,7 @@ class SignupLoginViewController: UIViewController {
         let button = Button(type: .Custom)
         button.setTitle(title, forState: .Normal)
         button.backgroundColor = UIColor.wmGreenishTealColor()
-        button.layer.cornerRadius = 4.0
+        //button.layer.cornerRadius = 4.0
         return button
     }
     
@@ -59,7 +59,7 @@ class SignupLoginViewController: UIViewController {
         field.layer.borderWidth = 1.0
         field.layer.borderColor = UIColor.wmSilverColor().CGColor
         field.font = Label.font()
-        field.layer.cornerRadius = 3.0
+        //field.layer.cornerRadius = 3.0
         field.backgroundColor = UIColor.whiteColor()
         field.textColor = UIColor.lightGrayColor()
         field.leftView = paddingView

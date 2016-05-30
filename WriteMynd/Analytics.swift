@@ -19,10 +19,13 @@ private let APP_LAUNCH_FROM_LOCAL_NOTIFICATION = "APP_LAUNCH_FROM_LOCAL_NOTIFICA
 private let APP_USAGE = "APP_USAGE"
 private let USER_MADE_POST_WITH_MORE_100_WORDS = "USER_MADE_POST_WITH_MORE_100_WORDS"
 private let USER_MADE_POST_WITH_MORE_50_WORDS = "USER_MADE_POST_WITH_MORE_50_WORDS"
+private let USER_SWIPED_8_WORDS_CONSECUTIVELY = "USER_SWIPED_8_WORDS_CONSECUTIVELY"
+private let USER_MADE_POST_WRITING_FEATURE = "USER_MADE_POST_WRITING_FEATURE"
 
 class Analytics {
     
     private static let email:String? = PFUser.currentUser()?.email
+    private static var swipeHistory:[Swipe] = []
     
     class func setup(){
         if let email = PFUser.currentUser()?.email {
@@ -48,11 +51,23 @@ class Analytics {
             ])
     }
     
+    /**
+     Tracks the swipe the user just made by recording the emotion, the user swiped on and also increments
+     the counter of the number of swipes made by the user
+     
+     - parameter swipe: The swipe to track
+     */
     class func trackUserMade( swipe:Swipe ){
+        if let email = email { MixpanelService.identify(email) }
         let emotion = swipe.feeling
         MixpanelService.track("USER_SWIPED", properties: [
             "emotion": emotion
             ])
+        MixpanelService.people.increment(["SWIPES":1])
+        Analytics.swipeHistory.append(swipe)
+        if Analytics.swipeHistory.count == 8 {
+            MixpanelService.track(USER_SWIPED_8_WORDS_CONSECUTIVELY)
+        }
     }
     
     class func trackUserViewed( page: UIViewController ){
@@ -62,12 +77,12 @@ class Analytics {
         default:
             break;
         }
-        
     }
     
     /**
      Tracks the post made by the user.
      Updates the count of posts made by the user and tracks the feeling and privacy of the post.
+     Logs if the post the user made is a written one.
      Also checks the number of words used in the post to determine if they are above 50, 100
      
      - parameter post: The post to track
@@ -81,6 +96,7 @@ class Analytics {
             ])
         //Categorise based on the number of words
         guard post.text != "" else{ return }
+        MixpanelService.track(USER_MADE_POST_WRITING_FEATURE)
         let words = post.text.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         if words.count >= 100 {
             MixpanelService.track(USER_MADE_POST_WITH_MORE_100_WORDS)

@@ -59,6 +59,7 @@ class PostTableViewCell: UITableViewCell {
         isPrivateLabel.setFontSize(8);
         postLabel.numberOfLines = 0
         postLabel.textColor = UIColor.wmSilverColor()
+        //emojiImageView.contentMode = .ScaleAspectFill
     }
     
     override func layoutSubviews() {
@@ -93,6 +94,7 @@ class PostTableViewCell: UITableViewCell {
             //make.height.equalTo(ellipsesButton.snp_height)
             make.right.equalTo(ellipsesButton.snp_left).offset(-10)
             make.bottom.equalTo(ellipsesButton.snp_bottom)
+            //make.size.equalTo(CGSize(width: 18, height: 16))
         })
         
         readMoreButton.snp_makeConstraints(closure: { make in
@@ -101,6 +103,11 @@ class PostTableViewCell: UITableViewCell {
         })
     }
     
+    /**
+     - note look into removing the middle view and use only the label.
+     
+     - parameter superview: <#superview description#>
+     */
     func setupMiddleSection( superview:UIView ){
         self.middleView.snp_makeConstraints(closure: { make in
             make.top.equalTo(self.topView.snp_bottom)
