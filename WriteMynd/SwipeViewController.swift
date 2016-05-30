@@ -28,14 +28,14 @@ class SwipeViewController: UIViewController {
         self.view.backgroundColor = UIColor.wmBackgroundColor()
         
         //MARK: - Onboarding checks
-        self.view.addSubview(topMessage)
+        self.view.addSubview(topMessage);
         let viewCounts = NSUserDefaults.standardUserDefaults().integerForKey(ON_BOARDING_MESSAGE_VIEWS)
-        if viewCounts > 5 {
+        if viewCounts >= 5 {
             topMessage.instructionLabel.hidden = true
         }else{
-            print(viewCounts)
             NSUserDefaults.standardUserDefaults().setInteger((viewCounts+1), forKey: ON_BOARDING_MESSAGE_VIEWS)
         }
+        print(viewCounts)        
         topMessage.snp_makeConstraints(closure: { make in
             make.width.equalTo(self.view.snp_width)
             make.top.equalTo(self.snp_topLayoutGuideBottom).offset(10)
@@ -60,7 +60,6 @@ class SwipeViewController: UIViewController {
         //MARK: - Emoji
         let emojiView = UIImageView(image: UIImage(named: "standingManHandsUp")!)
         emojiView.contentMode = .Center
-        //self.view.addSubview(emojiView)
         self.view.insertSubview(emojiView, belowSubview: kolodaView)
         emojiView.snp_makeConstraints(closure: { make in
             make.centerX.equalTo(self.view.snp_centerX)
@@ -143,11 +142,15 @@ extension SwipeViewController: SwipeViewDelegate {
     }
     
     /**
-     - todo: [ ] Change the defauot 
+     The delegate method called on user move swipe card.
+     Animates the background color and changes the `topMessage` view text.
      
-     - parameter koloda:        <#koloda description#>
-     - parameter finishPercent: <#finishPercent description#>
-     - parameter direction:     <#direction description#>
+     - parameter koloda:        the current swipe view
+     - parameter finishPercent: The percent of the screen covered in the swipe
+     - parameter direction:     The direction of the swipe
+     
+     - todo
+        *   Change the default color in the switch statement
      */
     func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {
         print("\(finishPercent)% in direction \(direction)")

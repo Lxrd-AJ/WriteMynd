@@ -21,9 +21,11 @@ class WriteViewController: UIViewController {
     var currentTextField: UITextField? //The Current textfield the user is editing
     var post: Post? //TODO: Add a setter function here
     var previousEmojiButton: UIButton?
+    var backbuttonItem: UIBarButtonItem?
     
     let question = dailyQuestion[Int( arc4random_uniform(UInt32(dailyQuestion.count)))]
     let feelingsView = FeelingsView()
+    let hashtagView = HashTagView()
     private let BUTTON_TICK_TAG = 100
     
     lazy var bigEmojiImage: UIImageView = {
@@ -127,6 +129,7 @@ class WriteViewController: UIViewController {
 
         self.view.backgroundColor = UIColor.wmBackgroundColor()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
+        self.backbuttonItem = self.navigationItem.backBarButtonItem
         
         if self.post == nil {
             self.post = Post(emoji: .None, text: "", hashTags: [], author: PFUser.currentUser()!)
@@ -212,7 +215,16 @@ class WriteViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        Analytics.timeUserEntered(self)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.post!.hashTags.count > 0 {
+            Analytics.timeUserExit(self, properties:["POSTED":true])
+        }else{
+            Analytics.timeUserExit(self, properties:["POSTED":false])
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -249,9 +261,9 @@ extension WriteViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-//    func createRightBarButtonItem() -> UIBarButtonItem {
-//        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: .finishedEditingTextView)
-//    }
+    func createRightBarButtonItem() -> UIBarButtonItem {
+        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: .finishedEditing)
+    }
 }
 
 extension WriteViewController {
@@ -383,7 +395,6 @@ extension WriteViewController {
         }
         
         //Editing HashTags
-        let hashtagView = HashTagView()
         self.focusView.addSubview(hashtagView)
         hashtagView.snp_makeConstraints(closure: { make in
             make.top.equalTo(self.view.snp_top).offset(200)
@@ -395,14 +406,24 @@ extension WriteViewController {
         
         hashtagView.hashtagField.becomeFirstResponder()
         hashtagView.hashtagField.text = self.hashTagField.text
-        hashtagView.onFinishCallback = {
-            self.hashTagField.text = hashtagView.hashtagField.text
-            self.post!.hashTags = self.hashTagField.text!.componentsSeparatedByString(" ").filter({ (text:String) -> Bool in
-                guard text != "" else { return false }
-                return text[text.startIndex] == "#"
-            })
-            self.focusView.removeFromSuperview()
-        }
+        hashtagView.onFinishCallback = hashtagViewCallback
+    }
+    
+    private func hashtagViewCallback(){
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.setHidesBackButton(false, animated: true)
+        self.hashTagField.text = self.hashtagView.hashtagField.text
+        self.post!.hashTags = self.hashTagField.text!.componentsSeparatedByString(" ").filter({ (text:String) -> Bool in
+            guard text != "" else { return false }
+            return text[text.startIndex] == "#"
+        })
+        self.focusView.removeFromSuperview()
+    }
+    
+    func endEditingWithFocusView(sender: UIBarButtonItem) -> Void {
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.setHidesBackButton(false, animated: true)
+        hashtagViewCallback()
     }
     
 }
@@ -411,6 +432,8 @@ extension WriteViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         self.beginEditingWithFocusView()
+        self.navigationItem.rightBarButtonItem = self.createRightBarButtonItem()
+        self.navigationItem.setHidesBackButton(true, animated: true)
         return false;
     }
     
@@ -444,4 +467,5 @@ extension WriteViewController: UITextViewDelegate {
 
 private extension Selector {
     static let emojiButtonTapped = #selector(WriteViewController.emojiButtonTapped(_:))
+    static let finishedEditing = #selector(WriteViewController.endEditingWithFocusView(_:))
 }

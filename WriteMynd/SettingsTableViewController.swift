@@ -264,8 +264,7 @@ extension SettingsTableViewController {
             self.rows = rows.filter({ $0 != TIMER })
             NSUserDefaults.standardUserDefaults().removeObjectForKey(REMINDER_DATE)
             self.tableView.reloadData()
-        }
-        NSUserDefaults.standardUserDefaults().synchronize()
+        }        
     }
     
     func configureMailComposeVC() -> MFMailComposeViewController {

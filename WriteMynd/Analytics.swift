@@ -21,6 +21,7 @@ private let USER_MADE_POST_WITH_MORE_100_WORDS = "USER_MADE_POST_WITH_MORE_100_W
 private let USER_MADE_POST_WITH_MORE_50_WORDS = "USER_MADE_POST_WITH_MORE_50_WORDS"
 private let USER_SWIPED_8_WORDS_CONSECUTIVELY = "USER_SWIPED_8_WORDS_CONSECUTIVELY"
 private let USER_MADE_POST_WRITING_FEATURE = "USER_MADE_POST_WRITING_FEATURE"
+private let USER_IN_WRITE_POST_PAGE = "USER_IN_WRITE_POST_PAGE"
 
 class Analytics {
     
@@ -72,9 +73,41 @@ class Analytics {
     
     class func trackUserViewed( page: UIViewController ){
         switch page {
-        case page is EveryMyndController: 
+        case page as! EveryMyndController:
             MixpanelService.track("USER_VIEWED_EVERYMYND")
         default:
+            print("Unknown page: \(page)")
+            break;
+        }
+    }
+    
+    /**
+     Similar to `trackUserViewed` but here the duration spent in this page is 
+     logged and when the user leaves this page is logged in `timeUserExit`
+     
+     - parameter page: the page to monitor
+     */
+    class func timeUserEntered( page:UIViewController ){
+        switch page {
+        case page as! WriteViewController:
+            MixpanelService.timeEvent(USER_IN_WRITE_POST_PAGE)
+        default:
+            print("Unknown page: \(page)")
+            break;
+        }
+    }
+    
+    /**
+     Tracks the time the user exited this page
+     
+     - parameter page: the page to log on user exit
+     */
+    class func timeUserExit( page:UIViewController,properties:[NSObject:AnyObject]? ){
+        switch page {
+        case page as! WriteViewController:
+            MixpanelService.track(USER_IN_WRITE_POST_PAGE, properties: properties)
+        default:
+            print("Unknown page: \(page)")
             break;
         }
     }

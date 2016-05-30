@@ -201,6 +201,11 @@ class PostsTableViewController: UITableViewController {
  */
 extension PostsTableViewController {
     
+    /**
+     - todo
+        * Remove the background view image + text to the container view instead
+        * Use a clear color as the table view's background view
+     */
     func updateBackgroundView(){
         if self.posts.count > 0 {
             self.tableView.backgroundView?.hidden = true

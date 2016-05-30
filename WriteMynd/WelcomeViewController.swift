@@ -121,12 +121,13 @@ class WelcomeViewController: UIViewController {
     func signInAnonymously(){
         SwiftSpinner.show("")
         PFAnonymousUtils.logInWithBlock{ (user:PFUser?, error:NSError?) -> Void in
+            SwiftSpinner.hide()
             if error != nil || user == nil {
                 print("Anonymous log in failed")
             }else{
-                let everyMyndVC = EveryMyndController()
+                let myMyndVC = MyPostsViewController()
                 self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
-                self.mm_drawerController.centerViewController = UINavigationController(rootViewController: everyMyndVC)
+                self.mm_drawerController.centerViewController = UINavigationController(rootViewController: myMyndVC)
                 SwiftSpinner.hide()
             }
         }
