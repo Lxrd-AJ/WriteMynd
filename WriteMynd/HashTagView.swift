@@ -14,7 +14,7 @@ class HashTagView: UIView {
     
     lazy var promptMessage: Label = {
         var label = Label()
-        label.text = "Create a hashtag"
+        label.text = "Categorise your post"
         label.textColor = UIColor.wmCoolBlueColor()
         return label
     }()
@@ -66,6 +66,21 @@ class HashTagView: UIView {
 }
 
 extension HashTagView: UITextFieldDelegate {
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if string == " " {
+            textField.text = textField.text! + "#"
+            
+            let start = textField.positionFromPosition(textField.beginningOfDocument, offset: range.location+1)
+            let end = textField.positionFromPosition(start!, offset: range.length)
+            let _range = textField.textRangeFromPosition(start!, toPosition: end!)
+            
+            textField.selectedTextRange = _range            
+            return false
+        }
+        return true
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         self.onFinishCallback?()

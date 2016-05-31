@@ -73,7 +73,7 @@ class WriteViewController: UIViewController {
     lazy var hashTagField: UITextField = { //this has the tag of 5
         let field = UITextField()
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
-        field.placeholder = "Create a #hashtag"
+        field.placeholder = "Categorise your post"
         field.layer.borderWidth = 1.0
         field.layer.borderColor = UIColor.lightGrayColor().CGColor
         field.font = Label.font()
@@ -255,8 +255,8 @@ extension WriteViewController {
     
     func displayErrorMessage( message:String ){
         //"You need to enter how you feel, select an emoji and type an hashtag"
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert )
-        let okAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        let alertController = UIAlertController(title: "Oops", message: message, preferredStyle: .Alert )
+        let okAction = UIAlertAction(title: "Gotcha", style: .Cancel, handler: nil)
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
@@ -277,11 +277,11 @@ extension WriteViewController {
      */
     func postButtonTapped( sender:Button ){
         guard self.post!.emoji != .None else {
-            displayErrorMessage("You need to select an emotion button before posting ");
+            displayErrorMessage("You need to select an emotion before posting");
             return
         }
         guard self.post!.hashTags.count > 0 else{
-            displayErrorMessage("You need to add a hashtag before posting");
+            displayErrorMessage("You need to categorise your post before posting");
             return
         }
         
@@ -441,9 +441,6 @@ extension WriteViewController: UITextFieldDelegate {
         return false;
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        return false
-    }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
