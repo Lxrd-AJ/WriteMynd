@@ -22,6 +22,8 @@ private let USER_MADE_POST_WITH_MORE_50_WORDS = "USER_MADE_POST_WITH_MORE_50_WOR
 private let USER_SWIPED_8_WORDS_CONSECUTIVELY = "USER_SWIPED_8_WORDS_CONSECUTIVELY"
 private let USER_MADE_POST_WRITING_FEATURE = "USER_MADE_POST_WRITING_FEATURE"
 private let USER_IN_WRITE_POST_PAGE = "USER_IN_WRITE_POST_PAGE"
+private let USER_SET_LOCAL_NOTIFICATION = "USER_SET_LOCAL_NOTIFICATION"
+private let USER_REMOVED_LOCAL_NOTIFICATION = "USER_REMOVED_LOCAL_NOTIFICATION"
 
 class Analytics {
     
@@ -32,6 +34,22 @@ class Analytics {
         if let email = PFUser.currentUser()?.email {
             MixpanelService.registerSuperProperties(["user":email])
         }
+    }
+    
+    class func trackUserUsedMyPostsFilter(){
+        MixpanelService.track("USER_USED_FILTER_IN_MY_POSTS")
+    }
+    
+    class func trackUserSetNotificationFor( date:NSDate ){
+        MixpanelService.track(USER_SET_LOCAL_NOTIFICATION, properties: [
+            "fire_date": date
+            ])
+    }
+    
+    class func trackUserRemovedNotificationFor( date:NSDate ){
+        MixpanelService.track(USER_REMOVED_LOCAL_NOTIFICATION, properties: [
+            "fire_date": date
+            ])
     }
     
     class func trackUserHid( post: Post ){
@@ -80,8 +98,12 @@ class Analytics {
     
     class func trackUserViewed( page: UIViewController ){
         switch page {
-        case page as! EveryMyndController:
-            MixpanelService.track("USER_VIEWED_EVERYMYND")
+//        case _ as EveryMyndController:
+//            MixpanelService.track()
+        case let page as EmojiChartDetailViewController:
+            MixpanelService.track("USER_TAPPED_THROUGH_PIE_CHART",properties: [
+                "chart_section": page.emoji.value().name
+                ])
         default:
             print("Unknown page: \(page)")
             break;
@@ -96,8 +118,16 @@ class Analytics {
      */
     class func timeUserEntered( page:UIViewController ){
         switch page {
-        case page as! WriteViewController:
+        case _ as WriteViewController:
             MixpanelService.timeEvent(USER_IN_WRITE_POST_PAGE)
+        case _ as DashboardController:
+            MixpanelService.timeEvent("USER_IN_DASHBOARD")
+        case _ as ThinkingViewController:
+            MixpanelService.timeEvent("USER_IN_THINKING_PAGE")
+        case _ as MyPostsViewController:
+            MixpanelService.timeEvent("USER_IN_MY_POSTS")
+        case _ as EveryMyndController:
+            MixpanelService.timeEvent("USER_VIEWED_EVERYMYND")
         default:
             print("Unknown page: \(page)")
             break;
@@ -111,8 +141,16 @@ class Analytics {
      */
     class func timeUserExit( page:UIViewController,properties:[NSObject:AnyObject]? ){
         switch page {
-        case page as! WriteViewController:
+        case _ as WriteViewController:
             MixpanelService.track(USER_IN_WRITE_POST_PAGE, properties: properties)
+        case _ as DashboardController:
+            MixpanelService.track("USER_IN_DASHBOARD", properties: properties)
+        case _ as ThinkingViewController:
+            MixpanelService.track("USER_IN_THINKING_PAGE", properties: properties)
+        case _ as MyPostsViewController:
+            MixpanelService.track("USER_IN_MY_POSTS", properties: properties)
+        case _ as EveryMyndController:
+            MixpanelService.track("USER_VIEWED_EVERYMYND", properties: properties)
         default:
             print("Unknown page: \(page)")
             break;

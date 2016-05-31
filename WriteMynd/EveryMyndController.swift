@@ -153,12 +153,17 @@ class EveryMyndController: ViewController {
         fetchPosts()
         
         //Track the user viewing `EveryMynd` event
-        Analytics.trackUserViewed( self )
+        Analytics.timeUserEntered(self)
         
         if shouldShowPostingSheet {
             self.showPostingSheet(self.createPostButton)
             shouldShowPostingSheet = !shouldShowPostingSheet
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        Analytics.timeUserExit(self, properties: nil)
     }
     
     deinit{

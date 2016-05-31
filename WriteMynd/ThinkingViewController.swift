@@ -67,12 +67,17 @@ class ThinkingViewController: ViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        Analytics.timeUserEntered(self)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height + 150.0)
         
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        Analytics.timeUserExit(self, properties: nil)
     }
 
     override func didReceiveMemoryWarning() {

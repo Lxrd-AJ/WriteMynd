@@ -241,7 +241,6 @@ extension SettingsTableViewController {
                         enable = true
                     }else{ enable = false }
                 }
-                
                 registerAction.enabled = enable
             })
         })

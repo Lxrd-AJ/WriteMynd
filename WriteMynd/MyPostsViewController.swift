@@ -89,6 +89,12 @@ class MyPostsViewController: ViewController {
             self.showPostingSheet(self.createPostButton)
             shouldShowPostingSheet = !shouldShowPostingSheet
         }
+        Analytics.timeUserEntered(self)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        Analytics.timeUserExit(self, properties: nil)
     }
     
     override func viewWillLayoutSubviews() {
@@ -132,7 +138,8 @@ class MyPostsViewController: ViewController {
     }
     
     /**
-     Filters the currently displayed posts based on the tapped button
+     Filters the currently displayed posts based on the tapped button.
+     Analytics data is also logged to the server
      
      - note: `Post to me button` has a tag of 5 whilst `Post to all button` has a tag of 10
      - parameter button: the tapped button
@@ -169,6 +176,8 @@ class MyPostsViewController: ViewController {
         button.selected = !button.selected
         self.postsViewController.posts.sortInPlace({ $0.createdAt!.compare($1.createdAt!) == NSComparisonResult.OrderedDescending})
         self.postsViewController.tableView.reloadData()
+        
+        Analytics.trackUserUsedMyPostsFilter()
     }
     
     func fetchPosts(){

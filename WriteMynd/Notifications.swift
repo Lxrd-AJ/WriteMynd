@@ -30,11 +30,16 @@ class Notifications {
         
         application.registerUserNotificationSettings(settings)
         application.scheduleLocalNotification(localNotification)
+        Analytics.trackUserSetNotificationFor( scheduleDate! )
         
         return scheduleDate!
     }
     
     class func cancelAllLocalNotifications(){
+        if let notification = UIApplication.sharedApplication().scheduledLocalNotifications?.first {
+            Analytics.trackUserRemovedNotificationFor( notification.fireDate! )
+        }
+        
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
     }

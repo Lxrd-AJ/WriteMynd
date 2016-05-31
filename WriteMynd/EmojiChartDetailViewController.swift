@@ -21,7 +21,8 @@ class EmojiChartDetailViewController: UITableViewController {
         self.tableView.registerClass(DetailTableViewCell.self , forCellReuseIdentifier: "EMOJI_DETAIL_CELL")
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorColor = UIColor.wmPaleGreyTwoColor()
-        self.tableView.bounces = false 
+        self.tableView.bounces = false
+        Analytics.trackUserViewed(self)
     }
 
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }

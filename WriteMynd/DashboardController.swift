@@ -89,6 +89,16 @@ class DashboardController: ViewController {
         swipeInfoButton.tag = 2
         drawCharts()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        Analytics.timeUserEntered(self)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        Analytics.timeUserExit(self, properties: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -405,7 +405,11 @@ extension WriteViewController {
         hashtagView.setupConstraints()
         
         hashtagView.hashtagField.becomeFirstResponder()
-        hashtagView.hashtagField.text = self.hashTagField.text
+        if self.hashTagField.text == "" {
+            hashtagView.hashtagField.text = "#"
+        }else{
+            hashtagView.hashtagField.text = self.hashTagField.text
+        }
         hashtagView.onFinishCallback = hashtagViewCallback
     }
     
@@ -437,6 +441,9 @@ extension WriteViewController: UITextFieldDelegate {
         return false;
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        return false
+    }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
