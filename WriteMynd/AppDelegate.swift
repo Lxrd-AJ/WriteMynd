@@ -11,6 +11,8 @@ import Parse
 import MMDrawerController
 import Mixpanel
 import SwiftDate
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -65,6 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         window!.tintColor = UIColor.wmCoolBlueColor()
         
+        //Fabric Crashlytics
+        Fabric.with([Crashlytics.self])
+
         if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
             print("Application launched from shortcut item => \(shortcutItem.type)")
             handleQuickAction(shortcutItem)

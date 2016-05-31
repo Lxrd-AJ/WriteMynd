@@ -114,10 +114,6 @@ extension SwipeViewController: SwipeViewDelegate {
         self.resetView()
     }
     
-    /**
-     - todo:
-        [x] If the feeling is in the negative space then add a negative value
-     */
     func koloda(koloda: SwipeView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeDirection) {
         let feeling = questions[Int(index)]
         var swipe = Swipe(value: -1, feeling: feeling)
@@ -134,11 +130,12 @@ extension SwipeViewController: SwipeViewDelegate {
         
         swipe.save()
         self.resetView()
-        print(direction)
+        //print(direction)
     }
     
     func koloda(kolodaDidRunOutOfCards koloda: SwipeView) {
         print("Cards Finished")
+        self.topMessage.promptLabel.text = "You're all done for now! \nTake a look at the My Mood graph in the Dashboard to see your score";
     }
     
     /**
@@ -153,7 +150,7 @@ extension SwipeViewController: SwipeViewDelegate {
         *   Change the default color in the switch statement
      */
     func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {
-        print("\(finishPercent)% in direction \(direction)")
+        //print("\(finishPercent)% in direction \(direction)")
         self.topMessage.instructionLabel.hidden = true
         self.topMessage.promptLabel.textColor = .whiteColor()
         

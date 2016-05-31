@@ -17,8 +17,10 @@ class HashTagsPieCharts: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        maxHashtagsPie.noDataText = ""
-        minHashtagsPie.noDataText = ""
+        maxHashtagsPie.noDataText = "Nothing here yet"
+        maxHashtagsPie.infoFont = Label.font().fontWithSize(11)
+        minHashtagsPie.noDataText = "\tWrite a post to\nstart populating this chart"
+        minHashtagsPie.infoFont = Label.font().fontWithSize(11)
         
         self.addSubview(maxHashtagsPie)
         self.addSubview(minHashtagsPie)

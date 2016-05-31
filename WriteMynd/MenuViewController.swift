@@ -17,7 +17,7 @@ import SwiftSpinner
  */
 class MenuViewController: UITableViewController {
     
-    let menuItems: [String] = ["My Posts","Dashboard","Every Mynd","The Thinking","Settings"]
+    let menuItems: [String] = ["My Posts","Dashboard","Feed","The Thinking","Settings"]
     var navController: UINavigationController?
     var drawerController: MMDrawerController?
 
@@ -78,7 +78,7 @@ class MenuViewController: UITableViewController {
         switch menuItems[indexPath.row] {
         case "My Posts":
             controller = MyPostsViewController()
-        case "Every Mynd":
+        case "Feed":
             controller = EveryMyndController()
         case "Dashboard":
             controller = DashboardController()

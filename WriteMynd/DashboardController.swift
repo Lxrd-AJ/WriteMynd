@@ -19,7 +19,10 @@ class DashboardController: ViewController {
     
     var emojiHashTagDictionary: [Emoji:[HashTag:Int]] = [:]
     
-    let topView = UIView()
+    lazy var topView: UIView = {
+        let view: UIView = UIView()
+        return view;
+    }()
     let middleView = UIView()
     let bottomView = UIView()
 
@@ -52,7 +55,8 @@ class DashboardController: ViewController {
         label.textColor = UIColor.wmCoolBlueColor()
         return label
     }()
-    
+    lazy var positiveLabel: Label = { return self.createLabel("Positive", color: UIColor.wmSilverColor(),size:11) }()
+    lazy var negativeLabel: Label = { return self.createLabel("Negative", color: UIColor.wmSilverColor(),size:11) }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +83,8 @@ class DashboardController: ViewController {
         self.middleView.addSubview(emojiPieChart)
         self.middleView.addSubview(emojiInfoButton)
         self.bottomView.addSubview(swipeLabel)
+        self.bottomView.addSubview(positiveLabel)
+        self.bottomView.addSubview(negativeLabel)
         self.bottomView.addSubview(swipeChart)
         self.bottomView.addSubview(swipeInfoButton)
         
@@ -114,21 +120,21 @@ class DashboardController: ViewController {
         }
         let labelConstraint = { (make:ConstraintMaker,v:UIView) -> Void in
             make.top.equalTo(v.snp_top).offset(5)
-            make.left.equalTo(v.snp_left).offset(5)
+            make.left.equalTo(v.snp_left).offset(10)
         }
         
         scrollView.snp_makeConstraints(closure: { make in
             make.centerX.equalTo(self.view.snp_centerX)
             make.top.equalTo(self.snp_topLayoutGuideBottom)
-            make.bottom.equalTo(self.stackView.snp_bottom).offset(50)
             make.size.equalTo(self.view.snp_size)
+            make.bottom.equalTo(self.stackView.snp_bottom).offset(100)
         })
         
         stackView.snp_makeConstraints(closure: { make in
             make.width.equalTo(self.view.snp_width)
             make.top.equalTo(self.scrollView.snp_top)
             make.right.equalTo(self.view.snp_right)
-            make.height.equalTo(700)
+            make.height.equalTo(800)
         })
         
         myHashTagsLabel.snp_makeConstraints(closure: { make in labelConstraint(make,topView) })
@@ -151,11 +157,20 @@ class DashboardController: ViewController {
         
         swipeLabel.snp_makeConstraints(closure: { make in labelConstraint(make,bottomView) })
         swipeInfoButton.snp_makeConstraints(closure: { make in infoButtonConstraint(make,bottomView) })
+        positiveLabel.snp_makeConstraints(closure: { make in
+            make.top.equalTo(self.swipeInfoButton.snp_bottom).offset(10)
+            make.left.equalTo(self.swipeLabel.snp_left)
+        })
         swipeChart.snp_makeConstraints(closure: { make in
             make.width.equalTo(bottomView.snp_width)
             make.top.equalTo(swipeInfoButton.snp_bottom).offset(15)
             make.centerX.equalTo(bottomView.snp_centerX)
-            make.bottom.equalTo(bottomView.snp_bottom).offset(-20)
+            //make.bottom.equalTo(bottomView.snp_bottom).offset(-20)
+            make.bottom.equalTo(negativeLabel.snp_top).offset(-5)
+        })
+        negativeLabel.snp_makeConstraints(closure: { make in
+            make.bottom.equalTo(bottomView.snp_bottom).offset(-5)
+            make.left.equalTo(self.positiveLabel.snp_left)
         })
     }
     
@@ -332,6 +347,14 @@ extension DashboardController {
         button.titleLabel?.numberOfLines = 0
         button.layer.cornerRadius = 5.0
         return button;
+    }
+    
+    func createLabel( title:String, color:UIColor = UIColor.blackColor(), size:CGFloat = 13.0 ) -> Label {
+        let label = Label()
+        label.text = title;
+        label.textColor = color;
+        label.setFontSize(size)
+        return label
     }
 
 }

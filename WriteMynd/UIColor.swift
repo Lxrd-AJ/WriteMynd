@@ -12,6 +12,11 @@ import UIKit
 // Color palette
 
 extension UIColor {
+    
+    class func whitishGreenColor() -> UIColor {
+        return UIColor(red: 67/255, green: 255/255, blue: 214/255, alpha: 0.4)
+    }
+    
     class func wmPaleGreyTwoColor() -> UIColor {
         return UIColor(red: 226.0 / 255.0, green: 230.0 / 255.0, blue: 239.0 / 255.0, alpha: 1.0)
     }

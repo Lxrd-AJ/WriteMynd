@@ -144,10 +144,7 @@ extension SearchViewController: UITextFieldDelegate {
 }
 
 extension SearchViewController: PostsTableVCDelegate {
-    func shouldShowSearchController() -> Bool {
-        return false
-    }
-    func canShowOptionsButton() -> Bool {
-        return false
-    }
+    func shouldShowSearchController() -> Bool { return false }
+    func canShowOptionsButton() -> Bool { return false }
+    func canShowEmpathiseButton() -> Bool { return false }
 }

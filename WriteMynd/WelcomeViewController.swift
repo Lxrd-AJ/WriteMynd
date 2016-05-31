@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import MMDrawerController
 import SwiftSpinner
+import Fabric
+import Crashlytics
 
 class WelcomeViewController: UIViewController {
     
@@ -62,6 +64,11 @@ class WelcomeViewController: UIViewController {
         //self.mm_drawerController.setMaximumLeftDrawerWidth(0, animated: true, completion: nil)
         
         if PFUser.currentUser() != nil {
+            // Register the user for crash logs
+            if let email = PFUser.currentUser()?.email {
+                self.logUser(email)
+            }
+
             let launchCont = MyPostsViewController()
             //launchCont.shouldShowPostingSheet = true
             self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
@@ -117,6 +124,13 @@ class WelcomeViewController: UIViewController {
         })
         
     }
+    
+    func logUser( email:String ) {
+        Crashlytics.sharedInstance().setUserEmail(email)
+        Crashlytics.sharedInstance().setUserIdentifier(email)
+        Crashlytics.sharedInstance().setUserName(email)
+    }
+
     
     func signInAnonymously(){
         SwiftSpinner.show("")

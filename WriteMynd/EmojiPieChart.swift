@@ -16,7 +16,8 @@ class EmojiPieChart: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        chart.noDataText = "Wondering how you feel ..."
+        chart.noDataText = "Write a post to start populating this chart"
+        chart.infoFont = Label.font().fontWithSize(11)
         self.addSubview(chart)
         
         chart.userInteractionEnabled = true

@@ -402,6 +402,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2172FBFB1C11B65E003446AC /* Build configuration list for PBXNativeTarget "WriteMynd" */;
 			buildPhases = (
+				21AB368D1CFE0AE000490E17 /* ShellScript */,
 				EA5AAC53AC47BA4834997D2A /* 📦 Check Pods Manifest.lock */,
 				2172FBE51C11B65E003446AC /* Sources */,
 				2172FBE61C11B65E003446AC /* Frameworks */,
@@ -477,6 +478,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		21AB368D1CFE0AE000490E17 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 93cd34c92e06710841a54f5510dc7544f687e57a f7d333570d1bad2ba8cec212fd58d03f456604fc160de8caf2bfa14833dda29c";
+		};
 		54E50041EB9ACC2C03EECDD8 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

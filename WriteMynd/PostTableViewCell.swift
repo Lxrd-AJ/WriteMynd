@@ -54,7 +54,9 @@ class PostTableViewCell: UITableViewCell {
         readMoreButton.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
         hashTagsLabel.titleLabel?.lineBreakMode = .ByTruncatingTail
         hashTagsLabel.setTitleColor(UIColor.wmSlateGreyColor(), forState: .Normal)
+        hashTagsLabel.setFontSize(14.5)
         dateLabel.textColor = UIColor.wmSilverColor()
+        dateLabel.setFontSize(11)
         isPrivateLabel.textColor = UIColor.wmCoolBlueColor()
         isPrivateLabel.setFontSize(8);
         postLabel.numberOfLines = 0
@@ -134,6 +136,7 @@ class PostTableViewCell: UITableViewCell {
         })
         //Emoji
         if self.postLabel.text == "" {
+            emojiImageView.contentMode = .ScaleToFill
             self.emojiImageView.snp_remakeConstraints(closure: { make in
                 make.width.equalTo(self.snp_width).multipliedBy(0.5)
                 make.height.equalTo(self.snp_height)
@@ -141,22 +144,27 @@ class PostTableViewCell: UITableViewCell {
                 make.top.equalTo(self.topView.snp_top)
             })
         }else{
+            emojiImageView.contentMode = .ScaleAspectFit //.Center
             emojiImageView.snp_remakeConstraints(closure: { make in
-                make.left.equalTo(self.topView).offset(5)
-                make.top.equalTo(self.topView).offset(5)
-                make.size.equalTo(CGSize(width: 28, height: 28))
+                make.left.equalTo(self.topView.snp_left).offset(5)
+                make.top.equalTo(self.topView.snp_top)//.offset(5)
+                make.height.equalTo(self.topView.snp_height)//.offset(-5)
+                make.width.equalTo(28)
+                //make.size.equalTo(CGSize(width: 28, height: 28))
             })
         }
         //Family HashTag
+        hashTagsLabel.sizeToFit()
         hashTagsLabel.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.topView.snp_top)
-            make.left.equalTo(emojiImageView.snp_right).offset(3)
+            make.top.equalTo(self.topView.snp_top)//.offset(-3) //to accomodate for the padding in the label
+            make.left.equalTo(emojiImageView.snp_right).offset(10)
             make.right.lessThanOrEqualTo(isPrivateLabel.snp_left).offset(-3)
         })
         //Date
+        dateLabel.sizeToFit()
         dateLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(hashTagsLabel.snp_bottom)
-            make.left.equalTo(emojiImageView.snp_right).offset(3)
+            make.left.equalTo(hashTagsLabel.snp_left)
         })
         //me or isPrivateLabel
         isPrivateLabel.snp_makeConstraints(closure: { make in
@@ -175,17 +183,21 @@ extension PostTableViewCell {
     func updateEmojiConstraints(){
         self.setNeedsLayout()
         if self.postLabel.text == "" {
+            emojiImageView.contentMode = .ScaleToFill
             self.emojiImageView.snp_remakeConstraints(closure: { make in
                 make.width.equalTo(self.snp_width).multipliedBy(0.5)
                 make.height.equalTo(self.snp_height)
-                make.left.equalTo(self.topView).offset(0)
-                make.top.equalTo(self.topView).offset(0)
+                make.left.equalTo(self.topView.snp_left)
+                make.top.equalTo(self.topView.snp_top)
             })
         }else{
+            emojiImageView.contentMode = .ScaleAspectFit //.Center
             emojiImageView.snp_remakeConstraints(closure: { make in
-                make.left.equalTo(self.topView).offset(5)
-                make.top.equalTo(self.topView).offset(5)
-                make.size.equalTo(CGSize(width: 28, height: 28))
+                make.left.equalTo(self.topView.snp_left).offset(5)
+                make.top.equalTo(self.topView.snp_top)//.offset(5)
+                make.height.equalTo(self.topView.snp_height)//.offset(-5)
+                make.width.equalTo(28)
+                //make.size.equalTo(CGSize(width: 28, height: 28))
             })
         }
         

@@ -23,6 +23,7 @@ protocol PostsTableVCDelegate {
     func canDeletePost() -> Bool
     func canShowOptionsButton() -> Bool
     func shouldSearchPrivatePosts() -> Bool
+    func canShowEmpathiseButton() -> Bool
 }
 extension PostsTableVCDelegate {
     func scrollBegan( scrollView:UIScrollView ){}
@@ -32,6 +33,7 @@ extension PostsTableVCDelegate {
     func canDeletePost() -> Bool { return false }
     func shouldSearchPrivatePosts() -> Bool{ return false }
     func canShowOptionsButton() -> Bool { return true }
+    func canShowEmpathiseButton() -> Bool { return true }
 }
 
 /**
@@ -41,8 +43,6 @@ extension PostsTableVCDelegate {
 class PostsTableViewController: UITableViewController {
     
     let CELL_IDENTIFIER = "WriteMynd And Chill Cell"
-    let backgroundView = UIView()
-    let backgroundImageView = UIImageView(image: UIImage(named: "sadManStood"))
     let infoLabel: Label = Label()
     var posts:[Post] = [] { didSet(_posts){ self.updateBackgroundView() } }
     var empathisedPosts: [EmpathisedPost] = [] {
@@ -67,9 +67,6 @@ class PostsTableViewController: UITableViewController {
         infoLabel.text = "There doesn't seem to be any posts here at the moment. Why not write how you feel?"
         infoLabel.textAlignment = .Center
         infoLabel.numberOfLines = 0
-        backgroundImageView.contentMode = .Center
-        backgroundView.addSubview(backgroundImageView)
-        backgroundView.addSubview(infoLabel)
     }
 
     override func didReceiveMemoryWarning() {
@@ -152,9 +149,7 @@ class PostsTableViewController: UITableViewController {
         cell.empathiseButton.tag = indexPath.section
         cell.empathiseButton.sizeToFit()
         cell.hashTagsLabel.setTitle(post.hashTags.reduce("", combine: { $0! + " " + $1 }), forState: .Normal)
-        cell.hashTagsLabel.setFontSize(15)
         cell.hashTagsLabel.addTarget(self, action: .hashTagsButtonTapped, forControlEvents: .TouchUpInside)
-        cell.dateLabel.font = cell.dateLabel.font.fontWithSize(13)
         cell.dateLabel.text = "\(post.createdAt!.monthName) " + post.createdAt!.toString(DateFormat.Custom("dd 'at' HH:mm"))!
         cell.empathiseButton.addTarget(self, action: .empathisePost, forControlEvents: .TouchUpInside)
         cell.readMoreButton.addTarget(self, action: .extendPostInCell, forControlEvents: .TouchUpInside)
@@ -210,20 +205,9 @@ extension PostsTableViewController {
         if self.posts.count > 0 {
             self.tableView.backgroundView?.hidden = true
         }else{
-            self.tableView.backgroundView = backgroundView
-            
-            backgroundView.snp_makeConstraints(closure: { make in
-                make.centerX.equalTo(self.view.snp_centerX)
-                make.centerY.equalTo(self.view.snp_centerY).offset(-100)
-            })
-            backgroundImageView.snp_makeConstraints(closure: { make in
-                make.center.equalTo(backgroundView.snp_center)
-            })
-            infoLabel.snp_makeConstraints(closure: { make in
-                make.top.equalTo(backgroundImageView.snp_bottom)
-                make.centerX.equalTo(backgroundView.snp_centerX)
-                make.width.equalTo(self.tableView.snp_width).offset(-25)
-            })
+            let imgV = UIImageView(image: UIImage(named: "manInTheMirror"))
+            imgV.contentMode = .Center
+            self.tableView.backgroundView = imgV
         }
     }
     
@@ -240,6 +224,8 @@ extension PostsTableViewController {
             }else{
                 cell.ellipsesButton.hidden = true
             }
+            
+            cell.empathiseButton.hidden = !delegate.canShowEmpathiseButton()
         }
     }
     

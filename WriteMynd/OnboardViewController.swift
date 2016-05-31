@@ -66,19 +66,19 @@ class OnboardViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.iconView.startAnimating()
+        //self.iconView.startAnimating()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         closeButton.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.view.snp_top).offset(20)
-            make.left.equalTo(self.view.snp_left).offset(15)
-            make.size.equalTo(CGSize(width: 12, height: 12))
+            make.top.equalTo(self.view.snp_top).offset(25)
+            make.left.equalTo(self.view.snp_left).offset(20)
+            make.size.equalTo(CGSize(width: 15, height: 15))
         })
         
         iconView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.closeButton.snp_bottom).offset(10)
+            make.top.equalTo(self.closeButton.snp_bottom).offset(20)
             //make.left.equalTo(self.view.snp_left).multipliedBy(0.4)
             make.centerX.equalTo(self.view.snp_centerX)
             //make.centerY.equalTo(100)

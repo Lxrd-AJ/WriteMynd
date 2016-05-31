@@ -23,6 +23,8 @@ target 'WriteMynd' do
     pod 'SZTextView'
     #pod 'Gifu'
     pod 'Pages'
+    pod 'Fabric'
+    pod 'Crashlytics'
     
     #pod 'PromiseKit', '~> 2.0'
     #pod 'DOFavoriteButton', '~> 0.0.4'

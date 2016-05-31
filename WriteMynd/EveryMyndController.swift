@@ -32,7 +32,7 @@ class EveryMyndController: ViewController {
     
     lazy var everyMyndLabel: Label = {
         let label:Label = Label()
-        label.text = "Everymynd"; label.sizeToFit();
+        label.text = "Feed"; label.sizeToFit();
         label.adjustsFontSizeToFitWidth = true
         label.font = label.font.fontWithSize(25.0)
         label.textColor = UIColor.wmCoolBlueColor()
@@ -42,7 +42,7 @@ class EveryMyndController: ViewController {
     lazy var empathiseButton: Button = {
         let button = Button()
         button.backgroundColor = UIColor.whiteColor()
-        button.setTitle("Empathised with", forState: .Normal)
+        button.setTitle("Saved posts", forState: .Normal)
         button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
         button.layer.cornerRadius = 14.0
         button.setImage(UIImage(named: "empathiseHeart"), forState: .Normal)

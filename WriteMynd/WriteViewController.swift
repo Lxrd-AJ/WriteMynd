@@ -308,7 +308,7 @@ extension WriteViewController {
                 //TRACK
                 Analytics.trackUserMade(self.post!)
                 //END TRACK
-                delay(3, closure: {
+                delay(2, closure: {
                     notificationView.removeFromSuperview()
                     self.navigationController?.popViewControllerAnimated(true)
                 })

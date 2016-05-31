@@ -183,15 +183,15 @@ extension SignupViewController {
      - parameter sender: button to begin onboarding
      */
     func beginOnBoarding( sender:Button ){
-        let firstPageAnimationImages = ["happyJumpingGuy1","happyJumpingGuy2","happyJumpingGuy3","happyJumpingGuy4","happyJumpingGuy5"]
+        let firstPageAnimationImages = ["happyJumpingGuy1","happyJumpingGuy2","happyJumpingGuy3","happyJumpingGuy2","happyJumpingGuy1"]
         let secondPageAnimationImages = ["photoGuy1","photoGuy2","photoGuy3","photoGuy4","photoGuy5"]
-        let thirdAnimationImages = ["manInTheMirror1","manInTheMirror2","manInTheMirror3","manInTheMirror4","manInTheMirror5"]
-        let lastAnimationImages = ["shareMan1","shareMan2","shareMan3","shareMan4","shareMan5","shareMan6","shareMan7","shareMan8","shareMan9"]
+        let thirdAnimationImages = ["reflectSlide1","reflectSlide2","reflectSlide3","reflectSlide2","reflectSlide1"]
+        let lastAnimationImages = ["shareSlide1","shareSlide2","shareSlide3","shareSlide4","shareSlide5","shareSlide6","shareSlide7","shareSlide8","shareSlide1"]
         
-        let firstPage = OnboardViewController(title: "", body: "To put it simply: Write Mynd is a place where you can anonymously record, reflect and share your honest thoughts and feelings for a clearer mind.", animationImageNames: firstPageAnimationImages, imageName: "happyJumpingGuy",backgroundColor: UIColor.wmSoftBlueColor()) //happyJumpingGuy
+        let firstPage = OnboardViewController(title: "", body: "To put it simply: Write Mynd is a place where you can anonymously record, reflect and share your honest thoughts and feelings for a clearer mind.", animationImageNames: firstPageAnimationImages, imageName: "happyJumpingGuy1",backgroundColor: UIColor.wmSoftBlueColor()) //happyJumpingGuy
         let secondPage = OnboardViewController(title: "Record", body: "Get things off your chest. With Write Mynd, you can easily express how you feel by simply swiping or writing.", animationImageNames: secondPageAnimationImages, imageName: "photoGuy", backgroundColor: UIColor.wmSlateGreyColor())
-        let thirdPage = OnboardViewController(title: "Reflect", body: "Check in on your emotions. Write Mynd helps you spot thought patterns and uncover what makes you feel the way you do.", animationImageNames: thirdAnimationImages, imageName: "manInTheMirror", backgroundColor: UIColor.wmGreenishTealTwoColor())
-        let lastPage = OnboardViewController(title: "Share", body: "See that you’re not alone. Write Mynd lets you see how other people are feeling as well as anonymously share your own thoughts.", animationImageNames: lastAnimationImages, imageName:"shareMan", backgroundColor: UIColor.wmLightGoldColor())
+        let thirdPage = OnboardViewController(title: "Reflect", body: "Check in on your emotions. Write Mynd helps you spot thought patterns and uncover what makes you feel the way you do.", animationImageNames: thirdAnimationImages, imageName: "reflectSlide1", backgroundColor: UIColor.wmGreenishTealTwoColor())
+        let lastPage = OnboardViewController(title: "Share", body: "See that you’re not alone. Write Mynd lets you see how other people are feeling as well as anonymously share your own thoughts.", animationImageNames: lastAnimationImages, imageName:"shareSlide1", backgroundColor: UIColor.wmLightGoldColor())
         
         let pages = [firstPage,secondPage,thirdPage,lastPage]
         let onboardingVC = PagesController(pages)
@@ -199,7 +199,7 @@ extension SignupViewController {
         onboardingVC.view.backgroundColor = UIColor.wmSilverColor()
         
         self.presentViewController(onboardingVC, animated: true, completion: {
-            firstPage.iconView.startAnimating()
+            //firstPage.iconView.startAnimating()
         })
 
     }

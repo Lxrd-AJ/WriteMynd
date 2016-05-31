@@ -3,7 +3,10 @@ PODS:
   - Charts (2.2.4):
     - Charts/Core (= 2.2.4)
   - Charts/Core (2.2.4)
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
   - DGElasticPullToRefresh (1.0.3)
+  - Fabric (1.6.7)
   - JTImageButton (1.0.2)
   - JTSActionSheet (1.0.1)
   - Mixpanel (2.9.9):
@@ -44,7 +47,9 @@ PODS:
 
 DEPENDENCIES:
   - Charts
+  - Crashlytics
   - DGElasticPullToRefresh
+  - Fabric
   - JTImageButton
   - JTSActionSheet (~> 1.0.1)
   - Mixpanel
@@ -63,7 +68,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Charts: a9e735c83c6d376ade20f6612dcf0ba217394a49
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   DGElasticPullToRefresh: 040f39ae69840b3261d163fe6735c5901bf851e9
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   JTImageButton: d214ff9ee6e01865368a9f749c5a16e6abbf6409
   JTSActionSheet: d7e5350ce63b5ff23ced9db653ed1c768358124e
   Mixpanel: 818d1940c2d9402453b349545022a86968097f57
@@ -80,6 +87,6 @@ SPEC CHECKSUMS:
   SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
   ZendeskSDK: b08a24cdf036a61dc8c680c389b208be4d6dc5ae
 
-PODFILE CHECKSUM: c6e581e0d0415b12268f746468a38abcffc645cb
+PODFILE CHECKSUM: 038d04fe3d3cdc53a3f3dc9322cb8924d3a4d3f4
 
 COCOAPODS: 1.0.0
