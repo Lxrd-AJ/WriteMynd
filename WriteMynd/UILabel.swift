@@ -68,21 +68,6 @@ class Label: UILabel {
 }
 
 
-class Button: UIButton {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 15.0)!
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setFontSize( size:CGFloat ){
-        self.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: size)!
-    }
-}
 
 
 

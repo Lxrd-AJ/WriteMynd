@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-//import DOFavoriteButton
 
 /**
  - todo:
@@ -147,8 +146,8 @@ class PostTableViewCell: UITableViewCell {
             emojiImageView.contentMode = .ScaleAspectFit //.Center
             emojiImageView.snp_remakeConstraints(closure: { make in
                 make.left.equalTo(self.topView.snp_left).offset(5)
-                make.top.equalTo(self.topView.snp_top)//.offset(5)
-                make.height.equalTo(self.topView.snp_height)//.offset(-5)
+                make.top.equalTo(self.topView.snp_top).offset(5)
+                make.height.equalTo(28)//self.topView.snp_height//.offset(-5)
                 make.width.equalTo(28)
                 //make.size.equalTo(CGSize(width: 28, height: 28))
             })
@@ -165,6 +164,7 @@ class PostTableViewCell: UITableViewCell {
         dateLabel.snp_makeConstraints(closure: { make in
             make.top.equalTo(hashTagsLabel.snp_bottom)
             make.left.equalTo(hashTagsLabel.snp_left)
+            //make.bottom.equalTo(
         })
         //me or isPrivateLabel
         isPrivateLabel.snp_makeConstraints(closure: { make in

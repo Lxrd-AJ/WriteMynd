@@ -14,17 +14,24 @@ import SwiftDate
 import Fabric
 import Crashlytics
 
+let serverURL = "http://178.62.103.146:8000" //http://178.62.103.146:8000/parse
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var drawerController: MMDrawerController = MMDrawerController()
+    let parseConfiguration = ParseClientConfiguration {
+        $0.applicationId = "rJrwXVeierGtuubX09tjfFY8lNA/dcuniTH0EdHbAhE="
+        $0.server = serverURL + "/parse"
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //Parse configurations
         Parse.enableLocalDatastore()
-        Parse.setApplicationId("psbQTCZJnowKHs9FT534pLsRKOtgxQvkNTmYctOD",clientKey: "JZVNrhm8472sSy8tuXNibdzOI7Xx1k3OJnVoIAXt")
+        Parse.initializeWithConfiguration(parseConfiguration)
+        //Parse.setApplicationId("psbQTCZJnowKHs9FT534pLsRKOtgxQvkNTmYctOD",clientKey: "JZVNrhm8472sSy8tuXNibdzOI7Xx1k3OJnVoIAXt")
         
         //Mixpanel Config
         Analytics.setup()

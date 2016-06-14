@@ -20,11 +20,13 @@ class Post {
     var createdAt: NSDate?
     var updatedAt: NSDate?
     var isEmpathised: Bool //Used locally to determine if the current user has empathised the post
+    var reportCount: Int
     
     init( emoji:Emoji, text:String, hashTags:[String] , author:PFUser ){
         self.emoji = emoji;
         self.isEmpathised = false
         self.text = text; self.hashTags = hashTags; self.author = author
+        self.reportCount = 0
     }
     
     /**
@@ -45,6 +47,7 @@ class Post {
         postData["hashTags"] = self.hashTags
         postData["private"] = self.isPrivate
         postData["parent"] = author
+        postData["reportCount"] = self.reportCount
         
         postData.saveInBackground()
     }
@@ -72,6 +75,9 @@ class Post {
         post.createdAt = postObj.createdAt
         post.updatedAt = postObj.updatedAt
         post.ID = postObj.objectId
+        if let count = postObj["reportCount"] as? Int {
+            post.reportCount = count;
+        }
         return post
     }
 }

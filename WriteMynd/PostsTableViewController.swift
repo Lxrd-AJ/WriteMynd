@@ -225,7 +225,7 @@ extension PostsTableViewController {
                 cell.ellipsesButton.hidden = true
             }
             
-            cell.empathiseButton.hidden = !delegate.canShowEmpathiseButton()
+            //cell.empathiseButton.hidden = !delegate.canShowEmpathiseButton()
         }
     }
     
@@ -253,9 +253,7 @@ extension PostsTableViewController {
         let alertController = UIAlertController(title: "Post Actions", message: "Choose an action to perform on the post", preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: { cancelAction in })
         let hidePost = UIAlertAction(title: "Hide Post", style: .Default, handler: { hideAction in
-            let postToHide = HiddenPost(postID: post.ID!, user: PFUser.currentUser()!)
-            self.posts.removeAtIndex(index)
-            postToHide.save()
+            self.hidePost(post, atIndex: index)
             Analytics.trackUserHid(post)
             self.tableView.reloadData()
         })
@@ -267,11 +265,21 @@ extension PostsTableViewController {
             post.delete()
             self.tableView.reloadData()
         })
+        let flagAction = UIAlertAction(title: "Report post", style: .Destructive, handler: { flagAction in
+            self.hidePost(post, atIndex: index)
+            let reportedPost = ReportedPost(postID: post.ID!, reporter: PFUser.currentUser()!)
+            post.reportCount += 1;
+            post.save()
+            reportedPost.save()
+            self.tableView.reloadData()
+            self.showAlert("Thanks for flagging this post as offensive. We have removed the post and will investigate this further", withTitle: "Noted!")
+        })
         
         if post.author.objectId == PFUser.currentUser()?.objectId {
             alertController.addAction(editPostAction)
         }else{
             alertController.addAction(hidePost)
+            alertController.addAction(flagAction)
         }
         
         if let _delegate = self.delegate where _delegate.canDeletePost() && (post.author.objectId == PFUser.currentUser()?.objectId){
@@ -325,6 +333,18 @@ extension PostsTableViewController {
             
             Analytics.trackUserEmpathisesWith(post)
         }
+    }
+    
+    func hidePost( post:Post , atIndex:Int ){
+        let postToHide = HiddenPost(postID: post.ID!, user: PFUser.currentUser()!)
+        self.posts.removeAtIndex(atIndex)
+        postToHide.save()
+    }
+    
+    func showAlert( message:String, withTitle:String ){
+        let alertController = UIAlertController(title: withTitle, message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
 

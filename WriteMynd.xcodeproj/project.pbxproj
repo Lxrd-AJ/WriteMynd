@@ -17,13 +17,15 @@
 		213016721C9D524500A4598D /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213016711C9D524500A4598D /* WriteViewController.swift */; };
 		213016761C9D74EE00A4598D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 213016741C9D745000A4598D /* Montserrat-Bold.ttf */; };
 		213016771C9D74F100A4598D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 213016751C9D745A00A4598D /* Montserrat-Regular.ttf */; };
-		213016791C9D780F00A4598D /* UILabel+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213016781C9D780F00A4598D /* UILabel+UIButton.swift */; };
+		213016791C9D780F00A4598D /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213016781C9D780F00A4598D /* UILabel.swift */; };
 		2130167B1C9DACEC00A4598D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2130167A1C9DACEC00A4598D /* Emoji.swift */; };
 		2130167D1C9DFA2800A4598D /* EmpathisedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2130167C1C9DFA2800A4598D /* EmpathisedPost.swift */; };
 		2132E96C1CCC66EC0049E95F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132E96B1CCC66EC0049E95F /* SignupViewController.swift */; };
 		2132E96E1CCDE8170049E95F /* SignupLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132E96D1CCDE8170049E95F /* SignupLoginViewController.swift */; };
 		2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0751C1A3B2A00BE26FD /* ParseService.swift */; };
 		2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */; };
+		214341151D0E7359002C3F66 /* Endurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214341141D0E7359002C3F66 /* Endurance.swift */; };
+		214341171D0F260B002C3F66 /* notes.md in Sources */ = {isa = PBXBuildFile; fileRef = 214341161D0F260B002C3F66 /* notes.md */; };
 		21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA41CA2E9B0005F117F /* FeelingsView.swift */; };
 		21623EA81CA3C761005F117F /* MyMyndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA71CA3C761005F117F /* MyMyndViewController.swift */; };
 		21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA91CA76AAD005F117F /* HiddenPost.swift */; };
@@ -52,6 +54,7 @@
 		217903F31CD4F46F00ECCDEA /* thinking3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903F21CD4F46F00ECCDEA /* thinking3.txt */; };
 		217903F51CD4F4A200ECCDEA /* thinking4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903F41CD4F4A200ECCDEA /* thinking4.txt */; };
 		217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BDB1C8A25290085D71B /* SwipeViewController.swift */; };
+		2180D2601D05575600EC6956 /* ReportedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2180D25F1D05575600EC6956 /* ReportedPost.swift */; };
 		219F4F581C9AFBFD00B9AB34 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */; };
 		21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC1B1C14D9B600F629FF /* Post.swift */; };
 		21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1341C2949A90047306D /* MenuViewController.swift */; };
@@ -66,6 +69,7 @@
 		21C387871CF43B1A00B22F08 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C387861CF43B1A00B22F08 /* OnboardViewController.swift */; };
 		21D467C71CB24C4D00412C3C /* HashTagsPieCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D467C61CB24C4D00412C3C /* HashTagsPieCharts.swift */; };
 		21D467C91CB346D300412C3C /* EmojiPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D467C81CB346D300412C3C /* EmojiPieChart.swift */; };
+		21DEB4E21D009A650094AC95 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEB4E11D009A650094AC95 /* UIButton.swift */; };
 		21E120CA1C9BB43B00DB1C8D /* PostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */; };
 		21F6193A1C9952CB0089542F /* KolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F619391C9952CB0089542F /* KolodaView.swift */; };
 		21F6193C1C9A0B5F0089542F /* DraggableCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F6193B1C9A0B5F0089542F /* DraggableCardView.swift */; };
@@ -84,13 +88,15 @@
 		213016711C9D524500A4598D /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		213016741C9D745000A4598D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Assets.xcassets/Montserrat-Bold.dataset/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		213016751C9D745A00A4598D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Assets.xcassets/Montserrat-Regular.dataset/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
-		213016781C9D780F00A4598D /* UILabel+UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+UIButton.swift"; sourceTree = "<group>"; };
+		213016781C9D780F00A4598D /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		2130167A1C9DACEC00A4598D /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		2130167C1C9DFA2800A4598D /* EmpathisedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpathisedPost.swift; sourceTree = "<group>"; };
 		2132E96B1CCC66EC0049E95F /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		2132E96D1CCDE8170049E95F /* SignupLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupLoginViewController.swift; sourceTree = "<group>"; };
 		2136F0751C1A3B2A00BE26FD /* ParseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseService.swift; sourceTree = "<group>"; };
 		2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		214341141D0E7359002C3F66 /* Endurance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endurance.swift; sourceTree = "<group>"; };
+		214341161D0F260B002C3F66 /* notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = notes.md; sourceTree = "<group>"; };
 		21623EA41CA2E9B0005F117F /* FeelingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingsView.swift; sourceTree = "<group>"; };
 		21623EA71CA3C761005F117F /* MyMyndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMyndViewController.swift; sourceTree = "<group>"; };
 		21623EA91CA76AAD005F117F /* HiddenPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenPost.swift; sourceTree = "<group>"; };
@@ -121,6 +127,7 @@
 		217903F21CD4F46F00ECCDEA /* thinking3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking3.txt; sourceTree = "<group>"; };
 		217903F41CD4F4A200ECCDEA /* thinking4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking4.txt; sourceTree = "<group>"; };
 		217F3BDB1C8A25290085D71B /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
+		2180D25F1D05575600EC6956 /* ReportedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportedPost.swift; sourceTree = "<group>"; };
 		219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeDirection.swift; sourceTree = "<group>"; };
 		21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WriteMynd-Bridging-Header.h"; sourceTree = "<group>"; };
 		21B8CC1B1C14D9B600F629FF /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -136,6 +143,7 @@
 		21C387861CF43B1A00B22F08 /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
 		21D467C61CB24C4D00412C3C /* HashTagsPieCharts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagsPieCharts.swift; sourceTree = "<group>"; };
 		21D467C81CB346D300412C3C /* EmojiPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiPieChart.swift; sourceTree = "<group>"; };
+		21DEB4E11D009A650094AC95 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		21E120C91C9BB43B00DB1C8D /* PostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTableViewController.swift; sourceTree = "<group>"; };
 		21F619391C9952CB0089542F /* KolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KolodaView.swift; sourceTree = "<group>"; };
 		21F6193B1C9A0B5F0089542F /* DraggableCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCardView.swift; sourceTree = "<group>"; };
@@ -214,6 +222,7 @@
 				21FA7FA51C61C49400D0836F /* Swipe.swift */,
 				2130167C1C9DFA2800A4598D /* EmpathisedPost.swift */,
 				21623EA91CA76AAD005F117F /* HiddenPost.swift */,
+				2180D25F1D05575600EC6956 /* ReportedPost.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -249,6 +258,7 @@
 		2172FBEB1C11B65E003446AC /* WriteMynd */ = {
 			isa = PBXGroup;
 			children = (
+				214341161D0F260B002C3F66 /* notes.md */,
 				213016731C9D743900A4598D /* Resources */,
 				2172FBEC1C11B65E003446AC /* AppDelegate.swift */,
 				2172FBF01C11B65E003446AC /* Main.storyboard */,
@@ -257,6 +267,7 @@
 				21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */,
 				21C387781CEF147100B22F08 /* Analytics.swift */,
 				2136F0751C1A3B2A00BE26FD /* ParseService.swift */,
+				214341141D0E7359002C3F66 /* Endurance.swift */,
 				2172FC071C11E073003446AC /* Utilities.swift */,
 				211B5FE41CF90F8800E7D240 /* Notifications.swift */,
 				2172FBF31C11B65E003446AC /* Assets.xcassets */,
@@ -350,9 +361,10 @@
 				217138B31CAA6A39008CC4D1 /* FloatLabelTextField.swift */,
 				21F619381C9952B70089542F /* Koloda */,
 				2172FC101C1258B7003446AC /* GenericExtensions.swift */,
-				213016781C9D780F00A4598D /* UILabel+UIButton.swift */,
+				213016781C9D780F00A4598D /* UILabel.swift */,
 				217903E21CD2172A00ECCDEA /* UIImage.swift */,
 				217903E81CD390BF00ECCDEA /* UIColor.swift */,
+				21DEB4E11D009A650094AC95 /* UIButton.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -402,13 +414,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2172FBFB1C11B65E003446AC /* Build configuration list for PBXNativeTarget "WriteMynd" */;
 			buildPhases = (
-				21AB368D1CFE0AE000490E17 /* ShellScript */,
 				EA5AAC53AC47BA4834997D2A /* 📦 Check Pods Manifest.lock */,
 				2172FBE51C11B65E003446AC /* Sources */,
 				2172FBE61C11B65E003446AC /* Frameworks */,
 				2172FBE71C11B65E003446AC /* Resources */,
 				F3F59AF7B4A37B6AE4333E98 /* 📦 Embed Pods Frameworks */,
 				54E50041EB9ACC2C03EECDD8 /* 📦 Copy Pods Resources */,
+				21AB368D1CFE0AE000490E17 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -548,7 +560,7 @@
 				213016721C9D524500A4598D /* WriteViewController.swift in Sources */,
 				21D467C91CB346D300412C3C /* EmojiPieChart.swift in Sources */,
 				2132E96C1CCC66EC0049E95F /* SignupViewController.swift in Sources */,
-				213016791C9D780F00A4598D /* UILabel+UIButton.swift in Sources */,
+				213016791C9D780F00A4598D /* UILabel.swift in Sources */,
 				217903EB1CD4331A00ECCDEA /* ThinkingViewController.swift in Sources */,
 				2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */,
 				21F6193C1C9A0B5F0089542F /* DraggableCardView.swift in Sources */,
@@ -560,6 +572,7 @@
 				21C0A1371C2A129A0047306D /* MenuViewCell.swift in Sources */,
 				21F6193E1C9A11190089542F /* OverlayView.swift in Sources */,
 				2117E9681CA097E20008A1E3 /* HashTagView.swift in Sources */,
+				21DEB4E21D009A650094AC95 /* UIButton.swift in Sources */,
 				2172FC111C1258B7003446AC /* GenericExtensions.swift in Sources */,
 				216BDFD41CED790600D8F115 /* TextViewController.swift in Sources */,
 				2172FC021C11CD3A003446AC /* EveryMyndController.swift in Sources */,
@@ -570,7 +583,9 @@
 				21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */,
 				21C387871CF43B1A00B22F08 /* OnboardViewController.swift in Sources */,
 				217138B61CAAE189008CC4D1 /* SearchViewController.swift in Sources */,
+				2180D2601D05575600EC6956 /* ReportedPost.swift in Sources */,
 				21FA7FA61C61C49400D0836F /* Swipe.swift in Sources */,
+				214341151D0E7359002C3F66 /* Endurance.swift in Sources */,
 				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,
 				217903ED1CD43CA400ECCDEA /* ThinkingPage.swift in Sources */,
 				211B5FE31CF8BBF200E7D240 /* DetailTableViewCell.swift in Sources */,
@@ -592,6 +607,7 @@
 				21D467C71CB24C4D00412C3C /* HashTagsPieCharts.swift in Sources */,
 				21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */,
 				2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */,
+				214341171D0F260B002C3F66 /* notes.md in Sources */,
 				2130167D1C9DFA2800A4598D /* EmpathisedPost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

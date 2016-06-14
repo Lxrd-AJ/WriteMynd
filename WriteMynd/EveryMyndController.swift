@@ -53,11 +53,8 @@ class EveryMyndController: ViewController {
     }()
     
     lazy var createPostButton: Button = {
-        let button: Button = Button()
+        let button: Button = Button.buttonWithImage("Create a post", imageName: "plusIcon", fontSize:16)
         button.backgroundColor = UIColor.wmGreenishTealColor()
-        button.setTitle("Create a post", forState: .Normal)
-        //button.setImage(UIImage(named: "group")!, forState: .Normal)
-        button.setFontSize(16)
         button.addTarget(self, action: .showPostingSheet, forControlEvents: .TouchUpInside)
         button.alpha = 0.8
         return button;

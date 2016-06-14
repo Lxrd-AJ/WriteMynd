@@ -223,6 +223,7 @@ extension MyPostsViewController: PostsTableVCDelegate {
     func shouldSearchPrivatePosts() -> Bool{ return true }
     func canDeletePost() -> Bool { return true }
     func shouldShowMeLabelOnCell() -> Bool { return false }
+    func canShowEmpathiseButton() -> Bool { return false }
     
     /**
      Editing a Post

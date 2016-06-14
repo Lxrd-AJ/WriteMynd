@@ -91,13 +91,13 @@ class LegalViewController: UIViewController {
             make.right.equalTo(headerView.snp_right).offset(-5)
             make.bottom.equalTo(headerView.snp_bottom).offset(-5)
         })
-        
         textView.snp_makeConstraints(closure: { make in
             make.top.equalTo(headerView.snp_bottom)
             make.width.equalTo(self.view.snp_width).offset(-10)
             make.centerX.equalTo(self.scrollView.snp_centerX)
             make.bottom.equalTo(scrollView.snp_bottom)
         })
+        
     }
     
 

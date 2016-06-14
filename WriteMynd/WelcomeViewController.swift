@@ -68,11 +68,17 @@ class WelcomeViewController: UIViewController {
             if let email = PFUser.currentUser()?.email {
                 self.logUser(email)
             }
-
-            let launchCont = MyPostsViewController()
-            //launchCont.shouldShowPostingSheet = true
-            self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
-            self.mm_drawerController.centerViewController = UINavigationController(rootViewController: launchCont)
+            
+            Endurance.checkIfUserBlocked(PFUser.currentUser()!.objectId!).then({ blocked in
+                if blocked {
+                    Endurance.showBlockedUserPage(self)
+                    PFUser.logOut()
+                }else{
+                    let launchCont = MyPostsViewController()
+                    self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+                    self.mm_drawerController.centerViewController = UINavigationController(rootViewController: launchCont)
+                }
+            })
         }
         
         self.view.addSubview(iconImageView)

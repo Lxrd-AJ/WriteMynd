@@ -25,6 +25,9 @@ target 'WriteMynd' do
     pod 'Pages'
     pod 'Fabric'
     pod 'Crashlytics'
+    pod 'Alamofire'
+    pod 'PromiseKit'
+    pod 'SwiftyJSON'
     
     #pod 'PromiseKit', '~> 2.0'
     #pod 'DOFavoriteButton', '~> 0.0.4'

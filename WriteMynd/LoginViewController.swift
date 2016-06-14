@@ -105,9 +105,16 @@ class LoginViewController: SignupLoginViewController {
         PFUser.logInWithUsernameInBackground(self.emailTextField.text!, password: self.passwordTextField.text!, block: { (user:PFUser?,error:NSError?) in
             if user != nil {
                 print("Log In successful")
-                SwiftSpinner.hide()
-                self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
-                self.mm_drawerController.centerViewController = UINavigationController(rootViewController: MyPostsViewController())
+                Endurance.checkIfUserBlocked(user!.objectId!).then({ blocked in
+                    SwiftSpinner.hide()
+                    if blocked { 
+                        Endurance.showBlockedUserPage(self)
+                        PFUser.logOut()
+                    }else{
+                        self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+                        self.mm_drawerController.centerViewController = UINavigationController(rootViewController: MyPostsViewController())
+                    }
+                })
             }else{
                 print(error)
                 var message = error!.userInfo["error"] as! String

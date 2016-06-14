@@ -31,7 +31,15 @@ class OnboardViewController: UIViewController {
         button.addTarget(self, action: .close, forControlEvents: .TouchUpInside)
         return button;
     }()
+    lazy var bottomButton: UIButton = {
+        let button = Button(type: .Custom)
+        button.addTarget(self, action: .bottomButton, forControlEvents: .TouchUpInside)
+        button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
+        button.hidden = true;
+        return button;
+    }()
     var buttonAction:(() -> Void)?
+    var bottomButtonAction: (() -> Void)?
 
     init( title:String, body:String, animationImageNames:[String], imageName:String, backgroundColor: UIColor ){
         self.iconView = UIImageView(image: UIImage(named: imageName))
@@ -55,6 +63,7 @@ class OnboardViewController: UIViewController {
         self.view.addSubview(iconView)
         self.view.addSubview(pageTitle)
         self.view.addSubview(body)
+        self.view.addSubview(bottomButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,12 +106,19 @@ class OnboardViewController: UIViewController {
             make.centerX.equalTo(self.view.snp_centerX)
             make.width.equalTo(self.view.snp_width).offset(-10)
         })
+        
+        bottomButton.snp_makeConstraints(closure: { make in
+            make.bottom.equalTo(self.view.snp_bottom).offset(-10)
+            make.centerX.equalTo(self.view.snp_centerX)
+        })
     }
     
     func closeButtonTapped( sender: UIButton ){ buttonAction?() }
+    func bottonButtonTapped( sender:UIButton){ bottomButtonAction?() }
 
 }
 
 private extension Selector{
     static let close = #selector(OnboardViewController.closeButtonTapped(_:))
+    static let bottomButton = #selector(OnboardViewController.bottonButtonTapped(_:))
 }
