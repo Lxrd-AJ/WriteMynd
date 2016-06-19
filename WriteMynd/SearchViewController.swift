@@ -18,6 +18,7 @@ class SearchViewController: UIViewController {
     let postsController = PostsTableViewController()
     var searchParameters: [String] = []
     var shouldSearchPrivatePosts: Bool = false
+    var empathisedPosts: [EmpathisedPost] = []
     
     lazy var searchTextField: FloatLabelTextField = {
         let field = FloatLabelTextField()
@@ -67,6 +68,7 @@ class SearchViewController: UIViewController {
         })
         postsController.tableView.backgroundView = UIImageView(image: UIImage(named: "manInTheMirror"))
         postsController.tableView.backgroundView?.contentMode = .Center
+        postsController.empathisedPosts = self.empathisedPosts
         
         if searchParameters.count > 0 {
             searchTextField.text = searchDisplayText(searchParameters)
@@ -111,20 +113,22 @@ extension SearchViewController {
         Analytics.trackSearchFor(searchText)
         if shouldSearchPrivatePosts {
             ParseService.getPostsWith([searchText], callback: { posts in
-                print(posts)
                 self.postsController.posts = posts
                 self.postsController.tableView.reloadData()
                 if posts.count > 0 {
                     self.toggleBackground(true)
+                    self.postsController.empathisedPosts = self.empathisedPosts
+                    self.postsController.tableView.reloadData()
                 }else{ self.toggleBackground(false) }
                 }, forUser: PFUser.currentUser()!)
         }else{
             ParseService.getPostsWith([searchText], callback: { posts in
-                print(posts)
                 self.postsController.posts = posts
                 self.postsController.tableView.reloadData()
                 if posts.count > 0 {
                     self.toggleBackground(true)
+                    self.postsController.empathisedPosts = self.empathisedPosts
+                    self.postsController.tableView.reloadData()
                 }else{ self.toggleBackground(false) }
                 }, forUser: nil)
         }

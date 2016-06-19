@@ -43,5 +43,23 @@ class Endurance {
         }
         onController.presentViewController(page, animated: true, completion: nil)
     }
+    
+    class func showEndUserLicensePage( reciever:UIViewController, onAgreeAction:(() -> Void) ){
+        let licensePage = LicensePageViewController(title: "End User Licence Agreement", body: "Please review and agree to our End User Licence Agreement before using the app", animationImageNames: [], imageName: "noEmotion", backgroundColor: UIColor.wmSilverTwoColor())
+        licensePage.bottomButtonAction = {
+            let legalVC = LegalViewController()
+            licensePage.navigationController?.pushViewController(legalVC, animated: true)
+            legalVC.navigationController?.navigationBarHidden = false
+        }
+        licensePage.onDeclineAction = {
+            licensePage.navigationController?.popViewControllerAnimated(true)
+        }
+        licensePage.onAgreeAction = {
+            licensePage.navigationController?.popViewControllerAnimated(true)
+            onAgreeAction()
+        }
+        reciever.navigationController?.pushViewController(licensePage, animated: true)
+        
+    }
 
 }

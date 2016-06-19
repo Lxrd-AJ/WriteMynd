@@ -24,6 +24,7 @@ protocol PostsTableVCDelegate {
     func canShowOptionsButton() -> Bool
     func shouldSearchPrivatePosts() -> Bool
     func canShowEmpathiseButton() -> Bool
+    func postsDataNeedsRefreshing()
 }
 extension PostsTableVCDelegate {
     func scrollBegan( scrollView:UIScrollView ){}
@@ -34,6 +35,7 @@ extension PostsTableVCDelegate {
     func shouldSearchPrivatePosts() -> Bool{ return false }
     func canShowOptionsButton() -> Bool { return true }
     func canShowEmpathiseButton() -> Bool { return true }
+    func postsDataNeedsRefreshing(){}
 }
 
 /**
@@ -234,6 +236,7 @@ extension PostsTableViewController {
         searchController.searchParameters = sender.titleLabel!.text!.componentsSeparatedByString("#")
             .filter({ $0 != " " })//Extra Space added by us in `reduce`
             .map({ "#\($0)" })
+        searchController.empathisedPosts = self.empathisedPosts
         if let delegate = self.delegate {
             searchController.shouldSearchPrivatePosts = delegate.shouldSearchPrivatePosts()
             if delegate.shouldShowSearchController() {
@@ -274,12 +277,23 @@ extension PostsTableViewController {
             self.tableView.reloadData()
             self.showAlert("Thanks for flagging this post as offensive. We have removed the post and will investigate this further", withTitle: "Noted!")
         })
+        let blockUserAction = UIAlertAction(title: "Block User", style: .Destructive, handler: { blockAction in
+            let authorToBlock = post.author
+            let hiddenUser = HiddenUser(blockedUser: authorToBlock, user: PFUser.currentUser()!)
+            hiddenUser.save()
+            self.posts.removeAtIndex(index)
+            self.tableView.reloadData()
+            self.showAlert("User has been blocked from you! You will no longer see posts from this user in your feed!", withTitle: "Noted!", completionHandler: { action in
+                self.delegate?.postsDataNeedsRefreshing()
+            })
+        })
         
         if post.author.objectId == PFUser.currentUser()?.objectId {
             alertController.addAction(editPostAction)
         }else{
             alertController.addAction(hidePost)
             alertController.addAction(flagAction)
+            alertController.addAction(blockUserAction)
         }
         
         if let _delegate = self.delegate where _delegate.canDeletePost() && (post.author.objectId == PFUser.currentUser()?.objectId){
@@ -341,9 +355,9 @@ extension PostsTableViewController {
         postToHide.save()
     }
     
-    func showAlert( message:String, withTitle:String ){
+    func showAlert( message:String, withTitle:String, completionHandler:((UIAlertAction) -> Void)? = nil){
         let alertController = UIAlertController(title: withTitle, message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: completionHandler))
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 }

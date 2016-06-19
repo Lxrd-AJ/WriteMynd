@@ -29,7 +29,6 @@ class EveryMyndController: ViewController {
             return post.isEmpathised
         })
     }
-    
     lazy var everyMyndLabel: Label = {
         let label:Label = Label()
         label.text = "Feed"; label.sizeToFit();
@@ -38,7 +37,6 @@ class EveryMyndController: ViewController {
         label.textColor = UIColor.wmCoolBlueColor()
         return label
     }()
-    
     lazy var empathiseButton: Button = {
         let button = Button()
         button.backgroundColor = UIColor.whiteColor()
@@ -51,7 +49,6 @@ class EveryMyndController: ViewController {
         button.setFontSize(14.0)
         return button
     }()
-    
     lazy var createPostButton: Button = {
         let button: Button = Button.buttonWithImage("Create a post", imageName: "plusIcon", fontSize:16)
         button.backgroundColor = UIColor.wmGreenishTealColor()
@@ -59,18 +56,6 @@ class EveryMyndController: ViewController {
         button.alpha = 0.8
         return button;
     }()
-//    lazy var createPostButton: JTImageButton = {
-//        let button: JTImageButton = JTImageButton(type: .Custom)
-//        button.createTitle("Create a post", withIcon: UIImage(named: "Pencil")!, font: Label.font(), iconOffsetY: JTImageButtonIconOffsetYNone)
-//        //button.backgroundColor = UIColor.wmGreenishTealColor()
-//        button.bgColor = UIColor.wmGreenishTealColor()
-//        button.titleColor = .whiteColor()
-//        button.padding = JTImageButtonPaddingMedium
-//        button.iconSide = JTImageButtonIconSideRight
-//        button.addTarget(self, action: .showPostingSheet, forControlEvents: .TouchUpInside)
-//        return button
-//    }()
-    
     lazy var bottomView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteColor()
@@ -280,6 +265,8 @@ extension EveryMyndController: PostsTableVCDelegate {
         }
         self.lastContentOffSet = scrollView.contentOffset.y
     }
+    
+    func postsDataNeedsRefreshing(){ self.fetchPosts() }
     
 }
 

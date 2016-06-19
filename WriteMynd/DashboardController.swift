@@ -322,11 +322,16 @@ extension DashboardController {
             count = Int((Float(hashTagMap[tag]!) / Float(total)) * Float(100))
         }
         
-        //print(tag)
-        //print(count)
+        print(tag)
+        print(count)
         
         let leastTags = ["Others", tag]
-        let leastTagsData = [ Double(total - count), Double(count)]
+        let leastTagsData = [ Double(100 - count), Double(count)] //Double(total - count)
+        
+//        print("\n\(leastTags)")
+//        print("\(leastTagsData)")
+//        print("Total: \(total)")
+//        print("\(hashTagMap.values)")
         
         hashtagsPieCharts.renderChart(hashtagsPieCharts.minHashtagsPie, dataPoints: leastTags, values: leastTagsData, centerValue: count, tag: tag)
     }

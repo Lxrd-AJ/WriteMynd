@@ -14,7 +14,7 @@ class LegalViewController: UIViewController {
         let label: Label = Label()
         label.setFontSize(20)
         label.textColor = .whiteColor()
-        label.text = "Privacy Policy";
+        label.text = "Legals";
         return label;
     }()
     
@@ -54,14 +54,30 @@ class LegalViewController: UIViewController {
         headerView.addSubview(titleLabel)
         headerView.addSubview(mascot)
         
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+//            let path = NSBundle.mainBundle().pathForResource("legal", ofType: "txt")
+//            do {
+//                let contents = try String(contentsOfFile: path!)
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    self.textView.text = contents
+//                    print("\(contents.characters.count) words")
+//                    print(contents)
+//                }
+//            }catch{
+//                print(error)
+//            }
+//        })
+        
         let path = NSBundle.mainBundle().pathForResource("legal", ofType: "txt")
         do {
             let contents = try String(contentsOfFile: path!)
             self.textView.text = contents
             print("\(contents.characters.count) words")
+            print(contents)
         }catch{
             print(error)
         }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,7 +113,7 @@ class LegalViewController: UIViewController {
             make.centerX.equalTo(self.scrollView.snp_centerX)
             make.bottom.equalTo(scrollView.snp_bottom)
         })
-        
+        print(textView.frame)
     }
     
 

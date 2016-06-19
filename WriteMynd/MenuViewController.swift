@@ -85,7 +85,7 @@ class MenuViewController: UITableViewController {
         case "The Thinking":
             controller = ThinkingViewController()
         case "Settings":
-            controller = storyboard!.instantiateViewControllerWithIdentifier("SettingsTableViewController") as! SettingsTableViewController
+            controller = SettingsTableViewController()
         default:
             controller = ViewController()
             break;

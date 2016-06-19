@@ -25,8 +25,8 @@ import SwiftSpinner
  */
 class SettingsTableViewController: UITableViewController {
     
-    let REMINDER_SWITCH: String = "REMINDER_SWITCH_" + PFUser.currentUser()!.username!
-    let REMINDER_DATE: String = "REMINDER_DATE_" + PFUser.currentUser()!.username!
+    let REMINDER_SWITCH: String = "REMINDER_SWITCH_" + PFUser.currentUser()!.objectId!
+    let REMINDER_DATE: String = "REMINDER_DATE_" + PFUser.currentUser()!.objectId!
     
     //Settings Table
     let TROUBLE_APP = "Having trouble with the app?"

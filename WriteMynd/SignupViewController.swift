@@ -16,7 +16,7 @@ class SignupViewController: SignupLoginViewController {
     let formStackView: UIStackView = UIStackView()
     
     lazy var onboardButton: Button = {
-        let button: Button = self.createButton("Tell me more about the Write Mynd")
+        let button: Button = self.createButton("Tell me more about Write Mynd")
         button.backgroundColor = UIColor.wmSilverColor()
         button.layer.cornerRadius = 0.0
         button.addTarget(self, action: .beginOnBoarding, forControlEvents: .TouchUpInside)
@@ -151,31 +151,37 @@ extension SignupViewController {
         guard self.password1Field.text != "" else{ self.showError("Aren’t you forgetting something? Enter a password to create an account."); return; }
         guard self.password1Field.text == self.password2Field.text else{ self.showError("Oops. Both passwords must match in order to create an account"); return; }
         
-        SwiftSpinner.show("Creating WriteMynd account ...", animated: true)
-        
         let user:PFUser = PFUser()
         user.username = self.emailTextField.text
         user.password = self.password2Field.text
         user.email = self.emailTextField.text
-        user.signUpInBackgroundWithBlock({ (succeeded:Bool, error:NSError?) -> Void in
-            if let error = error where !succeeded {
-                print(error)
-                print(error.code)
-                var errorString = error.userInfo["error"] as? NSString
-                if error.code == 202 {
-                    errorString = "\(user.email!) is already registered to an account"
-                }else if error.code == 125 {
-                    errorString = "Email address doesn’t seem to be valid."
+        
+        //Get the user to agree to the end user license first 
+//        Endurance.showEndUserLicensePage(self, onAgreeAction:)
+        Endurance.showEndUserLicensePage(self, onAgreeAction: {
+            SwiftSpinner.show("Creating WriteMynd account ...", animated: true)
+            user.signUpInBackgroundWithBlock({ (succeeded:Bool, error:NSError?) -> Void in
+                if let error = error where !succeeded {
+                    print(error)
+                    print(error.code)
+                    var errorString = error.userInfo["error"] as? NSString
+                    if error.code == 202 {
+                        errorString = "\(user.email!) is already registered to an account"
+                    }else if error.code == 125 {
+                        errorString = "Email address doesn’t seem to be valid."
+                    }
+                    self.showError(errorString as! String)
+                }else{
+                    SwiftSpinner.hide()
+                    self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+                    self.mm_drawerController.centerViewController = UINavigationController(rootViewController: EveryMyndController())
                 }
-                self.showError(errorString as! String)
-            }else{
-                SwiftSpinner.hide()
-                self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
-                self.mm_drawerController.centerViewController = UINavigationController(rootViewController: EveryMyndController())
-            }
-        })
+            })
+        })//end
         
     }
+    
+
     
     /**
      - todo: Replace with pages https://github.com/hyperoslo/Pages 

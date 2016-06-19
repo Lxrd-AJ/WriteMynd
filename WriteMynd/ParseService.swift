@@ -56,11 +56,14 @@ class ParseService {
         guard user != nil else{ return; }
         let fetchQuery: PFQuery = PFQuery( className: "Post" )
         let hiddenPostsQuery: PFQuery = PFQuery( className: "HiddenPost")
+        let hiddenUserQuery = PFQuery(className: "HiddenUser")
         let reportedPostsQuery = PFQuery(className: "ReportedPost")
         hiddenPostsQuery.whereKey("user", equalTo: user!)
+        hiddenUserQuery.whereKey("user", equalTo: user!)
         fetchQuery.whereKey("private", notEqualTo: true)
         fetchQuery.whereKey("objectId", doesNotMatchKey: "postID", inQuery: hiddenPostsQuery)
         fetchQuery.whereKey("objectId", doesNotMatchKey: "postID", inQuery: reportedPostsQuery)
+        fetchQuery.whereKey("parent", doesNotMatchKey: "blockedUser", inQuery: hiddenUserQuery) //Do not include posts from blocked users
         fetchQuery.orderByDescending("createdAt")
         fetchQuery.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
             if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }

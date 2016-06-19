@@ -14,7 +14,9 @@ import SwiftDate
 import Fabric
 import Crashlytics
 
-let serverURL = "http://178.62.103.146:8000" //http://178.62.103.146:8000/parse
+let serverURL = "http://127.0.0.1:8000" //http://178.62.103.146:8000
+
+//- todo: Create a HiddenUser feature, just like hide post but for the respective user
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

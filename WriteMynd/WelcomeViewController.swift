@@ -69,7 +69,9 @@ class WelcomeViewController: UIViewController {
                 self.logUser(email)
             }
             
+            SwiftSpinner.show("")
             Endurance.checkIfUserBlocked(PFUser.currentUser()!.objectId!).then({ blocked in
+                SwiftSpinner.hide()
                 if blocked {
                     Endurance.showBlockedUserPage(self)
                     PFUser.logOut()
@@ -139,18 +141,20 @@ class WelcomeViewController: UIViewController {
 
     
     func signInAnonymously(){
-        SwiftSpinner.show("")
-        PFAnonymousUtils.logInWithBlock{ (user:PFUser?, error:NSError?) -> Void in
-            SwiftSpinner.hide()
-            if error != nil || user == nil {
-                print("Anonymous log in failed")
-            }else{
-                let myMyndVC = MyPostsViewController()
-                self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
-                self.mm_drawerController.centerViewController = UINavigationController(rootViewController: myMyndVC)
+        Endurance.showEndUserLicensePage(self, onAgreeAction: {
+            SwiftSpinner.show("")
+            PFAnonymousUtils.logInWithBlock{ (user:PFUser?, error:NSError?) -> Void in
                 SwiftSpinner.hide()
+                if error != nil || user == nil {
+                    print("Anonymous log in failed")
+                }else{
+                    let myMyndVC = MyPostsViewController()
+                    self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+                    self.mm_drawerController.centerViewController = UINavigationController(rootViewController: myMyndVC)
+                    SwiftSpinner.hide()
+                }
             }
-        }
+        })
     }
     
     func signupAction( button:Button ){

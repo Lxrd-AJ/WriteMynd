@@ -24,6 +24,7 @@
 		2132E96E1CCDE8170049E95F /* SignupLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132E96D1CCDE8170049E95F /* SignupLoginViewController.swift */; };
 		2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0751C1A3B2A00BE26FD /* ParseService.swift */; };
 		2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */; };
+		2138AACB1D12214700C2F0F0 /* HiddenUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138AACA1D12214700C2F0F0 /* HiddenUser.swift */; };
 		214341151D0E7359002C3F66 /* Endurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214341141D0E7359002C3F66 /* Endurance.swift */; };
 		214341171D0F260B002C3F66 /* notes.md in Sources */ = {isa = PBXBuildFile; fileRef = 214341161D0F260B002C3F66 /* notes.md */; };
 		21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA41CA2E9B0005F117F /* FeelingsView.swift */; };
@@ -55,6 +56,7 @@
 		217903F51CD4F4A200ECCDEA /* thinking4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217903F41CD4F4A200ECCDEA /* thinking4.txt */; };
 		217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F3BDB1C8A25290085D71B /* SwipeViewController.swift */; };
 		2180D2601D05575600EC6956 /* ReportedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2180D25F1D05575600EC6956 /* ReportedPost.swift */; };
+		2183A9C91D11CC9700121287 /* LicensePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2183A9C81D11CC9700121287 /* LicensePageViewController.swift */; };
 		219F4F581C9AFBFD00B9AB34 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */; };
 		21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B8CC1B1C14D9B600F629FF /* Post.swift */; };
 		21C0A1351C2949A90047306D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0A1341C2949A90047306D /* MenuViewController.swift */; };
@@ -95,6 +97,7 @@
 		2132E96D1CCDE8170049E95F /* SignupLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupLoginViewController.swift; sourceTree = "<group>"; };
 		2136F0751C1A3B2A00BE26FD /* ParseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseService.swift; sourceTree = "<group>"; };
 		2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		2138AACA1D12214700C2F0F0 /* HiddenUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenUser.swift; sourceTree = "<group>"; };
 		214341141D0E7359002C3F66 /* Endurance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endurance.swift; sourceTree = "<group>"; };
 		214341161D0F260B002C3F66 /* notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = notes.md; sourceTree = "<group>"; };
 		21623EA41CA2E9B0005F117F /* FeelingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingsView.swift; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 		217903F41CD4F4A200ECCDEA /* thinking4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinking4.txt; sourceTree = "<group>"; };
 		217F3BDB1C8A25290085D71B /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		2180D25F1D05575600EC6956 /* ReportedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportedPost.swift; sourceTree = "<group>"; };
+		2183A9C81D11CC9700121287 /* LicensePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensePageViewController.swift; sourceTree = "<group>"; };
 		219F4F571C9AFBFD00B9AB34 /* SwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeDirection.swift; sourceTree = "<group>"; };
 		21B8CC151C14B87500F629FF /* WriteMynd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WriteMynd-Bridging-Header.h"; sourceTree = "<group>"; };
 		21B8CC1B1C14D9B600F629FF /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 				21FA7FA51C61C49400D0836F /* Swipe.swift */,
 				2130167C1C9DFA2800A4598D /* EmpathisedPost.swift */,
 				21623EA91CA76AAD005F117F /* HiddenPost.swift */,
+				2138AACA1D12214700C2F0F0 /* HiddenUser.swift */,
 				2180D25F1D05575600EC6956 /* ReportedPost.swift */,
 			);
 			name = Models;
@@ -351,6 +356,7 @@
 				2172FC051C11D037003446AC /* LoginViewController.swift */,
 				2132E96B1CCC66EC0049E95F /* SignupViewController.swift */,
 				21C387861CF43B1A00B22F08 /* OnboardViewController.swift */,
+				2183A9C81D11CC9700121287 /* LicensePageViewController.swift */,
 			);
 			name = OnBoarding;
 			sourceTree = "<group>";
@@ -588,6 +594,7 @@
 				214341151D0E7359002C3F66 /* Endurance.swift in Sources */,
 				21B8CC1C1C14D9B600F629FF /* Post.swift in Sources */,
 				217903ED1CD43CA400ECCDEA /* ThinkingPage.swift in Sources */,
+				2183A9C91D11CC9700121287 /* LicensePageViewController.swift in Sources */,
 				211B5FE31CF8BBF200E7D240 /* DetailTableViewCell.swift in Sources */,
 				21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */,
 				21F6193A1C9952CB0089542F /* KolodaView.swift in Sources */,
@@ -600,6 +607,7 @@
 				211772561CBA4900009B6DF0 /* SwipeChart.swift in Sources */,
 				211B5FE51CF90F8800E7D240 /* Notifications.swift in Sources */,
 				21C387791CEF147100B22F08 /* Analytics.swift in Sources */,
+				2138AACB1D12214700C2F0F0 /* HiddenUser.swift in Sources */,
 				2172FBED1C11B65E003446AC /* AppDelegate.swift in Sources */,
 				217F3BDC1C8A25290085D71B /* SwipeViewController.swift in Sources */,
 				217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */,

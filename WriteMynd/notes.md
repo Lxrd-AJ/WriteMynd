@@ -2,6 +2,9 @@
 //1. Dynamic text in PostTableViewCell
 //2. Massive View Controllers
 
+# App Store Review:
+- Is the email feature compulsory
+
 
 //- Some Features to consider for WriteMynd
 //1. Apple Watch features
