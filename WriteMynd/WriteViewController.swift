@@ -359,7 +359,7 @@ extension WriteViewController {
             self.post?.emoji = .Angry
             imageName = "angryManStood"
         case 3:
-            descriptionText = "Fear"
+            descriptionText = "Scared"
             self.post?.emoji = .Scared
             imageName = "fearManStood"
         case 4:

@@ -14,9 +14,7 @@ import SwiftDate
 import Fabric
 import Crashlytics
 
-let serverURL = "http://127.0.0.1:8000" //http://178.62.103.146:8000
-
-//- todo: Create a HiddenUser feature, just like hide post but for the respective user
+let serverURL = "http://178.62.103.146:8080" //http://178.62.103.146:8080
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var drawerController: MMDrawerController = MMDrawerController()
     let parseConfiguration = ParseClientConfiguration {
-        $0.applicationId = "rJrwXVeierGtuubX09tjfFY8lNA/dcuniTH0EdHbAhE="
+        $0.applicationId = "rJrwXVeierGtuubX09tjfFY8lNAdcuniTH0EdHbAhE"
         $0.server = serverURL + "/parse"
     }
 
@@ -33,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Parse configurations
         Parse.enableLocalDatastore()
         Parse.initializeWithConfiguration(parseConfiguration)
-        //Parse.setApplicationId("psbQTCZJnowKHs9FT534pLsRKOtgxQvkNTmYctOD",clientKey: "JZVNrhm8472sSy8tuXNibdzOI7Xx1k3OJnVoIAXt")
         
         //Mixpanel Config
         Analytics.setup()

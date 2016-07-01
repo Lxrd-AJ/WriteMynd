@@ -136,7 +136,7 @@ WRITE MYND LIMITED (we) are committed to protecting and respecting your privacy.
 SCOPE OF POLICY
 
 This policy (together with our Terms and Conditions above) applies to your use of:
-Write Mynd app (versions 1.2.7 and above) mobile application software (App), once you have downloaded or streamed a copy of the App onto your mobile telephone or handheld device (Device).
+Write Mynd app (versions 1.3.1 and above) mobile application software (App), once you have downloaded or streamed a copy of the App onto your mobile telephone or handheld device (Device).
 Any of the services accessible through the App (Services) that are available on the App Site or other sites of ours (Services Sites), unless this document states that a separate privacy policy applies to a particular Service, in which case that privacy policy only applies.
 
 This policy sets out the basis on which any personal data we collect from you, or that you provide to us, will be processed by us. Please read the following carefully to understand our views and practices regarding your personal data and how We will treat it.
