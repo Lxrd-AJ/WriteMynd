@@ -140,6 +140,13 @@ class LoginViewController: SignupLoginViewController {
         })
     }
     
+    /**
+     Recieves an email address to send a password reset link to
+     
+     - parameter email: the email address to use
+     - note:
+        the validity of the email address is never checked, the email is simply bounced back
+     */
     func resetPassword( email:String ){
         PFUser.requestPasswordResetForEmailInBackground(email, block: { (success:Bool,error:NSError?) in
             let alertController = UIAlertController(title: "Password Reset", message: "", preferredStyle: .Alert)
@@ -147,7 +154,7 @@ class LoginViewController: SignupLoginViewController {
             if let error = error where !success {
                 alertController.message = error.userInfo["error"] as? String
             }else{
-                alertController.message = "A Password reset link has been sent to your email address"
+                alertController.message = "A reset link has been emailed to you. Don’t forget to check your junk folder too!"
             }
             self.presentViewController(alertController, animated: true, completion: nil)
         })

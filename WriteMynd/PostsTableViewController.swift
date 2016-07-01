@@ -114,8 +114,8 @@ class PostsTableViewController: UITableViewController {
             cell.empathiseButton.hidden = false
         }
         
-        if post.text.characters.count > 150 && currentCellSelection != indexPath.section {
-            cell.postLabel.text = "\(post.text.substringToIndex(post.text.startIndex.advancedBy(150)))..."
+        if post.text.characters.count >= 140 && currentCellSelection != indexPath.section {
+            cell.postLabel.text = "\(post.text.substringToIndex(post.text.startIndex.advancedBy(140)))..."
             cell.readMoreButton.hidden = false
         }else{
             cell.postLabel.text = post.text
@@ -175,10 +175,20 @@ class PostsTableViewController: UITableViewController {
         return 150.0
     }
 
+    /**
+     Estimates the height by counting the number of characters present in the cell. **Including whitespace characters**
+     */
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if( indexPath.section == currentCellSelection){
             let post = self.posts[ indexPath.section ]
-            return CGFloat(post.text.characters.filter({ $0 != " " }).count)
+            //return CGFloat(post.text.characters.filter({ $0 != " " }).count)
+            //return CGFloat(post.text.characters.count)
+            
+            //let size = (post.text as NSString).sizeWithAttributes([NSFontAttributeName:Label.font()])
+            
+            let rect = (post.text as NSString).boundingRectWithSize(CGSize(width: tableView.frame.width,height: CGFloat.max), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:Label.font()], context: nil)
+            //print("Cell text width \(rect.width) with height \(rect.height)")
+            return rect.height;
         }
         return 150.0
     }
@@ -304,6 +314,14 @@ extension PostsTableViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    /**
+     This is the functionality for the `read more` button.
+     It marks the cell as collapsed or expanded and requests the table view changes it height by calling begin and end updates.
+     If the current cell is to be expanded, the table view uses `UITableViewAutomaticDimension` for the height as suggested by
+     the estimated number of characters in the cell
+     
+     - parameter sender: the read more button
+     */
     func extendPostInCell( sender:Button ) {
         if sender.selected {
             sender.selected = false
@@ -318,7 +336,7 @@ extension PostsTableViewController {
         self.tableView.reloadData()
         
         if self.currentCellSelection > 0 {
-            let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: sender.tag))!
+            let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: sender.tag))! as! PostTableViewCell
             self.tableView.reloadSections(NSIndexSet(index: sender.tag), withRowAnimation: UITableViewRowAnimation.Automatic)
             self.tableView.scrollRectToVisible(cell.frame, animated: true)
         }
