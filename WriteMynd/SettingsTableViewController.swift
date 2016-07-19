@@ -269,7 +269,7 @@ extension SettingsTableViewController {
     func configureMailComposeVC() -> MFMailComposeViewController {
         let composerVC = MFMailComposeViewController()
         composerVC.mailComposeDelegate = self
-        composerVC.setToRecipients(["support@writemynd.freshdesk.com","lizziebarclay@hotmail.co.uk"])
+        composerVC.setToRecipients(["support@writemynd.freshdesk.com","lizzie@writemynd.com"])
         if let email = PFUser.currentUser()?.email {
             composerVC.setSubject("Feedback on WriteMynd from \(email)")
         }else{

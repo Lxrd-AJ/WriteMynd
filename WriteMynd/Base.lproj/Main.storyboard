@@ -151,7 +151,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rT7-il-0pX" id="tId-0U-AfI">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18S-Fh-Mib">
@@ -320,16 +320,23 @@
                                 <rect key="frame" x="0.0" y="188" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v9Z-S6-E9I" id="iNS-mT-U3p">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KON-Pz-ub6">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KON-Pz-ub6">
                                             <rect key="frame" x="8" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                             <color key="textColor" red="0.52156862749999999" green="0.3803921569" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYa-yA-OA4">
+                                            <rect key="frame" x="63" y="7" width="46" height="30"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="leadingMargin" secondItem="KON-Pz-ub6" secondAttribute="leading" constant="6" id="9j2-HJ-8K0"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>

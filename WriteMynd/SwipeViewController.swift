@@ -145,9 +145,13 @@ extension SwipeViewController: SwipeViewDelegate {
      - parameter koloda:        the current swipe view
      - parameter finishPercent: The percent of the screen covered in the swipe
      - parameter direction:     The direction of the swipe
+     
+     - todo:
+        Use the x,y axis instead
      */
     func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {
         print("\(finishPercent)% in direction \(direction)")
+        print("Koloda view x:\(koloda.frame.origin.x) and y:\(koloda.frame.origin.y)")
         self.topMessage.instructionLabel.hidden = true
         self.topMessage.promptLabel.textColor = .whiteColor()
         
@@ -162,9 +166,10 @@ extension SwipeViewController: SwipeViewDelegate {
             self.animateToColor(UIColor.wmGreenishTealColor().colorWithAlphaComponent(alpha))
             self.topMessage.promptLabel.text = "Strongly feel like this"
         default:        
-            self.animateToColor(UIColor.wmGreenishTealTwoColor().colorWithSaturationComponent(0.3))
+            self.animateToColor(UIColor.wmGreenishTealTwoColor().colorWithSaturationComponent(alpha))
             self.topMessage.promptLabel.text = "Feel a bit like this"
         }
+        print("Alpha \(alpha)")
     }
     
     func koloda(kolodaSwipeThresholdMargin koloda: SwipeView) -> CGFloat? {

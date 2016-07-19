@@ -179,6 +179,7 @@ class PostsTableViewController: UITableViewController {
      Estimates the height by counting the number of characters present in the cell. **Including whitespace characters**
      */
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        //print("Index path \(indexPath.section) \n Current Cell Selection \(currentCellSelection)")
         if( indexPath.section == currentCellSelection){
             let post = self.posts[ indexPath.section ]
             //return CGFloat(post.text.characters.filter({ $0 != " " }).count)
@@ -187,7 +188,7 @@ class PostsTableViewController: UITableViewController {
             //let size = (post.text as NSString).sizeWithAttributes([NSFontAttributeName:Label.font()])
             
             let rect = (post.text as NSString).boundingRectWithSize(CGSize(width: tableView.frame.width,height: CGFloat.max), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:Label.font()], context: nil)
-            //print("Cell text width \(rect.width) with height \(rect.height)")
+            print("Cell text width \(rect.width) with height \(rect.height)")
             return rect.height;
         }
         return 150.0
@@ -263,17 +264,17 @@ extension PostsTableViewController {
     func showActionSheet( sender:Button ){
         let index = sender.tag //The index of the current cell(row) that was touched
         let post = self.posts[ index ]
-        let alertController = UIAlertController(title: "Post Actions", message: "Choose an action to perform on the post", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: "Post actions", message: "Choose an action to perform on the post", preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: { cancelAction in })
-        let hidePost = UIAlertAction(title: "Hide Post", style: .Default, handler: { hideAction in
+        let hidePost = UIAlertAction(title: "Hide post", style: .Default, handler: { hideAction in
             self.hidePost(post, atIndex: index)
             Analytics.trackUserHid(post)
             self.tableView.reloadData()
         })
-        let editPostAction = UIAlertAction(title: "Edit Post", style: .Default, handler: { editAction in
+        let editPostAction = UIAlertAction(title: "Edit post", style: .Default, handler: { editAction in
             self.delegate?.editPost(post)
         })
-        let deletePostAction = UIAlertAction(title: "Delete Post", style: .Destructive, handler: { deleteAction in
+        let deletePostAction = UIAlertAction(title: "Delete post", style: .Destructive, handler: { deleteAction in
             let post = self.posts.removeAtIndex(index)
             post.delete()
             self.tableView.reloadData()
@@ -287,7 +288,7 @@ extension PostsTableViewController {
             self.tableView.reloadData()
             self.showAlert("Thanks for flagging this post as offensive. We have removed the post and will investigate this further", withTitle: "Noted!")
         })
-        let blockUserAction = UIAlertAction(title: "Block User", style: .Destructive, handler: { blockAction in
+        let blockUserAction = UIAlertAction(title: "Block user", style: .Destructive, handler: { blockAction in
             let authorToBlock = post.author
             let hiddenUser = HiddenUser(blockedUser: authorToBlock, user: PFUser.currentUser()!)
             hiddenUser.save()
@@ -323,11 +324,21 @@ extension PostsTableViewController {
      - parameter sender: the read more button
      */
     func extendPostInCell( sender:Button ) {
-        if sender.selected {
-            sender.selected = false
+//        if sender.selected {
+//            sender.selected = false
+//            //print("Sender deselected, should be false => \(sender.selected)")
+//            self.currentCellSelection = -1000
+//        }else{
+//            sender.selected = true
+//            //print("Sender should be selected, true => \(sender.selected)")
+//            self.currentCellSelection = sender.tag
+//        }
+        
+        if sender.tag == self.currentCellSelection {
+            print("Should collapse the cell")
             self.currentCellSelection = -1000
         }else{
-            sender.selected = true
+            print("Should expand the cell")
             self.currentCellSelection = sender.tag
         }
         
@@ -336,9 +347,11 @@ extension PostsTableViewController {
         self.tableView.reloadData()
         
         if self.currentCellSelection > 0 {
-            let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: sender.tag))! as! PostTableViewCell
+            print("Sender tag \(sender.tag), currentSelection \(self.currentCellSelection)")
+            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: sender.tag)) as? PostTableViewCell {
+                self.tableView.scrollRectToVisible(cell.frame, animated: true)
+            }
             self.tableView.reloadSections(NSIndexSet(index: sender.tag), withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.tableView.scrollRectToVisible(cell.frame, animated: true)
         }
     }
     

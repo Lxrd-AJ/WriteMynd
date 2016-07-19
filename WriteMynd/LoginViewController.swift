@@ -91,7 +91,7 @@ class LoginViewController: SignupLoginViewController {
     func signInButton( sender: Button ){
         dismissKeyboard()
         guard self.emailTextField.text != "" else {
-            showErrorFor(self.emailErrorMessage, message: "! Email can't empty");
+            showErrorFor(self.emailErrorMessage, message: "! Email can't be empty");
             return;
         }
         guard self.passwordTextField.text != "" else{ showErrorFor(self.passwordErrorMessage, message: "! Password Cannot be empty");
