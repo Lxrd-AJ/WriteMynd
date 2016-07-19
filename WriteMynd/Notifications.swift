@@ -23,7 +23,7 @@ class Notifications {
         localNotification.alertBody = "Take 10 minutes to do something good for your mind"
         localNotification.alertAction = "Make a Post"
         localNotification.timeZone = NSTimeZone.defaultTimeZone()
-        localNotification.alertTitle = "WriteMynd"
+        localNotification.alertTitle = "Write Mynd"
         localNotification.repeatInterval = .Day
         localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         localNotification.soundName = UILocalNotificationDefaultSoundName

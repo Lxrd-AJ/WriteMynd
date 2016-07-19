@@ -176,7 +176,9 @@ class PostsTableViewController: UITableViewController {
     }
 
     /**
-     Estimates the height by counting the number of characters present in the cell. **Including whitespace characters**
+     Estimates the height of the cell.
+     If the cell is not being expanded, the default height of 150.0 is returned, else if it is being expanded, the new height is 
+     calculated by using the `boundingRectWithSize` method of `NSString` to estimate the new height to fit the current cell
      */
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         //print("Index path \(indexPath.section) \n Current Cell Selection \(currentCellSelection)")
@@ -188,7 +190,7 @@ class PostsTableViewController: UITableViewController {
             //let size = (post.text as NSString).sizeWithAttributes([NSFontAttributeName:Label.font()])
             
             let rect = (post.text as NSString).boundingRectWithSize(CGSize(width: tableView.frame.width,height: CGFloat.max), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:Label.font()], context: nil)
-            print("Cell text width \(rect.width) with height \(rect.height)")
+            //print("Cell text width \(rect.width) with height \(rect.height)")
             return rect.height;
         }
         return 150.0
@@ -335,10 +337,10 @@ extension PostsTableViewController {
 //        }
         
         if sender.tag == self.currentCellSelection {
-            print("Should collapse the cell")
+            //print("Should collapse the cell")
             self.currentCellSelection = -1000
         }else{
-            print("Should expand the cell")
+            //print("Should expand the cell")
             self.currentCellSelection = sender.tag
         }
         
@@ -347,7 +349,7 @@ extension PostsTableViewController {
         self.tableView.reloadData()
         
         if self.currentCellSelection > 0 {
-            print("Sender tag \(sender.tag), currentSelection \(self.currentCellSelection)")
+            //print("Sender tag \(sender.tag), currentSelection \(self.currentCellSelection)")
             if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: sender.tag)) as? PostTableViewCell {
                 self.tableView.scrollRectToVisible(cell.frame, animated: true)
             }
