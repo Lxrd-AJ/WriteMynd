@@ -1,6 +1,7 @@
 //
 //  AppDelegate.swift
 //  WriteMynd
+
 //
 //  Created by AJ Ibraheem on 04/12/2015.
 //  Copyright © 2015 The Leaf. All rights reserved.
@@ -13,6 +14,7 @@ import Mixpanel
 import SwiftDate
 import Fabric
 import Crashlytics
+import Bolts
 
 let serverURL = "http://178.62.103.146:8080" //http://178.62.103.146:8080
 
@@ -93,6 +95,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else if application.applicationState == .Inactive || application.applicationState == .Background{
             //Opened from local push notification in background
         }
+    }
+    
+    /**
+     Deep linking.
+     Handles incoming urls for deep links to sections of the app, atm it currently does nothing but pattern match
+     
+     - parameter application:       <#application description#>
+     - parameter url:               <#url description#>
+     - parameter sourceApplication: <#sourceApplication description#>
+     - parameter annotation:        <#annotation description#>
+     
+     - note:
+        Facebook deep link URL https://fb.me/923854597724718
+     
+     - returns: <#return value description#>
+     */
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        print("Application opening \(url) from source application \(sourceApplication)")
+        if url.host == "post" {
+            switch url.path! {
+            case "/main":
+                print("App should load my posts page")
+            default:
+                print("No page matched... returning false")
+                return false
+            }
+            return true
+        }else{ return false }
     }
     
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {

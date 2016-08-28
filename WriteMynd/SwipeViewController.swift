@@ -147,7 +147,7 @@ extension SwipeViewController: SwipeViewDelegate {
      - parameter direction:     The direction of the swipe
      
      - todo:
-        Use the x,y axis instead
+        * Make the color change gradual instead of being sudden, switch on the different degrees
      */
     func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {
         print("\(finishPercent)% in direction \(direction)")

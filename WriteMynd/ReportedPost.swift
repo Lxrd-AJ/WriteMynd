@@ -30,7 +30,7 @@ class ReportedPost {
     }
     
     class func convertPFObjectToReportedPost( object:PFObject ) -> ReportedPost {
-        let reporter = PFUser(outDataWithObjectId: object["reporterID"] as? String )
+        let reporter = PFUser(withoutDataWithObjectId: object["reporterID"] as? String )
         let reportedPost = ReportedPost(postID: object["postID"] as! String, reporter: reporter)
         reportedPost.reportDate = object.createdAt!
         return reportedPost

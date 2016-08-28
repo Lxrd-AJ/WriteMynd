@@ -30,7 +30,7 @@ class EmpathisedPost {
     }
     
     class func convertPFObjectToEmpathisedPost( object:PFObject ) -> EmpathisedPost {
-        let user = PFUser(outDataWithObjectId: (object["userID"] as! String))
+        let user = PFUser(className: (object["userID"] as! String))
         let empathisedPost = EmpathisedPost(user: user, ID: object["postID"] as! String)
         empathisedPost.likedDate = object.createdAt
         empathisedPost.objectID = object.objectId
