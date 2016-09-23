@@ -15,44 +15,44 @@ import Parse
  */
 class ParseService {
     
-    class func getSwipesForUser( user:PFUser, callback:(swipes:[Swipe]) -> Void ) -> Void {
+    class func getSwipesForUser( _ user:PFUser, callback:@escaping (_ swipes:[Swipe]) -> Void ) -> Void {
         let query = PFQuery(className: "Swipe")
         query.whereKey("parent", equalTo: user)
-        query.orderByDescending("createdAt")
+        query.order(byDescending: "createdAt")
         query.limit = 1000;
-        query.findObjectsInBackgroundWithBlock({ (swipes:[PFObject]?, error:NSError?) -> Void in
+        query.findObjectsInBackground(block: { (swipes:[PFObject]?, error:NSError?) -> Void in
             if let objects = swipes {
                 callback(swipes: objects.map(Swipe.convertToSwipe) )
             }else{ callback(swipes: []) }
         })
     }
     
-    class func getPostsWith( hashTags:[String], callback:(posts:[Post]) -> Void, forUser:PFUser? ){
+    class func getPostsWith( _ hashTags:[String], callback:@escaping (_ posts:[Post]) -> Void, forUser:PFUser? ){
         let query = PFQuery(className: "Post")
         query.whereKey("hashTags", containedIn: hashTags)
         //query.whereKey("hashTags", containsAllObjectsInArray: hashTags)
         if let user = forUser {
             query.whereKey("parent", equalTo: user)
         }
-        query.orderByDescending("createdAt")
-        query.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
+        query.order(byDescending: "createdAt")
+        query.findObjectsInBackground(block: { (posts:[PFObject]?, error:NSError?) -> Void in
             if let objects = posts {
                 callback(posts: objects.map( Post.convertPFObjectToPost ) )
             }else{ callback(posts: []) }
         })
     }
     
-    class func fetchPostsForUser( user:PFUser, callback:(posts:[Post]) -> Void ) {
+    class func fetchPostsForUser( _ user:PFUser, callback:@escaping (_ posts:[Post]) -> Void ) {
         let fetchQuery: PFQuery = PFQuery( className: "Post" )
         fetchQuery.whereKey("parent", equalTo: user)
-        fetchQuery.orderByDescending("createdAt")
-        fetchQuery.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
+        fetchQuery.order(byDescending: "createdAt")
+        fetchQuery.findObjectsInBackground(block: { (posts:[PFObject]?, error:NSError?) -> Void in
             if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }
             else{ callback(posts: []) }
         })
     }
     
-    class func fetchPostsForUserFeed( user:PFUser?, callback:(posts:[Post]) -> Void ) {
+    class func fetchPostsForUserFeed( _ user:PFUser?, callback:@escaping (_ posts:[Post]) -> Void ) {
         guard user != nil else{ return; }
         let fetchQuery: PFQuery = PFQuery( className: "Post" )
         let hiddenPostsQuery: PFQuery = PFQuery( className: "HiddenPost")
@@ -61,39 +61,39 @@ class ParseService {
         hiddenPostsQuery.whereKey("user", equalTo: user!)
         hiddenUserQuery.whereKey("user", equalTo: user!)
         fetchQuery.whereKey("private", notEqualTo: true)
-        fetchQuery.whereKey("objectId", doesNotMatchKey: "postID", inQuery: hiddenPostsQuery)
-        fetchQuery.whereKey("objectId", doesNotMatchKey: "postID", inQuery: reportedPostsQuery)
-        fetchQuery.whereKey("parent", doesNotMatchKey: "blockedUser", inQuery: hiddenUserQuery) //Do not include posts from blocked users
-        fetchQuery.orderByDescending("createdAt")
-        fetchQuery.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
+        fetchQuery.whereKey("objectId", doesNotMatchKey: "postID", in: hiddenPostsQuery)
+        fetchQuery.whereKey("objectId", doesNotMatchKey: "postID", in: reportedPostsQuery)
+        fetchQuery.whereKey("parent", doesNotMatchKey: "blockedUser", in: hiddenUserQuery) //Do not include posts from blocked users
+        fetchQuery.order(byDescending: "createdAt")
+        fetchQuery.findObjectsInBackground(block: { (posts:[PFObject]?, error:NSError?) -> Void in
             if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }
             else{ callback(posts: []) }
         })
     }
     
-    class func fetchPrivatePostsForUser( user:PFUser, callback:(posts:[Post]) -> Void ) {
+    class func fetchPrivatePostsForUser( _ user:PFUser, callback:@escaping (_ posts:[Post]) -> Void ) {
         let fetchQuery: PFQuery = PFQuery( className: "Post" )
         fetchQuery.whereKey("parent", equalTo: user)
         fetchQuery.whereKey("private", equalTo: true)
-        fetchQuery.orderByDescending("createdAt")
-        fetchQuery.findObjectsInBackgroundWithBlock({ (posts:[PFObject]?, error:NSError?) -> Void in
+        fetchQuery.order(byDescending: "createdAt")
+        fetchQuery.findObjectsInBackground(block: { (posts:[PFObject]?, error:NSError?) -> Void in
             if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }
             else{ callback(posts: []) }
         })
     }
     
-    class func fetchEmpathisedPosts( user:PFUser?, callback:(empathisesPosts:[EmpathisedPost]) -> Void ){
+    class func fetchEmpathisedPosts( _ user:PFUser?, callback:@escaping (_ empathisesPosts:[EmpathisedPost]) -> Void ){
         guard user != nil else{ return; }
         let query = PFQuery(className: "EmpathisedPost")
         query.whereKey("userID", equalTo: user!.objectId!)
-        query.findObjectsInBackgroundWithBlock({ (emPosts:[PFObject]?, error:NSError?) -> Void in
+        query.findObjectsInBackground(block: { (emPosts:[PFObject]?, error:NSError?) -> Void in
             if let posts = emPosts {
                 callback(empathisesPosts: posts.map(EmpathisedPost.convertPFObjectToEmpathisedPost))
             }else{ callback(empathisesPosts: []) }
         })
     }
     
-    class func dempathisePost( empathisedPost:EmpathisedPost ){
+    class func dempathisePost( _ empathisedPost:EmpathisedPost ){
         PFObject(withoutDataWithClassName: "EmpathisedPost", objectId: empathisedPost.objectID).deleteInBackground()
     }
     

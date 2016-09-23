@@ -21,17 +21,17 @@ class MyPostsViewController: ViewController {
     var shouldShowPostingSheet: Bool = false
     lazy var bottomView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         view.alpha = 1.0
         return view;
     }()
     lazy var createPostButton: Button = {
         let button: Button = Button()
         button.backgroundColor = UIColor.wmGreenishTealColor()
-        button.setTitle("Create a post", forState: .Normal)
+        button.setTitle("Create a post", for: UIControlState())
         //button.setImage(UIImage(named: "group")!, forState: .Normal)
         button.setFontSize(16)
-        button.addTarget(self, action: .showPostingSheet, forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .showPostingSheet, for: .touchUpInside)
         button.alpha = 0.8
         return button;
     }()
@@ -54,9 +54,9 @@ class MyPostsViewController: ViewController {
         
         //Constaints
         self.view.addSubview(buttonStackView)
-        buttonStackView.axis = .Horizontal
-        buttonStackView.alignment = .Fill
-        buttonStackView.distribution = .FillEqually
+        buttonStackView.axis = .horizontal
+        buttonStackView.alignment = .fill
+        buttonStackView.distribution = .fillEqually
         buttonStackView.spacing = 10.0
         buttonStackView.addArrangedSubview(postsToMeButton)
         buttonStackView.addArrangedSubview(postsToAllButton)
@@ -69,7 +69,7 @@ class MyPostsViewController: ViewController {
         
         self.addChildViewController(postsViewController)
         self.view.addSubview(postsViewController.tableView)
-        postsViewController.didMoveToParentViewController(self)
+        postsViewController.didMove(toParentViewController: self)
         postsViewController.posts = posts
         postsViewController.delegate = self
         
@@ -79,11 +79,11 @@ class MyPostsViewController: ViewController {
         self.scrollBegan(UIScrollView()) //Decieve the page so it automatically adjusts the bottom view
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.fetchPosts()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if shouldShowPostingSheet {
             self.showPostingSheet(self.createPostButton)
@@ -92,7 +92,7 @@ class MyPostsViewController: ViewController {
         Analytics.timeUserEntered(self)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         Analytics.timeUserExit(self, properties: nil)
     }
@@ -123,17 +123,17 @@ class MyPostsViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func createFilterButton( title:String ) -> Button {
-        let button = Button(type: .Custom)
-        button.setTitle(title, forState: .Normal)
-        button.setImage(UIImage(named: "oval")!, forState: .Normal)
-        button.addTarget(self, action: .filterButtonTapped, forControlEvents: .TouchUpInside)
-        button.backgroundColor = .whiteColor()
-        button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
+    func createFilterButton( _ title:String ) -> Button {
+        let button = Button(type: .custom)
+        button.setTitle(title, for: UIControlState())
+        button.setImage(UIImage(named: "oval")!, for: UIControlState())
+        button.addTarget(self, action: .filterButtonTapped, for: .touchUpInside)
+        button.backgroundColor = .white()
+        button.setTitleColor(UIColor.wmCoolBlueColor(), for: UIControlState())
         button.layer.cornerRadius = 15.0
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         button.setFontSize(12.0)
-        button.selected = false
+        button.isSelected = false
         return button
     }
     
@@ -144,21 +144,21 @@ class MyPostsViewController: ViewController {
      - note: `Post to me button` has a tag of 5 whilst `Post to all button` has a tag of 10
      - parameter button: the tapped button
      */
-    func filterButtonTapped( button: Button ){
-        func design( button:UIButton, selected:Bool ) {
+    func filterButtonTapped( _ button: Button ){
+        func design( _ button:UIButton, selected:Bool ) {
             if !selected {
-                button.backgroundColor = .whiteColor()
-                button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
+                button.backgroundColor = .white()
+                button.setTitleColor(UIColor.wmCoolBlueColor(), for: UIControlState())
             }else{
                 button.backgroundColor = UIColor.wmCoolBlueColor()
-                button.setTitleColor(.whiteColor(), forState: .Normal)
+                button.setTitleColor(.white(), for: UIControlState())
             }
         }
         
         let otherButtonTag = button.tag == 5 ? 10 : 5
         let otherButton = self.view.viewWithTag(otherButtonTag) as! Button
         
-        if button.selected {
+        if button.isSelected {
             self.postsViewController.posts = self.posts
             design(button, selected: false)
             design(otherButton, selected: false)
@@ -168,20 +168,20 @@ class MyPostsViewController: ViewController {
             }else{
                 self.postsViewController.posts = self.posts.filter({ !$0.isPrivate  })
             }
-            design(button, selected: !button.selected)
-            design(otherButton, selected: button.selected)
-            otherButton.selected = button.selected
+            design(button, selected: !button.isSelected)
+            design(otherButton, selected: button.isSelected)
+            otherButton.isSelected = button.isSelected
         }
         
-        button.selected = !button.selected
-        self.postsViewController.posts.sortInPlace({ $0.createdAt!.compare($1.createdAt!) == NSComparisonResult.OrderedDescending})
+        button.isSelected = !button.isSelected
+        self.postsViewController.posts.sort(by: { $0.createdAt!.compare($1.createdAt! as Date) == ComparisonResult.orderedDescending})
         self.postsViewController.tableView.reloadData()
         
         Analytics.trackUserUsedMyPostsFilter()
     }
     
     func fetchPosts(){
-        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { posts in
+        ParseService.fetchPostsForUser(PFUser.current()!, callback: { posts in
             self.posts = posts //Check if redundant
             self.postsViewController.posts = posts
             self.postsViewController.tableView.reloadData()
@@ -195,7 +195,7 @@ class MyPostsViewController: ViewController {
      UIActionSheet does not allow images so an option might be to mimic UIActionSheet with a View
      Controller and View and present them
      */
-    func showPostingSheet( sender:UIButton ){
+    func showPostingSheet( _ sender:UIButton ){
         self.bottomView.alpha = 0.0
         let theme: JTSActionSheetTheme = global_getActionSheetTheme()
         let swipeItItem = JTSActionSheetItem(title: "Swipe It", action: {
@@ -212,8 +212,8 @@ class MyPostsViewController: ViewController {
         let cancelItem = JTSActionSheetItem(title: "Cancel", action: {
             self.bottomView.alpha = 1.0
             }, isDestructive: true)
-        let actionSheet = JTSActionSheet(theme: theme, title: "", actionItems: [swipeItItem, writeItItem], cancelItem: cancelItem)
-        actionSheet.showInView(self.view)
+        let actionSheet = JTSActionSheet(theme: theme, title: "", actionItems: [swipeItItem, writeItItem], cancel: cancelItem)
+        actionSheet?.show(in: self.view)
     }
 
 }
@@ -232,7 +232,7 @@ extension MyPostsViewController: PostsTableVCDelegate {
      - todo
         [ ] Migrate to `PostsTableViewController` as the functionality is common to both EveryMynd and MyMynd
      */
-    func editPost(post: Post) {
+    func editPost(_ post: Post) {
         let writeVC = WriteViewController()
         writeVC.post = post
         self.navigationController?.pushViewController(writeVC, animated: true)
@@ -245,7 +245,7 @@ extension MyPostsViewController: PostsTableVCDelegate {
      - todo: 
         [ ] Migrate this method to the `PostsTableViewController` as it common in both `EveryMynd` and `MyMynd`
      */
-    func scrollBegan( scrollView:UIScrollView ) {
+    func scrollBegan( _ scrollView:UIScrollView ) {
         if( self.lastContentOffSet < scrollView.contentOffset.y ){
             //Scrolling to the bottom
             UIView.animateWithDuration(1.5, delay: 1.5, options: .CurveEaseInOut, animations: {

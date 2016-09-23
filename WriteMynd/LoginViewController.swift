@@ -16,37 +16,37 @@ class LoginViewController: SignupLoginViewController {
     lazy var emailTextField: UITextField = {
         let field: UITextField = self.createTextField("Email Address")
         field.tag = 5
-        field.autocapitalizationType = .None
-        field.returnKeyType = .Next
+        field.autocapitalizationType = .none
+        field.returnKeyType = .next
         field.delegate = self
         return field;
     }()
     lazy var emailErrorMessage: Label = {
         let label = self.createLabel("! Email already in use")
-        label.textColor = UIColor.clearColor()
+        label.textColor = UIColor.clear
         return label
     }()
     lazy var passwordTextField: UITextField = {
         let field = self.createTextField("Password")
-        field.secureTextEntry = true
-        field.returnKeyType = .Send
+        field.isSecureTextEntry = true
+        field.returnKeyType = .send
         field.tag = 10
         field.delegate = self
         return field
     }()
     lazy var passwordErrorMessage: Label = {
         let label = self.createLabel("! Wrong password")
-        label.textColor = UIColor.clearColor()
+        label.textColor = UIColor.clear
         return label
     }()
     lazy var loginButton: Button = {
         let button = self.createButton("Log in")
-        button.addTarget(self, action: .signin, forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .signin, for: .touchUpInside)
         return button
     }()
     lazy var mascot: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "happyManStood"))
-        imageView.contentMode = .Center
+        imageView.contentMode = .center
         return imageView
     }()
     
@@ -55,9 +55,9 @@ class LoginViewController: SignupLoginViewController {
         super.viewDidLoad()
         self.navigationController?.title = "Sign Up"
         
-        emailStackView.axis = .Vertical
-        emailStackView.alignment = .Fill
-        emailStackView.distribution = .FillEqually//.FillProportionally
+        emailStackView.axis = .vertical
+        emailStackView.alignment = .fill
+        emailStackView.distribution = .fillEqually//.FillProportionally
         
         emailStackView.addArrangedSubview(emailTextField)
         emailStackView.addArrangedSubview(emailErrorMessage)
@@ -88,7 +88,7 @@ class LoginViewController: SignupLoginViewController {
         
     }
     
-    func signInButton( sender: Button ){
+    func signInButton( _ sender: Button ){
         dismissKeyboard()
         guard self.emailTextField.text != "" else {
             showErrorFor(self.emailErrorMessage, message: "! Email can't be empty");
@@ -102,7 +102,7 @@ class LoginViewController: SignupLoginViewController {
         SwiftSpinner.show("Signing in ...")
         
         
-        PFUser.logInWithUsernameInBackground(self.emailTextField.text!, password: self.passwordTextField.text!, block: { (user:PFUser?,error:NSError?) in
+        PFUser.logInWithUsername(inBackground: self.emailTextField.text!, password: self.passwordTextField.text!, block: { (user:PFUser?,error:NSError?) in
             if user != nil {
                 print("Log In successful")
                 Endurance.checkIfUserBlocked(user!.objectId!).then({ blocked in
@@ -147,16 +147,16 @@ class LoginViewController: SignupLoginViewController {
      - note:
         the validity of the email address is never checked, the email is simply bounced back
      */
-    func resetPassword( email:String ){
-        PFUser.requestPasswordResetForEmailInBackground(email, block: { (success:Bool,error:NSError?) in
-            let alertController = UIAlertController(title: "Password Reset", message: "", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-            if let error = error where !success {
+    func resetPassword( _ email:String ){
+        PFUser.requestPasswordResetForEmail(inBackground: email, block: { (success:Bool,error:NSError?) in
+            let alertController = UIAlertController(title: "Password Reset", message: "", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            if let error = error , !success {
                 alertController.message = error.userInfo["error"] as? String
             }else{
                 alertController.message = "A reset link has been emailed to you. Don’t forget to check your junk folder too!"
             }
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         })
     }
     
@@ -168,7 +168,7 @@ class LoginViewController: SignupLoginViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField.tag == 10 {
             self.signInButton(self.loginButton)

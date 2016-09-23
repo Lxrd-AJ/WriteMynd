@@ -13,17 +13,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .Plain, target: self, action: .search)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: .Plain, target: self, action: .toggleMenu)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .plain, target: self, action: .search)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: .plain, target: self, action: .toggleMenu)
         self.navigationItem.rightBarButtonItem?.tintColor = .wmCoolBlueColor()
         self.navigationItem.leftBarButtonItem?.tintColor = .wmCoolBlueColor()
     }
     
-    func toggleMenu( sender:UIBarButtonItem ){
-        self.mm_drawerController.toggleDrawerSide(.Left, animated: true, completion: nil)
+    func toggleMenu( _ sender:UIBarButtonItem ){
+        self.mm_drawerController.toggle(.left, animated: true, completion: nil)
     }
     
-    func presentSearchView( sender:UIBarButtonItem ){
+    func presentSearchView( _ sender:UIBarButtonItem ){
         self.navigationController?.pushViewController(SearchViewController(), animated: true)
     }
 }
@@ -34,12 +34,12 @@ private extension Selector {
 }
 
 func global_getActionSheetTheme() -> JTSActionSheetTheme {
-    let theme = JTSActionSheetTheme.defaultTheme()
-    theme.normalButtonFont = UIFont(name: "Montserrat-Regular", size: 15.0)!
-    theme.normalButtonColor = UIColor.whiteColor()
-    theme.destructiveButtonColor = UIColor.wmSilverColor()
-    theme.backgroundColor = UIColor.wmGreenishTealColor()
-    return theme
+    let theme = JTSActionSheetTheme.default()
+    theme?.normalButtonFont = UIFont(name: "Montserrat-Regular", size: 15.0)!
+    theme?.normalButtonColor = UIColor.white
+    theme?.destructiveButtonColor = UIColor.wmSilverColor()
+    theme?.backgroundColor = UIColor.wmGreenishTealColor()
+    return theme!
 }
 
 class Label: UILabel {
@@ -57,7 +57,7 @@ class Label: UILabel {
         self.font = UIFont(name: "Montserrat-Bold", size: 15.0)
     }
     
-    func setFontSize( size:CGFloat ){
+    func setFontSize( _ size:CGFloat ){
         self.font = UIFont(name: "Montserrat-Regular", size: size)!
     }
     

@@ -29,11 +29,11 @@ class SwipeViewController: UIViewController {
         
         //MARK: - Onboarding checks
         self.view.addSubview(topMessage);
-        let viewCounts = NSUserDefaults.standardUserDefaults().integerForKey(ON_BOARDING_MESSAGE_VIEWS)
+        let viewCounts = UserDefaults.standard.integer(forKey: ON_BOARDING_MESSAGE_VIEWS)
         if viewCounts >= 5 {
-            topMessage.instructionLabel.hidden = true
+            topMessage.instructionLabel.isHidden = true
         }else{
-            NSUserDefaults.standardUserDefaults().setInteger((viewCounts+1), forKey: ON_BOARDING_MESSAGE_VIEWS)
+            UserDefaults.standard.set((viewCounts+1), forKey: ON_BOARDING_MESSAGE_VIEWS)
         }
         print(viewCounts)        
         topMessage.snp_makeConstraints(closure: { make in
@@ -59,7 +59,7 @@ class SwipeViewController: UIViewController {
         
         //MARK: - Emoji
         let emojiView = UIImageView(image: UIImage(named: "standingManHandsUp")!)
-        emojiView.contentMode = .Center
+        emojiView.contentMode = .center
         self.view.insertSubview(emojiView, belowSubview: kolodaView)
         emojiView.snp_makeConstraints(closure: { make in
             make.centerX.equalTo(self.view.snp_centerX)
@@ -75,8 +75,8 @@ class SwipeViewController: UIViewController {
 }
 
 extension SwipeViewController {
-    func animateToColor( color: UIColor ){
-        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseInOut, animations: {
+    func animateToColor( _ color: UIColor ){
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions(), animations: {
             self.view.backgroundColor = color
             }, completion: nil)
     }
@@ -94,11 +94,11 @@ extension SwipeViewController: SwipeViewDataSource {
         return UInt(questions.count)
     }
     
-    func koloda(koloda: SwipeView, viewForCardAtIndex index: UInt) -> UIView {
+    func koloda(_ koloda: SwipeView, viewForCardAtIndex index: UInt) -> UIView {
         let label = Label()
         label.text = questions[Int(index)]
-        label.textAlignment = .Center
-        label.backgroundColor = UIColor.whiteColor()
+        label.textAlignment = .center
+        label.backgroundColor = UIColor.white
         label.layer.masksToBounds = false
         label.layer.shadowOffset = CGSize(width: 0, height: 2)
         label.layer.shadowRadius = 1
@@ -114,7 +114,7 @@ extension SwipeViewController: SwipeViewDelegate {
         self.resetView()
     }
     
-    func koloda(koloda: SwipeView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeDirection) {
+    func koloda(_ koloda: SwipeView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeDirection) {
         let feeling = questions[Int(index)]
         var swipe = Swipe(value: -1, feeling: feeling)
         
@@ -149,24 +149,24 @@ extension SwipeViewController: SwipeViewDelegate {
      - todo:
         * Make the color change gradual instead of being sudden, switch on the different degrees
      */
-    func koloda(koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {
+    func koloda(_ koloda: SwipeView, draggedCardWithFinishPercent finishPercent: CGFloat, inDirection direction: SwipeDirection) {
         print("\(finishPercent)% in direction \(direction)")
         print("Koloda view x:\(koloda.frame.origin.x) and y:\(koloda.frame.origin.y)")
-        self.topMessage.instructionLabel.hidden = true
-        self.topMessage.promptLabel.textColor = .whiteColor()
+        self.topMessage.instructionLabel.isHidden = true
+        self.topMessage.promptLabel.textColor = .white()
         
         var alpha = finishPercent/100.0
         if alpha <= 50 { alpha = 0.7 }
         
         switch direction {
-        case .Left, .Ragnarok:
-            self.animateToColor(UIColor.redColor().colorWithAlphaComponent(alpha))
+        case .left, .ragnarok:
+            self.animateToColor(UIColor.red.withAlphaComponent(alpha))
             self.topMessage.promptLabel.text = "I don't feel like this"
         case ._15Degrees, ._30Degrees, ._45Degrees, ._60Degrees, ._75Degrees, ._90Degrees:
-            self.animateToColor(UIColor.wmGreenishTealColor().colorWithAlphaComponent(alpha))
+            self.animateToColor(UIColor.wmGreenishTealColor().withAlphaComponent(alpha))
             self.topMessage.promptLabel.text = "Strongly feel like this"
         default:        
-            self.animateToColor(UIColor.wmGreenishTealTwoColor().colorWithSaturationComponent(alpha))
+            self.animateToColor(UIColor.wmGreenishTealTwoColor().withSaturationComponent(alpha))
             self.topMessage.promptLabel.text = "Feel a bit like this"
         }
         print("Alpha \(alpha)")

@@ -25,17 +25,17 @@ class SearchViewController: UIViewController {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
         field.placeholder = "Search for hashtags"
         field.font = Label.font()
-        field.backgroundColor = UIColor.clearColor()
+        field.backgroundColor = UIColor.clear
         field.adjustsFontSizeToFitWidth = true
         field.leftView = paddingView
-        field.leftViewMode = .Always
+        field.leftViewMode = .always
         field.textColor = .wmCoolBlueColor()
         field.titleActiveTextColour = UIColor.wmSilverColor()
         field.delegate = self
-        field.autocorrectionType = .No
-        field.autocapitalizationType = .None
-        field.returnKeyType = .Search
-        field.addBorder(edges: [.Bottom], colour: UIColor.lightGrayColor(), thickness: 0.5)
+        field.autocorrectionType = .no
+        field.autocapitalizationType = .none
+        field.returnKeyType = .search
+        field.addBorder(edges: [.bottom], colour: UIColor.lightGray, thickness: 0.5)
         return field
     }()
     
@@ -58,7 +58,7 @@ class SearchViewController: UIViewController {
         //Adding the table view controller to display posts
         self.addChildViewController(postsController)
         self.view.addSubview(postsController.tableView)
-        postsController.didMoveToParentViewController(self)
+        postsController.didMove(toParentViewController: self)
         postsController.delegate = self
         postsController.tableView.snp_makeConstraints(closure: { make in
             make.top.equalTo(searchTextField.snp_bottom)
@@ -67,7 +67,7 @@ class SearchViewController: UIViewController {
             make.centerX.equalTo(self.view.snp_centerX)
         })
         postsController.tableView.backgroundView = UIImageView(image: UIImage(named: "manInTheMirror"))
-        postsController.tableView.backgroundView?.contentMode = .Center
+        postsController.tableView.backgroundView?.contentMode = .center
         postsController.empathisedPosts = self.empathisedPosts
         
         if searchParameters.count > 0 {
@@ -88,8 +88,8 @@ class SearchViewController: UIViewController {
  */
 extension SearchViewController {
     
-    func toggleBackground( visible:Bool ){
-        postsController.tableView.backgroundView?.hidden = visible
+    func toggleBackground( _ visible:Bool ){
+        postsController.tableView.backgroundView?.isHidden = visible
     }
     
     /**
@@ -99,11 +99,11 @@ extension SearchViewController {
      
      - returns: text to display
      */
-    func searchDisplayText( searchParams:[String] ) -> String {
-        return searchParams.reduce("", combine: { (searchText,param) in "\(searchText)\(param)"})
+    func searchDisplayText( _ searchParams:[String] ) -> String {
+        return searchParams.reduce("", { (searchText,param) in "\(searchText)\(param)"})
     }
     
-    func search( text:String ){
+    func search( _ text:String ){
         var searchText = text;
         if text.characters.first != "#" {
             searchText = "#" + text
@@ -120,7 +120,7 @@ extension SearchViewController {
                     self.postsController.empathisedPosts = self.empathisedPosts
                     self.postsController.tableView.reloadData()
                 }else{ self.toggleBackground(false) }
-                }, forUser: PFUser.currentUser()!)
+                }, forUser: PFUser.current()!)
         }else{
             ParseService.getPostsWith([searchText], callback: { posts in
                 self.postsController.posts = posts
@@ -137,10 +137,10 @@ extension SearchViewController {
 
 extension SearchViewController: UITextFieldDelegate {
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         self.search(textField.text!)
         return true

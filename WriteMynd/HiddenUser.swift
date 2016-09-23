@@ -25,7 +25,7 @@ class HiddenUser {
         object.saveEventually()
     }
     
-    class func convertPFObjectToHiddenUser( object:PFObject ) -> HiddenUser {
+    class func convertPFObjectToHiddenUser( _ object:PFObject ) -> HiddenUser {
         return HiddenUser(blockedUser: object["blockedUser"] as! PFUser, user: object["user"] as! PFUser)
     }
 }

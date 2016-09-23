@@ -17,23 +17,23 @@ class WelcomeViewController: UIViewController {
     
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "wm-logo-signup"))
-        imageView.contentMode = .Center
+        imageView.contentMode = .center
         return imageView
     }()
     
     lazy var signInButton: Button = {
         let button = self.createButton("Sign in", iconName: "")
         button.backgroundColor = UIColor.wmPaleGreyColor()
-        button.setTitleColor(UIColor.wmSlateGreyColor(), forState: .Normal)
-        button.addTarget(self, action: .signin, forControlEvents: .TouchUpInside)
+        button.setTitleColor(UIColor.wmSlateGreyColor(), for: UIControlState())
+        button.addTarget(self, action: .signin, for: .touchUpInside)
         return button
     }()
     
     lazy var signupButton: Button = {
         let button: Button = self.createButton("Create an account", iconName: "")
         button.backgroundColor = UIColor.wmGreenishTealColor()
-        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        button.addTarget(self, action: .signup, forControlEvents: .TouchUpInside)
+        button.setTitleColor(UIColor.white, for: UIControlState())
+        button.addTarget(self, action: .signup, for: .touchUpInside)
         return button;
     }()
     
@@ -50,10 +50,10 @@ class WelcomeViewController: UIViewController {
     }()
     
     lazy var signupLaterButton: Button = {
-        let button: Button = Button(type: .Custom)
-        button.setTitle("I want to look around now", forState: .Normal)
-        button.setTitleColor(.whiteColor(), forState: .Normal)
-        button.addTarget(self, action: .anonymousSignin, forControlEvents: .TouchUpInside)
+        let button: Button = Button(type: .custom)
+        button.setTitle("I want to look around now", for: UIControlState())
+        button.setTitleColor(.white(), for: UIControlState())
+        button.addTarget(self, action: .anonymousSignin, for: .touchUpInside)
         return button;
     }()
     
@@ -63,9 +63,9 @@ class WelcomeViewController: UIViewController {
         self.mm_drawerController.openDrawerGestureModeMask = []
         //self.mm_drawerController.setMaximumLeftDrawerWidth(0, animated: true, completion: nil)
         
-        if PFUser.currentUser() != nil {
+        if PFUser.current() != nil {
             // Register the user for crash logs
-            if let email = PFUser.currentUser()?.email {
+            if let email = PFUser.current()?.email {
                 self.logUser(email)
             }
             
@@ -92,9 +92,9 @@ class WelcomeViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -133,7 +133,7 @@ class WelcomeViewController: UIViewController {
         
     }
     
-    func logUser( email:String ) {
+    func logUser( _ email:String ) {
         Crashlytics.sharedInstance().setUserEmail(email)
         Crashlytics.sharedInstance().setUserIdentifier(email)
         Crashlytics.sharedInstance().setUserName(email)
@@ -157,29 +157,29 @@ class WelcomeViewController: UIViewController {
         })
     }
     
-    func signupAction( button:Button ){
+    func signupAction( _ button:Button ){
         let signupVC = SignupViewController()
         self.navigationController?.pushViewController(signupVC, animated: true)
     }
     
-    func signinAction( button: Button ){
+    func signinAction( _ button: Button ){
         let loginVC = LoginViewController()
         self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
-    func createLabel( title:String ) -> Label {
+    func createLabel( _ title:String ) -> Label {
         let label = Label()
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.white
         label.text = title
         label.numberOfLines = 0;
-        label.textAlignment = .Center
+        label.textAlignment = .center
         return label
     }
     
-    func createButton( title:String, iconName:String ) -> Button {
-        let button = Button(type: .Custom)
-        button.setTitle(title, forState: .Normal)
-        button.setImage(UIImage(named: iconName), forState: .Normal)
+    func createButton( _ title:String, iconName:String ) -> Button {
+        let button = Button(type: .custom)
+        button.setTitle(title, for: UIControlState())
+        button.setImage(UIImage(named: iconName), for: UIControlState())
         //button.layer.cornerRadius = 4.0
         button.snp_makeConstraints(closure: { make in
             make.size.equalTo(CGSize(width: 256, height: 45))

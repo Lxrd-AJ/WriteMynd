@@ -65,9 +65,9 @@ class DashboardController: ViewController {
         self.view.backgroundColor = UIColor.wmBackgroundColor()
         self.scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height )
         emojiPieChart.chart.delegate = self
-        stackView.axis = .Vertical
-        stackView.alignment = .Fill
-        stackView.distribution = .FillEqually
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
         
         self.view.addSubview(scrollView)
         self.scrollView.addSubview(stackView)
@@ -88,7 +88,7 @@ class DashboardController: ViewController {
         self.bottomView.addSubview(swipeChart)
         self.bottomView.addSubview(swipeInfoButton)
         
-        _ = [topView,middleView].map({ $0.addBorder(edges: [.Bottom], colour: UIColor.wmSilverColor(), thickness: 0.9) })
+        _ = [topView,middleView].map({ $0.addBorder(edges: [.bottom], colour: UIColor.wmSilverColor(), thickness: 0.9) })
 
         hashTagInfoButton.tag = 0
         emojiInfoButton.tag = 1
@@ -96,12 +96,12 @@ class DashboardController: ViewController {
         drawCharts()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Analytics.timeUserEntered(self)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         Analytics.timeUserExit(self, properties: nil)
     }
@@ -123,94 +123,94 @@ class DashboardController: ViewController {
             make.left.equalTo(v.snp_left).offset(10)
         }
         
-        scrollView.snp_makeConstraints(closure: { make in
+        scrollView.snp_makeConstraints({ make in
             make.centerX.equalTo(self.view.snp_centerX)
             make.top.equalTo(self.snp_topLayoutGuideBottom)
             make.size.equalTo(self.view.snp_size)
             make.bottom.equalTo(self.stackView.snp_bottom).offset(100)
         })
         
-        stackView.snp_makeConstraints(closure: { make in
+        stackView.snp_makeConstraints({ make in
             make.width.equalTo(self.view.snp_width)
             make.top.equalTo(self.scrollView.snp_top)
             make.right.equalTo(self.view.snp_right)
             make.height.equalTo(800)
         })
         
-        myHashTagsLabel.snp_makeConstraints(closure: { make in labelConstraint(make,topView) })
-        hashTagInfoButton.snp_makeConstraints(closure: { make in infoButtonConstraint(make,topView) })
-        hashtagsPieCharts.snp_makeConstraints(closure: { make in
+        myHashTagsLabel.snp_makeConstraints({ make in labelConstraint(make,topView) })
+        hashTagInfoButton.snp_makeConstraints({ make in infoButtonConstraint(make,topView) })
+        hashtagsPieCharts.snp_makeConstraints({ make in
             make.width.equalTo(topView.snp_width)
             make.top.equalTo(hashTagInfoButton.snp_bottom)
             make.centerX.equalTo(topView.snp_centerX)
             make.bottom.equalTo(topView.snp_bottom).offset(-20)
         })
         
-        myEmojisLabel.snp_makeConstraints(closure: { make in labelConstraint(make,middleView) })
-        emojiInfoButton.snp_makeConstraints(closure: { make in infoButtonConstraint(make, middleView) })
-        emojiPieChart.snp_makeConstraints(closure: { make in
+        myEmojisLabel.snp_makeConstraints({ make in labelConstraint(make,middleView) })
+        emojiInfoButton.snp_makeConstraints({ make in infoButtonConstraint(make, middleView) })
+        emojiPieChart.snp_makeConstraints({ make in
             make.width.equalTo(middleView.snp_width)
             make.top.equalTo(emojiInfoButton.snp_bottom)
             make.centerX.equalTo(middleView.snp_centerX)
             make.bottom.equalTo(middleView.snp_bottom).offset(-20)
         })
         
-        swipeLabel.snp_makeConstraints(closure: { make in labelConstraint(make,bottomView) })
-        swipeInfoButton.snp_makeConstraints(closure: { make in infoButtonConstraint(make,bottomView) })
-        positiveLabel.snp_makeConstraints(closure: { make in
+        swipeLabel.snp_makeConstraints({ make in labelConstraint(make,bottomView) })
+        swipeInfoButton.snp_makeConstraints({ make in infoButtonConstraint(make,bottomView) })
+        positiveLabel.snp_makeConstraints({ make in
             make.top.equalTo(self.swipeInfoButton.snp_bottom).offset(10)
             make.left.equalTo(self.swipeLabel.snp_left)
         })
-        swipeChart.snp_makeConstraints(closure: { make in
+        swipeChart.snp_makeConstraints({ make in
             make.width.equalTo(bottomView.snp_width)
             make.top.equalTo(swipeInfoButton.snp_bottom).offset(15)
             make.centerX.equalTo(bottomView.snp_centerX)
             //make.bottom.equalTo(bottomView.snp_bottom).offset(-20)
             make.bottom.equalTo(negativeLabel.snp_top).offset(-5)
         })
-        negativeLabel.snp_makeConstraints(closure: { make in
+        negativeLabel.snp_makeConstraints({ make in
             make.bottom.equalTo(bottomView.snp_bottom).offset(-5)
             make.left.equalTo(self.positiveLabel.snp_left)
         })
     }
     
-    func moreInfoButtonTapped( sender:UIButton ){
+    func moreInfoButtonTapped( _ sender:UIButton ){
         var infoMessage = ""
         var containerView:UIView!
         
         switch sender.tag {
         case 0:
             //My hashtags
-            self.myHashTagsLabel.hidden = !self.myHashTagsLabel.hidden
+            self.myHashTagsLabel.isHidden = !self.myHashTagsLabel.isHidden
             containerView = self.topView
             infoMessage = "These are your most popular themes based on how you've categorised your posts"
         case 1: //My Emotions
             infoMessage = "This chart maps the emotions you have expressed when writing. Click through to see the posts that are connected to each of them."
-            self.myEmojisLabel.hidden = !self.myEmojisLabel.hidden
+            self.myEmojisLabel.isHidden = !self.myEmojisLabel.isHidden
             containerView = self.middleView
         case 2: //My Mood
             infoMessage = "This graph tracks your mood based on your swiping. Anything above the line represents positive emotions, anything below the line represents negative emotions."
-            self.swipeLabel.hidden = !self.swipeLabel.hidden
+            self.swipeLabel.isHidden = !self.swipeLabel.isHidden
             containerView = self.bottomView
         default:
             containerView = UIView()
             break;
         }
         
-        if !sender.selected {
-            sender.selected = true
+        if !sender.isSelected {
+            sender.isSelected = true
             sender.backgroundColor = UIColor.wmCoolBlueColor()
-            sender.setTitle(infoMessage, forState: .Normal)
-            sender.snp_updateConstraints(closure: { make in
+            sender.setTitle(infoMessage, for: UIControlState())
+            sender.snp_updateConstraints({ make in
                 make.width.equalTo(self.view.snp_width).offset(-10)
                 make.height.equalTo(35)
             })
         }else{
-            sender.selected = false
-            sender.backgroundColor = UIColor.clearColor()
+            sender.isSelected = false
+            sender.backgroundColor = UIColor.clear
             //sender.snp_removeConstraints()
-            sender.setTitle("", forState: .Normal)
-            sender.snp_remakeConstraints(closure: { make in
+            sender.setTitle("", for: UIControlState())
+            sender.snp_remakeConstraints({ make in
                 //make.width.equalTo(15)
                 make.top.equalTo(containerView.snp_top).offset(5)
                 make.right.equalTo(containerView.snp_right).offset(-5)
@@ -222,7 +222,7 @@ class DashboardController: ViewController {
 
 extension DashboardController {
     func drawCharts(){
-        func createHashTagMap( hashtags:[String], map:[HashTag:Int] ) -> [HashTag:Int] {
+        func createHashTagMap( _ hashtags:[String], map:[HashTag:Int] ) -> [HashTag:Int] {
             var _map = map;
             for hashtag in hashtags {
                 if let freq = _map[hashtag] { _map[hashtag] = freq + 1 }
@@ -231,11 +231,11 @@ extension DashboardController {
             return _map
         }
         
-        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { posts in
+        ParseService.fetchPostsForUser(PFUser.current()!, callback: { posts in
             guard posts.count != 0 else{ return }
             
             // Emoji - HashTag - Count
-            self.emojiHashTagDictionary = posts.reduce([:], combine: { map,post in
+            self.emojiHashTagDictionary = posts.reduce([:], { map,post in
                 var _map = map;
                 if let hashTags = _map[post.emoji] {
                     _map[post.emoji] = createHashTagMap(post.hashTags, map: hashTags)
@@ -246,13 +246,13 @@ extension DashboardController {
             })
             
             //Retrieve the hash tags data
-            let postHashTags = posts.reduce([], combine: { return $0 + $1.hashTags })
+            let postHashTags = posts.reduce([], { return $0 + $1.hashTags })
             let hashTagMap: [HashTag:Int] = createHashTagMap(postHashTags, map: [:])
             
             //Retrieve the Emoji Data
-            let emojiCountDictionary: [Emoji:Int] = self.emojiHashTagDictionary.keys.reduce([:], combine: {map, emoji in
+            let emojiCountDictionary: [Emoji:Int] = self.emojiHashTagDictionary.keys.reduce([:], {map, emoji in
                 var _map = map;
-                _map[emoji] = self.emojiHashTagDictionary[emoji]!.values.reduce(0, combine: +)
+                _map[emoji] = self.emojiHashTagDictionary[emoji]!.values.reduce(0, +)
                 return _map;
             })
             
@@ -262,11 +262,11 @@ extension DashboardController {
         })
         
         //Line Graph for Swipes
-        ParseService.getSwipesForUser(PFUser.currentUser()!, callback: { swipes in
+        ParseService.getSwipesForUser(PFUser.current()!, callback: { swipes in
             guard swipes.count != 0 else{ return }
             
-            let dateFormat = DateFormat.Custom("dd/MM/yyyy")
-            let swipeDictionary: [NSDate:[Swipe]] = swipes.reduce([:], combine: { map, swipe in
+            let dateFormat = DateFormat.custom("dd/MM/yyyy")
+            let swipeDictionary: [Date:[Swipe]] = swipes.reduce([:], { map, swipe in
                 var _map = map
                 let key = swipe.createdAt.toString(dateFormat)!.toDate(dateFormat)!
                 if let swipes = map[key] {
@@ -281,21 +281,21 @@ extension DashboardController {
         })
     }
     
-    func setupSwipeChart( dictionary:[NSDate:[Swipe]] ){
+    func setupSwipeChart( _ dictionary:[Date:[Swipe]] ){
         //- note: Reversing the dictionary keys & values because the sortBy on the query isn't working
         let dataKeys: [String] = dictionary.keys.map({ $0.toString()! }).reverse()
-        let dataValues: [Double] = dictionary.keys.map({ self.averageScoreFor(dictionary[$0]!) }).reverse()
+        let dataValues: [Double] = dictionary.keys.map({ self.averageScoreFor(dictionary[$0]!) }).reversed()
         swipeChart.renderChart(dataKeys, values: dataValues)
     }
     
-    func setupEmojiPieChart( dictionary:[Emoji:Int] ) {
+    func setupEmojiPieChart( _ dictionary:[Emoji:Int] ) {
         let dataKeys:[String] = dictionary.keys.map({ emoji in emoji.value().name })
         let dataValues:[Int] = dictionary.keys.map({ emoji in dictionary[emoji]! });
         let colors:[UIColor] = dictionary.keys.map({ emoji in emoji.value().color })
         emojiPieChart.renderChart(emojiPieChart.chart, dataPoints: dataKeys, values: dataValues, colors: colors)
     }
     
-    func setupMaxHashTagsPieChart( hashTagMap:[String:Int] ){
+    func setupMaxHashTagsPieChart( _ hashTagMap:[String:Int] ){
         //Most Used HashTag
         let mostTags = ["Others", hashTagMap.max()]
         let maxTuple: (highest:Int, total:Int) = hashTagMap.maxTuple()
@@ -309,10 +309,10 @@ extension DashboardController {
      - todo: Needs refactoring as this method is not elegant enough
      - parameter hashTagMap: a dictionary of the hashtags to their frequency
      */
-    func setupMinHashTagsPieChart( hashTagMap:[String:Int] ){
+    func setupMinHashTagsPieChart( _ hashTagMap:[String:Int] ){
         //Least Used HashTag
-        let tags = hashTagMap.keys().sort({ s1,s2 in return hashTagMap[s1]! > hashTagMap[s2]! })
-        let total = hashTagMap.values.reduce(0, combine: +)
+        let tags = hashTagMap.keys().sorted(by: { s1,s2 in return hashTagMap[s1]! > hashTagMap[s2]! })
+        let total = hashTagMap.values.reduce(0, +)
         let minTuple: (lowest:Int, total:Int) = hashTagMap.minTuple()
         var tag = hashTagMap.min()
         var count = minTuple.lowest
@@ -336,25 +336,25 @@ extension DashboardController {
         hashtagsPieCharts.renderChart(hashtagsPieCharts.minHashtagsPie, dataPoints: leastTags, values: leastTagsData, centerValue: count, tag: tag)
     }
     
-    func averageScoreFor( swipes:[Swipe] ) -> Double {
-        let total = swipes.reduce(0, combine: { (total,cur) in
+    func averageScoreFor( _ swipes:[Swipe] ) -> Double {
+        let total = swipes.reduce(0, { (total,cur) in
             return total + cur.value
         })
         return (Double(total)/Double(swipes.count))
     }
     
     func moreInfoButton() -> UIButton {
-        let button = UIButton(type: .Custom);
-        button.setImage(UIImage(named: "info"), forState: .Normal)
-        button.addTarget(self, action: .infoButtonTapped, forControlEvents: .TouchUpInside)
-        button.titleLabel?.font = Label.font().fontWithSize(9)
-        button.setTitleColor(.whiteColor(), forState: .Normal)
+        let button = UIButton(type: .custom);
+        button.setImage(UIImage(named: "info"), for: UIControlState())
+        button.addTarget(self, action: .infoButtonTapped, for: .touchUpInside)
+        button.titleLabel?.font = Label.font().withSize(9)
+        button.setTitleColor(UIColor.white, for: UIControlState())
         button.titleLabel?.numberOfLines = 0
         button.layer.cornerRadius = 5.0
         return button;
     }
     
-    func createLabel( title:String, color:UIColor = UIColor.blackColor(), size:CGFloat = 13.0 ) -> Label {
+    func createLabel( _ title:String, color:UIColor = UIColor.black, size:CGFloat = 13.0 ) -> Label {
         let label = Label()
         label.text = title;
         label.textColor = color;
@@ -365,7 +365,7 @@ extension DashboardController {
 }
 
 extension DashboardController: ChartViewDelegate {
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         let emoji = Emoji.toEnum(entry.data! as! String)
         let detailVC = EmojiChartDetailViewController()
         detailVC.emoji = emoji

@@ -13,14 +13,14 @@ class LegalViewController: UIViewController {
     lazy var titleLabel: Label = {
         let label: Label = Label()
         label.setFontSize(20)
-        label.textColor = .whiteColor()
+        label.textColor = .white()
         label.text = "Legals";
         return label;
     }()
     
     lazy var mascot: UIImageView = {
         let mascot:UIImageView = UIImageView(image: UIImage(named: "happyManStood"))
-        mascot.contentMode = .Center
+        mascot.contentMode = .center
         return mascot
     }()
     
@@ -29,7 +29,7 @@ class LegalViewController: UIViewController {
         //textView.setFontSize(15)
         textView.font = UIFont(name: "Baskerville", size: 16)
         textView.numberOfLines = 0
-        textView.textColor = UIColor.blackColor()
+        textView.textColor = UIColor.black
         return textView
     }()
     
@@ -68,7 +68,7 @@ class LegalViewController: UIViewController {
 //            }
 //        })
         
-        let path = NSBundle.mainBundle().pathForResource("legal", ofType: "txt")
+        let path = Bundle.main.path(forResource: "legal", ofType: "txt")
         do {
             let contents = try String(contentsOfFile: path!)
             self.textView.text = contents

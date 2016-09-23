@@ -31,10 +31,10 @@ class ThinkingViewController: ViewController {
         self.contentView.addSubview(page3)
         self.contentView.addSubview(page4)
 
-        let page1Path = NSBundle.mainBundle().pathForResource("thinking1", ofType: "txt")
-        let page2Path = NSBundle.mainBundle().pathForResource("thinking2", ofType: "txt")
-        let page3Path = NSBundle.mainBundle().pathForResource("thinking3", ofType: "txt")
-        let page4Path = NSBundle.mainBundle().pathForResource("thinking4", ofType: "txt")
+        let page1Path = Bundle.main.path(forResource: "thinking1", ofType: "txt")
+        let page2Path = Bundle.main.path(forResource: "thinking2", ofType: "txt")
+        let page3Path = Bundle.main.path(forResource: "thinking3", ofType: "txt")
+        let page4Path = Bundle.main.path(forResource: "thinking4", ofType: "txt")
         do {
             let contents = try String(contentsOfFile: page1Path!)
             self.page1.page1Message.text = contents
@@ -65,18 +65,18 @@ class ThinkingViewController: ViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Analytics.timeUserEntered(self)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height + 150.0)
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         Analytics.timeUserExit(self, properties: nil)
     }
 

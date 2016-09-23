@@ -24,7 +24,7 @@ class FeelingsView: UIView {
         textView.textColor = UIColor.wmSlateGreyColor()
         textView.delegate = self
         textView.layer.borderWidth = 1.0
-        textView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        textView.layer.borderColor = UIColor.lightGray.cgColor
 
         return textView
     }()
@@ -62,13 +62,13 @@ class FeelingsView: UIView {
 
 extension FeelingsView: UITextViewDelegate {
     
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        textView.userInteractionEnabled = true
-        textView.editable = true
-        textView.scrollEnabled = true
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        textView.isUserInteractionEnabled = true
+        textView.isEditable = true
+        textView.isScrollEnabled = true
         return true
     }
 }

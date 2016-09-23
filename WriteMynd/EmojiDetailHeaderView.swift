@@ -13,10 +13,10 @@ class EmojiDetailHeaderView: UIView {
     lazy var header: Label = {
         let label = Label()
         label.text = ""
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.white
         label.layer.cornerRadius = 16.0
         label.layer.masksToBounds = true
-        label.textAlignment = .Center
+        label.textAlignment = .center
         return label;
     }()
     lazy var promptLabel: Label = {

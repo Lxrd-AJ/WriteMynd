@@ -16,7 +16,7 @@ class SwipeOnBoarding: UIView {
         label.text = "Which of these emotions do you feel right now?"
         label.setFontSize(20.0)
         label.numberOfLines = 0
-        label.textAlignment = .Center
+        label.textAlignment = .center
         return label
     }()
     
@@ -26,7 +26,7 @@ class SwipeOnBoarding: UIView {
         label.text = "Swipe left and right on the cards"
         label.setFontSize(13.0)
         label.numberOfLines = 0
-        label.textAlignment = .Center
+        label.textAlignment = .center
         return label
     }()
     

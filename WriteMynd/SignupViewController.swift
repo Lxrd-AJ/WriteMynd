@@ -9,7 +9,6 @@
 import UIKit
 import SwiftSpinner
 import Parse
-import Pages
 
 class SignupViewController: SignupLoginViewController {
     
@@ -19,46 +18,46 @@ class SignupViewController: SignupLoginViewController {
         let button: Button = self.createButton("Tell me more about Write Mynd")
         button.backgroundColor = UIColor.wmSilverColor()
         button.layer.cornerRadius = 0.0
-        button.addTarget(self, action: .beginOnBoarding, forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .beginOnBoarding, for: .touchUpInside)
         return button
     }()
     lazy var emailTextField: UITextField = {
         let field: UITextField = self.createTextField("Email address")
         field.tag = 1
-        field.returnKeyType = .Next
+        field.returnKeyType = .next
         return field
     }()
     lazy var password1Field: UITextField = {
         let field: UITextField = self.createTextField("Password")
         field.tag = 2;
-        field.returnKeyType = .Next
-        field.secureTextEntry = true
+        field.returnKeyType = .next
+        field.isSecureTextEntry = true
         return field
     }()
     lazy var password2Field: UITextField = {
         let field: UITextField = self.createTextField("Confirm password")
         field.tag = 3;
-        field.returnKeyType = .Done
-        field.secureTextEntry = true
+        field.returnKeyType = .done
+        field.isSecureTextEntry = true
         return field
     }()
     lazy var signupButton: Button = {
         let button = self.createButton("Create account")
-        button.addTarget(self, action: .signup, forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .signup, for: .touchUpInside)
         return button
     }()
     lazy var mascot: UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "noEmotion"))
-        imgView.contentMode = .Center
+        imgView.contentMode = .center
         return imgView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        formStackView.axis = .Vertical
-        formStackView.alignment = .Fill
-        formStackView.distribution = .FillEqually //.FillProportionally
+        formStackView.axis = .vertical
+        formStackView.alignment = .fill
+        formStackView.distribution = .fillEqually //.FillProportionally
         formStackView.spacing = 10.0
         
         formStackView.addArrangedSubview(emailTextField)
@@ -77,20 +76,20 @@ class SignupViewController: SignupLoginViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        formStackView.snp_makeConstraints(closure: { make in
+        formStackView.snp_makeConstraints({ make in
             make.top.equalTo(self.snp_topLayoutGuideBottom).offset(45)
             make.left.equalTo(self.view.snp_left).offset(10)
             make.right.equalTo(self.view.snp_right).offset(-10)
             make.height.equalTo(225)
         })
         
-        onboardButton.snp_makeConstraints(closure: { make in
+        onboardButton.snp_makeConstraints({ make in
             make.bottom.equalTo(self.view.snp_bottom)
             make.width.equalTo(self.view.snp_width)
             make.height.equalTo(50)
         })
         
-        mascot.snp_makeConstraints(closure: { make in
+        mascot.snp_makeConstraints({ make in
             make.top.equalTo(formStackView.snp_bottom)
             make.bottom.equalTo(onboardButton.snp_top)
             make.right.equalTo(self.view.snp_right).offset(-10)
@@ -102,7 +101,7 @@ class SignupViewController: SignupLoginViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func createTextField(placeholder: String) -> UITextField {
+    override func createTextField(_ placeholder: String) -> UITextField {
         let field = super.createTextField(placeholder)
         field.delegate = self
         return field
@@ -111,7 +110,7 @@ class SignupViewController: SignupLoginViewController {
 }
 
 extension SignupViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
         if textField.tag == 1 {
@@ -130,7 +129,7 @@ extension SignupViewController: UITextFieldDelegate {
 
 extension SignupViewController {
     
-    func showError( title:String ){
+    func showError( _ title:String ){
         SwiftSpinner.setTitleFont(Label.font())
         SwiftSpinner.show(title, animated: true).addTapHandler({ SwiftSpinner.hide() }, subtitle: "Tap to dismiss")
     }
@@ -144,7 +143,7 @@ extension SignupViewController {
         * 125 = Invalid Email address
         * 202 = Email Address/Username already in use
      */
-    func signup( sender:Button ){
+    func signup( _ sender:Button ){
         dismissKeyboard()
         
         guard self.emailTextField.text != "" else{ self.showError("Woah there. Enter your email address if you want to create an account."); return; }
@@ -161,7 +160,7 @@ extension SignupViewController {
         Endurance.showEndUserLicensePage(self, onAgreeAction: {
             SwiftSpinner.show("Creating WriteMynd account ...", animated: true)
             user.signUpInBackgroundWithBlock({ (succeeded:Bool, error:NSError?) -> Void in
-                if let error = error where !succeeded {
+                if let error = error , !succeeded {
                     print(error)
                     print(error.code)
                     var errorString = error.userInfo["error"] as? NSString
@@ -188,7 +187,7 @@ extension SignupViewController {
      
      - parameter sender: button to begin onboarding
      */
-    func beginOnBoarding( sender:Button ){
+    func beginOnBoarding( _ sender:Button ){
         let firstPageAnimationImages = ["happyJumpingGuy1","happyJumpingGuy2","happyJumpingGuy3","happyJumpingGuy2","happyJumpingGuy1"]
         let secondPageAnimationImages = ["photoGuy1","photoGuy2","photoGuy3","photoGuy4","photoGuy5"]
         let thirdAnimationImages = ["reflectSlide1","reflectSlide2","reflectSlide3","reflectSlide2","reflectSlide1"]

@@ -13,7 +13,7 @@ class EmpathisedPost {
     
     var user: PFUser
     var postID: String
-    var likedDate: NSDate?
+    var likedDate: Date?
     var objectID: String?
     
     init( user:PFUser, ID:String ){
@@ -29,7 +29,7 @@ class EmpathisedPost {
         object.saveInBackground()
     }
     
-    class func convertPFObjectToEmpathisedPost( object:PFObject ) -> EmpathisedPost {
+    class func convertPFObjectToEmpathisedPost( _ object:PFObject ) -> EmpathisedPost {
         let user = PFUser(className: (object["userID"] as! String))
         let empathisedPost = EmpathisedPost(user: user, ID: object["postID"] as! String)
         empathisedPost.likedDate = object.createdAt

@@ -17,10 +17,10 @@ class MenuViewCell: UITableViewCell {
         // Initialization code
         
         self.backgroundColor = .wmCoolBlueColor()
-        self.titleLabel.textColor = .whiteColor()
+        self.titleLabel.textColor = .white()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

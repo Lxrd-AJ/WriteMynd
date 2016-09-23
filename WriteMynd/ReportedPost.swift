@@ -13,12 +13,12 @@ class ReportedPost {
     var objectID: String?
     var reporter: PFUser
     var postID: String
-    var reportDate: NSDate
+    var reportDate: Date
     
     init( postID:String, reporter:PFUser ){
         self.postID = postID;
         self.reporter = reporter
-        self.reportDate = NSDate()
+        self.reportDate = Date()
     }
     
     func save(){
@@ -29,7 +29,7 @@ class ReportedPost {
         object.saveInBackground()
     }
     
-    class func convertPFObjectToReportedPost( object:PFObject ) -> ReportedPost {
+    class func convertPFObjectToReportedPost( _ object:PFObject ) -> ReportedPost {
         let reporter = PFUser(withoutDataWithObjectId: object["reporterID"] as? String )
         let reportedPost = ReportedPost(postID: object["postID"] as! String, reporter: reporter)
         reportedPost.reportDate = object.createdAt!

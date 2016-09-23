@@ -25,7 +25,7 @@ class HiddenPost {
         object.saveEventually()
     }
     
-    class func convertPFObjectToHiddenPost( object:PFObject ) -> HiddenPost {
+    class func convertPFObjectToHiddenPost( _ object:PFObject ) -> HiddenPost {
         return HiddenPost(postID: object["post"] as! String, user: object["user"] as! PFUser)
     }
 }

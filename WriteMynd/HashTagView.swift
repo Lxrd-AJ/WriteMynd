@@ -24,12 +24,12 @@ class HashTagView: UIView {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
         field.placeholder = ""
         field.layer.borderWidth = 1.0
-        field.layer.borderColor = UIColor.lightGrayColor().CGColor
+        field.layer.borderColor = UIColor.lightGray.cgColor
         field.font = Label.font()
-        field.backgroundColor = UIColor.whiteColor()
+        field.backgroundColor = UIColor.white
         field.adjustsFontSizeToFitWidth = true
         field.leftView = paddingView
-        field.leftViewMode = .Always
+        field.leftViewMode = .always
         field.delegate = self
         field.textColor = UIColor.wmSlateGreyColor()
         field.tag = 10
@@ -67,13 +67,13 @@ class HashTagView: UIView {
 
 extension HashTagView: UITextFieldDelegate {
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if string == " " {
             textField.text = textField.text! + "#"
             
-            let start = textField.positionFromPosition(textField.beginningOfDocument, offset: range.location+1)
-            let end = textField.positionFromPosition(start!, offset: range.length)
-            let _range = textField.textRangeFromPosition(start!, toPosition: end!)
+            let start = textField.position(from: textField.beginningOfDocument, offset: range.location+1)
+            let end = textField.position(from: start!, offset: range.length)
+            let _range = textField.textRange(from: start!, to: end!)
             
             textField.selectedTextRange = _range            
             return false
@@ -81,7 +81,7 @@ extension HashTagView: UITextFieldDelegate {
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         self.onFinishCallback?()
         return true

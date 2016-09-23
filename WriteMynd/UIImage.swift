@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    static func fromColor( color:UIColor ) -> UIImage {
+    static func fromColor( _ color:UIColor ) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
         color.setFill()
         UIRectFill(rect)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return img
+        return img!
     }
 }

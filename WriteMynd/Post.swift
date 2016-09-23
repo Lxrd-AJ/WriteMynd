@@ -17,8 +17,8 @@ class Post {
     var hashTags: [String]
     var isPrivate: Bool = true //TODO: Discard booleans and use PFACL to enforce constraints
     var author: PFUser
-    var createdAt: NSDate?
-    var updatedAt: NSDate?
+    var createdAt: Date?
+    var updatedAt: Date?
     var isEmpathised: Bool //Used locally to determine if the current user has empathised the post
     var reportCount: Int
     
@@ -58,11 +58,11 @@ class Post {
         }
     }
     
-    class func convertPFObjectToPost( postObj:PFObject ) -> Post {
+    class func convertPFObjectToPost( _ postObj:PFObject ) -> Post {
         let emojiText = postObj["emoji"] as! String
         var emoji:Emoji
         if emojiText == "🙂"{ //Temporary Hack for Testing
-            emoji = Emoji.Happy
+            emoji = Emoji.happy
         }else{
             emoji = Emoji.toEnum(emojiText)
         }

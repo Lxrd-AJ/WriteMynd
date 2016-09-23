@@ -50,9 +50,9 @@ class PostTableViewCell: UITableViewCell {
         bottomView.addSubview(empathiseButton)
         bottomView.addSubview(readMoreButton)
         
-        readMoreButton.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
-        hashTagsLabel.titleLabel?.lineBreakMode = .ByTruncatingTail
-        hashTagsLabel.setTitleColor(UIColor.wmSlateGreyColor(), forState: .Normal)
+        readMoreButton.setTitleColor(UIColor.wmCoolBlueColor(), for: UIControlState())
+        hashTagsLabel.titleLabel?.lineBreakMode = .byTruncatingTail
+        hashTagsLabel.setTitleColor(UIColor.wmSlateGreyColor(), for: UIControlState())
         hashTagsLabel.setFontSize(14.5)
         dateLabel.textColor = UIColor.wmSilverColor()
         dateLabel.setFontSize(11)
@@ -75,8 +75,8 @@ class PostTableViewCell: UITableViewCell {
         self.setNeedsLayout()
     }
     
-    func setupBottomSection( superview:UIView ) {
-        bottomView.snp_makeConstraints(closure: { make in
+    func setupBottomSection( _ superview:UIView ) {
+        bottomView.snp_makeConstraints({ make in
             //make.top.equalTo(self.middleView.snp_bottom)
             make.bottom.equalTo(superview.snp_bottom)
             make.width.equalTo(superview.snp_width)
@@ -84,21 +84,21 @@ class PostTableViewCell: UITableViewCell {
         })
         
         //Ellipsis Button
-        ellipsesButton.setImage(UIImage(named:"ellipses"), forState: .Normal)
-        ellipsesButton.snp_makeConstraints(closure: { make in
+        ellipsesButton.setImage(UIImage(named:"ellipses"), for: UIControlState())
+        ellipsesButton.snp_makeConstraints({ make in
             make.right.equalTo(bottomView.snp_right).offset(-14.9)
             make.bottom.equalTo(bottomView.snp_bottom).offset(-10)
         })
 
         //Empathise Button
-        empathiseButton.snp_makeConstraints(closure: { make in
+        empathiseButton.snp_makeConstraints({ make in
             //make.height.equalTo(ellipsesButton.snp_height)
             make.right.equalTo(ellipsesButton.snp_left).offset(-10)
             make.bottom.equalTo(ellipsesButton.snp_bottom)
             //make.size.equalTo(CGSize(width: 18, height: 16))
         })
         
-        readMoreButton.snp_makeConstraints(closure: { make in
+        readMoreButton.snp_makeConstraints({ make in
             make.bottom.equalTo(ellipsesButton.snp_bottom).offset(5)
             make.left.equalTo(bottomView.snp_left).offset(5)
         })
@@ -109,15 +109,15 @@ class PostTableViewCell: UITableViewCell {
      
      - parameter superview: <#superview description#>
      */
-    func setupMiddleSection( superview:UIView ){
-        self.middleView.snp_makeConstraints(closure: { make in
+    func setupMiddleSection( _ superview:UIView ){
+        self.middleView.snp_makeConstraints({ make in
             make.top.equalTo(self.topView.snp_bottom)
             make.height.equalTo(superview.snp_height).multipliedBy(0.5)
             make.width.equalTo(superview.snp_width)
             make.centerX.equalTo(superview.snp_centerX)
         })
         //Posts Label
-        postLabel.snp_makeConstraints(closure: { make in
+        postLabel.snp_makeConstraints({ make in
             //make.top.equalTo(superview.snp_top).offset(5)
             //make.width.equalTo(superview.snp_width).offset(-10)
             //make.center.equalTo(superview.snp_center)
@@ -126,8 +126,8 @@ class PostTableViewCell: UITableViewCell {
         })
     }
     
-    func setupTopSection( superview:UIView )  {
-        self.topView.snp_makeConstraints(closure: { make in
+    func setupTopSection( _ superview:UIView )  {
+        self.topView.snp_makeConstraints({ make in
             make.top.equalTo(superview.snp_top)
             make.width.equalTo(superview.snp_width)
             make.centerX.equalTo(superview.snp_centerX)
@@ -135,16 +135,16 @@ class PostTableViewCell: UITableViewCell {
         })
         //Emoji
         if self.postLabel.text == "" {
-            emojiImageView.contentMode = .ScaleToFill
-            self.emojiImageView.snp_remakeConstraints(closure: { make in
+            emojiImageView.contentMode = .scaleToFill
+            self.emojiImageView.snp_remakeConstraints({ make in
                 make.width.equalTo(self.snp_width).multipliedBy(0.5)
                 make.height.equalTo(self.snp_height)
                 make.left.equalTo(self.topView.snp_left)
                 make.top.equalTo(self.topView.snp_top)
             })
         }else{
-            emojiImageView.contentMode = .ScaleAspectFit //.Center
-            emojiImageView.snp_remakeConstraints(closure: { make in
+            emojiImageView.contentMode = .scaleAspectFit //.Center
+            emojiImageView.snp_remakeConstraints({ make in
                 make.left.equalTo(self.topView.snp_left).offset(5)
                 make.top.equalTo(self.topView.snp_top).offset(5)
                 make.height.equalTo(28)//self.topView.snp_height//.offset(-5)
@@ -154,20 +154,20 @@ class PostTableViewCell: UITableViewCell {
         }
         //Family HashTag
         hashTagsLabel.sizeToFit()
-        hashTagsLabel.snp_makeConstraints(closure: { make in
+        hashTagsLabel.snp_makeConstraints({ make in
             make.top.equalTo(self.topView.snp_top)//.offset(-3) //to accomodate for the padding in the label
             make.left.equalTo(emojiImageView.snp_right).offset(10)
             make.right.lessThanOrEqualTo(isPrivateLabel.snp_left).offset(-3)
         })
         //Date
         dateLabel.sizeToFit()
-        dateLabel.snp_makeConstraints(closure: { make in
+        dateLabel.snp_makeConstraints({ make in
             make.top.equalTo(hashTagsLabel.snp_bottom)
             make.left.equalTo(hashTagsLabel.snp_left)
             //make.bottom.equalTo(
         })
         //me or isPrivateLabel
-        isPrivateLabel.snp_makeConstraints(closure: { make in
+        isPrivateLabel.snp_makeConstraints({ make in
             make.right.equalTo(topView.snp_right).offset(-5)
             make.top.equalTo(topView.snp_top).offset(5)
         })
@@ -183,16 +183,16 @@ extension PostTableViewCell {
     func updateEmojiConstraints(){
         self.setNeedsLayout()
         if self.postLabel.text == "" {
-            emojiImageView.contentMode = .ScaleToFill
-            self.emojiImageView.snp_remakeConstraints(closure: { make in
+            emojiImageView.contentMode = .scaleToFill
+            self.emojiImageView.snp_remakeConstraints({ make in
                 make.width.equalTo(self.snp_width).multipliedBy(0.5)
                 make.height.equalTo(self.snp_height)
                 make.left.equalTo(self.topView.snp_left)
                 make.top.equalTo(self.topView.snp_top)
             })
         }else{
-            emojiImageView.contentMode = .ScaleAspectFit //.Center
-            emojiImageView.snp_remakeConstraints(closure: { make in
+            emojiImageView.contentMode = .scaleAspectFit //.Center
+            emojiImageView.snp_remakeConstraints({ make in
                 make.left.equalTo(self.topView.snp_left).offset(5)
                 make.top.equalTo(self.topView.snp_top)//.offset(5)
                 make.height.equalTo(self.topView.snp_height)//.offset(-5)

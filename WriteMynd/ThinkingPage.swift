@@ -18,8 +18,8 @@ class ThinkingPage: UIView {
     
     lazy var page1TitleLabel: Label = {
         let label: Label = Label()
-        label.textColor = .whiteColor()
-        let attributedString = NSMutableAttributedString(string: "Write Mynd \nThe thinking", attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        label.textColor = .white()
+        let attributedString = NSMutableAttributedString(string: "Write Mynd \nThe thinking", attributes: [NSForegroundColorAttributeName:UIColor.white])
         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.wmFrenchBlueColor(), range: NSRange(location: 10, length: 14))
         label.attributedText = attributedString
         label.setFontSize(21)
@@ -31,7 +31,7 @@ class ThinkingPage: UIView {
         label.text = "An app for recording,\nreflecting and sharing for\na clearer mind"
         label.setFontSize(17)
         label.numberOfLines = 0;
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.white
         return label
     }()
     lazy var page1Mascot: UIImageView = {
@@ -99,9 +99,9 @@ class ThinkingPage: UIView {
         })
     }
     
-    func createImageView( imageName:String ) -> UIImageView {
+    func createImageView( _ imageName:String ) -> UIImageView {
         let imageView: UIImageView = UIImageView(image: UIImage(named: imageName))
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }
 }

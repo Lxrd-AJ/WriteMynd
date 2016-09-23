@@ -1,41 +1,40 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, '8.0'
-# Uncomment this line if you're using Swift
+
 use_frameworks!
 
 target 'WriteMynd' do
     
-	pod 'Parse'
-    pod 'ParseUI'
-    pod 'SwiftSpinner'
-    pod 'MMDrawerController'
-    pod 'Charts', '~> 2.2.5'
-    pod 'SwiftDate', '~> 3.0.8'
-    pod 'RMDateSelectionViewController', '~> 2.0.3'
-    pod 'ZendeskSDK', '~> 1.5'
-    pod 'SnapKit', '~> 0.21.0'
-    pod 'pop', '~> 1.0'
+    pod 'Alamofire', '~> 4.0.0'
+    pod 'Bolts', '~> 1.8.4'
+    pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :branch => 'Chart2.2.5-Swift3.0'
+    pod 'Crashlytics', '~> 3.8.2'
+    pod 'DGElasticPullToRefresh', '~> 1.1'
+    pod 'Fabric', '~> 1.6.8'
     pod 'JTSActionSheet', '~> 1.0.1'
     pod 'JTImageButton'
-    pod 'Mixpanel', '~> 3.0.2'
-    #pod 'Onboard'
-    pod 'DGElasticPullToRefresh'
+    pod 'MMDrawerController'
+    pod 'Mixpanel', '~> 3.0.3'
+	pod 'Parse'
+    pod 'ParseUI'
+    pod 'pop', '~> 1.0'
+    pod 'PromiseKit', '~> 4.0'
+    pod 'RMDateSelectionViewController', '~> 2.0.3'
+    pod 'SwiftSpinner', '~> 1.0.2'
+    pod 'SwiftDate', :git => 'https://github.com/malcommac/SwiftDate.git', :branch => 'feature/swift-3.0'
+    pod 'SnapKit', '~> 3.0.1'
+    pod 'SwiftyJSON', '~> 3.0.0'
     pod 'SZTextView'
+    pod 'ZendeskSDK', '~> 1.7.3.1'
+    
+    
+    
+    
     #pod 'Gifu'
-    pod 'Pages'
-    pod 'Fabric'
-    pod 'Crashlytics'
-    pod 'Alamofire', '~> 3.4.1'
-    pod 'PromiseKit', '~> 3.4.3'
-    pod 'SwiftyJSON'
-    pod 'Bolts', '~> 1.8.4'
     #pod 'FacebookCore'
     #pod 'FacebookLogin'
     #pod 'FacebookShare'
-    
-    #pod 'PromiseKit', '~> 2.0'
     #pod 'DOFavoriteButton', '~> 0.0.4'
     #pod 'DOAlertController'
-    
+    #pod 'Pages'
+
 end
 

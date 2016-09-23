@@ -1,18 +1,23 @@
 PODS:
-  - Alamofire (3.4.1)
+  - Alamofire (4.0.0)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
   - Charts (2.2.5):
     - Charts/Core (= 2.2.5)
   - Charts/Core (2.2.5)
-  - Crashlytics (3.7.2):
+  - Crashlytics (3.8.2):
     - Fabric (~> 1.6.3)
-  - DGElasticPullToRefresh (1.0.3)
-  - Fabric (1.6.7)
+  - DGElasticPullToRefresh (1.1)
+  - Fabric (1.6.8)
   - JTImageButton (1.0.2)
   - JTSActionSheet (1.0.1)
-  - Mixpanel (3.0.2):
-    - Mixpanel/Mixpanel (= 3.0.2)
-  - Mixpanel/Mixpanel (3.0.2)
+  - Mixpanel (3.0.3):
+    - Mixpanel/Mixpanel (= 3.0.3)
+  - Mixpanel/Mixpanel (3.0.3)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -25,96 +30,101 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - OMGHTTPURLRQ (3.2.0):
-    - OMGHTTPURLRQ/RQ (= 3.2.0)
-  - OMGHTTPURLRQ/FormURLEncode (3.2.0)
-  - OMGHTTPURLRQ/RQ (3.2.0):
-    - OMGHTTPURLRQ/FormURLEncode
-    - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (3.2.0)
-  - Pages (0.6.3)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
   - ParseUI (1.2.0):
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
   - pop (1.0.9)
-  - PromiseKit (3.4.3):
-    - PromiseKit/Foundation (= 3.4.3)
-    - PromiseKit/QuartzCore (= 3.4.3)
-    - PromiseKit/UIKit (= 3.4.3)
-  - PromiseKit/CorePromise (3.4.3)
-  - PromiseKit/Foundation (3.4.3):
-    - OMGHTTPURLRQ (~> 3.2.0)
+  - PromiseKit (4.0.1):
+    - PromiseKit/Foundation (= 4.0.1)
+    - PromiseKit/QuartzCore (= 4.0.1)
+    - PromiseKit/UIKit (= 4.0.1)
+  - PromiseKit/CorePromise (4.0.1)
+  - PromiseKit/Foundation (4.0.1):
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (3.4.3):
+  - PromiseKit/QuartzCore (4.0.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (3.4.3):
+  - PromiseKit/UIKit (4.0.1):
     - PromiseKit/CorePromise
   - RMActionController (1.0.5)
   - RMDateSelectionViewController (2.0.3):
     - RMActionController (~> 1.0.5)
-  - SnapKit (0.21.1)
-  - SwiftDate (3.0.8)
-  - SwiftSpinner (0.9.5)
-  - SwiftyJSON (2.3.2)
+  - SnapKit (3.0.1)
+  - SwiftDate (3.0.9)
+  - SwiftSpinner (1.0.2)
+  - SwiftyJSON (3.0.0)
   - SZTextView (1.2.2)
-  - ZendeskSDK (1.6.2.1):
-    - ZendeskSDK/Providers (= 1.6.2.1)
-    - ZendeskSDK/UI (= 1.6.2.1)
-  - ZendeskSDK/Providers (1.6.2.1)
-  - ZendeskSDK/UI (1.6.2.1):
+  - ZendeskSDK (1.7.3.1):
+    - ZendeskSDK/Providers (= 1.7.3.1)
+    - ZendeskSDK/UI (= 1.7.3.1)
+  - ZendeskSDK/Providers (1.7.3.1)
+  - ZendeskSDK/UI (1.7.3.1):
     - ZendeskSDK/Providers
 
 DEPENDENCIES:
-  - Alamofire
-  - Charts
-  - Crashlytics
-  - DGElasticPullToRefresh
-  - Fabric
+  - Alamofire (~> 4.0.0)
+  - Bolts (~> 1.8.4)
+  - Charts (from `https://github.com/danielgindi/Charts.git`, branch `Chart2.2.5-Swift3.0`)
+  - Crashlytics (~> 3.8.2)
+  - DGElasticPullToRefresh (~> 1.1)
+  - Fabric (~> 1.6.8)
   - JTImageButton
   - JTSActionSheet (~> 1.0.1)
-  - Mixpanel
+  - Mixpanel (~> 3.0.3)
   - MMDrawerController
-  - Pages
   - Parse
   - ParseUI
   - pop (~> 1.0)
-  - PromiseKit
+  - PromiseKit (~> 4.0)
   - RMDateSelectionViewController (~> 2.0.3)
-  - SnapKit (~> 0.21.0)
-  - SwiftDate (~> 3.0.8)
-  - SwiftSpinner
-  - SwiftyJSON
+  - SnapKit (~> 3.0.1)
+  - SwiftDate (from `https://github.com/malcommac/SwiftDate.git`, branch `feature/swift-3.0`)
+  - SwiftSpinner (~> 1.0.2)
+  - SwiftyJSON (~> 3.0.0)
   - SZTextView
-  - ZendeskSDK (~> 1.5)
+  - ZendeskSDK (~> 1.7.3.1)
+
+EXTERNAL SOURCES:
+  Charts:
+    :branch: Chart2.2.5-Swift3.0
+    :git: https://github.com/danielgindi/Charts.git
+  SwiftDate:
+    :branch: feature/swift-3.0
+    :git: https://github.com/malcommac/SwiftDate.git
+
+CHECKOUT OPTIONS:
+  Charts:
+    :commit: ab3bb619df2c2d165b41736b6bc25a4218833252
+    :git: https://github.com/danielgindi/Charts.git
+  SwiftDate:
+    :commit: 644a4615c77dc70d7861ddadb2c59f5c45f4c235
+    :git: https://github.com/malcommac/SwiftDate.git
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
-  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
-  DGElasticPullToRefresh: 040f39ae69840b3261d163fe6735c5901bf851e9
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
+  DGElasticPullToRefresh: 28f11a6026302a90f8ffebbc6e24748e584dddd3
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   JTImageButton: d214ff9ee6e01865368a9f749c5a16e6abbf6409
   JTSActionSheet: d7e5350ce63b5ff23ced9db653ed1c768358124e
-  Mixpanel: 0e4f1f9a2ac612b589b2894830038418c2587428
+  Mixpanel: 45867daeaa3c60f88072a3cb1b44e0b6c5cec009
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
-  OMGHTTPURLRQ: 1e54807cb7d5dbb506926e53498e1e9ac5720c79
-  Pages: 71e80bc64040f1176297c327d080d80b7e74b38c
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
-  PromiseKit: 4e92b3008341816bcd556c8ec4f16398a93ac920
+  PromiseKit: ae9e7f97ee758e23f7b9c5e80380a2e78d6338c5
   RMActionController: b83653e7452ed51492094d65dc82151c36443c03
   RMDateSelectionViewController: 354a0f1fe40bac01054528b7a8735f2973bbd813
-  SnapKit: bbad04cb016c7cead63965f16b00c09318d271ee
-  SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
-  SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
+  SwiftDate: fa487d9b7d8c3070ea2553486902494f4915465d
+  SwiftSpinner: 1c80ff6ea1c47e2faa1dfce0fcd5e6b39a47fd51
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
-  ZendeskSDK: ad94d9f9be1826df7f048902080ada92585cd718
+  ZendeskSDK: 3b795e822d558b846555230f6085aeb997e0b835
 
-PODFILE CHECKSUM: 34b95e2a3e91761269726d6baec641bc5521694a
+PODFILE CHECKSUM: 84f7d534a838a154e07cc910937bb62dc0d5e242
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.1.0.rc.2

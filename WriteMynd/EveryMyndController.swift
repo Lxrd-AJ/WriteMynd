@@ -33,18 +33,18 @@ class EveryMyndController: ViewController {
         let label:Label = Label()
         label.text = "Feed"; label.sizeToFit();
         label.adjustsFontSizeToFitWidth = true
-        label.font = label.font.fontWithSize(25.0)
+        label.font = label.font.withSize(25.0)
         label.textColor = UIColor.wmCoolBlueColor()
         return label
     }()
     lazy var empathiseButton: Button = {
         let button = Button()
-        button.backgroundColor = UIColor.whiteColor()
-        button.setTitle("Saved posts", forState: .Normal)
-        button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
+        button.backgroundColor = UIColor.white
+        button.setTitle("Saved posts", for: UIControlState())
+        button.setTitleColor(UIColor.wmCoolBlueColor(), for: UIControlState())
         button.layer.cornerRadius = 14.0
-        button.setImage(UIImage(named: "empathiseHeart"), forState: .Normal)
-        button.addTarget(self, action: .showOnlyEmphasisedPosts,forControlEvents: .TouchUpInside)
+        button.setImage(UIImage(named: "empathiseHeart"), for: UIControlState())
+        button.addTarget(self, action: .showOnlyEmphasisedPosts,for: .touchUpInside)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         button.setFontSize(14.0)
         return button
@@ -52,13 +52,13 @@ class EveryMyndController: ViewController {
     lazy var createPostButton: Button = {
         let button: Button = Button.buttonWithImage("Create a post", imageName: "plusIcon", fontSize:16)
         button.backgroundColor = UIColor.wmGreenishTealColor()
-        button.addTarget(self, action: .showPostingSheet, forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .showPostingSheet, for: .touchUpInside)
         button.alpha = 0.8
         return button;
     }()
     lazy var bottomView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         view.alpha = 1.0
         return view;
     }()
@@ -72,7 +72,7 @@ class EveryMyndController: ViewController {
         //Adding the table view controller to display posts
         self.addChildViewController(postsController)
         self.view.addSubview(postsController.tableView)
-        postsController.didMoveToParentViewController(self)
+        postsController.didMove(toParentViewController: self)
         postsController.delegate = self
         
         loadingView.tintColor = UIColor.wmCoolBlueColor()
@@ -89,8 +89,8 @@ class EveryMyndController: ViewController {
         bottomView.addSubview(createPostButton)
         self.scrollBegan(UIScrollView()) //Decieve the page so it automatically adjusts the bottom view
         
-        if (PFUser.currentUser() != nil) {
-            postsController.tableView.hidden = true
+        if (PFUser.current() != nil) {
+            postsController.tableView.isHidden = true
             fetchPosts()
         }
         
@@ -130,7 +130,7 @@ class EveryMyndController: ViewController {
         })
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         fetchPosts()
         
@@ -143,7 +143,7 @@ class EveryMyndController: ViewController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         Analytics.timeUserExit(self, properties: nil)
     }
@@ -158,27 +158,27 @@ class EveryMyndController: ViewController {
         // Dispose of any resources that can be recreated. 
     }
     
-    @IBAction func unwindToSegue( segue:UIStoryboardSegue ) {}
+    @IBAction func unwindToSegue( _ segue:UIStoryboardSegue ) {}
     
-    @IBAction func showMenu( sender: UIBarButtonItem ){
-        self.mm_drawerController.toggleDrawerSide(.Left, animated: true, completion: nil)
+    @IBAction func showMenu( _ sender: UIBarButtonItem ){
+        self.mm_drawerController.toggle(.left, animated: true, completion: nil)
     }
 }
 
 extension EveryMyndController {
     
-    func showOnlyEmphasisedPosts( sender:Button ){
-        if sender.selected {
-            sender.backgroundColor = UIColor.whiteColor()
-            sender.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
-            sender.setImage(UIImage(named:"empathiseHeart"), forState: .Normal)
-            sender.selected = false
+    func showOnlyEmphasisedPosts( _ sender:Button ){
+        if sender.isSelected {
+            sender.backgroundColor = UIColor.white
+            sender.setTitleColor(UIColor.wmCoolBlueColor(), for: UIControlState())
+            sender.setImage(UIImage(named:"empathiseHeart"), for: UIControlState())
+            sender.isSelected = false
             self.postsController.posts = self.posts
         }else{
             sender.backgroundColor = UIColor.wmCoolBlueColor()
-            sender.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            sender.setImage(UIImage(named:"empathise_heart_filled"), forState: .Normal)
-            sender.selected = true
+            sender.setTitleColor(UIColor.white, for: UIControlState())
+            sender.setImage(UIImage(named:"empathise_heart_filled"), for: UIControlState())
+            sender.isSelected = true
             self.postsController.posts = self.postsEmphasised
             print("Empathised posts on button touch \(self.postsEmphasised)")
         }
@@ -192,7 +192,7 @@ extension EveryMyndController {
         UIActionSheet does not allow images so an option might be to mimic UIActionSheet with a View
         Controller and View and present them
      */
-    func showPostingSheet( sender:UIButton ){
+    func showPostingSheet( _ sender:UIButton ){
         self.bottomView.alpha = 0.0
         let theme: JTSActionSheetTheme = global_getActionSheetTheme()
         let swipeItItem = JTSActionSheetItem(title: "Swipe It", action: {
@@ -209,8 +209,8 @@ extension EveryMyndController {
         let cancelItem = JTSActionSheetItem(title: "Cancel", action: {
             self.bottomView.alpha = 1.0
             }, isDestructive: true)
-        let actionSheet = JTSActionSheet(theme: theme, title: "", actionItems: [swipeItItem, writeItItem], cancelItem: cancelItem)
-        actionSheet.showInView(self.view)
+        let actionSheet = JTSActionSheet(theme: theme, title: "", actionItems: [swipeItItem, writeItItem], cancel: cancelItem)
+        actionSheet?.show(in: self.view)
     }
     
     /**
@@ -219,16 +219,16 @@ extension EveryMyndController {
         [ ] Use Promises to eradicate the callbacks
      */
     func fetchPosts(){
-        ParseService.fetchPostsForUserFeed(PFUser.currentUser(), callback: { (posts:[Post]) -> Void in
+        ParseService.fetchPostsForUserFeed(PFUser.current(), callback: { (posts:[Post]) -> Void in
             self.postsController.tableView.dg_stopLoading()
             
             self.postsController.posts = posts
             self.postsController.tableView.reloadData()
             self.posts = posts
             
-            ParseService.fetchEmpathisedPosts(PFUser.currentUser(), callback: { (emPosts:[EmpathisedPost]) -> Void in
+            ParseService.fetchEmpathisedPosts(PFUser.current(), callback: { (emPosts:[EmpathisedPost]) -> Void in
                 self.postsController.empathisedPosts = emPosts
-                self.postsController.tableView.hidden = false
+                self.postsController.tableView.isHidden = false
                 self.postsController.tableView.reloadData()
                 self.view.setNeedsLayout()
             })
@@ -239,7 +239,7 @@ extension EveryMyndController {
 
 extension EveryMyndController: PostsTableVCDelegate {
     
-    func editPost(post: Post) {
+    func editPost(_ post: Post) {
         let writeVC = WriteViewController()
         writeVC.post = post
         self.navigationController?.pushViewController(writeVC, animated: true)
@@ -247,7 +247,7 @@ extension EveryMyndController: PostsTableVCDelegate {
     
     func canDeletePost() -> Bool { return true }
     
-    func scrollBegan( scrollView:UIScrollView ) {
+    func scrollBegan( _ scrollView:UIScrollView ) {
         if( self.lastContentOffSet < scrollView.contentOffset.y ){
             //Scrolling to the bottom
             UIView.animateWithDuration(1.5, delay: 1.5, options: .CurveEaseInOut, animations: {

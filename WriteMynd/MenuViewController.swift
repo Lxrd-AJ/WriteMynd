@@ -25,7 +25,7 @@ class MenuViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.backgroundColor = .wmCoolBlueColor()
-        tableView.separatorColor = .whiteColor()
+        tableView.separatorColor = .white()
         tableView.alwaysBounceVertical = false
         //tableView.tableHeaderView = self.tableViewHeader()
         tableView.tableFooterView = self.tableViewFooter()
@@ -53,29 +53,29 @@ class MenuViewController: UITableViewController {
 
     //Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItems.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as! MenuViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as! MenuViewCell
         let backgroundView = UIView()
         
         backgroundView.backgroundColor = UIColor.wmSlateGreyColor()
-        cell.titleLabel.text = menuItems[indexPath.row]
+        cell.titleLabel.text = menuItems[(indexPath as NSIndexPath).row]
         cell.selectedBackgroundView = backgroundView
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var controller: UIViewController
         
-        switch menuItems[indexPath.row] {
+        switch menuItems[(indexPath as NSIndexPath).row] {
         case "My Posts":
             controller = MyPostsViewController()
         case "Feed":
@@ -92,10 +92,10 @@ class MenuViewController: UITableViewController {
         }
         
         self.drawerController?.centerViewController = UINavigationController(rootViewController: controller)
-        self.drawerController?.closeDrawerAnimated(true, completion: nil)
+        self.drawerController?.closeDrawer(animated: true, completion: nil)
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80.0
     }
     
@@ -104,9 +104,9 @@ class MenuViewController: UITableViewController {
 extension MenuViewController {
     
     func tableViewHeader() -> UIView {
-        let button = UIButton(type: .Custom)
-        button.setBackgroundImage(UIImage(named: "cross-menu"), forState: .Normal)
-        button.addTarget(self, action: .closeDrawer, forControlEvents: .TouchUpInside)
+        let button = UIButton(type: .custom)
+        button.setBackgroundImage(UIImage(named: "cross-menu"), for: UIControlState())
+        button.addTarget(self, action: .closeDrawer, for: .touchUpInside)
         return button
     }
     
@@ -115,15 +115,15 @@ extension MenuViewController {
         let logo = UIImageView(image: UIImage(named: "wm-logo-menu"))
         let logOutButton = Button()
         
-        logo.contentMode = .Center
-        logOutButton.setTitle("Log out", forState: .Normal)
+        logo.contentMode = .center
+        logOutButton.setTitle("Log out", for: UIControlState())
         logOutButton.backgroundColor = UIColor.wmGreenishTealColor()
         logOutButton.setFontSize(17)
-        logOutButton.addTarget(self, action: .logOutUser, forControlEvents: .TouchUpInside)
+        logOutButton.addTarget(self, action: .logOutUser, for: .touchUpInside)
         
-        footerStackView.axis = .Vertical
-        footerStackView.alignment = .Fill
-        footerStackView.distribution = .FillProportionally
+        footerStackView.axis = .vertical
+        footerStackView.alignment = .fill
+        footerStackView.distribution = .fillProportionally
         footerStackView.spacing = 6.0
         
         footerStackView.addArrangedSubview(logo)
@@ -132,22 +132,22 @@ extension MenuViewController {
         return footerStackView
     }
     
-    func closeDrawerButtonTapped( sender:Button ){
-        self.drawerController?.closeDrawerAnimated(true, completion: nil)
+    func closeDrawerButtonTapped( _ sender:Button ){
+        self.drawerController?.closeDrawer(animated: true, completion: nil)
     }
     
-    func logOutButtonTapped( sender: Button ){
-        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
-            let alertController = UIAlertController(title: "Wait", message: "It looks like you haven’t created an account yet. If you log out now you’ll lose everything.", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Create account to keep my data", style: .Default, handler: { _ in
+    func logOutButtonTapped( _ sender: Button ){
+        if PFAnonymousUtils.isLinked(with: PFUser.current()) {
+            let alertController = UIAlertController(title: "Wait", message: "It looks like you haven’t created an account yet. If you log out now you’ll lose everything.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Create account to keep my data", style: .default, handler: { _ in
                 let settingsVC = SettingsTableViewController()
-                self.mm_drawerController.closeDrawerAnimated(true, completion: nil)
+                self.mm_drawerController.closeDrawer(animated: true, completion: nil)
                 self.mm_drawerController.centerViewController = UINavigationController(rootViewController: settingsVC)
                 settingsVC.registerUser()
             }))
-            alertController.addAction(UIAlertAction(title: "That's ok, log me out", style: .Destructive, handler: { _ in self.logout() }))
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
+            alertController.addAction(UIAlertAction(title: "That's ok, log me out", style: .destructive, handler: { _ in self.logout() }))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
         }else{
             self.logout()
         }
@@ -157,7 +157,7 @@ extension MenuViewController {
         SwiftSpinner.show("Logging out...", animated: true)
         PFUser.logOut()
         SwiftSpinner.hide()
-        self.mm_drawerController.closeDrawerAnimated(true, completion: nil)
+        self.mm_drawerController.closeDrawer(animated: true, completion: nil)
         self.drawerController?.centerViewController = UINavigationController(rootViewController: WelcomeViewController())
     }
 }

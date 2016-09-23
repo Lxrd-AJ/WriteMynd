@@ -10,7 +10,7 @@ import Foundation
 import Mixpanel
 import Parse
 
-private let MixpanelService = Mixpanel.sharedInstanceWithToken("35657d737e9e58ce0c79c4bb4cc8a94e");
+private let MixpanelService = Mixpanel.sharedInstance(withToken: "35657d737e9e58ce0c79c4bb4cc8a94e");
 
 private let POST_EMPATHISED = "USER_EMPATHISES A POST"
 private let USER_SEARCHED = "USER_SEARCHED_FOR"
@@ -27,11 +27,11 @@ private let USER_REMOVED_LOCAL_NOTIFICATION = "USER_REMOVED_LOCAL_NOTIFICATION"
 
 class Analytics {
     
-    private static let email:String? = PFUser.currentUser()?.email
-    private static var swipeHistory:[Swipe] = []
+    fileprivate static let email:String? = PFUser.current()?.email
+    fileprivate static var swipeHistory:[Swipe] = []
     
     class func setup(){
-        if let email = PFUser.currentUser()?.email {
+        if let email = PFUser.current()?.email {
             MixpanelService.registerSuperProperties(["user":email])
         }
     }
@@ -40,26 +40,26 @@ class Analytics {
         MixpanelService.track("USER_USED_FILTER_IN_MY_POSTS")
     }
     
-    class func trackUserSetNotificationFor( date:NSDate ){
+    class func trackUserSetNotificationFor( _ date:Date ){
         MixpanelService.track(USER_SET_LOCAL_NOTIFICATION, properties: [
             "fire_date": date
             ])
     }
     
-    class func trackUserRemovedNotificationFor( date:NSDate ){
+    class func trackUserRemovedNotificationFor( _ date:Date ){
         MixpanelService.track(USER_REMOVED_LOCAL_NOTIFICATION, properties: [
             "fire_date": date
             ])
     }
     
-    class func trackUserHid( post: Post ){
+    class func trackUserHid( _ post: Post ){
         MixpanelService.track("USER_HID_POST", properties: [
             "post_text":post.text,
             "post_emoji": post.emoji.value().name
             ])
     }
     
-    class func trackAppLaunchFromNotification( local:Bool ){
+    class func trackAppLaunchFromNotification( _ local:Bool ){
         MixpanelService.track(APP_LAUNCH_FROM_LOCAL_NOTIFICATION)
     }
     
@@ -71,7 +71,7 @@ class Analytics {
     
     class func trackAppUsageEnded(){ MixpanelService.track(APP_USAGE_BEGAN) }
     
-    class func trackSearchFor( query:String ){
+    class func trackSearchFor( _ query:String ){
         MixpanelService.track( USER_SEARCHED, properties: [
                 "query": query
             ])
@@ -83,7 +83,7 @@ class Analytics {
      
      - parameter swipe: The swipe to track
      */
-    class func trackUserMade( swipe:Swipe ){
+    class func trackUserMade( _ swipe:Swipe ){
         if let email = email { MixpanelService.identify(email) }
         let emotion = swipe.feeling
         MixpanelService.track("USER_SWIPED", properties: [
@@ -96,7 +96,7 @@ class Analytics {
         }
     }
     
-    class func trackUserViewed( page: UIViewController ){
+    class func trackUserViewed( _ page: UIViewController ){
         switch page {
 //        case _ as EveryMyndController:
 //            MixpanelService.track()
@@ -116,7 +116,7 @@ class Analytics {
      
      - parameter page: the page to monitor
      */
-    class func timeUserEntered( page:UIViewController ){
+    class func timeUserEntered( _ page:UIViewController ){
         switch page {
         case _ as WriteViewController:
             MixpanelService.timeEvent(USER_IN_WRITE_POST_PAGE)
@@ -139,7 +139,7 @@ class Analytics {
      
      - parameter page: the page to log on user exit
      */
-    class func timeUserExit( page:UIViewController,properties:[NSObject:AnyObject]? ){
+    class func timeUserExit( _ page:UIViewController,properties:[AnyHashable: Any]? ){
         switch page {
         case _ as WriteViewController:
             MixpanelService.track(USER_IN_WRITE_POST_PAGE, properties: properties)
@@ -165,7 +165,7 @@ class Analytics {
      
      - parameter post: The post to track
      */
-    class func trackUserMade( post:Post ){
+    class func trackUserMade( _ post:Post ){
         if let email = email { MixpanelService.identify(email) }
         MixpanelService.people.increment(["POSTS_MADE":1])
         MixpanelService.track("USER_MADE_POST", properties: [
@@ -175,7 +175,7 @@ class Analytics {
         //Categorise based on the number of words
         guard post.text != "" else{ return }
         MixpanelService.track(USER_MADE_POST_WRITING_FEATURE)
-        let words = post.text.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let words = post.text.components(separatedBy: CharacterSet.whitespacesAndNewlines)
         if words.count >= 100 {
             MixpanelService.track(USER_MADE_POST_WITH_MORE_100_WORDS)
         }else if words.count >= 50 {
@@ -183,5 +183,5 @@ class Analytics {
         }
     }
     
-    class func trackUserEmpathisesWith( post:Post ){ MixpanelService.track( POST_EMPATHISED ) }
+    class func trackUserEmpathisesWith( _ post:Post ){ MixpanelService.track( POST_EMPATHISED ) }
 }

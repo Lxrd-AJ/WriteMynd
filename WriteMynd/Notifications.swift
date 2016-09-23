@@ -11,21 +11,21 @@ import UIKit
 
 class Notifications {
     
-    class func scheduleRepeatingNotification( date:NSDate, interval: NSCalendarUnit ) -> NSDate{
-        let calendar:NSCalendar = NSCalendar.autoupdatingCurrentCalendar()
-        let scheduleDate = calendar.dateBySettingHour(date.hour, minute: date.minute, second: date.second, ofDate: NSDate(), options: NSCalendarOptions.MatchNextTime)
+    class func scheduleRepeatingNotification( _ date:Date, interval: NSCalendar.Unit ) -> Date{
+        let calendar:Calendar = Calendar.autoupdatingCurrent
+        let scheduleDate = calendar.dateBySettingHour(date.hour, minute: date.minute, second: date.second, ofDate: Date(), options: NSCalendar.Options.MatchNextTime)
         let localNotification:UILocalNotification = UILocalNotification()
-        let userNotificationTypes:UIUserNotificationType = [ .Alert, .Badge, .Sound ]
-        let settings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-        let application = UIApplication.sharedApplication()
+        let userNotificationTypes:UIUserNotificationType = [ .alert, .badge, .sound ]
+        let settings:UIUserNotificationSettings = UIUserNotificationSettings(types: userNotificationTypes, categories: nil)
+        let application = UIApplication.shared
         
         localNotification.fireDate = scheduleDate
         localNotification.alertBody = "Take 10 minutes to do something good for your mind"
         localNotification.alertAction = "Make a Post"
-        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        localNotification.timeZone = TimeZone.current
         localNotification.alertTitle = "Write Mynd"
-        localNotification.repeatInterval = .Day
-        localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
+        localNotification.repeatInterval = .day
+        localNotification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
         localNotification.soundName = UILocalNotificationDefaultSoundName
         
         application.registerUserNotificationSettings(settings)
@@ -36,11 +36,11 @@ class Notifications {
     }
     
     class func cancelAllLocalNotifications(){
-        if let notification = UIApplication.sharedApplication().scheduledLocalNotifications?.first {
+        if let notification = UIApplication.shared.scheduledLocalNotifications?.first {
             Analytics.trackUserRemovedNotificationFor( notification.fireDate! )
         }
         
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
+        UIApplication.shared.cancelAllLocalNotifications()
+        UIApplication.shared.applicationIconBadgeNumber = 0;
     }
 }

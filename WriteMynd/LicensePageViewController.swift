@@ -16,20 +16,20 @@ class LicensePageViewController: OnboardViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.closeButton.hidden = true
-        self.bottomButton.hidden = false
-        self.bottomButton.setTitle("Read Licence Agreement", forState: .Normal)
+        self.closeButton.isHidden = true
+        self.bottomButton.isHidden = false
+        self.bottomButton.setTitle("Read Licence Agreement", for: UIControlState())
         
         let disagreeButton = self.createButton("Disagree")
         let agreeButton = self.createButton("Agree")
         disagreeButton.backgroundColor = UIColor.wmCoolBlueColor()
-        disagreeButton.addTarget(self, action: .disagree, forControlEvents: .TouchUpInside)
+        disagreeButton.addTarget(self, action: .disagree, for: .touchUpInside)
         agreeButton.backgroundColor = UIColor.wmFadedRedColor()
-        agreeButton.addTarget(self, action: .agree, forControlEvents: .TouchUpInside)
+        agreeButton.addTarget(self, action: .agree, for: .touchUpInside)
         
-        buttonStackView.axis = .Horizontal
-        buttonStackView.alignment = .Fill
-        buttonStackView.distribution = .FillEqually
+        buttonStackView.axis = .horizontal
+        buttonStackView.alignment = .fill
+        buttonStackView.distribution = .fillEqually
         buttonStackView.spacing = 5.0
         buttonStackView.addArrangedSubview(disagreeButton)
         buttonStackView.addArrangedSubview(agreeButton)
@@ -37,9 +37,9 @@ class LicensePageViewController: OnboardViewController {
         self.view.addSubview(buttonStackView)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,12 +50,12 @@ class LicensePageViewController: OnboardViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        bottomButton.snp_remakeConstraints(closure: { make in
+        bottomButton.snp_remakeConstraints({ make in
             make.top.equalTo(body.snp_bottom).offset(6)
             make.centerX.equalTo(self.view.snp_centerX)
         })
         
-        buttonStackView.snp_makeConstraints(closure: { make in
+        buttonStackView.snp_makeConstraints({ make in
             make.bottom.equalTo(self.view.snp_bottom).offset(-20)
             make.width.equalTo(self.view.snp_width).offset(-10)
             make.centerX.equalTo(self.view.snp_centerX)
@@ -63,16 +63,16 @@ class LicensePageViewController: OnboardViewController {
         })
     }
     
-    func createButton( titleText:String ) -> Button {
-        let button = Button(type: .Custom)
-        button.setTitle(titleText, forState: .Normal)
+    func createButton( _ titleText:String ) -> Button {
+        let button = Button(type: .custom)
+        button.setTitle(titleText, for: UIControlState())
         button.layer.cornerRadius = 5.0
-        button.layer.borderColor = UIColor.blackColor().CGColor
+        button.layer.borderColor = UIColor.black.cgColor
         return button;
     }
     
-    func onAgree( sender:UIButton ){ onAgreeAction?() }
-    func onDisagree( sender:UIButton ){ onDeclineAction?() }
+    func onAgree( _ sender:UIButton ){ onAgreeAction?() }
+    func onDisagree( _ sender:UIButton ){ onDeclineAction?() }
 
 }
 

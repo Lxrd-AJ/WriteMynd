@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-let screenWidth = UIScreen.mainScreen().bounds.width
-let screenHeight = UIScreen.mainScreen().bounds.height
+let screenWidth = UIScreen.main.bounds.width
+let screenHeight = UIScreen.main.bounds.height
 
 /**
  Executes the closure using grand central dispatch on the main queue
@@ -19,13 +19,9 @@ let screenHeight = UIScreen.mainScreen().bounds.height
  - delay: The amount in seconds to wait before executing `closure`
  - closure: The lambda block to execute
  */
-func delay(delay:Double, closure:()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
+func delay(_ delay:Double, closure:@escaping ()->()) {
+    DispatchQueue.main.asyncAfter(
+        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
 
 let dailyQuestion: [String] = [

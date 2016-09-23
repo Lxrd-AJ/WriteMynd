@@ -9,82 +9,102 @@
 import Foundation
 import UIKit
 import Charts
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 extension UIView{
     
-    class func loadFromNibName( nibNamed:String, bundle:NSBundle? = nil ) -> UIView? {
-        return UINib(nibName: nibNamed, bundle: bundle).instantiateWithOwner(nil , options: nil)[0] as? UIView
+    class func loadFromNibName( _ nibNamed:String, bundle:Bundle? = nil ) -> UIView? {
+        return UINib(nibName: nibNamed, bundle: bundle).instantiate(withOwner: nil , options: nil)[0] as? UIView
     }
     
-    func addBorder(edges edges: UIRectEdge, colour: UIColor = UIColor.whiteColor(), thickness: CGFloat = 1) -> [UIView] {
+    func addBorder(edges: UIRectEdge, colour: UIColor = UIColor.white, thickness: CGFloat = 1) -> [UIView] {
         
         var borders = [UIView]()
         
         func border() -> UIView {
-            let border = UIView(frame: CGRectZero)
+            let border = UIView(frame: CGRect.zero)
             border.backgroundColor = colour
             border.translatesAutoresizingMaskIntoConstraints = false
             return border
         }
         
-        if edges.contains(.Top) || edges.contains(.All) {
+        if edges.contains(.top) || edges.contains(.all) {
             let top = border()
             addSubview(top)
             addConstraints(
-                NSLayoutConstraint.constraintsWithVisualFormat("V:|-(0)-[top(==thickness)]",
+                NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[top(==thickness)]",
                     options: [],
                     metrics: ["thickness": thickness],
                     views: ["top": top]))
             addConstraints(
-                NSLayoutConstraint.constraintsWithVisualFormat("H:|-(0)-[top]-(0)-|",
+                NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[top]-(0)-|",
                     options: [],
                     metrics: nil,
                     views: ["top": top]))
             borders.append(top)
         }
         
-        if edges.contains(.Left) || edges.contains(.All) {
+        if edges.contains(.left) || edges.contains(.all) {
             let left = border()
             addSubview(left)
             addConstraints(
-                NSLayoutConstraint.constraintsWithVisualFormat("H:|-(0)-[left(==thickness)]",
+                NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[left(==thickness)]",
                     options: [],
                     metrics: ["thickness": thickness],
                     views: ["left": left]))
             addConstraints(
-                NSLayoutConstraint.constraintsWithVisualFormat("V:|-(0)-[left]-(0)-|",
+                NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[left]-(0)-|",
                     options: [],
                     metrics: nil,
                     views: ["left": left]))
             borders.append(left)
         }
         
-        if edges.contains(.Right) || edges.contains(.All) {
+        if edges.contains(.right) || edges.contains(.all) {
             let right = border()
             addSubview(right)
             addConstraints(
-                NSLayoutConstraint.constraintsWithVisualFormat("H:[right(==thickness)]-(0)-|",
+                NSLayoutConstraint.constraints(withVisualFormat: "H:[right(==thickness)]-(0)-|",
                     options: [],
                     metrics: ["thickness": thickness],
                     views: ["right": right]))
             addConstraints(
-                NSLayoutConstraint.constraintsWithVisualFormat("V:|-(0)-[right]-(0)-|",
+                NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[right]-(0)-|",
                     options: [],
                     metrics: nil,
                     views: ["right": right]))
             borders.append(right)
         }
         
-        if edges.contains(.Bottom) || edges.contains(.All) {
+        if edges.contains(.bottom) || edges.contains(.all) {
             let bottom = border()
             addSubview(bottom)
             addConstraints(
-                NSLayoutConstraint.constraintsWithVisualFormat("V:[bottom(==thickness)]-(0)-|",
+                NSLayoutConstraint.constraints(withVisualFormat: "V:[bottom(==thickness)]-(0)-|",
                     options: [],
                     metrics: ["thickness": thickness],
                     views: ["bottom": bottom]))
             addConstraints(
-                NSLayoutConstraint.constraintsWithVisualFormat("H:|-(0)-[bottom]-(0)-|",
+                NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[bottom]-(0)-|",
                     options: [],
                     metrics: nil,
                     views: ["bottom": bottom]))
@@ -95,7 +115,7 @@ extension UIView{
     }
 }
 
-extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralConvertible {
+extension Dictionary where Value: ExpressibleByIntegerLiteral, Key: ExpressibleByStringLiteral {
     func max() -> String {
 //        var maxValue: Int = -1; var maxKey: String = "";
 //        for key in self.keys {
@@ -107,12 +127,12 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
 //            if (self[$0] as? Int) > (self[$1] as? Int) { return $0 }
 //            else{ return $1 }
 //        }))
-        return self.keys().sort{ s1,s2 in return (self[s1] as? Int) > (self[s2] as? Int) }.first! as! String
+        return self.keys().sorted{ s1,s2 in return (self[s1] as? Int) > (self[s2] as? Int) }.first! as! String
     }
     
     func min() -> String {
         guard self.keys.first != nil else{ return "" }
-        return String(self.keys.reduce(self.keys.first! , combine: {
+        return String(describing: self.keys.reduce(self.keys.first! , {
             if (self[$0] as? Int) < (self[$1] as? Int) { return $0 }
             else{ return $1 }
         }))
@@ -121,7 +141,7 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
     func maxTuple () -> (Int,Int) {
         //maxTuple ( current_highest, total_value )
         guard self.keys.first != nil else{ return (0,0) }
-        return self.keys.reduce((self[self.keys.first!] as! Int, 0), combine: { (_tuple:(Int,Int), curKey) in
+        return self.keys.reduce((self[self.keys.first!] as! Int, 0), { (_tuple:(Int,Int), curKey) in
             var tuple = _tuple;
             let _curKey = self[curKey] as! Int
             if _curKey > tuple.0 { tuple.0 = _curKey }
@@ -139,7 +159,7 @@ extension Dictionary where Value: IntegerLiteralConvertible, Key: StringLiteralC
     func minTuple () -> (Int,Int) {
         //minTuple ( current_lowest, total_value )
         guard self.keys.first != nil else{ return (0,0) }
-        return self.keys.reduce((self[self.keys.first!] as! Int, 0), combine: { (_tuple:(Int,Int), curKey) in
+        return self.keys.reduce((self[self.keys.first!] as! Int, 0), { (_tuple:(Int,Int), curKey) in
             var tuple = _tuple;
             let _curKey = self[curKey] as! Int
             if _curKey < tuple.0 { tuple.0 = _curKey }
@@ -165,15 +185,15 @@ extension Dictionary {
 /**
  Extensions to shuffle an array
  */
-extension CollectionType {
+extension Collection {
     /// Return a copy of `self` with its elements shuffled
-    func shuffle() -> [Generator.Element] {
+    func shuffle() -> [Iterator.Element] {
         var list = Array(self)
         list.shuffleInPlace()
         return list
     }
 }
-extension MutableCollectionType where Index == Int {
+extension MutableCollection where Index == Int {
     /// Shuffle the elements of `self` in-place.
     mutating func shuffleInPlace() {
         // empty and single-element collections don't shuffle
@@ -189,7 +209,7 @@ extension MutableCollectionType where Index == Int {
 
 extension Array where Element: EmpathisedPost {
     
-    func containsPost( post:Post ) -> Bool {
+    func containsPost( _ post:Post ) -> Bool {
         var result = false
         for emPost in self {
             if emPost.postID == post.ID{
@@ -203,7 +223,7 @@ extension Array where Element: EmpathisedPost {
 
 
 class LineXAxis: ChartXAxisValueFormatter {
-    @objc func stringForXValue(index: Int, original: String, viewPortHandler: ChartViewPortHandler) -> String {
+    @objc func stringForXValue(_ index: Int, original: String, viewPortHandler: ChartViewPortHandler) -> String {
         let double = Double(original)
         guard double != nil else { return original }
         return String(Int(double!))

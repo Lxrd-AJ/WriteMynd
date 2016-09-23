@@ -28,11 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         $0.server = serverURL + "/parse"
     }
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         //Parse configurations
         Parse.enableLocalDatastore()
-        Parse.initializeWithConfiguration(parseConfiguration)
+        Parse.initialize(with: parseConfiguration)
         
         //Mixpanel Config
         Analytics.setup()
@@ -40,27 +40,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //UI Configurations
         UILabel.appearance().font = UIFont(name: "Montserrat-Regular.ttf", size: 17.0)
-        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()//
+        UINavigationBar.appearance().barTintColor = UIColor.white//
         UINavigationBar.appearance().tintColor = UIColor.wmCoolBlueColor()
         UIBarButtonItem.appearance().tintColor = UIColor(red: 99/255, green: 60/255, blue: 134/255, alpha: 1) //UIColor.whiteColor()
         UIBarButtonItem.appearance().setTitleTextAttributes([
             NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 15.0)!,
             NSForegroundColorAttributeName: UIColor.wmCoolBlueColor()]
-        , forState: .Normal)
+        , for: UIControlState())
         
         //App Configurations
         let signupVC = WelcomeViewController()
-        let menuVC: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+        let menuVC: MenuViewController = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
         let navigationController: UINavigationController = UINavigationController(rootViewController: signupVC)
-        drawerController = MMDrawerController(centerViewController: navigationController, leftDrawerViewController: menuVC)
+        drawerController = MMDrawerController(center: navigationController, leftDrawerViewController: menuVC)
         menuVC.navController = navigationController
         menuVC.drawerController = drawerController
-        drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
-        drawerController.closeDrawerGestureModeMask = [.BezelPanningCenterView,.PanningCenterView]
+        drawerController.openDrawerGestureModeMask = [.bezelPanningCenterView]
+        drawerController.closeDrawerGestureModeMask = [.bezelPanningCenterView,.panningCenterView]
         
         //Local Notifications
         //SwiftDate.Region.setDefaultRegion(Region.LocalRegion())
-        if let localNotification:UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+        if let localNotification:UILocalNotification = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
             application.applicationIconBadgeNumber = 0 //localNotification.applicationIconBadgeNumber--
             print("Application launched by local Notification \n \(localNotification.applicationIconBadgeNumber)")
             let everyMyndVC = EveryMyndController()
@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         application.applicationIconBadgeNumber = 0 //HACK: Remove later
         
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         window!.rootViewController = drawerController
         window!.makeKeyAndVisible()
         window!.tintColor = UIColor.wmCoolBlueColor()
@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Fabric Crashlytics
         Fabric.with([Crashlytics.self])
 
-        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             print("Application launched from shortcut item => \(shortcutItem.type)")
             handleQuickAction(shortcutItem)
             return false
@@ -86,13 +86,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true //so that `performActionForShortcutItem` would not be called
     }
     
-    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         application.applicationIconBadgeNumber = 0
         Analytics.trackAppLaunchFromNotification(true)
-        if application.applicationState == .Active {
+        if application.applicationState == .active {
             print("Local Notification recieved whilst active")
             //TODO: Display an unintrusive notification **google whisper**
-        }else if application.applicationState == .Inactive || application.applicationState == .Background{
+        }else if application.applicationState == .inactive || application.applicationState == .background{
             //Opened from local push notification in background
         }
     }
@@ -111,10 +111,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      
      - returns: <#return value description#>
      */
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("Application opening \(url) from source application \(sourceApplication)")
         if url.host == "post" {
-            switch url.path! {
+            switch url.path {
             case "/main":
                 print("App should load my posts page")
             default:
@@ -125,33 +125,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else{ return false }
     }
     
-    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         print("Performing shortcut item \(shortcutItem.type)")
         completionHandler( handleQuickAction(shortcutItem) )
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         Analytics.trackAppUsageEnded()
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         application.applicationIconBadgeNumber = 0
         Analytics.trackAppUsageBegan()
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         Analytics.trackAppUsageEnded()
     }
@@ -166,14 +166,14 @@ extension AppDelegate {
         case Reflect = "reflect"
     }
     
-    func handleQuickAction( shortcutItem: UIApplicationShortcutItem ) -> Bool {
+    func handleQuickAction( _ shortcutItem: UIApplicationShortcutItem ) -> Bool {
         print("Handling Action \(shortcutItem.localizedTitle)")
-        guard PFUser.currentUser() != nil else{ return false }
+        guard PFUser.current() != nil else{ return false }
         var actionHandled = false
         
         let everymynd = EveryMyndController()
-        let type = shortcutItem.type.componentsSeparatedByString(".").last!
-        if let shortcutType = ShortCut.init(rawValue: type) , nav = drawerController.centerViewController as? UINavigationController{
+        let type = shortcutItem.type.components(separatedBy: ".").last!
+        if let shortcutType = ShortCut.init(rawValue: type) , let nav = drawerController.centerViewController as? UINavigationController{
             switch shortcutType {
             case .WriteIt:
                 actionHandled = true

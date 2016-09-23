@@ -14,8 +14,8 @@ class DetailTableViewCell: UITableViewCell {
         let label = Label()
         label.textColor = UIColor.wmLightGoldColor()
         label.setFontSize(30)
-        label.textAlignment = .Center
-        label.addBorder(edges: .Right, colour: .wmPaleGreyTwoColor(), thickness: 0.9)
+        label.textAlignment = .center
+        label.addBorder(edges: .right, colour: .wmPaleGreyTwoColor(), thickness: 0.9)
         return label;
     }()
     

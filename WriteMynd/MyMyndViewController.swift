@@ -20,22 +20,22 @@ class MyMyndViewController: ViewController {
     
     lazy var myProfileButton: Button = {
         let button = Button()
-        button.setTitle("My Profile", forState: .Normal)
-        button.setTitleColor(.wmCoolBlueColor(), forState: .Normal)
+        button.setTitle("My Profile", for: UIControlState())
+        button.setTitleColor(.wmCoolBlueColor(), for: UIControlState())
         button.setFontSize(25.0)
         button.backgroundColor = UIColor.wmDarkSkyBlue10Color()
-        button.addTarget(self, action: .toggleProfileAndPost, forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .toggleProfileAndPost, for: .touchUpInside)
         button.tag = 0
         return button
     }()
     
     lazy var myPostsButton: Button = {
         let button = Button()
-        button.setTitle("My Posts", forState: .Normal)
-        button.setTitleColor(.wmCoolBlueColor(), forState: .Normal)
+        button.setTitle("My Posts", for: UIControlState())
+        button.setTitleColor(.wmCoolBlueColor(), for: UIControlState())
         button.setFontSize(25.0)
         button.backgroundColor = UIColor.wmDarkSkyBlue10Color()
-        button.addTarget(self, action: .toggleProfileAndPost, forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: .toggleProfileAndPost, for: .touchUpInside)
         button.tag = 1
         return button
     }()
@@ -66,7 +66,7 @@ class MyMyndViewController: ViewController {
         })
         //END MARK
         
-        ParseService.fetchPostsForUser(PFUser.currentUser()!, callback: { posts in
+        ParseService.fetchPostsForUser(PFUser.current()!, callback: { posts in
             self.posts = posts //Check if redundant 
             self.myPostsVC.posts = self.posts
         })
@@ -83,7 +83,7 @@ class MyMyndViewController: ViewController {
 }
 
 extension MyMyndViewController {
-    func toggleProfileAndPost( sender: Button ){
+    func toggleProfileAndPost( _ sender: Button ){
         sender.backgroundColor = UIColor.wmSlateGreyColor()
         
         if sender.tag == 0 { //My profile button
@@ -91,7 +91,7 @@ extension MyMyndViewController {
             
             //Remove the posts table view controller if in the view 
             if self.myPostsVC.view.superview != nil {
-                myPostsVC.willMoveToParentViewController(nil)
+                myPostsVC.willMove(toParentViewController: nil)
                 myPostsVC.view.removeFromSuperview()
                 myPostsVC.removeFromParentViewController()
             }
@@ -101,7 +101,7 @@ extension MyMyndViewController {
             
             self.view.addSubview(dashboardVC.view)
             
-            dashboardVC.didMoveToParentViewController(self)
+            dashboardVC.didMove(toParentViewController: self)
             dashboardVC.view.snp_makeConstraints(closure: { make in
                 make.top.equalTo(self.myProfileButton.snp_bottom)
                 make.width.equalTo(self.view.snp_width)
@@ -113,14 +113,14 @@ extension MyMyndViewController {
             self.myProfileButton.backgroundColor = UIColor.wmDarkSkyBlue10Color()            
             
             //Remove the Dashboard Child Controller
-            dashboardVC.willMoveToParentViewController(nil)
+            dashboardVC.willMove(toParentViewController: nil)
             dashboardVC.view.removeFromSuperview()
             dashboardVC.removeFromParentViewController()
             
             //Add the posts table view controller
             self.addChildViewController(myPostsVC)
             self.view.addSubview(myPostsVC.view)
-            myPostsVC.didMoveToParentViewController(self)
+            myPostsVC.didMove(toParentViewController: self)
             myPostsVC.view.snp_makeConstraints(closure: { make in
                 make.top.equalTo(myProfileButton.snp_bottom)
                 make.bottom.equalTo(self.view.snp_bottom)

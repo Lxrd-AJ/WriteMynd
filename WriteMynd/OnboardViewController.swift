@@ -13,29 +13,29 @@ class OnboardViewController: UIViewController {
     let iconView: UIImageView!
     let pageTitle: Label! = {
         let label = Label()
-        label.textColor = .whiteColor()
+        label.textColor = UIColor.white
         label.setFontSize(20)
         return label
     }()
     let body: Label! = {
         let label = Label()
-        label.textColor = .whiteColor()
+        label.textColor = UIColor.white
         label.numberOfLines = 0
-        label.textAlignment = .Center
+        label.textAlignment = .center
         label.setFontSize(16)
         return label
     }()
     lazy var closeButton: UIButton = {
-        let button = UIButton(type: .Custom)
-        button.setImage(UIImage(named: "cross-menu"), forState: .Normal)
-        button.addTarget(self, action: .close, forControlEvents: .TouchUpInside)
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "cross-menu"), for: UIControlState())
+        button.addTarget(self, action: .close, for: .touchUpInside)
         return button;
     }()
     lazy var bottomButton: UIButton = {
-        let button = Button(type: .Custom)
-        button.addTarget(self, action: .bottomButton, forControlEvents: .TouchUpInside)
-        button.setTitleColor(UIColor.wmCoolBlueColor(), forState: .Normal)
-        button.hidden = true;
+        let button = Button(type: .custom)
+        button.addTarget(self, action: .bottomButton, for: .touchUpInside)
+        button.setTitleColor(UIColor.wmCoolBlueColor(), for: UIControlState())
+        button.isHidden = true;
         return button;
     }()
     var buttonAction:(() -> Void)?
@@ -46,7 +46,7 @@ class OnboardViewController: UIViewController {
         self.iconView.animationImages = animationImageNames.map({ return UIImage(named: $0)! })
         self.iconView.animationDuration = 1.5
         self.iconView.animationRepeatCount = 1;
-        self.iconView.contentMode = .Center
+        self.iconView.contentMode = .center
         self.pageTitle.text = title
         self.body.text = body;
         super.init(nibName: nil, bundle: nil)
@@ -70,23 +70,23 @@ class OnboardViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         //self.iconView.startAnimating()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        closeButton.snp_makeConstraints(closure: { make in
+        closeButton.snp_makeConstraints({ make in
             make.top.equalTo(self.view.snp_top).offset(25)
             make.left.equalTo(self.view.snp_left).offset(20)
             make.size.equalTo(CGSize(width: 15, height: 15))
         })
         
-        iconView.snp_makeConstraints(closure: { make in
+        iconView.snp_makeConstraints({ make in
             make.top.equalTo(self.closeButton.snp_bottom).offset(20)
             //make.left.equalTo(self.view.snp_left).multipliedBy(0.4)
             make.centerX.equalTo(self.view.snp_centerX)
@@ -96,25 +96,25 @@ class OnboardViewController: UIViewController {
             make.height.equalTo(180)
         })
         
-        pageTitle.snp_makeConstraints(closure: { make in
+        pageTitle.snp_makeConstraints({ make in
             make.top.equalTo(iconView.snp_bottom).offset(40)
             make.centerX.equalTo(self.view.snp_centerX)
         })
         
-        body.snp_makeConstraints(closure: { make in
+        body.snp_makeConstraints({ make in
             make.top.equalTo(pageTitle.snp_bottom).offset(30)
             make.centerX.equalTo(self.view.snp_centerX)
             make.width.equalTo(self.view.snp_width).offset(-10)
         })
         
-        bottomButton.snp_makeConstraints(closure: { make in
+        bottomButton.snp_makeConstraints({ make in
             make.bottom.equalTo(self.view.snp_bottom).offset(-10)
             make.centerX.equalTo(self.view.snp_centerX)
         })
     }
     
-    func closeButtonTapped( sender: UIButton ){ buttonAction?() }
-    func bottonButtonTapped( sender:UIButton){ bottomButtonAction?() }
+    func closeButtonTapped( _ sender: UIButton ){ buttonAction?() }
+    func bottonButtonTapped( _ sender:UIButton){ bottomButtonAction?() }
 
 }
 

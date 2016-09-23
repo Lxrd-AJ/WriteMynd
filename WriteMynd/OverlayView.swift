@@ -11,5 +11,5 @@ import UIKit
 
 
 class OverlayView: UIView {
-    var overlayState = SwipeDirection.Ragnarok
+    var overlayState = SwipeDirection.ragnarok
 }

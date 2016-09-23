@@ -18,9 +18,9 @@ class SignupLoginViewController: UIViewController {
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,45 +28,45 @@ class SignupLoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func showErrorFor( label:Label, message:String ) {
+    func showErrorFor( _ label:Label, message:String ) {
         label.textColor = UIColor.wmFadedRedColor()
         label.text = message
         
         delay(3.0, closure:{
-            label.textColor = UIColor.clearColor()
+            label.textColor = UIColor.clear
         })
         
     }
     
-    func createButton( title:String ) -> Button {
-        let button = Button(type: .Custom)
-        button.setTitle(title, forState: .Normal)
+    func createButton( _ title:String ) -> Button {
+        let button = Button(type: .custom)
+        button.setTitle(title, for: UIControlState())
         button.backgroundColor = UIColor.wmGreenishTealColor()
         return button
     }
     
-    func createLabel( title:String ) -> Label {
+    func createLabel( _ title:String ) -> Label {
         let label = Label()
         label.textColor = UIColor.wmFadedRedColor()
         label.text = title
         label.setFontSize(10)
         label.numberOfLines = 0;
-        label.textAlignment = .Left
+        label.textAlignment = .left
         return label
     }
     
-    func createTextField( placeholder:String ) -> UITextField {
+    func createTextField( _ placeholder:String ) -> UITextField {
         let field = UITextField()
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
         field.placeholder = placeholder
         field.layer.borderWidth = 1.0
-        field.layer.borderColor = UIColor.wmSilverColor().CGColor
+        field.layer.borderColor = UIColor.wmSilverColor().cgColor
         field.font = Label.font()        
-        field.backgroundColor = UIColor.whiteColor()
-        field.textColor = UIColor.lightGrayColor()
+        field.backgroundColor = UIColor.white
+        field.textColor = UIColor.lightGray
         field.leftView = paddingView
-        field.leftViewMode = .Always
-        field.autocapitalizationType = .None
+        field.leftViewMode = .always
+        field.autocapitalizationType = .none
         return field
     }
 

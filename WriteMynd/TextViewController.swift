@@ -19,7 +19,7 @@ class TextViewController: UIViewController {
         textView.textColor = UIColor.wmSlateGreyColor()
         textView.delegate = self
         textView.layer.borderWidth = 1.0
-        textView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        textView.layer.borderColor = UIColor.lightGray.cgColor
         return textView
     }()
     
@@ -34,14 +34,14 @@ class TextViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: .finishedEditingTextView)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: .finishedEditingTextView)
         
-        self.view.backgroundColor = .whiteColor()
+        self.view.backgroundColor = .white()
         self.view.addSubview(promptMessage)
         self.view.addSubview(textView)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         textView.becomeFirstResponder()
     }
@@ -65,15 +65,15 @@ class TextViewController: UIViewController {
         })
     }
     
-    func finishedEditingTextView(sender: UIBarButtonItem){
+    func finishedEditingTextView(_ sender: UIBarButtonItem){
         print("Done Button called")
         onFinishCallback?()
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
 extension TextViewController: UITextViewDelegate {
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         return true
     }
 }

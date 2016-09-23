@@ -47,7 +47,7 @@ class HashTagsPieCharts: UIView {
         })
     }
     
-    func renderChart( pieChart:PieChartView, dataPoints:[String], values:[Double],centerValue:Int, tag:String ){
+    func renderChart( _ pieChart:PieChartView, dataPoints:[String], values:[Double],centerValue:Int, tag:String ){
         guard values.count > 0 else{ pieChart.noDataText = "No tags yet!"; return }
         
         var dataEntries: [ChartDataEntry] = []
@@ -68,7 +68,7 @@ class HashTagsPieCharts: UIView {
         pieChart.centerText = "\(centerValue)%\n\(tag)" //345-346
         pieChart.holeRadiusPercent = 0.6
         pieChart.centerTextRadiusPercent = 1
-        pieChart.descriptionTextPosition = CGPointZero
+        pieChart.descriptionTextPosition = CGPoint.zero
         pieChart.legend.enabled = false
         pieChart.userInteractionEnabled = false
         pieChart.animate(xAxisDuration: 1, yAxisDuration: 1, easingOption: .EaseInOutCirc)
