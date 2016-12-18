@@ -27,6 +27,7 @@ class ParseService {
         })
     }
     
+    // -TODO: Do not fetch private posts
     class func getPostsWith( _ hashTags:[String], callback:@escaping (_ posts:[Post]) -> Void, forUser:PFUser? ){
         let query = PFQuery(className: "Post")
         query.whereKey("hashTags", containedIn: hashTags)

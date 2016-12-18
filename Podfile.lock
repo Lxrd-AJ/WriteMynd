@@ -6,9 +6,9 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Charts (2.2.5):
-    - Charts/Core (= 2.2.5)
-  - Charts/Core (2.2.5)
+  - Charts (3.0.1):
+    - Charts/Core (= 3.0.1)
+  - Charts/Core (3.0.1)
   - Crashlytics (3.8.2):
     - Fabric (~> 1.6.3)
   - DGElasticPullToRefresh (1.1)
@@ -51,7 +51,7 @@ PODS:
   - RMDateSelectionViewController (2.0.3):
     - RMActionController (~> 1.0.5)
   - SnapKit (3.0.1)
-  - SwiftDate (3.0.9)
+  - SwiftDate (4.0.8)
   - SwiftSpinner (1.0.2)
   - SwiftyJSON (3.0.0)
   - SZTextView (1.2.2)
@@ -65,7 +65,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0.0)
   - Bolts (~> 1.8.4)
-  - Charts (from `https://github.com/danielgindi/Charts.git`, branch `Chart2.2.5-Swift3.0`)
+  - Charts
   - Crashlytics (~> 3.8.2)
   - DGElasticPullToRefresh (~> 1.1)
   - Fabric (~> 1.6.8)
@@ -79,32 +79,16 @@ DEPENDENCIES:
   - PromiseKit (~> 4.0)
   - RMDateSelectionViewController (~> 2.0.3)
   - SnapKit (~> 3.0.1)
-  - SwiftDate (from `https://github.com/malcommac/SwiftDate.git`, branch `feature/swift-3.0`)
+  - SwiftDate
   - SwiftSpinner (~> 1.0.2)
   - SwiftyJSON (~> 3.0.0)
   - SZTextView
   - ZendeskSDK (~> 1.7.3.1)
 
-EXTERNAL SOURCES:
-  Charts:
-    :branch: Chart2.2.5-Swift3.0
-    :git: https://github.com/danielgindi/Charts.git
-  SwiftDate:
-    :branch: feature/swift-3.0
-    :git: https://github.com/malcommac/SwiftDate.git
-
-CHECKOUT OPTIONS:
-  Charts:
-    :commit: ab3bb619df2c2d165b41736b6bc25a4218833252
-    :git: https://github.com/danielgindi/Charts.git
-  SwiftDate:
-    :commit: 644a4615c77dc70d7861ddadb2c59f5c45f4c235
-    :git: https://github.com/malcommac/SwiftDate.git
-
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
+  Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
   Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
   DGElasticPullToRefresh: 28f11a6026302a90f8ffebbc6e24748e584dddd3
   Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
@@ -119,12 +103,12 @@ SPEC CHECKSUMS:
   RMActionController: b83653e7452ed51492094d65dc82151c36443c03
   RMDateSelectionViewController: 354a0f1fe40bac01054528b7a8735f2973bbd813
   SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
-  SwiftDate: fa487d9b7d8c3070ea2553486902494f4915465d
+  SwiftDate: 9aa3259d8850d818bec02802f8f05aa9a8c26fdb
   SwiftSpinner: 1c80ff6ea1c47e2faa1dfce0fcd5e6b39a47fd51
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
   ZendeskSDK: 3b795e822d558b846555230f6085aeb997e0b835
 
-PODFILE CHECKSUM: 84f7d534a838a154e07cc910937bb62dc0d5e242
+PODFILE CHECKSUM: f304ff9ac855bd18ba159db133bed9b53f05e1e8
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.1
