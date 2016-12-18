@@ -5,7 +5,7 @@ target 'WriteMynd' do
     
     pod 'Alamofire', '~> 4.0.0'
     pod 'Bolts', '~> 1.8.4'
-    pod 'Charts' #, :git => 'https://github.com/danielgindi/Charts.git', :branch => 'Chart2.2.5-Swift3.0'
+    pod 'Charts', '~> 3.0.1' #, :git => 'https://github.com/danielgindi/Charts.git', :branch => 'Chart2.2.5-Swift3.0'
     pod 'Crashlytics', '~> 3.8.2'
     pod 'DGElasticPullToRefresh', '~> 1.1'
     pod 'Fabric', '~> 1.6.8'
@@ -13,13 +13,14 @@ target 'WriteMynd' do
     pod 'JTImageButton'
     pod 'MMDrawerController'
     pod 'Mixpanel', '~> 3.0.3'
+    pod 'Pages'
 	pod 'Parse'
     pod 'ParseUI'
     pod 'pop', '~> 1.0'
-    pod 'PromiseKit', '~> 4.0'
+    pod 'PromiseKit', '~> 4.0.4'
     pod 'RMDateSelectionViewController', '~> 2.0.3'
     pod 'SwiftSpinner', '~> 1.0.2'
-    pod 'SwiftDate' #, :git => 'https://github.com/malcommac/SwiftDate.git', :branch => 'feature/swift-3.0'
+    pod 'SwiftDate', '~> 4.0.8' #, :git => 'https://github.com/malcommac/SwiftDate.git', :branch => 'feature/swift-3.0'
     pod 'SnapKit', '~> 3.0.1'
     pod 'SwiftyJSON', '~> 3.0.0'
     pod 'SZTextView'
@@ -34,7 +35,6 @@ target 'WriteMynd' do
     #pod 'FacebookShare'
     #pod 'DOFavoriteButton', '~> 0.0.4'
     #pod 'DOAlertController'
-    #pod 'Pages'
 
 end
 

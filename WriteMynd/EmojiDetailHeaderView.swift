@@ -41,18 +41,18 @@ class EmojiDetailHeaderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        promptLabel.snp_makeConstraints(closure: { make in
-            //make.top.equalTo(self.snp_top).offset(15)
-            make.centerY.equalTo(self.snp_centerY)
-            make.left.equalTo(self.snp_left).offset(15)
+        promptLabel.snp.makeConstraints({ make in
+            //make.top.equalTo(self.snp.top).offset(15)
+            make.centerY.equalTo(self.snp.centerY)
+            make.left.equalTo(self.snp.left).offset(15)
         })
         
-        header.snp_makeConstraints(closure: { make in
-            //make.top.equalTo(promptLabel.snp_top)
-            make.left.equalTo(promptLabel.snp_right).offset(6)
+        header.snp.makeConstraints({ make in
+            //make.top.equalTo(promptLabel.snp.top)
+            make.left.equalTo(promptLabel.snp.right).offset(6)
             make.width.greaterThanOrEqualTo(100)
             make.height.greaterThanOrEqualTo(30)
-            make.centerY.equalTo(self.snp_centerY)
+            make.centerY.equalTo(self.snp.centerY)
         })
     }
 

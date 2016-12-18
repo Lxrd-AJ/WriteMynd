@@ -25,7 +25,7 @@ class MenuViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.backgroundColor = .wmCoolBlueColor()
-        tableView.separatorColor = .white()
+        tableView.separatorColor = .white
         tableView.alwaysBounceVertical = false
         //tableView.tableHeaderView = self.tableViewHeader()
         tableView.tableFooterView = self.tableViewFooter()
@@ -39,14 +39,14 @@ class MenuViewController: UITableViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        tableView.tableHeaderView?.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(15)
-            make.left.equalTo(self.tableView.snp_left).offset(5)
+        tableView.tableHeaderView?.snp_makeConstraints({ make in
+            make.top.equalTo(self.view.snp.topMargin).offset(15)
+            make.left.equalTo(self.tableView.snp.left).offset(5)
         })
         
-        tableView.tableFooterView?.snp_makeConstraints(closure: { make in
-            make.bottom.equalTo(self.snp_bottomLayoutGuideBottom)
-            make.width.equalTo(self.tableView.snp_width)
+        tableView.tableFooterView?.snp_makeConstraints({ make in
+            make.bottom.equalTo(self.view.snp.bottomMargin)
+            make.width.equalTo(self.tableView.snp.width)
             make.height.equalTo(150)
         })
     }

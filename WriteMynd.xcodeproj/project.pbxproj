@@ -25,7 +25,6 @@
 		2136F0781C1A3F6300BE26FD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */; };
 		2138AACB1D12214700C2F0F0 /* HiddenUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138AACA1D12214700C2F0F0 /* HiddenUser.swift */; };
 		214341151D0E7359002C3F66 /* Endurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214341141D0E7359002C3F66 /* Endurance.swift */; };
-		214341171D0F260B002C3F66 /* notes.md in Sources */ = {isa = PBXBuildFile; fileRef = 214341161D0F260B002C3F66 /* notes.md */; };
 		21623EA51CA2E9B0005F117F /* FeelingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA41CA2E9B0005F117F /* FeelingsView.swift */; };
 		21623EA81CA3C761005F117F /* MyMyndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA71CA3C761005F117F /* MyMyndViewController.swift */; };
 		21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21623EA91CA76AAD005F117F /* HiddenPost.swift */; };
@@ -78,6 +77,7 @@
 		21FA7FA61C61C49400D0836F /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA51C61C49400D0836F /* Swipe.swift */; };
 		21FA7FA81C61E3D100D0836F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FA7FA71C61E3D100D0836F /* SettingsTableViewController.swift */; };
 		7DEF330B117599CD7499141B /* Pods_WriteMynd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7013527911DFBAC8F8CF6249 /* Pods_WriteMynd.framework */; };
+		BDE0F7711E0701550030F443 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE0F7701E0701550030F443 /* UIFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,7 +99,6 @@
 		2136F0771C1A3F6300BE26FD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		2138AACA1D12214700C2F0F0 /* HiddenUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenUser.swift; sourceTree = "<group>"; };
 		214341141D0E7359002C3F66 /* Endurance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endurance.swift; sourceTree = "<group>"; };
-		214341161D0F260B002C3F66 /* notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = notes.md; sourceTree = "<group>"; };
 		21623EA41CA2E9B0005F117F /* FeelingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingsView.swift; sourceTree = "<group>"; };
 		21623EA71CA3C761005F117F /* MyMyndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMyndViewController.swift; sourceTree = "<group>"; };
 		21623EA91CA76AAD005F117F /* HiddenPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenPost.swift; sourceTree = "<group>"; };
@@ -157,6 +156,7 @@
 		3C079B186CB0C0A22EFAADE4 /* Pods-WriteMynd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.release.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.release.xcconfig"; sourceTree = "<group>"; };
 		4D42FB5857EE292EDFA6AD82 /* Pods-WriteMynd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteMynd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WriteMynd/Pods-WriteMynd.debug.xcconfig"; sourceTree = "<group>"; };
 		7013527911DFBAC8F8CF6249 /* Pods_WriteMynd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteMynd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDE0F7701E0701550030F443 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,7 +263,6 @@
 		2172FBEB1C11B65E003446AC /* WriteMynd */ = {
 			isa = PBXGroup;
 			children = (
-				214341161D0F260B002C3F66 /* notes.md */,
 				213016731C9D743900A4598D /* Resources */,
 				2172FBEC1C11B65E003446AC /* AppDelegate.swift */,
 				2172FBF01C11B65E003446AC /* Main.storyboard */,
@@ -371,6 +370,7 @@
 				217903E21CD2172A00ECCDEA /* UIImage.swift */,
 				217903E81CD390BF00ECCDEA /* UIColor.swift */,
 				21DEB4E11D009A650094AC95 /* UIButton.swift */,
+				BDE0F7701E0701550030F443 /* UIFont.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -444,7 +444,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "The Leaf";
 				TargetAttributes = {
 					2172FBE81C11B65E003446AC = {
@@ -614,9 +614,9 @@
 				217138B21CA9A993008CC4D1 /* SwipeOnBoarding.swift in Sources */,
 				217903E31CD2172A00ECCDEA /* UIImage.swift in Sources */,
 				21D467C71CB24C4D00412C3C /* HashTagsPieCharts.swift in Sources */,
+				BDE0F7711E0701550030F443 /* UIFont.swift in Sources */,
 				21623EAA1CA76AAD005F117F /* HiddenPost.swift in Sources */,
 				2136F0761C1A3B2A00BE26FD /* ParseService.swift in Sources */,
-				214341171D0F260B002C3F66 /* notes.md in Sources */,
 				2130167D1C9DFA2800A4598D /* EmpathisedPost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

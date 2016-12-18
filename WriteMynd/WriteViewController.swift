@@ -162,52 +162,52 @@ class WriteViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        bigEmojiImage.snp_makeConstraints({ make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(9)
-            make.centerX.equalTo(self.view.snp_centerX)
+        bigEmojiImage.snp.makeConstraints({ make in
+            make.top.equalTo(self.view.snp.topMargin).offset(9)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.size.equalTo(CGSize(width: 145, height: 160))
         })
         
-        descriptionLabel.snp_makeConstraints({ make in
-            make.top.equalTo(bigEmojiImage.snp_bottom).offset(9)
-            make.centerX.equalTo(self.view.snp_centerX)
-            make.width.lessThanOrEqualTo(self.view.snp_width)
+        descriptionLabel.snp.makeConstraints({ make in
+            make.top.equalTo(bigEmojiImage.snp.bottom).offset(9)
+            make.centerX.equalTo(self.view.snp.centerX)
+            make.width.lessThanOrEqualTo(self.view.snp.width)
         })
         
-        emojiStackView.snp_makeConstraints({ make in
-            make.top.equalTo(descriptionLabel.snp_bottom).offset(10)
-            make.width.equalTo(self.view.snp_width).offset(-10)
-            make.centerX.equalTo(self.view.snp_centerX)
+        emojiStackView.snp.makeConstraints({ make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(10)
+            make.width.equalTo(self.view.snp.width).offset(-10)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.height.equalTo(50.0)
         })
         
-        hashTagField.snp_makeConstraints({ make in
-            make.top.equalTo(emojiStackView.snp_bottom).offset(10)
+        hashTagField.snp.makeConstraints({ make in
+            make.top.equalTo(emojiStackView.snp.bottom).offset(10)
             make.width.equalTo(screenWidth - 20)
-            make.centerX.equalTo(self.view.snp_centerX)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.height.equalTo(45)
         })
         
-        feelingsTextView.snp_makeConstraints({ make in
-            make.top.equalTo( hashTagField.snp_bottom ).offset(10)
+        feelingsTextView.snp.makeConstraints({ make in
+            make.top.equalTo( hashTagField.snp.bottom ).offset(10)
             //make.size.equalTo( CGSize(width: 335, height: 85 ))
-            make.width.equalTo(hashTagField.snp_width)
+            make.width.equalTo(hashTagField.snp.width)
             make.height.equalTo(85)
-            make.centerX.equalTo(self.view.snp_centerX)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         
-        postToMeButton.snp_makeConstraints({ make in
-            make.left.equalTo(self.view.snp_left).offset(10)
-            make.top.equalTo(self.feelingsTextView.snp_bottom).offset(11)
-            //make.right.equalTo(postToAllButton.snp_left).offset(-10)
-            make.width.equalTo(self.postToAllButton.snp_width)
+        postToMeButton.snp.makeConstraints({ make in
+            make.left.equalTo(self.view.snp.left).offset(10)
+            make.top.equalTo(self.feelingsTextView.snp.bottom).offset(11)
+            //make.right.equalTo(postToAllButton.snp.left).offset(-10)
+            make.width.equalTo(self.postToAllButton.snp.width)
             make.height.equalTo(45)
         })
         
-        postToAllButton.snp_makeConstraints({ make in
-            make.right.equalTo(self.view.snp_right).offset(-10)
-            make.top.equalTo(self.feelingsTextView.snp_bottom).offset(11)
-            make.width.equalTo(self.view.snp_width).multipliedBy(0.45)
+        postToAllButton.snp.makeConstraints({ make in
+            make.right.equalTo(self.view.snp.right).offset(-10)
+            make.top.equalTo(self.feelingsTextView.snp.bottom).offset(11)
+            make.width.equalTo(self.view.snp.width).multipliedBy(0.45)
             make.height.equalTo(45)
         })
 
@@ -289,8 +289,8 @@ extension WriteViewController {
         let notificationView = WrittenPostNotificationView()
         notificationView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         self.view.addSubview(notificationView)
-        notificationView.snp_makeConstraints({ make in
-            make.size.equalTo(self.view.snp_size)
+        notificationView.snp.makeConstraints({ make in
+            make.size.equalTo(self.view.snp.size)
         })
         
         if sender.tag == 0 { //Private post
@@ -310,7 +310,7 @@ extension WriteViewController {
                 //END TRACK
                 delay(2, closure: {
                     notificationView.removeFromSuperview()
-                    self.navigationController?.popViewController(animated: true)
+                    let _ = self.navigationController?.popViewController(animated: true)
                 })
         })
     }
@@ -331,9 +331,9 @@ extension WriteViewController {
             imageView.tag = BUTTON_TICK_TAG;
             //sender.layer.masksToBounds = true
             button.addSubview(imageView)
-            imageView.snp_makeConstraints({ make in
-                make.size.equalTo(button.snp_size)
-                make.center.equalTo(button.snp_center)
+            imageView.snp.makeConstraints({ make in
+                make.size.equalTo(button.snp.size)
+                make.center.equalTo(button.snp.center)
             })
         }
         
@@ -396,11 +396,11 @@ extension WriteViewController {
         
         //Editing HashTags
         self.focusView.addSubview(hashtagView)
-        hashtagView.snp_makeConstraints({ make in
-            make.top.equalTo(self.view.snp_top).offset(200)
-            make.left.equalTo(self.view.snp_left)//.offset(10)
-            make.width.equalTo(self.view.snp_width)
-            make.centerX.equalTo(self.view.snp_centerX)
+        hashtagView.snp.makeConstraints({ make in
+            make.top.equalTo(self.view.snp.top).offset(200)
+            make.left.equalTo(self.view.snp.left)//.offset(10)
+            make.width.equalTo(self.view.snp.width)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         hashtagView.setupConstraints()
         

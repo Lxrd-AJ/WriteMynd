@@ -43,14 +43,14 @@ class FeelingsView: UIView {
     }
     
     func setupConstraints() -> Void {
-        self.promptMessage.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_top)
-            make.left.equalTo(self.snp_leftMargin)
+        self.promptMessage.snp.makeConstraints({ make in
+            make.top.equalTo(self.snp.top)
+            make.left.equalTo(self.snp.leftMargin)
         })
-        self.feelingsTextView.snp_makeConstraints(closure: {make in
-            make.top.equalTo(self.promptMessage.snp_bottom)
-            make.width.equalTo(self.snp_width).offset(-20)
-            make.centerX.equalTo(self.snp_centerX)
+        self.feelingsTextView.snp.makeConstraints({make in
+            make.top.equalTo(self.promptMessage.snp.bottom)
+            make.width.equalTo(self.snp.width).offset(-20)
+            make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(150)
         })
     }

@@ -37,20 +37,20 @@ class WrittenPostNotificationView: UIView {
         super.init(frame: frame)
         
         self.addSubview(message)
-        message.snp_makeConstraints(closure: { make in
-            make.center.equalTo(self.snp_center)
+        message.snp.makeConstraints({ make in
+            make.center.equalTo(self.snp.center)
         })
         
         self.addSubview(imageView)
-        imageView.snp_makeConstraints(closure: { make in
-            make.bottom.equalTo(message.snp_top).offset(-10)
+        imageView.snp.makeConstraints({ make in
+            make.bottom.equalTo(message.snp.top).offset(-10)
             make.size.equalTo(CGSize(width: 121, height: 98))
-            make.centerX.equalTo(self.snp_centerX)
+            make.centerX.equalTo(self.snp.centerX)
         })
         imageView.startAnimating()
 //        imageView.addSubview(loadingIndicator)
-//        loadingIndicator.snp_makeConstraints(closure: { make in
-//            make.center.equalTo(imageView.snp_center)
+//        loadingIndicator.snp.makeConstraints(closure: { make in
+//            make.center.equalTo(imageView.snp.center)
 //            make.size.equalTo(CGSize(width: 50, height: 15))
 //        })
 //        loadingIndicator.startAnimating()

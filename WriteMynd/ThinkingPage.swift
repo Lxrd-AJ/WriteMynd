@@ -18,7 +18,7 @@ class ThinkingPage: UIView {
     
     lazy var page1TitleLabel: Label = {
         let label: Label = Label()
-        label.textColor = .white()
+        label.textColor = .white
         let attributedString = NSMutableAttributedString(string: "Write Mynd \nThe thinking", attributes: [NSForegroundColorAttributeName:UIColor.white])
         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.wmFrenchBlueColor(), range: NSRange(location: 10, length: 14))
         label.attributedText = attributedString
@@ -64,38 +64,38 @@ class ThinkingPage: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        header.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_top)
-            make.width.equalTo(self.snp_width)
+        header.snp.makeConstraints( { make in
+            make.top.equalTo(self.snp.top)
+            make.width.equalTo(self.snp.width)
             make.height.equalTo(180)
         })
         
-        page1TitleLabel.snp_makeConstraints(closure: { make in
-            make.top.equalTo(header.snp_top).offset(5)
-            make.left.equalTo(header.snp_left).offset(5)
+        page1TitleLabel.snp.makeConstraints( { make in
+            make.top.equalTo(header.snp.top).offset(5)
+            make.left.equalTo(header.snp.left).offset(5)
         })
         
-        page1SubTitle.snp_makeConstraints(closure: { make in
-            make.bottom.equalTo(header.snp_bottom).offset(-5)
-            make.left.equalTo(header.snp_left).offset(5)
-            make.right.equalTo(self.page1Mascot.snp_left).offset(-5)
+        page1SubTitle.snp.makeConstraints( { make in
+            make.bottom.equalTo(header.snp.bottom).offset(-5)
+            make.left.equalTo(header.snp.left).offset(5)
+            make.right.equalTo(self.page1Mascot.snp.left).offset(-5)
         })
         
-        page1Mascot.snp_makeConstraints(closure: { make in
-            make.right.equalTo(header.snp_right).offset(-5)
-            make.bottom.equalTo(header.snp_bottom).offset(-5)
-            make.height.equalTo(header.snp_height).offset(-10)
-            make.centerY.equalTo(header.snp_centerY)
+        page1Mascot.snp.makeConstraints( { make in
+            make.right.equalTo(header.snp.right).offset(-5)
+            make.bottom.equalTo(header.snp.bottom).offset(-5)
+            make.height.equalTo(header.snp.height).offset(-10)
+            make.centerY.equalTo(header.snp.centerY)
         })
         
-        page1Message.snp_makeConstraints(closure: { make in
-            make.top.equalTo(header.snp_bottom).offset(5)
-            make.width.equalTo(self.snp_width).offset(-20)
-            make.centerX.equalTo(self.snp_centerX)
+        page1Message.snp.makeConstraints( { make in
+            make.top.equalTo(header.snp.bottom).offset(5)
+            make.width.equalTo(self.snp.width).offset(-20)
+            make.centerX.equalTo(self.snp.centerX)
         })
         
-        self.snp_makeConstraints(closure: { make in
-            make.bottom.equalTo(page1Message.snp_bottom)
+        self.snp.makeConstraints( { make in
+            make.bottom.equalTo(page1Message.snp.bottom)
         })
     }
     

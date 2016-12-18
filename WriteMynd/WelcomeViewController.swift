@@ -52,7 +52,7 @@ class WelcomeViewController: UIViewController {
     lazy var signupLaterButton: Button = {
         let button: Button = Button(type: .custom)
         button.setTitle("I want to look around now", for: UIControlState())
-        button.setTitleColor(.white(), for: UIControlState())
+        button.setTitleColor(.white, for: UIControlState())
         button.addTarget(self, action: .anonymousSignin, for: .touchUpInside)
         return button;
     }()
@@ -100,35 +100,35 @@ class WelcomeViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        iconImageView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(100)
-            make.centerX.equalTo(self.view.snp_centerX)
+        iconImageView.snp.makeConstraints( { make in
+            make.top.equalTo(self.view.snp.topMargin).offset(100)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         
-        signInButton.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.iconImageView.snp_bottom).offset(50)
-            make.centerX.equalTo(self.view.snp_centerX)
+        signInButton.snp.makeConstraints( { make in
+            make.top.equalTo(self.iconImageView.snp.bottom).offset(50)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         
-        orLabel.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.signInButton.snp_bottom).offset(10)
-            make.centerX.equalTo(self.view.snp_centerX)
+        orLabel.snp.makeConstraints( { make in
+            make.top.equalTo(self.signInButton.snp.bottom).offset(10)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         
-        signupButton.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.orLabel.snp_bottom).offset(10)
-            make.centerX.equalTo(self.view.snp_centerX)
+        signupButton.snp.makeConstraints( { make in
+            make.top.equalTo(self.orLabel.snp.bottom).offset(10)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         
-        warningLabel.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.signupButton.snp_bottom).offset(15)
-            make.centerX.equalTo(self.view.snp_centerX)
-            make.width.lessThanOrEqualTo(self.signupButton.snp_width)
+        warningLabel.snp.makeConstraints( { make in
+            make.top.equalTo(self.signupButton.snp.bottom).offset(15)
+            make.centerX.equalTo(self.view.snp.centerX)
+            make.width.lessThanOrEqualTo(self.signupButton.snp.width)
         })
         
-        signupLaterButton.snp_makeConstraints(closure: { make in
-            make.bottom.equalTo(self.view.snp_bottom).offset(-10)
-            make.centerX.equalTo(self.view.snp_centerX)
+        signupLaterButton.snp.makeConstraints( { make in
+            make.bottom.equalTo(self.view.snp.bottom).offset(-10)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         
     }
@@ -143,13 +143,13 @@ class WelcomeViewController: UIViewController {
     func signInAnonymously(){
         Endurance.showEndUserLicensePage(self, onAgreeAction: {
             SwiftSpinner.show("")
-            PFAnonymousUtils.logInWithBlock{ (user:PFUser?, error:NSError?) -> Void in
+            PFAnonymousUtils.logIn{ (user, error) -> Void in
                 SwiftSpinner.hide()
                 if error != nil || user == nil {
                     print("Anonymous log in failed")
                 }else{
                     let myMyndVC = MyPostsViewController()
-                    self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+                    self.mm_drawerController.openDrawerGestureModeMask = [.bezelPanningCenterView]
                     self.mm_drawerController.centerViewController = UINavigationController(rootViewController: myMyndVC)
                     SwiftSpinner.hide()
                 }
@@ -181,7 +181,7 @@ class WelcomeViewController: UIViewController {
         button.setTitle(title, for: UIControlState())
         button.setImage(UIImage(named: iconName), for: UIControlState())
         //button.layer.cornerRadius = 4.0
-        button.snp_makeConstraints(closure: { make in
+        button.snp.makeConstraints( { make in
             make.size.equalTo(CGSize(width: 256, height: 45))
         })
         return button

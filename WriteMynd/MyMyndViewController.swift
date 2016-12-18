@@ -49,19 +49,19 @@ class MyMyndViewController: ViewController {
         
         //MARK: Constraints 
         self.view.addSubview(myProfileButton)
-        myProfileButton.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom)
-            make.left.equalTo(self.view.snp_left)
-            make.width.equalTo(self.view.snp_width).multipliedBy(0.5)
+        myProfileButton.snp.makeConstraints({ make in
+            make.top.equalTo(self.view.snp.topMargin)
+            make.left.equalTo(self.view.snp.left)
+            make.width.equalTo(self.view.snp.width).multipliedBy(0.5)
             make.height.equalTo(50)
         })
         
         self.view.addSubview(myPostsButton)
-        myPostsButton.snp_makeConstraints(closure: { make in
-            //make.size.equalTo(myProfileButton.snp_size)
-            make.top.equalTo(myProfileButton.snp_top)
-            make.right.equalTo(self.view.snp_right)
-            make.width.equalTo(self.view.snp_width).multipliedBy(0.5)
+        myPostsButton.snp.makeConstraints({ make in
+            //make.size.equalTo(myProfileButton.snp.size)
+            make.top.equalTo(myProfileButton.snp.top)
+            make.right.equalTo(self.view.snp.right)
+            make.width.equalTo(self.view.snp.width).multipliedBy(0.5)
             make.height.equalTo(50)
         })
         //END MARK
@@ -102,11 +102,11 @@ extension MyMyndViewController {
             self.view.addSubview(dashboardVC.view)
             
             dashboardVC.didMove(toParentViewController: self)
-            dashboardVC.view.snp_makeConstraints(closure: { make in
-                make.top.equalTo(self.myProfileButton.snp_bottom)
-                make.width.equalTo(self.view.snp_width)
-                make.bottom.equalTo(self.view.snp_bottom)
-                make.centerX.equalTo(self.view.snp_centerX)
+            dashboardVC.view.snp.makeConstraints({ make in
+                make.top.equalTo(self.myProfileButton.snp.bottom)
+                make.width.equalTo(self.view.snp.width)
+                make.bottom.equalTo(self.view.snp.bottom)
+                make.centerX.equalTo(self.view.snp.centerX)
             })
             
         }else if sender.tag == 1 {
@@ -121,11 +121,11 @@ extension MyMyndViewController {
             self.addChildViewController(myPostsVC)
             self.view.addSubview(myPostsVC.view)
             myPostsVC.didMove(toParentViewController: self)
-            myPostsVC.view.snp_makeConstraints(closure: { make in
-                make.top.equalTo(myProfileButton.snp_bottom)
-                make.bottom.equalTo(self.view.snp_bottom)
-                make.width.equalTo(self.view.snp_width)
-                make.centerX.equalTo(self.view.snp_centerX)
+            myPostsVC.view.snp.makeConstraints({ make in
+                make.top.equalTo(myProfileButton.snp.bottom)
+                make.bottom.equalTo(self.view.snp.bottom)
+                make.width.equalTo(self.view.snp.width)
+                make.centerX.equalTo(self.view.snp.centerX)
             })
             myPostsVC.postsViewController.posts = self.posts
         }

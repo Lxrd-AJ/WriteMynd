@@ -152,7 +152,7 @@ class PostsTableViewController: UITableViewController {
         cell.empathiseButton.sizeToFit()
         cell.hashTagsLabel.setTitle(post.hashTags.reduce("", { $0! + " " + $1 }), for: UIControlState())
         cell.hashTagsLabel.addTarget(self, action: .hashTagsButtonTapped, for: .touchUpInside)
-        cell.dateLabel.text = "\(post.createdAt!.monthName) " + post.createdAt!.toString(DateFormat.Custom("dd 'at' HH:mm"))!
+        cell.dateLabel.text = "\(post.createdAt!.monthName) " + post.createdAt!.string(format: DateFormat.custom("dd 'at' HH:mm"))
         cell.empathiseButton.addTarget(self, action: .empathisePost, for: .touchUpInside)
         cell.readMoreButton.addTarget(self, action: .extendPostInCell, for: .touchUpInside)
         cell.ellipsesButton.addTarget(self, action: .showActionSheet, for: .touchUpInside)

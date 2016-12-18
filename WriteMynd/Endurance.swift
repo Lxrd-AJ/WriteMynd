@@ -16,15 +16,14 @@ class Endurance {
     class func checkIfUserBlocked( _ userID:String ) -> Promise<Bool>{
         return Promise { fulfill, reject in
             let url = serverURL + "/is_user_blocked"
-            Alamofire.request(.GET,url,parameters: ["userID":userID]).responseJSON(completionHandler: { response in
+            Alamofire.request(url,parameters: ["userID":userID]).responseJSON(completionHandler: { response in
                 print(response)
-                switch response.result {
-                case .Success(let data):
+                if let data = response.result.value {
                     let json = JSON(data)
                     fulfill( json["result"].bool! )
-                case .Failure(let error):
-                    print(error)
-                    reject(error)
+                }else{
+                    print(response.result.error!)
+                    reject(response.result.error!)
                 }
             })
         }
@@ -32,16 +31,16 @@ class Endurance {
     
     class func showBlockedUserPage( _ onController:UIViewController ){
         let page = OnboardViewController(title: "User Account Blocked", body: "You have been removed from the app due to a post that was reported by another user as offensive.\nPlease read our End User Licence Agreement here", animationImageNames: [], imageName: "mehManStood", backgroundColor: UIColor.wmFadedRedColor())
-        page.bottomButton.setTitle("End User Agreement", forState: .Normal)
-        page.bottomButton.hidden = false
+        page.bottomButton.setTitle("End User Agreement", for: .normal)
+        page.bottomButton.isHidden = false
         page.buttonAction = {
-            page.dismissViewControllerAnimated(true, completion: nil)
+            page.dismiss(animated: true, completion: nil)
         }
         page.bottomButtonAction = {
-            page.dismissViewControllerAnimated(true, completion: nil)
+            page.dismiss(animated: true, completion: nil)
             onController.navigationController?.pushViewController(LegalViewController(), animated: true)
         }
-        onController.presentViewController(page, animated: true, completion: nil)
+        onController.present(page, animated: true, completion: nil)
     }
     
     class func showEndUserLicensePage( _ reciever:UIViewController, onAgreeAction:@escaping (() -> Void) ){
@@ -49,13 +48,13 @@ class Endurance {
         licensePage.bottomButtonAction = {
             let legalVC = LegalViewController()
             licensePage.navigationController?.pushViewController(legalVC, animated: true)
-            legalVC.navigationController?.navigationBarHidden = false
+            legalVC.navigationController?.isNavigationBarHidden = false
         }
         licensePage.onDeclineAction = {
-            licensePage.navigationController?.popViewControllerAnimated(true)
+            let _ = licensePage.navigationController?.popViewController(animated: true)
         }
         licensePage.onAgreeAction = {
-            licensePage.navigationController?.popViewControllerAnimated(true)
+            let _ = licensePage.navigationController?.popViewController(animated: true)
             onAgreeAction()
         }
         reciever.navigationController?.pushViewController(licensePage, animated: true)

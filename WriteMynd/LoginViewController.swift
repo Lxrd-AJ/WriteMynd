@@ -73,17 +73,17 @@ class LoginViewController: SignupLoginViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        emailStackView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(100)
-            make.width.equalTo(self.view.snp_width).offset(-40)
-            make.centerX.equalTo(self.view.snp_centerX)
+        emailStackView.snp.makeConstraints({ make in
+            make.top.equalTo(self.snp.topLayoutGuideBottom).offset(100)
+            make.width.equalTo(self.view.snp.width).offset(-40)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.height.equalTo(200)
         })
         
-        mascot.snp_makeConstraints(closure: { make in
-            make.top.equalTo(emailStackView.snp_bottom).offset(10)
-            make.bottom.equalTo(self.view.snp_bottom).offset(-10)
-            make.right.equalTo(self.view.snp_right).offset(-10)
+        mascot.snp.makeConstraints({ make in
+            make.top.equalTo(emailStackView.snp.bottom).offset(10)
+            make.bottom.equalTo(self.view.snp.bottom).offset(-10)
+            make.right.equalTo(self.view.snp.right).offset(-10)
         })
         
     }

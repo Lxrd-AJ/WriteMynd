@@ -45,15 +45,15 @@ class DetailTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        countLabel.snp_makeConstraints(closure: { make in
-            make.left.equalTo(self.contentView.snp_left).offset(15)
-            make.centerY.equalTo(self.contentView.snp_centerY)
+        countLabel.snp.makeConstraints({ make in
+            make.left.equalTo(self.contentView.snp.left).offset(15)
+            make.centerY.equalTo(self.contentView.snp.centerY)
             make.width.greaterThanOrEqualTo(50)
         })
         
-        hashtagLabel.snp_makeConstraints(closure: { make in
-            make.left.equalTo(countLabel.snp_right).offset(5)
-            make.centerY.equalTo(self.contentView.snp_centerY)
+        hashtagLabel.snp.makeConstraints({ make in
+            make.left.equalTo(countLabel.snp.right).offset(5)
+            make.centerY.equalTo(self.contentView.snp.centerY)
         })
     }
 

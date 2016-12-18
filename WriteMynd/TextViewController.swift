@@ -36,7 +36,7 @@ class TextViewController: UIViewController {
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "stroke5"))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: .finishedEditingTextView)
         
-        self.view.backgroundColor = .white()
+        self.view.backgroundColor = .white
         self.view.addSubview(promptMessage)
         self.view.addSubview(textView)
     }
@@ -53,14 +53,14 @@ class TextViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.promptMessage.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(10)
-            make.left.equalTo(self.view.snp_leftMargin)
+        self.promptMessage.snp.makeConstraints({ make in
+            make.top.equalTo(self.view.snp.topMargin).offset(10)
+            make.left.equalTo(self.view.snp.leftMargin)
         })
-        self.textView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.promptMessage.snp_bottom)
-            make.width.equalTo(self.view.snp_width).offset(-20)
-            make.centerX.equalTo(self.view.snp_centerX)
+        self.textView.snp.makeConstraints({ make in
+            make.top.equalTo(self.promptMessage.snp.bottom)
+            make.width.equalTo(self.view.snp.width).offset(-20)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.height.equalTo(175)
         })
     }
@@ -68,7 +68,7 @@ class TextViewController: UIViewController {
     func finishedEditingTextView(_ sender: UIBarButtonItem){
         print("Done Button called")
         onFinishCallback?()
-        self.navigationController?.popViewController(animated: true)
+        let _ = self.navigationController?.popViewController(animated: true)
     }
 }
 

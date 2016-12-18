@@ -72,11 +72,12 @@ class SettingsTableViewController: UITableViewController {
         
         print("\(UIApplication.shared.scheduledLocalNotifications!.count) local notification(s) active")
         //Zendesk Configurations
-        ZDKConfig.instance().initialize(withAppId: "5da13e96950d04535c6ae060f94b79cd713ef65de89b0ef2", zendeskUrl: "https://writemynd.zendesk.com", andClientId: "mobile_sdk_client_8deeb7714b32b75f45de")
+        ZDKConfig.instance().initialize(withAppId: "5da13e96950d04535c6ae060f94b79cd713ef65de89b0ef2", zendeskUrl: "https://writemynd.zendesk.com", clientId: "mobile_sdk_client_8deeb7714b32b75f45de")
         ZDKConfig.instance().userIdentity = ZDKAnonymousIdentity()
-        ZDKRMA.configure({ (account:ZDKAccount!,config:ZDKRMAConfigObject!) -> Void in
+        //ZDKRMA.configure(<#T##configBlock: ((ZDKAccount?, ZDKRMAConfigObject?) -> Void)!##((ZDKAccount?, ZDKRMAConfigObject?) -> Void)!##(ZDKAccount?, ZDKRMAConfigObject?) -> Void#>)
+        ZDKRMA.configure({ (account:ZDKAccount?,config:ZDKRMAConfigObject?) -> Void in
             //config.dialogActions = []
-            config.additionalRequestInfo = "Testing WriteMynd"
+            config?.additionalRequestInfo = "Testing WriteMynd"
         })
     }
     
@@ -121,7 +122,7 @@ class SettingsTableViewController: UITableViewController {
         case TIMER:
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
             let scheduleDate = UserDefaults.standard.object(forKey: self.REMINDER_DATE) as! Date
-            label.text = "\(scheduleDate.toString(DateFormat.Custom("HH:mm"))!)"
+            label.text = "\(scheduleDate.string(format: DateFormat.custom("HH:mm")))"
             cell.accessoryView = label
             cell.backgroundColor = UIColor(red: 3/255, green: 201/255, blue: 169/255, alpha: 1)
         default: break
@@ -207,8 +208,8 @@ extension SettingsTableViewController {
                 try PFUser.current()?.signUp()
                 SwiftSpinner.show("Successfully registered your account", animated: true).addTapHandler({
                     if self.rows.contains(self.REGISTER_ACCOUNT) {
-                        let idx = self.rows.indexOf(self.REGISTER_ACCOUNT)
-                        self.rows.removeAtIndex(idx!)
+                        let idx = self.rows.index(of: self.REGISTER_ACCOUNT)
+                        self.rows.remove(at: idx!)
                         self.tableView.reloadData()
                     }
                     SwiftSpinner.hide()

@@ -9,6 +9,7 @@
 import UIKit
 import SwiftSpinner
 import Parse
+import Pages
 
 class SignupViewController: SignupLoginViewController {
     
@@ -76,23 +77,23 @@ class SignupViewController: SignupLoginViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        formStackView.snp_makeConstraints({ make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(45)
-            make.left.equalTo(self.view.snp_left).offset(10)
-            make.right.equalTo(self.view.snp_right).offset(-10)
+        formStackView.snp.makeConstraints({ make in
+            make.top.equalTo(self.view.snp.topMargin).offset(45)
+            make.left.equalTo(self.view.snp.left).offset(10)
+            make.right.equalTo(self.view.snp.right).offset(-10)
             make.height.equalTo(225)
         })
         
-        onboardButton.snp_makeConstraints({ make in
-            make.bottom.equalTo(self.view.snp_bottom)
-            make.width.equalTo(self.view.snp_width)
+        onboardButton.snp.makeConstraints({ make in
+            make.bottom.equalTo(self.view.snp.bottom)
+            make.width.equalTo(self.view.snp.width)
             make.height.equalTo(50)
         })
         
-        mascot.snp_makeConstraints({ make in
-            make.top.equalTo(formStackView.snp_bottom)
-            make.bottom.equalTo(onboardButton.snp_top)
-            make.right.equalTo(self.view.snp_right).offset(-10)
+        mascot.snp.makeConstraints({ make in
+            make.top.equalTo(formStackView.snp.bottom)
+            make.bottom.equalTo(onboardButton.snp.top)
+            make.right.equalTo(self.view.snp.right).offset(-10)
         })
     }
 
@@ -159,20 +160,21 @@ extension SignupViewController {
 //        Endurance.showEndUserLicensePage(self, onAgreeAction:)
         Endurance.showEndUserLicensePage(self, onAgreeAction: {
             SwiftSpinner.show("Creating WriteMynd account ...", animated: true)
-            user.signUpInBackgroundWithBlock({ (succeeded:Bool, error:NSError?) -> Void in
+            
+            user.signUpInBackground(block: { (succeeded, error) -> Void in
                 if let error = error , !succeeded {
                     print(error)
-                    print(error.code)
-                    var errorString = error.userInfo["error"] as? NSString
-                    if error.code == 202 {
-                        errorString = "\(user.email!) is already registered to an account"
-                    }else if error.code == 125 {
-                        errorString = "Email address doesn’t seem to be valid."
-                    }
-                    self.showError(errorString as! String)
+                    //print(error.code)
+                    let errorString = error.localizedDescription
+//                    if error.code == 202 {
+//                        errorString = "\(user.email!) is already registered to an account"
+//                    }else if error.code == 125 {
+//                        errorString = "Email address doesn’t seem to be valid."
+//                    }
+                    self.showError(errorString)
                 }else{
                     SwiftSpinner.hide()
-                    self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+                    self.mm_drawerController.openDrawerGestureModeMask = [.bezelPanningCenterView]
                     self.mm_drawerController.centerViewController = UINavigationController(rootViewController: EveryMyndController())
                 }
             })
@@ -200,10 +202,10 @@ extension SignupViewController {
         
         let pages = [firstPage,secondPage,thirdPage,lastPage]
         let onboardingVC = PagesController(pages)
-        _ = pages.map({ page in page.buttonAction = { onboardingVC.dismissViewControllerAnimated(true, completion: nil) } })
+        _ = pages.map({ page in page.buttonAction = { onboardingVC.dismiss(animated: true, completion: nil) } })
         onboardingVC.view.backgroundColor = UIColor.wmSilverColor()
         
-        self.presentViewController(onboardingVC, animated: true, completion: {
+        self.present(onboardingVC, animated: true, completion: {
             //firstPage.iconView.startAnimating()
         })
 

@@ -16,8 +16,8 @@ class EmojiPieChart: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        chart.noDataText = "Write a post to start populating this chart"
-        chart.infoFont = Label.font().withSize(11)
+        chart.noDataText = "Write a post to start populating this chart";
+        //chart.noDataFont = chart.entryLabelFont = Label.font().withSize(11);
         self.addSubview(chart)
         
         chart.isUserInteractionEnabled = true
@@ -30,21 +30,21 @@ class EmojiPieChart: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        chart.snp_makeConstraints({ make in
-            make.size.equalTo(self.snp_size).inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
-            make.center.equalTo(self.snp_center)
+        chart.snp.makeConstraints({ make in
+            make.size.equalTo(self.snp.size).inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+            make.center.equalTo(self.snp.center)
         })
     }
     
     func renderChart( _ chart:PieChartView, dataPoints:[String], values:[Int], colors:[UIColor] ){
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
-            let dataEntry = ChartDataEntry(value: Double(values[i]), xIndex: i)
+            let dataEntry = ChartDataEntry(x: Double(values[i]), y: Double(i))
             dataEntry.data = dataPoints[i] as AnyObject?
             dataEntries.append(dataEntry)
         }
-        let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "");
-        let chartData = PieChartData(xVals: dataPoints, dataSets: [pieChartDataSet])
+        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "");
+        let chartData = PieChartData(dataSets: [pieChartDataSet])//PieChartData(xVals: dataPoints, dataSets: [pieChartDataSet])
         pieChartDataSet.colors = colors
         pieChartDataSet.highlightEnabled = false
         pieChartDataSet.drawValuesEnabled = false

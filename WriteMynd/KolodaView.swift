@@ -272,7 +272,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
         
         let kolodaAppearScaleAnimation = POPBasicAnimation(propertyNamed: kPOPLayerScaleXY)
         
-        kolodaAppearScaleAnimation.beginTime = CACurrentMediaTime() + cardSwipeActionAnimationDuration
+        kolodaAppearScaleAnimation?.beginTime = CACurrentMediaTime() + cardSwipeActionAnimationDuration
         kolodaAppearScaleAnimation?.duration = kolodaAppearScaleAnimationDuration
         kolodaAppearScaleAnimation?.fromValue = NSValue(cgPoint: kolodaAppearScaleAnimationFromValue)
         kolodaAppearScaleAnimation?.toValue = NSValue(cgPoint: kolodaAppearScaleAnimationToValue)
@@ -285,7 +285,7 @@ class SwipeView: UIView, SwipeableCardDelegate {
         
         let kolodaAppearAlphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
         
-        kolodaAppearAlphaAnimation.beginTime = CACurrentMediaTime() + cardSwipeActionAnimationDuration
+        kolodaAppearAlphaAnimation?.beginTime = CACurrentMediaTime() + cardSwipeActionAnimationDuration
         kolodaAppearAlphaAnimation?.fromValue = NSNumber(value: Float(kolodaAppearAlphaAnimationFromValue) as Float)
         kolodaAppearAlphaAnimation?.toValue = NSNumber(value: Float(kolodaAppearAlphaAnimationToValue) as Float)
         kolodaAppearAlphaAnimation?.duration = kolodaAppearAlphaAnimationDuration

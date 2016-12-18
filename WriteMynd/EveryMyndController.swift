@@ -77,7 +77,7 @@ class EveryMyndController: ViewController {
         
         loadingView.tintColor = UIColor.wmCoolBlueColor()
         postsController.tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
-            self?.postsController.tableView.backgroundView?.hidden = true
+            self?.postsController.tableView.backgroundView?.isHidden = true
             self?.fetchPosts()
         }, loadingView: loadingView)
         postsController.tableView.dg_setPullToRefreshFillColor(UIColor.wmSoftBlueColor())
@@ -99,33 +99,33 @@ class EveryMyndController: ViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        everyMyndLabel.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(5)
+        everyMyndLabel.snp.makeConstraints({ make in
+            make.top.equalTo(self.view.snp.topMargin).offset(5)
             make.left.equalTo(self.view).offset(10)
             make.width.lessThanOrEqualTo(screenWidth * 0.4)
         })
         
-        empathiseButton.snp_makeConstraints(closure: { make in
-            make.top.equalTo(everyMyndLabel.snp_top)
-            make.right.equalTo(self.view.snp_right).offset(-10)
+        empathiseButton.snp.makeConstraints({ make in
+            make.top.equalTo(everyMyndLabel.snp.top)
+            make.right.equalTo(self.view.snp.right).offset(-10)
             make.width.equalTo(169.0)
             make.height.equalTo(29.0)
         })
         
-        bottomView.snp_makeConstraints(closure: { make in
-            make.width.equalTo(self.view.snp_width)
-            make.centerX.equalTo(self.view.snp_centerX)
+        bottomView.snp.makeConstraints({ make in
+            make.width.equalTo(self.view.snp.width)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.height.equalTo(75)
         })
         
-        createPostButton.snp_makeConstraints(closure: { make in
+        createPostButton.snp.makeConstraints({ make in
             make.edges.equalTo(bottomView).inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         })
         
-        postsController.tableView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(everyMyndLabel.snp_bottom).offset(6)
-            make.centerX.equalTo(self.view.snp_centerX)
-            make.bottom.equalTo(self.view.snp_bottom)
+        postsController.tableView.snp.makeConstraints({ make in
+            make.top.equalTo(everyMyndLabel.snp.bottom).offset(6)
+            make.centerX.equalTo(self.view.snp.centerX)
+            make.bottom.equalTo(self.view.snp.bottom)
             make.width.equalTo(screenWidth - 20)
         })
     }
@@ -250,16 +250,16 @@ extension EveryMyndController: PostsTableVCDelegate {
     func scrollBegan( _ scrollView:UIScrollView ) {
         if( self.lastContentOffSet < scrollView.contentOffset.y ){
             //Scrolling to the bottom
-            UIView.animateWithDuration(1.5, delay: 1.5, options: .CurveEaseInOut, animations: {
-                self.bottomView.snp_updateConstraints(closure: { make in
-                    make.bottom.equalTo(self.view.snp_bottom).offset(100)
+            UIView.animate(withDuration: 1.5, delay: 1.5, options: .curveEaseInOut, animations: {
+                self.bottomView.snp.updateConstraints({ make in
+                    make.bottom.equalTo(self.view.snp.bottom).offset(100)
                 })
                 }, completion: nil)
         }else{
             //Scrolling to the top
-            UIView.animateWithDuration(5.0, delay: 1.0, options: .CurveEaseIn, animations: {
-                self.bottomView.snp_updateConstraints(closure: { make in
-                    make.bottom.equalTo(self.view.snp_bottom)
+            UIView.animate(withDuration: 5.0, delay: 1.0, options: .curveEaseIn, animations: {
+                self.bottomView.snp.updateConstraints({ make in
+                    make.bottom.equalTo(self.view.snp.bottom)
                 })
                 }, completion: nil)
         }

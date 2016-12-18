@@ -88,31 +88,31 @@ class ThinkingViewController: ViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        scrollView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom)
-            make.bottom.equalTo(self.view.snp_bottom)
-            make.width.equalTo(self.view.snp_width)
+        scrollView.snp.makeConstraints({ make in
+            make.top.equalTo(self.view.snp.topMargin)
+            make.bottom.equalTo(self.view.snp.bottom)
+            make.width.equalTo(self.view.snp.width)
         })
         
-        page1.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.scrollView.snp_top)
-            make.width.equalTo(self.view.snp_width)
+        page1.snp.makeConstraints({ make in
+            make.top.equalTo(self.scrollView.snp.top)
+            make.width.equalTo(self.view.snp.width)
         })
         
-        page2.snp_makeConstraints(closure: { make in
-            make.top.equalTo(page1.snp_bottom).offset(20)
-            make.width.equalTo(self.view.snp_width)
+        page2.snp.makeConstraints({ make in
+            make.top.equalTo(page1.snp.bottom).offset(20)
+            make.width.equalTo(self.view.snp.width)
         })
         
-        page3.snp_makeConstraints(closure: { make in
-            make.top.equalTo(page2.snp_bottom).offset(20)
-            make.width.equalTo(self.view.snp_width)
+        page3.snp.makeConstraints({ make in
+            make.top.equalTo(page2.snp.bottom).offset(20)
+            make.width.equalTo(self.view.snp.width)
         })
         
-        page4.snp_makeConstraints(closure: { make in
-            make.top.equalTo(page3.snp_bottom).offset(20)
-            make.width.equalTo(self.view.snp_width)
-            make.bottom.equalTo(self.scrollView.snp_bottom)
+        page4.snp.makeConstraints({ make in
+            make.top.equalTo(page3.snp.bottom).offset(20)
+            make.width.equalTo(self.view.snp.width)
+            make.bottom.equalTo(self.scrollView.snp.bottom)
         })
         
     }

@@ -48,9 +48,9 @@ class SearchViewController: UIViewController {
         
         //MARK: View Constraints
         self.view.addSubview(searchTextField)
-        searchTextField.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(10)
-            make.width.equalTo(self.view.snp_width)
+        searchTextField.snp.makeConstraints( { make in
+            make.top.equalTo(self.view.snp.topMargin).offset(10)
+            make.width.equalTo(self.view.snp.width)
             make.height.equalTo(50)
         })
         //END MARK
@@ -60,11 +60,11 @@ class SearchViewController: UIViewController {
         self.view.addSubview(postsController.tableView)
         postsController.didMove(toParentViewController: self)
         postsController.delegate = self
-        postsController.tableView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(searchTextField.snp_bottom)
-            make.bottom.equalTo(self.view.snp_bottom)
-            make.width.equalTo(self.view.snp_width).offset(-20)
-            make.centerX.equalTo(self.view.snp_centerX)
+        postsController.tableView.snp.makeConstraints( { make in
+            make.top.equalTo(searchTextField.snp.bottom)
+            make.bottom.equalTo(self.view.snp.bottom)
+            make.width.equalTo(self.view.snp.width).offset(-20)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         postsController.tableView.backgroundView = UIImageView(image: UIImage(named: "manInTheMirror"))
         postsController.tableView.backgroundView?.contentMode = .center
@@ -111,6 +111,7 @@ extension SearchViewController {
         print("Search text \(searchText)")
         
         Analytics.trackSearchFor(searchText)
+        //TODO: Fix Bug here, private posts being returned
         if shouldSearchPrivatePosts {
             ParseService.getPostsWith([searchText], callback: { posts in
                 self.postsController.posts = posts
