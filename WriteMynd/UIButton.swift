@@ -30,14 +30,14 @@ class Button: UIButton {
         button.setImage(UIImage(named: imageName)!, for: UIControlState())
         button.setFontSize(fontSize)
         
-        button.titleLabel?.snp_makeConstraints({ make in
-            make.left.equalTo(button.snp_left).offset(10)
-            make.width.equalTo(button.snp_width).multipliedBy(0.7)
+        button.titleLabel?.snp.makeConstraints({ make in
+            make.left.equalTo(button.snp.left).offset(10)
+            make.width.equalTo(button.snp.width).multipliedBy(0.7)
         })
         button.imageView?.contentMode = .center;
-        button.imageView?.snp_makeConstraints({ make in
-            make.right.equalTo(button.snp_right).offset(-10)
-            make.width.equalTo(button.snp_width).multipliedBy(0.2)
+        button.imageView?.snp.makeConstraints({ make in
+            make.right.equalTo(button.snp.right).offset(-10)
+            make.width.equalTo(button.snp.width).multipliedBy(0.2)
         })
         return button;
     }

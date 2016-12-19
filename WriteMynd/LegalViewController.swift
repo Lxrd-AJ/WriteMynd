@@ -13,7 +13,7 @@ class LegalViewController: UIViewController {
     lazy var titleLabel: Label = {
         let label: Label = Label()
         label.setFontSize(20)
-        label.textColor = .white()
+        label.textColor = .white
         label.text = "Legals";
         return label;
     }()
@@ -88,30 +88,30 @@ class LegalViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        scrollView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom)
-            make.bottom.equalTo(self.view.snp_bottom)
-            make.width.equalTo(self.view.snp_width)
+        scrollView.snp.makeConstraints( { make in
+            make.top.equalTo(self.view.snp.topMargin)
+            make.bottom.equalTo(self.view.snp.bottom)
+            make.width.equalTo(self.view.snp.width)
         })
 
-        headerView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(self.scrollView.snp_top)
-            make.width.equalTo(self.view.snp_width)
+        headerView.snp.makeConstraints( { make in
+            make.top.equalTo(self.scrollView.snp.top)
+            make.width.equalTo(self.view.snp.width)
             make.height.equalTo(180)
         })
-        titleLabel.snp_makeConstraints(closure: { make in
-            make.left.equalTo(headerView.snp_left).offset(5)
-            make.top.equalTo(headerView.snp_top).offset(5)
+        titleLabel.snp.makeConstraints( { make in
+            make.left.equalTo(headerView.snp.left).offset(5)
+            make.top.equalTo(headerView.snp.top).offset(5)
         })
-        mascot.snp_makeConstraints(closure: { make in
-            make.right.equalTo(headerView.snp_right).offset(-5)
-            make.bottom.equalTo(headerView.snp_bottom).offset(-5)
+        mascot.snp.makeConstraints( { make in
+            make.right.equalTo(headerView.snp.right).offset(-5)
+            make.bottom.equalTo(headerView.snp.bottom).offset(-5)
         })
-        textView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(headerView.snp_bottom)
-            make.width.equalTo(self.view.snp_width).offset(-10)
-            make.centerX.equalTo(self.scrollView.snp_centerX)
-            make.bottom.equalTo(scrollView.snp_bottom)
+        textView.snp.makeConstraints( { make in
+            make.top.equalTo(headerView.snp.bottom)
+            make.width.equalTo(self.view.snp.width).offset(-10)
+            make.centerX.equalTo(self.scrollView.snp.centerX)
+            make.bottom.equalTo(scrollView.snp.bottom)
         })
         print(textView.frame)
     }

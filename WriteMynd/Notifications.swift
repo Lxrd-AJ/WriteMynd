@@ -13,7 +13,7 @@ class Notifications {
     
     class func scheduleRepeatingNotification( _ date:Date, interval: NSCalendar.Unit ) -> Date{
         let calendar:Calendar = Calendar.autoupdatingCurrent
-        let scheduleDate = calendar.dateBySettingHour(date.hour, minute: date.minute, second: date.second, ofDate: Date(), options: NSCalendar.Options.MatchNextTime)
+        let scheduleDate = calendar.date(bySettingHour: date.hour, minute: date.minute, second: date.second, of: Date())
         let localNotification:UILocalNotification = UILocalNotification()
         let userNotificationTypes:UIUserNotificationType = [ .alert, .badge, .sound ]
         let settings:UIUserNotificationSettings = UIUserNotificationSettings(types: userNotificationTypes, categories: nil)

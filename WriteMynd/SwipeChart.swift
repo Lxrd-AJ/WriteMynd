@@ -17,8 +17,8 @@ class SwipeChart: UIView {
         super.init(frame: frame)
         
         lineChart.noDataText = "Swipe a post to start populating this graph"
-        lineChart.infoFont = Label.font().fontWithSize(11)
-        lineChart.backgroundColor = UIColor.clearColor()
+        //lineChart.infoFont = Label.font().fontWithSize(11)
+        lineChart.backgroundColor = UIColor.clear
         lineChart.layer.cornerRadius = 6.0
         lineChart.legend.enabled = false
         lineChart.xAxis.enabled = false
@@ -27,7 +27,7 @@ class SwipeChart: UIView {
         lineChart.descriptionText = ""
         lineChart.leftAxis.axisMaxValue = 10.0
         lineChart.leftAxis.axisMinValue = -10.0
-        lineChart.userInteractionEnabled = false
+        lineChart.isUserInteractionEnabled = false
         
         self.addSubview(lineChart)
     }
@@ -39,12 +39,12 @@ class SwipeChart: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        lineChart.snp_makeConstraints(closure: { make in
-            //make.size.equalTo(self.snp_size).inset(UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
-            make.center.equalTo(self.snp_center)
-            make.top.equalTo(self.snp_top)
-            make.width.equalTo(self.snp_width).offset(-10)
-            make.bottom.equalTo(self.snp_bottom)
+        lineChart.snp.makeConstraints({ make in
+            //make.size.equalTo(self.snp.size).inset(UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
+            make.center.equalTo(self.snp.center)
+            make.top.equalTo(self.snp.top)
+            make.width.equalTo(self.snp.width).offset(-10)
+            make.bottom.equalTo(self.snp.bottom)
         })
     }
     
@@ -53,25 +53,25 @@ class SwipeChart: UIView {
         //Data Entries
         var yVals = [ChartDataEntry]()
         for i in 0..<dataPoints.count {
-            yVals.append(ChartDataEntry(value: values[i], xIndex: i))
+            yVals.append(ChartDataEntry(x: values[i], y: Double(i)))
         }
         
         //Date Set 
-        let set = LineChartDataSet(yVals: yVals, label: "Mood over time")
-        set.axisDependency = .Left
+        let set = LineChartDataSet(values: yVals, label: "Mood over time")
+        set.axisDependency = .left
         set.setCircleColor(UIColor.wmGreenishTealColor())
         //set.setColor(UIColor.whiteColor())
         set.setColor(UIColor.wmGreenishTealColor())
         set.lineWidth = 2.0
         set.circleRadius = 3.5
-        set.circleHoleColor = UIColor.whiteColor()//UIColor.wmGreenishTealColor()
-        set.valueTextColor = UIColor.clearColor()
+        set.circleHoleColor = UIColor.white//UIColor.wmGreenishTealColor()
+        set.valueTextColor = UIColor.clear
         
         //Array of Line Chart Data sets 
         let datasets = [set]
         
-        //X-axis label for the datasets 
-        let data = LineChartData(xVals: dataPoints, dataSets: datasets)
+        //X-axis label for the datasets
+        let data = LineChartData(dataSets: datasets)
         
         //Limitline 
         let limitLine = ChartLimitLine(limit: 0.0)
@@ -80,6 +80,6 @@ class SwipeChart: UIView {
         self.lineChart.leftAxis.addLimitLine(limitLine)
         
         self.lineChart.data = data;
-        self.lineChart.animate(xAxisDuration: 1, yAxisDuration: 1, easingOption: .EaseInOutSine)
+        self.lineChart.animate(xAxisDuration: 1, yAxisDuration: 1, easingOption: .easeInOutSine)
     }
 }

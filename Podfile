@@ -18,7 +18,7 @@ target 'WriteMynd' do
     pod 'ParseUI'
     pod 'pop', '~> 1.0'
     pod 'PromiseKit', '~> 4.0.4'
-    pod 'RMDateSelectionViewController', '~> 2.0.3'
+    pod 'RMDateSelectionViewController', '~> 2.2.1'
     pod 'SwiftSpinner', '~> 1.0.2'
     pod 'SwiftDate', '~> 4.0.8' #, :git => 'https://github.com/malcommac/SwiftDate.git', :branch => 'feature/swift-3.0'
     pod 'SnapKit', '~> 3.0.1'

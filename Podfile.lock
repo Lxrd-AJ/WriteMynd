@@ -48,9 +48,9 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (4.0.5):
     - PromiseKit/CorePromise
-  - RMActionController (1.0.5)
-  - RMDateSelectionViewController (2.0.3):
-    - RMActionController (~> 1.0.5)
+  - RMActionController (1.2.1)
+  - RMDateSelectionViewController (2.2.1):
+    - RMActionController (~> 1.2.1)
   - SnapKit (3.0.1)
   - SwiftDate (4.0.8)
   - SwiftSpinner (1.0.2)
@@ -79,7 +79,7 @@ DEPENDENCIES:
   - ParseUI
   - pop (~> 1.0)
   - PromiseKit (~> 4.0.4)
-  - RMDateSelectionViewController (~> 2.0.3)
+  - RMDateSelectionViewController (~> 2.2.1)
   - SnapKit (~> 3.0.1)
   - SwiftDate (~> 4.0.8)
   - SwiftSpinner (~> 1.0.2)
@@ -103,8 +103,8 @@ SPEC CHECKSUMS:
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   PromiseKit: 593b5e24ded6cbb1ebc708bc2c3428a8a5632d91
-  RMActionController: b83653e7452ed51492094d65dc82151c36443c03
-  RMDateSelectionViewController: 354a0f1fe40bac01054528b7a8735f2973bbd813
+  RMActionController: e516bc0651a61d675abb5eaf09ee79a92ae6155c
+  RMDateSelectionViewController: 81b9251420345c793921b7516b77a9c80be7d399
   SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
   SwiftDate: 9aa3259d8850d818bec02802f8f05aa9a8c26fdb
   SwiftSpinner: 1c80ff6ea1c47e2faa1dfce0fcd5e6b39a47fd51
@@ -112,6 +112,6 @@ SPEC CHECKSUMS:
   SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
   ZendeskSDK: 3b795e822d558b846555230f6085aeb997e0b835
 
-PODFILE CHECKSUM: c6950aa650c244233db229c30adc04debeb0f433
+PODFILE CHECKSUM: 31125e4831cfd6bab4fdba34f7f2ca9356c59c85
 
 COCOAPODS: 1.1.1

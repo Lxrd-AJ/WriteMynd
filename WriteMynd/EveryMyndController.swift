@@ -90,7 +90,7 @@ class EveryMyndController: ViewController {
         self.scrollBegan(UIScrollView()) //Decieve the page so it automatically adjusts the bottom view
         
         if (PFUser.current() != nil) {
-            postsController.tableView.isHidden = true
+            postsController.tableView.isHidden = false //true
             fetchPosts()
         }
         

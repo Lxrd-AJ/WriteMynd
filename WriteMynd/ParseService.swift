@@ -20,10 +20,10 @@ class ParseService {
         query.whereKey("parent", equalTo: user)
         query.order(byDescending: "createdAt")
         query.limit = 1000;
-        query.findObjectsInBackground(block: { (swipes:[PFObject]?, error:NSError?) -> Void in
+        query.findObjectsInBackground(block: { (swipes:[PFObject]?, error:Error?) -> Void in
             if let objects = swipes {
-                callback(swipes: objects.map(Swipe.convertToSwipe) )
-            }else{ callback(swipes: []) }
+                callback(objects.map(Swipe.convertToSwipe) )
+            }else{ callback([]) }
         })
     }
     
@@ -36,10 +36,10 @@ class ParseService {
             query.whereKey("parent", equalTo: user)
         }
         query.order(byDescending: "createdAt")
-        query.findObjectsInBackground(block: { (posts:[PFObject]?, error:NSError?) -> Void in
+        query.findObjectsInBackground(block: { (posts:[PFObject]?, error:Error?) -> Void in
             if let objects = posts {
-                callback(posts: objects.map( Post.convertPFObjectToPost ) )
-            }else{ callback(posts: []) }
+                callback(objects.map( Post.convertPFObjectToPost ) )
+            }else{ callback([]) }
         })
     }
     
@@ -47,9 +47,9 @@ class ParseService {
         let fetchQuery: PFQuery = PFQuery( className: "Post" )
         fetchQuery.whereKey("parent", equalTo: user)
         fetchQuery.order(byDescending: "createdAt")
-        fetchQuery.findObjectsInBackground(block: { (posts:[PFObject]?, error:NSError?) -> Void in
-            if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }
-            else{ callback(posts: []) }
+        fetchQuery.findObjectsInBackground(block: { (posts:[PFObject]?, error:Error?) -> Void in
+            if let postObjs = posts { callback(postObjs.map( Post.convertPFObjectToPost ) ) }
+            else{ callback([]) }
         })
     }
     
@@ -66,9 +66,9 @@ class ParseService {
         fetchQuery.whereKey("objectId", doesNotMatchKey: "postID", in: reportedPostsQuery)
         fetchQuery.whereKey("parent", doesNotMatchKey: "blockedUser", in: hiddenUserQuery) //Do not include posts from blocked users
         fetchQuery.order(byDescending: "createdAt")
-        fetchQuery.findObjectsInBackground(block: { (posts:[PFObject]?, error:NSError?) -> Void in
-            if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }
-            else{ callback(posts: []) }
+        fetchQuery.findObjectsInBackground(block: { (posts:[PFObject]?, error:Error?) -> Void in
+            if let postObjs = posts { callback(postObjs.map( Post.convertPFObjectToPost ) ) }
+            else{ callback([]) }
         })
     }
     
@@ -77,9 +77,9 @@ class ParseService {
         fetchQuery.whereKey("parent", equalTo: user)
         fetchQuery.whereKey("private", equalTo: true)
         fetchQuery.order(byDescending: "createdAt")
-        fetchQuery.findObjectsInBackground(block: { (posts:[PFObject]?, error:NSError?) -> Void in
-            if let postObjs = posts { callback(posts: postObjs.map( Post.convertPFObjectToPost ) ) }
-            else{ callback(posts: []) }
+        fetchQuery.findObjectsInBackground(block: { (posts:[PFObject]?, error:Error?) -> Void in
+            if let postObjs = posts { callback(postObjs.map( Post.convertPFObjectToPost ) ) }
+            else{ callback([]) }
         })
     }
     
@@ -87,10 +87,10 @@ class ParseService {
         guard user != nil else{ return; }
         let query = PFQuery(className: "EmpathisedPost")
         query.whereKey("userID", equalTo: user!.objectId!)
-        query.findObjectsInBackground(block: { (emPosts:[PFObject]?, error:NSError?) -> Void in
+        query.findObjectsInBackground(block: { (emPosts:[PFObject]?, error:Error?) -> Void in
             if let posts = emPosts {
-                callback(empathisesPosts: posts.map(EmpathisedPost.convertPFObjectToEmpathisedPost))
-            }else{ callback(empathisesPosts: []) }
+                callback(posts.map(EmpathisedPost.convertPFObjectToEmpathisedPost))
+            }else{ callback([]) }
         })
     }
     

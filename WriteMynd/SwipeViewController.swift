@@ -16,7 +16,7 @@ let ON_BOARDING_MESSAGE_VIEWS = "ON_BOARDING_MESSAGE_VIEWS"
  */
 class SwipeViewController: UIViewController {
 
-    let questions: [String] = swipeQuestions.shuffle() //`swipeQuestions` declared in utilities.swift
+    let questions: [String] = swipeQuestions.shuffled() //`swipeQuestions` declared in utilities.swift
     lazy var topMessage: SwipeOnBoarding = {
         return SwipeOnBoarding()
     }()
@@ -36,11 +36,11 @@ class SwipeViewController: UIViewController {
             UserDefaults.standard.set((viewCounts+1), forKey: ON_BOARDING_MESSAGE_VIEWS)
         }
         print(viewCounts)        
-        topMessage.snp_makeConstraints(closure: { make in
-            make.width.equalTo(self.view.snp_width)
-            make.top.equalTo(self.snp_topLayoutGuideBottom).offset(10)
+        topMessage.snp.makeConstraints({ make in
+            make.width.equalTo(self.view.snp.width)
+            make.top.equalTo(self.view.snp.topMargin).offset(10)
             make.height.equalTo(150)
-            make.centerX.equalTo(self.view.snp_centerX)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         //END MARK
         
@@ -49,9 +49,9 @@ class SwipeViewController: UIViewController {
         kolodaView.dataSource = self
         kolodaView.delegate = self
         self.view.addSubview( kolodaView )
-        kolodaView.snp_makeConstraints(closure: { make in
-            make.top.equalTo(topMessage.snp_bottom).offset(10)
-            make.centerX.equalTo(topMessage.snp_centerX)
+        kolodaView.snp.makeConstraints({ make in
+            make.top.equalTo(topMessage.snp.bottom).offset(10)
+            make.centerX.equalTo(topMessage.snp.centerX)
             make.width.equalTo(250)
             make.height.equalTo(150)
         })
@@ -61,10 +61,10 @@ class SwipeViewController: UIViewController {
         let emojiView = UIImageView(image: UIImage(named: "standingManHandsUp")!)
         emojiView.contentMode = .center
         self.view.insertSubview(emojiView, belowSubview: kolodaView)
-        emojiView.snp_makeConstraints(closure: { make in
-            make.centerX.equalTo(self.view.snp_centerX)
-            make.top.equalTo(kolodaView.snp_bottom).offset(-20)
-            make.bottom.equalTo(self.view.snp_bottom).offset(-5)
+        emojiView.snp.makeConstraints({ make in
+            make.centerX.equalTo(self.view.snp.centerX)
+            make.top.equalTo(kolodaView.snp.bottom).offset(-20)
+            make.bottom.equalTo(self.view.snp.bottom).offset(-5)
         })
         //END MARK
     }
@@ -153,7 +153,7 @@ extension SwipeViewController: SwipeViewDelegate {
         print("\(finishPercent)% in direction \(direction)")
         print("Koloda view x:\(koloda.frame.origin.x) and y:\(koloda.frame.origin.y)")
         self.topMessage.instructionLabel.isHidden = true
-        self.topMessage.promptLabel.textColor = .white()
+        self.topMessage.promptLabel.textColor = .white
         
         var alpha = finishPercent/100.0
         if alpha <= 50 { alpha = 0.7 }

@@ -74,7 +74,7 @@ class LoginViewController: SignupLoginViewController {
         super.viewWillLayoutSubviews()
         
         emailStackView.snp.makeConstraints({ make in
-            make.top.equalTo(self.snp.topLayoutGuideBottom).offset(100)
+            make.top.equalTo(self.view.snp.topMargin).offset(100)
             make.width.equalTo(self.view.snp.width).offset(-40)
             make.centerX.equalTo(self.view.snp.centerX)
             make.height.equalTo(200)
@@ -102,39 +102,40 @@ class LoginViewController: SignupLoginViewController {
         SwiftSpinner.show("Signing in ...")
         
         
-        PFUser.logInWithUsername(inBackground: self.emailTextField.text!, password: self.passwordTextField.text!, block: { (user:PFUser?,error:NSError?) in
+        PFUser.logInWithUsername(inBackground: self.emailTextField.text!, password: self.passwordTextField.text!, block: { (user:PFUser?,error:Error?) in
             if user != nil {
                 print("Log In successful")
-                Endurance.checkIfUserBlocked(user!.objectId!).then({ blocked in
+                
+                Endurance.checkIfUserBlocked(user!.objectId!).then{ blocked -> Void in
                     SwiftSpinner.hide()
                     if blocked { 
                         Endurance.showBlockedUserPage(self)
                         PFUser.logOut()
                     }else{
-                        self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+                        self.mm_drawerController.openDrawerGestureModeMask = [.bezelPanningCenterView]
                         self.mm_drawerController.centerViewController = UINavigationController(rootViewController: MyPostsViewController())
                     }
-                })
+                }
             }else{
-                print(error)
-                var message = error!.userInfo["error"] as! String
+                print(error.debugDescription)
+                var message = error?.localizedDescription//error!._userInfo["error"] as! String
                 self.showErrorFor(self.passwordErrorMessage, message: error!.localizedDescription);
-                if error!.code == 101 {
+                if error!._code == 101 { 
                     message = "Wrong Email or Password, Please retry!"
                 }
-                SwiftSpinner.show(message).addTapHandler({
+                SwiftSpinner.show(message!).addTapHandler({
                     SwiftSpinner.hide()
-                    let alertController = UIAlertController(title: "Oops", message: "Looks like you’ve entered the wrong email address or password.", preferredStyle: .Alert)
-                    alertController.addAction(UIAlertAction(title: "Give it another go", style: .Cancel, handler: nil))
-                    alertController.addAction(UIAlertAction(title: "Reset password", style: .Destructive, handler: { action in
+                    let alertController = UIAlertController(title: "Oops", message: "Looks like you’ve entered the wrong email address or password.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Give it another go", style: .cancel, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "Reset password", style: .destructive, handler: { action in
                         self.resetPassword( self.emailTextField.text! )
                     }))
-                    alertController.addAction(UIAlertAction(title: "Create account", style: .Default, handler: { action in
+                    alertController.addAction(UIAlertAction(title: "Create account", style: .default, handler: { action in
                         let signupVC = SignupViewController()
                         signupVC.emailTextField.text = self.emailTextField.text
                        self.navigationController?.pushViewController(signupVC, animated: true)
                     }))
-                    self.presentViewController(alertController, animated: true, completion: nil)
+                    self.present(alertController, animated: true, completion: nil)
                 }, subtitle: "Tap to hide!")
             }
         })
@@ -148,11 +149,11 @@ class LoginViewController: SignupLoginViewController {
         the validity of the email address is never checked, the email is simply bounced back
      */
     func resetPassword( _ email:String ){
-        PFUser.requestPasswordResetForEmail(inBackground: email, block: { (success:Bool,error:NSError?) in
+        PFUser.requestPasswordResetForEmail(inBackground: email, block: { (success:Bool,error:Error?) in
             let alertController = UIAlertController(title: "Password Reset", message: "", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             if let error = error , !success {
-                alertController.message = error.userInfo["error"] as? String
+                alertController.message = error.localizedDescription //error._userInfo["error"] as? String
             }else{
                 alertController.message = "A reset link has been emailed to you. Don’t forget to check your junk folder too!"
             }

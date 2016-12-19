@@ -50,7 +50,7 @@ class EmojiPieChart: UIView {
         pieChartDataSet.drawValuesEnabled = false
         pieChartDataSet.selectionShift = 9.0
         chartData.highlightEnabled = true
-        chart.drawSliceTextEnabled = false
+        chart.drawEntryLabelsEnabled = false
         chart.usePercentValuesEnabled = true
         chart.holeRadiusPercent = 0.7
 //        chart.centerTextRadiusPercent = 1

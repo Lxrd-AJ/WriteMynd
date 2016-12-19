@@ -286,10 +286,10 @@ extension SettingsTableViewController {
     
     fileprivate func showTimePicker( _ sender:UISwitch ){
         //Show the time selector/picker
-        let selectAction: RMAction = RMAction(title: "Select", style: .done, andHandler: {
+        let selectAction: RMAction = RMAction<UIDatePicker>(title: "Select", style: .done, andHandler: {
             (controller:RMActionController) -> Void in
             Notifications.cancelAllLocalNotifications()
-            let date:Date = (controller.contentView as! UIDatePicker).date
+            let date:Date = (controller.contentView).date
             let reminderDate = Notifications.scheduleRepeatingNotification(date, interval: .day)
             
             //Add the new time cell string to the table rows array
@@ -300,11 +300,11 @@ extension SettingsTableViewController {
             UserDefaults.standard.set(reminderDate, forKey: self.REMINDER_DATE)
             self.tableView.reloadData()
         })!
-        let cancelAction: RMAction = RMAction(title: "Cancel", style: .cancel, andHandler: {
+        let cancelAction: RMAction = RMAction<UIDatePicker>(title: "Cancel", style: .cancel, andHandler: {
             (controller:RMActionController) -> Void in
             self.tableView.reloadData()
         })!
-        let timeSelectionController: RMDateSelectionViewController = RMDateSelectionViewController(style: RMActionControllerStyle(), title: "Choose a time", message: "Select a time you would like us to remind you", select: selectAction, andCancel: cancelAction)!
+        let timeSelectionController = RMDateSelectionViewController(style: .white, title: "Choose a time", message: "Select a time you would like us to remind you", select: selectAction, andCancel: cancelAction)!
         timeSelectionController.datePicker.datePickerMode = .time
         self.present(timeSelectionController, animated: true, completion: nil)
     }

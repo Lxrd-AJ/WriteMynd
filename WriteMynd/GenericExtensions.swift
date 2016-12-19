@@ -226,11 +226,11 @@ extension Array where Element: EmpathisedPost {
 }
 
 
-class LineXAxis: ChartXAxisValueFormatter {
-    @objc func stringForXValue(_ index: Int, original: String, viewPortHandler: ViewPortHandler) -> String {
-        let double = Double(original)
-        guard double != nil else { return original }
-        return String(Int(double!))
-    }
-}
+//class LineXAxis: ChartXAxisValueFormatter {
+//    @objc func stringForXValue(_ index: Int, original: String, viewPortHandler: ViewPortHandler) -> String {
+//        let double = Double(original)
+//        guard double != nil else { return original }
+//        return String(Int(double!))
+//    }
+//}
 

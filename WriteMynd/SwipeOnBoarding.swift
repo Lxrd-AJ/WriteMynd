@@ -34,17 +34,17 @@ class SwipeOnBoarding: UIView {
         super.init(frame: frame)
         
         self.addSubview(promptLabel)
-        promptLabel.snp_makeConstraints(closure: { make in
-            make.centerX.equalTo(self.snp_centerX)
-            make.top.equalTo(self.snp_top).offset(5)
-            make.width.equalTo(self.snp_width).offset(-20)
+        promptLabel.snp.makeConstraints({ make in
+            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo(self.snp.top).offset(5)
+            make.width.equalTo(self.snp.width).offset(-20)
         })
         
         self.addSubview(instructionLabel)
-        instructionLabel.snp_makeConstraints(closure: { make in
-            make.top.equalTo(promptLabel.snp_bottom).offset(15)
-            make.centerX.equalTo(self.snp_centerX)
-            make.width.equalTo(self.snp_width).offset(-40)
+        instructionLabel.snp.makeConstraints({ make in
+            make.top.equalTo(promptLabel.snp.bottom).offset(15)
+            make.centerX.equalTo(self.snp.centerX)
+            make.width.equalTo(self.snp.width).offset(-40)
         })
     }
     

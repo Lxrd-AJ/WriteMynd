@@ -80,36 +80,36 @@ class OnboardViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        closeButton.snp_makeConstraints({ make in
-            make.top.equalTo(self.view.snp_top).offset(25)
-            make.left.equalTo(self.view.snp_left).offset(20)
+        closeButton.snp.makeConstraints({ make in
+            make.top.equalTo(self.view.snp.top).offset(25)
+            make.left.equalTo(self.view.snp.left).offset(20)
             make.size.equalTo(CGSize(width: 15, height: 15))
         })
         
-        iconView.snp_makeConstraints({ make in
-            make.top.equalTo(self.closeButton.snp_bottom).offset(20)
-            //make.left.equalTo(self.view.snp_left).multipliedBy(0.4)
-            make.centerX.equalTo(self.view.snp_centerX)
+        iconView.snp.makeConstraints({ make in
+            make.top.equalTo(self.closeButton.snp.bottom).offset(20)
+            //make.left.equalTo(self.view.snp.left).multipliedBy(0.4)
+            make.centerX.equalTo(self.view.snp.centerX)
             //make.centerY.equalTo(100)
             //make.size.equalTo(CGSize(width: 150, height: 190)) //130,170
-            make.width.equalTo(self.view.snp_width)
+            make.width.equalTo(self.view.snp.width)
             make.height.equalTo(180)
         })
         
-        pageTitle.snp_makeConstraints({ make in
-            make.top.equalTo(iconView.snp_bottom).offset(40)
-            make.centerX.equalTo(self.view.snp_centerX)
+        pageTitle.snp.makeConstraints({ make in
+            make.top.equalTo(iconView.snp.bottom).offset(40)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         
-        body.snp_makeConstraints({ make in
-            make.top.equalTo(pageTitle.snp_bottom).offset(30)
-            make.centerX.equalTo(self.view.snp_centerX)
-            make.width.equalTo(self.view.snp_width).offset(-10)
+        body.snp.makeConstraints({ make in
+            make.top.equalTo(pageTitle.snp.bottom).offset(30)
+            make.centerX.equalTo(self.view.snp.centerX)
+            make.width.equalTo(self.view.snp.width).offset(-10)
         })
         
-        bottomButton.snp_makeConstraints({ make in
-            make.bottom.equalTo(self.view.snp_bottom).offset(-10)
-            make.centerX.equalTo(self.view.snp_centerX)
+        bottomButton.snp.makeConstraints({ make in
+            make.bottom.equalTo(self.view.snp.bottom).offset(-10)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
     }
     

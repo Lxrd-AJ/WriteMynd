@@ -50,15 +50,15 @@ class LicensePageViewController: OnboardViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        bottomButton.snp_remakeConstraints({ make in
-            make.top.equalTo(body.snp_bottom).offset(6)
-            make.centerX.equalTo(self.view.snp_centerX)
+        bottomButton.snp.remakeConstraints({ make in
+            make.top.equalTo(body.snp.bottom).offset(6)
+            make.centerX.equalTo(self.view.snp.centerX)
         })
         
-        buttonStackView.snp_makeConstraints({ make in
-            make.bottom.equalTo(self.view.snp_bottom).offset(-20)
-            make.width.equalTo(self.view.snp_width).offset(-10)
-            make.centerX.equalTo(self.view.snp_centerX)
+        buttonStackView.snp.makeConstraints({ make in
+            make.bottom.equalTo(self.view.snp.bottom).offset(-20)
+            make.width.equalTo(self.view.snp.width).offset(-10)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.height.equalTo(45)
         })
     }

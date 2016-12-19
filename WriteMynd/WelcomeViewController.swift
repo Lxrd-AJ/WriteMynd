@@ -70,17 +70,17 @@ class WelcomeViewController: UIViewController {
             }
             
             SwiftSpinner.show("")
-            Endurance.checkIfUserBlocked(PFUser.currentUser()!.objectId!).then({ blocked in
+            Endurance.checkIfUserBlocked(PFUser.current()!.objectId!).then{ blocked -> Void in
                 SwiftSpinner.hide()
                 if blocked {
                     Endurance.showBlockedUserPage(self)
                     PFUser.logOut()
                 }else{
                     let launchCont = MyPostsViewController()
-                    self.mm_drawerController.openDrawerGestureModeMask = [.BezelPanningCenterView]
+                    self.mm_drawerController.openDrawerGestureModeMask = [.bezelPanningCenterView]
                     self.mm_drawerController.centerViewController = UINavigationController(rootViewController: launchCont)
                 }
-            })
+            }
         }
         
         self.view.addSubview(iconImageView)
