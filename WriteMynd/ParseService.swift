@@ -31,6 +31,7 @@ class ParseService {
     class func getPostsWith( _ hashTags:[String], callback:@escaping (_ posts:[Post]) -> Void, forUser:PFUser? ){
         let query = PFQuery(className: "Post")
         query.whereKey("hashTags", containedIn: hashTags)
+        query.whereKey("private", notEqualTo: true)
         //query.whereKey("hashTags", containsAllObjectsInArray: hashTags)
         if let user = forUser {
             query.whereKey("parent", equalTo: user)

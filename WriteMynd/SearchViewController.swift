@@ -49,7 +49,7 @@ class SearchViewController: UIViewController {
         //MARK: View Constraints
         self.view.addSubview(searchTextField)
         searchTextField.snp.makeConstraints( { make in
-            make.top.equalTo(self.view.snp.topMargin).offset(10)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(10)
             make.width.equalTo(self.view.snp.width)
             make.height.equalTo(50)
         })
@@ -111,28 +111,15 @@ extension SearchViewController {
         print("Search text \(searchText)")
         
         Analytics.trackSearchFor(searchText)
-        //TODO: Fix Bug here, private posts being returned
-        if shouldSearchPrivatePosts {
-            ParseService.getPostsWith([searchText], callback: { posts in
-                self.postsController.posts = posts
+        ParseService.getPostsWith([searchText], callback: { posts in
+            self.postsController.posts = posts
+            self.postsController.tableView.reloadData()
+            if posts.count > 0 {
+                self.toggleBackground(true)
+                self.postsController.empathisedPosts = self.empathisedPosts
                 self.postsController.tableView.reloadData()
-                if posts.count > 0 {
-                    self.toggleBackground(true)
-                    self.postsController.empathisedPosts = self.empathisedPosts
-                    self.postsController.tableView.reloadData()
-                }else{ self.toggleBackground(false) }
-                }, forUser: PFUser.current()!)
-        }else{
-            ParseService.getPostsWith([searchText], callback: { posts in
-                self.postsController.posts = posts
-                self.postsController.tableView.reloadData()
-                if posts.count > 0 {
-                    self.toggleBackground(true)
-                    self.postsController.empathisedPosts = self.empathisedPosts
-                    self.postsController.tableView.reloadData()
-                }else{ self.toggleBackground(false) }
-                }, forUser: nil)
-        }
+            }else{ self.toggleBackground(false) }
+        }, forUser: (shouldSearchPrivatePosts ? PFUser.current()! : nil))
     }
 }
 

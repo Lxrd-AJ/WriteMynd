@@ -61,7 +61,7 @@ class MyPostsViewController: ViewController {
         buttonStackView.addArrangedSubview(postsToMeButton)
         buttonStackView.addArrangedSubview(postsToAllButton)
         buttonStackView.snp.makeConstraints({ make in
-            make.top.equalTo(self.view.snp.topMargin).offset(10)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(10)
             make.centerX.equalTo(self.view.snp.centerX)
             make.width.equalTo(self.view.snp.width).offset(-5)
             make.height.equalTo(30)

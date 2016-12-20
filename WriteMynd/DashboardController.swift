@@ -125,7 +125,7 @@ class DashboardController: ViewController {
 
         scrollView.snp.makeConstraints({ make in
             make.centerX.equalTo(self.view.snp.centerX)
-            make.top.equalTo(self.view.snp.topMargin)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom) //|| self.view.snp.topMargin)
             make.size.equalTo(self.view.snp.size)
             make.bottom.equalTo(self.stackView.snp.bottom).offset(100)
         })
@@ -175,6 +175,7 @@ class DashboardController: ViewController {
     }
 
     func moreInfoButtonTapped( _ sender: UIButton) {
+        return; //TODO: Remove this later
         var infoMessage = ""
         var containerView: UIView!
 
@@ -284,8 +285,9 @@ extension DashboardController {
 
     func setupSwipeChart( _ dictionary: [Date: [Swipe]]) {
         //- note: Reversing the dictionary keys & values because the sortBy on the query isn't working
-        let dataKeys: [String] = dictionary.keys.map({ $0.string() }).reversed()
-        let dataValues: [Double] = dictionary.keys.map({ self.averageScoreFor(dictionary[$0]!) }).reversed()
+        let dataKeys: [String] = dictionary.keys.sorted(by: { $0.compare($1) == .orderedDescending })
+            .map({ $0.string() }).reversed()
+        let dataValues: [Double] = dictionary.keys.map({ self.averageScoreFor(dictionary[$0]!) }).reversed()        
         swipeChart.renderChart(dataKeys, values: dataValues)
     }
 
@@ -366,7 +368,7 @@ extension DashboardController {
 }
 
 extension DashboardController: ChartViewDelegate {
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: Highlight) {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         let emoji = Emoji.toEnum(entry.data! as! String)
         let detailVC = EmojiChartDetailViewController()
         detailVC.emoji = emoji

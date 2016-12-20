@@ -74,7 +74,7 @@ class LoginViewController: SignupLoginViewController {
         super.viewWillLayoutSubviews()
         
         emailStackView.snp.makeConstraints({ make in
-            make.top.equalTo(self.view.snp.topMargin).offset(100)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(100)
             make.width.equalTo(self.view.snp.width).offset(-40)
             make.centerX.equalTo(self.view.snp.centerX)
             make.height.equalTo(200)

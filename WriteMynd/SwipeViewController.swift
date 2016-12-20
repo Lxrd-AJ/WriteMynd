@@ -38,7 +38,7 @@ class SwipeViewController: UIViewController {
         print(viewCounts)        
         topMessage.snp.makeConstraints({ make in
             make.width.equalTo(self.view.snp.width)
-            make.top.equalTo(self.view.snp.topMargin).offset(10)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(10)
             make.height.equalTo(150)
             make.centerX.equalTo(self.view.snp.centerX)
         })

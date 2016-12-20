@@ -78,7 +78,7 @@ class SignupViewController: SignupLoginViewController {
         super.viewWillLayoutSubviews()
         
         formStackView.snp.makeConstraints({ make in
-            make.top.equalTo(self.view.snp.topMargin).offset(45)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(45)
             make.left.equalTo(self.view.snp.left).offset(10)
             make.right.equalTo(self.view.snp.right).offset(-10)
             make.height.equalTo(225)

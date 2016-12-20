@@ -40,7 +40,7 @@ class MenuViewController: UITableViewController {
         super.viewWillLayoutSubviews()
         
         tableView.tableHeaderView?.snp.makeConstraints({ make in
-            make.top.equalTo(self.view.snp.topMargin).offset(15)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(15)
             make.left.equalTo(self.tableView.snp.left).offset(5)
         })
         

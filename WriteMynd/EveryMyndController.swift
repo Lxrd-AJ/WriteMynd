@@ -100,7 +100,7 @@ class EveryMyndController: ViewController {
         super.viewWillLayoutSubviews()
         
         everyMyndLabel.snp.makeConstraints({ make in
-            make.top.equalTo(self.view.snp.topMargin).offset(5)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(5)
             make.left.equalTo(self.view).offset(10)
             make.width.lessThanOrEqualTo(screenWidth * 0.4)
         })

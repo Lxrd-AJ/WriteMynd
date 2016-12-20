@@ -51,13 +51,13 @@ class SwipeChart: UIView {
     func renderChart( _ dataPoints:[String], values:[Double] ){
         guard values.count > 0 else{ lineChart.noDataText = "No Swipes!, yet"; return }
         //Data Entries
-        var yVals = [ChartDataEntry]()
+        var entries = [ChartDataEntry]()
         for i in 0..<dataPoints.count {
-            yVals.append(ChartDataEntry(x: values[i], y: Double(i)))
+            entries.append(ChartDataEntry(x: Double(i), y: values[i]))
         }
         
         //Date Set 
-        let set = LineChartDataSet(values: yVals, label: "Mood over time")
+        let set = LineChartDataSet(values: entries, label: "Mood over time")
         set.axisDependency = .left
         set.setCircleColor(UIColor.wmGreenishTealColor())
         //set.setColor(UIColor.whiteColor())

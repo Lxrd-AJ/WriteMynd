@@ -54,7 +54,7 @@ class TextViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.promptMessage.snp.makeConstraints({ make in
-            make.top.equalTo(self.view.snp.topMargin).offset(10)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(10)
             make.left.equalTo(self.view.snp.leftMargin)
         })
         self.textView.snp.makeConstraints({ make in

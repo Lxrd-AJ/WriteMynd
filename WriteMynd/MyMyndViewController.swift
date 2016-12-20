@@ -50,7 +50,7 @@ class MyMyndViewController: ViewController {
         //MARK: Constraints 
         self.view.addSubview(myProfileButton)
         myProfileButton.snp.makeConstraints({ make in
-            make.top.equalTo(self.view.snp.topMargin)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom)
             make.left.equalTo(self.view.snp.left)
             make.width.equalTo(self.view.snp.width).multipliedBy(0.5)
             make.height.equalTo(50)

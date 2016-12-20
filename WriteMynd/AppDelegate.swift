@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             print("Application launched from shortcut item => \(shortcutItem.type)")
-            handleQuickAction(shortcutItem)
+            _ = handleQuickAction(shortcutItem)
             return false
         }
         return true //so that `performActionForShortcutItem` would not be called

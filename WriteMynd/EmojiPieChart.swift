@@ -37,10 +37,9 @@ class EmojiPieChart: UIView {
     }
     
     func renderChart( _ chart:PieChartView, dataPoints:[String], values:[Int], colors:[UIColor] ){
-        var dataEntries: [ChartDataEntry] = []
+        var dataEntries: [PieChartDataEntry] = []
         for i in 0..<dataPoints.count {
-            let dataEntry = ChartDataEntry(x: Double(values[i]), y: Double(i))
-            dataEntry.data = dataPoints[i] as AnyObject?
+            let dataEntry = PieChartDataEntry(value: Double(values[i]), label: dataPoints[i], data: dataPoints[i] as AnyObject?)
             dataEntries.append(dataEntry)
         }
         let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "");

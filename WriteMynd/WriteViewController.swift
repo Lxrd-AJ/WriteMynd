@@ -163,7 +163,7 @@ class WriteViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         bigEmojiImage.snp.makeConstraints({ make in
-            make.top.equalTo(self.view.snp.topMargin).offset(9)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(9)
             make.centerX.equalTo(self.view.snp.centerX)
             make.size.equalTo(CGSize(width: 145, height: 160))
         })

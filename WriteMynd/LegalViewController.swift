@@ -89,7 +89,7 @@ class LegalViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         scrollView.snp.makeConstraints( { make in
-            make.top.equalTo(self.view.snp.topMargin)
+            make.top.equalTo(self.topLayoutGuide.snp.bottom)
             make.bottom.equalTo(self.view.snp.bottom)
             make.width.equalTo(self.view.snp.width)
         })
