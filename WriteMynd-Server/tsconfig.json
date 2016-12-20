@@ -1,0 +1,17 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": false,
+        "sourceMap": false,
+        "outDir": "./.build",
+        "moduleResolution": "node"
+    },
+    "exclude": [
+        "node_modules",
+        "typings/browser.d.ts",
+        "Webapp",
+        ".build"
+    ]
+}
